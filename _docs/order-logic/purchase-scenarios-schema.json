@@ -1,0 +1,624 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Teligant Purchase Scenarios Catalog",
+  "description": "Machine-readable catalog of purchase scenarios for testing and validation",
+  "version": "1.0.0",
+  "generated": "2024-12-02",
+
+  "definitions": {
+    "purchaseType": {
+      "type": "string",
+      "enum": ["ONE_TIME_PURCHASE", "SUBSCRIPTION", "MEMBERSHIP", "CONSULTATION", "SUBSCRIPTION_ACTION", "SUBSCRIPTION_REFILL", "PAYMENT_METHOD"]
+    },
+    "billingCycle": {
+      "type": "string",
+      "enum": ["ONE_TIME_PAYMENT", "CHARGE_UPFRONT", "EVERY_DAY_30", "EVERY_DAY_60", "EVERY_DAY_90", "EVERY_DAY_120", "EVERY_DAY_180", "ANNUAL", "MONTHLY"]
+    },
+    "supplyVariant": {
+      "type": "string",
+      "enum": ["DAY_30", "DAY_60", "DAY_90", "DAY_120", "DAY_180"]
+    },
+    "orderStatus": {
+      "type": "string",
+      "enum": ["PENDING", "AWAITING_REVIEW", "APPROVED", "DENIED", "ACTIVE", "PAUSED", "CANCELED", "SENT_TO_PHARMACY", "ORDER_SHIPPED", "READY_TO_SEND"]
+    },
+    "consultationStatus": {
+      "type": "string",
+      "enum": ["PENDING", "IN_PROGRESS", "PROCESSED", "REFUNDED", "EXPIRED", "SENT_TO_PHARMACY"]
+    },
+    "transactionStatus": {
+      "type": "string",
+      "enum": ["PENDING", "AUTHORIZED", "CAPTURED", "FAILED", "REFUNDED", "DISPUTED"]
+    },
+    "refillStatus": {
+      "type": "string",
+      "enum": ["PENDING", "PAID", "CANCELED", "FAILED"]
+    },
+    "paymentTiming": {
+      "type": "string",
+      "enum": ["IMMEDIATE", "ON_APPROVAL", "RECURRING"]
+    },
+    "productType": {
+      "type": "string",
+      "enum": ["PHYSICAL", "SERVICE", "MEMBERSHIP", "LAB_TEST"]
+    }
+  },
+
+  "constants": {
+    "SUBSCRIPTION_PAYMENT_SHIFT_DAYS": {
+      "value": 7,
+      "description": "Number of days to shift the first refill date earlier",
+      "applies_to": ["SUBSCRIPTION"]
+    },
+    "payTheoryAccountCodes": {
+      "INITIAL_CONSULTATION": "Initial Consultation",
+      "MEMBERSHIP": "Membership",
+      "SUBSCRIPTION": "Subscription",
+      "LAB_TEST": "Lab Test",
+      "PHYSICAL_PRODUCT": "Physical Product"
+    }
+  },
+
+  "scenarios": [
+    {
+      "id": "SC-001",
+      "name": "OTP - Physical Product (Non-Prescription)",
+      "type": "ONE_TIME_PURCHASE",
+      "category": "one_time_purchase",
+      "requires_approval": false,
+      "requires_prescription": false,
+      "payment_timing": "IMMEDIATE",
+      "product_type": "PHYSICAL",
+      "status_flow": ["PENDING", "APPROVED", "SENT_TO_PHARMACY", "ORDER_SHIPPED"],
+      "test_assertions": {
+        "initial_status": "PENDING",
+        "payment_charged_at": "checkout",
+        "final_status": "ORDER_SHIPPED",
+        "refund_eligible_until": "SENT_TO_PHARMACY"
+      },
+      "test_data": {
+        "sample_product": "non-prescription-vitamin",
+        "expected_charge_timing": "immediate"
+      }
+    },
+    {
+      "id": "SC-002",
+      "name": "OTP - Prescription Medication",
+      "type": "ONE_TIME_PURCHASE",
+      "category": "one_time_purchase",
+      "requires_approval": true,
+      "requires_prescription": true,
+      "payment_timing": "ON_APPROVAL",
+      "product_type": "PHYSICAL",
+      "status_flow": {
+        "approved": ["AWAITING_REVIEW", "APPROVED", "SENT_TO_PHARMACY", "ORDER_SHIPPED"],
+        "denied": ["AWAITING_REVIEW", "DENIED"]
+      },
+      "test_assertions": {
+        "initial_status": "AWAITING_REVIEW",
+        "payment_charged_at": "doctor_approval",
+        "requires_health_questionnaire": true,
+        "denial_requires_reason": true
+      },
+      "test_data": {
+        "sample_product": "prescription-medication",
+        "expected_charge_timing": "on_approval"
+      }
+    },
+    {
+      "id": "SC-003",
+      "name": "OTP - Lab Test",
+      "type": "ONE_TIME_PURCHASE",
+      "category": "one_time_purchase",
+      "requires_approval": false,
+      "requires_prescription": false,
+      "payment_timing": "IMMEDIATE",
+      "product_type": "LAB_TEST",
+      "status_flow": ["PENDING", "APPROVED", "IN_PROGRESS", "PROCESSED"],
+      "integration": "ChooseHealth",
+      "test_assertions": {
+        "initial_status": "PENDING",
+        "payment_charged_at": "checkout",
+        "generates_requisition": true
+      },
+      "test_data": {
+        "sample_product": "blood-panel-test",
+        "expected_charge_timing": "immediate"
+      }
+    },
+    {
+      "id": "SC-004",
+      "name": "Subscription - 30-Day Cycle (New)",
+      "type": "SUBSCRIPTION",
+      "category": "subscription",
+      "requires_approval": true,
+      "requires_prescription": true,
+      "payment_timing": "ON_APPROVAL",
+      "billing_cycle": "EVERY_DAY_30",
+      "supply": "DAY_30",
+      "status_flow": ["AWAITING_REVIEW", "ACTIVE"],
+      "refill_schedule": {
+        "first_refill_offset_days": -7,
+        "first_refill_day": 23,
+        "subsequent_interval_days": 30,
+        "formula": "first_refill = subscription_start + 30 - 7"
+      },
+      "test_assertions": {
+        "initial_status": "AWAITING_REVIEW",
+        "active_status_after_approval": true,
+        "first_refill_day_from_start": 23,
+        "creates_paytheory_subscription": true
+      },
+      "test_data": {
+        "subscription_start": "2024-01-01",
+        "expected_first_refill": "2024-01-24",
+        "expected_second_refill": "2024-02-23"
+      }
+    },
+    {
+      "id": "SC-005",
+      "name": "Subscription - 90-Day Cycle (New)",
+      "type": "SUBSCRIPTION",
+      "category": "subscription",
+      "requires_approval": true,
+      "requires_prescription": true,
+      "payment_timing": "ON_APPROVAL",
+      "billing_cycle": "EVERY_DAY_90",
+      "supply": "DAY_90",
+      "status_flow": ["AWAITING_REVIEW", "ACTIVE"],
+      "refill_schedule": {
+        "first_refill_offset_days": -7,
+        "first_refill_day": 83,
+        "subsequent_interval_days": 90,
+        "formula": "first_refill = subscription_start + 90 - 7"
+      },
+      "test_assertions": {
+        "initial_status": "AWAITING_REVIEW",
+        "active_status_after_approval": true,
+        "first_refill_day_from_start": 83,
+        "creates_paytheory_subscription": true
+      },
+      "test_data": {
+        "subscription_start": "2024-01-01",
+        "expected_first_refill": "2024-03-25",
+        "expected_second_refill": "2024-06-23"
+      }
+    },
+    {
+      "id": "SC-006",
+      "name": "Subscription - Pause",
+      "type": "SUBSCRIPTION_ACTION",
+      "category": "subscription",
+      "action": "PAUSE",
+      "requires_approval": false,
+      "preconditions": {
+        "current_status": "ACTIVE",
+        "no_pending_refill_processing": true
+      },
+      "status_flow": ["ACTIVE", "PAUSED"],
+      "side_effects": {
+        "paytheory_subscription_canceled": true,
+        "canceled_at_recorded": true,
+        "refills_marked_inactive": true,
+        "user_action_logged": "SUBSCRIPTION_PAUSED",
+        "activecampaign_event": "DOCTOR_REVIEW_PAUSED"
+      },
+      "test_assertions": {
+        "final_status": "PAUSED",
+        "paytheory_status": "CANCELED",
+        "original_refills_preserved": true
+      },
+      "known_issues": ["Uses cancel+recreate workaround - PayTheory has no native pause"]
+    },
+    {
+      "id": "SC-007",
+      "name": "Subscription - Resume",
+      "type": "SUBSCRIPTION_ACTION",
+      "category": "subscription",
+      "action": "RESUME",
+      "requires_approval": false,
+      "preconditions": {
+        "current_status": "PAUSED"
+      },
+      "status_flow": ["PAUSED", "NEW", "ACTIVE"],
+      "side_effects": {
+        "existing_refill_statuses_reset": true,
+        "new_paytheory_subscription_created": true,
+        "refill_dates_recalculated": true,
+        "user_action_logged": "SUBSCRIPTION_RESUMED",
+        "activecampaign_event": "DOCTOR_REVIEW_RESUMED"
+      },
+      "test_assertions": {
+        "final_status": "ACTIVE",
+        "new_paytheory_subscription": true,
+        "refills_from_resume_date": true
+      },
+      "known_issues": [
+        "BUG: Original -7 day offset lost on resume",
+        "Refill dates shift unpredictably after resume",
+        "Potential duplicate refills if overlapping dates"
+      ]
+    },
+    {
+      "id": "SC-008",
+      "name": "Subscription - Cancel",
+      "type": "SUBSCRIPTION_ACTION",
+      "category": "subscription",
+      "action": "CANCEL",
+      "requires_approval": false,
+      "preconditions": {
+        "current_status": ["ACTIVE", "PAUSED"]
+      },
+      "status_flow": {
+        "from_active": ["ACTIVE", "CANCELED"],
+        "from_paused": ["PAUSED", "CANCELED"]
+      },
+      "side_effects": {
+        "paytheory_subscription_canceled": true,
+        "future_refills_canceled": true,
+        "user_action_logged": "SUBSCRIPTION_CANCELED"
+      },
+      "test_assertions": {
+        "final_status": "CANCELED",
+        "no_future_charges": true,
+        "no_automatic_refund": true
+      }
+    },
+    {
+      "id": "SC-009",
+      "name": "Subscription - Doctor Denial",
+      "type": "SUBSCRIPTION_ACTION",
+      "category": "subscription",
+      "action": "DENY",
+      "requires_approval": true,
+      "preconditions": {
+        "current_status": "AWAITING_REVIEW"
+      },
+      "status_flow": ["AWAITING_REVIEW", "DENIED"],
+      "side_effects": {
+        "refund_if_charged": true,
+        "patient_notified": true,
+        "denial_reason_required": true
+      },
+      "test_assertions": {
+        "final_status": "DENIED",
+        "refund_issued": "if_already_charged",
+        "reason_recorded": true
+      }
+    },
+    {
+      "id": "SC-010",
+      "name": "Membership - Monthly",
+      "type": "MEMBERSHIP",
+      "category": "membership",
+      "requires_approval": false,
+      "payment_timing": "IMMEDIATE",
+      "billing_cycle": "MONTHLY",
+      "status_flow": ["PENDING", "ACTIVE"],
+      "benefits": {
+        "product_discounts": true,
+        "auto_order_eligible": true,
+        "health_assessment_access": true,
+        "priority_support": true
+      },
+      "test_assertions": {
+        "initial_status": "PENDING",
+        "active_after_payment": true,
+        "benefits_unlocked": true,
+        "recurring_monthly": true
+      },
+      "test_data": {
+        "expected_charge_timing": "immediate",
+        "recurring_interval": "monthly"
+      }
+    },
+    {
+      "id": "SC-011",
+      "name": "Membership - Annual",
+      "type": "MEMBERSHIP",
+      "category": "membership",
+      "requires_approval": false,
+      "payment_timing": "IMMEDIATE",
+      "billing_cycle": "ANNUAL",
+      "status_flow": ["PENDING", "ACTIVE"],
+      "benefits": {
+        "product_discounts": true,
+        "auto_order_eligible": true,
+        "health_assessment_access": true,
+        "priority_support": true,
+        "annual_discount": true,
+        "price_lock": true
+      },
+      "test_assertions": {
+        "initial_status": "PENDING",
+        "active_after_payment": true,
+        "full_annual_charged": true,
+        "access_duration_months": 12
+      },
+      "test_data": {
+        "expected_charge_timing": "immediate",
+        "charge_type": "full_annual"
+      }
+    },
+    {
+      "id": "SC-012",
+      "name": "Initial Consultation - Video",
+      "type": "CONSULTATION",
+      "category": "consultation",
+      "service_type": "VIDEO",
+      "requires_approval": false,
+      "payment_timing": "IMMEDIATE",
+      "status_flow": {
+        "completed": ["PENDING", "IN_PROGRESS", "PROCESSED"],
+        "refunded": ["PENDING", "REFUNDED"],
+        "expired": ["PENDING", "EXPIRED"],
+        "with_prescription": ["PENDING", "IN_PROGRESS", "SENT_TO_PHARMACY"]
+      },
+      "refund_conditions": [
+        "Canceled 24+ hours before appointment",
+        "Doctor unavailable",
+        "Technical issues preventing consultation"
+      ],
+      "test_assertions": {
+        "payment_at_booking": true,
+        "appointment_token_created": true,
+        "can_result_in_prescription": true
+      },
+      "test_data": {
+        "expected_charge_timing": "at_booking",
+        "refund_window_hours": 24
+      }
+    },
+    {
+      "id": "SC-013",
+      "name": "Subscription Refill - Payment Success",
+      "type": "SUBSCRIPTION_REFILL",
+      "category": "subscription",
+      "trigger": "SCHEDULED_PAYMENT",
+      "payment_result": "SUCCESS",
+      "webhook_event": "payment.success",
+      "status_updates": {
+        "transaction_status": "CAPTURED",
+        "refill_status": "PAID"
+      },
+      "side_effects": {
+        "child_order_created": true,
+        "sent_to_pharmacy": true,
+        "next_refill_confirmed": true
+      },
+      "test_assertions": {
+        "transaction_captured": true,
+        "refill_marked_paid": true,
+        "child_order_exists": true
+      }
+    },
+    {
+      "id": "SC-014",
+      "name": "Subscription Refill - Payment Failure",
+      "type": "SUBSCRIPTION_REFILL",
+      "category": "subscription",
+      "trigger": "SCHEDULED_PAYMENT",
+      "payment_result": "FAILURE",
+      "webhook_event": "payment.failed",
+      "status_updates": {
+        "transaction_status": "FAILED",
+        "refill_status": "FAILED"
+      },
+      "retry_policy": {
+        "max_attempts": 3,
+        "retry_period_days": 7,
+        "escalation": "pause_subscription"
+      },
+      "side_effects": {
+        "failure_reasons_recorded": true,
+        "patient_notified": true,
+        "retry_scheduled": true
+      },
+      "test_assertions": {
+        "transaction_failed": true,
+        "failure_reasons_present": true,
+        "retry_initiated": true
+      }
+    },
+    {
+      "id": "SC-015",
+      "name": "Payment Method - Add New Card",
+      "type": "PAYMENT_METHOD",
+      "category": "payment",
+      "action": "CREATE",
+      "flow": [
+        "Patient navigates to payment settings",
+        "PayTheory hosted form displayed",
+        "Patient enters card details",
+        "Card tokenized by PayTheory",
+        "Token stored in PayTheoryPaymentMethod"
+      ],
+      "data_stored": {
+        "paymentMethodId": "PayTheory token",
+        "payload": "card metadata (last4, brand, expiry)",
+        "NOT_stored": ["full_card_number", "cvv"]
+      },
+      "test_assertions": {
+        "token_stored": true,
+        "card_number_not_stored": true,
+        "available_for_purchases": true
+      }
+    },
+    {
+      "id": "SC-016",
+      "name": "Payment Method - Update for Subscription",
+      "type": "PAYMENT_METHOD",
+      "category": "payment",
+      "action": "UPDATE",
+      "preconditions": {
+        "new_method_saved": true,
+        "subscription_active": true
+      },
+      "flow": [
+        "Patient selects subscription",
+        "Patient selects new payment method",
+        "PayTheory subscription updated",
+        "Future charges use new card"
+      ],
+      "test_assertions": {
+        "subscription_updated": true,
+        "future_charges_use_new_card": true
+      }
+    }
+  ],
+
+  "business_rules": [
+    {
+      "id": "BR-001",
+      "name": "Prescription Approval Required",
+      "applies_to": ["ONE_TIME_PURCHASE", "SUBSCRIPTION"],
+      "condition": "product.requirePrescription === true",
+      "behavior": {
+        "initial_status": "AWAITING_REVIEW",
+        "payment_held": true,
+        "doctor_review_required": true,
+        "denial_requires_reason": true
+      }
+    },
+    {
+      "id": "BR-002",
+      "name": "First Refill 7-Day Shift",
+      "applies_to": ["SUBSCRIPTION"],
+      "constant": "SUBSCRIPTION_PAYMENT_SHIFT_DAYS",
+      "value": 7,
+      "behavior": {
+        "first_refill_shifted_days": -7,
+        "subsequent_refills_normal": true,
+        "purpose": "Improve patient engagement"
+      }
+    },
+    {
+      "id": "BR-003",
+      "name": "Pause Uses Cancel+Recreate",
+      "applies_to": ["SUBSCRIPTION"],
+      "reason": "PayTheory has no native pause API",
+      "behavior": {
+        "pause_action": "cancel_paytheory_subscription",
+        "resume_action": "create_new_paytheory_subscription",
+        "known_issue": "Refill schedule recalculated from resume date"
+      }
+    },
+    {
+      "id": "BR-004",
+      "name": "Membership Benefits Application",
+      "applies_to": ["MEMBERSHIP"],
+      "benefits": {
+        "discount_percentage": "configured_per_product",
+        "auto_order_eligible": true,
+        "health_assessment_access": true
+      },
+      "tracking_model": "StoreProductMembershipBenefitApplication"
+    },
+    {
+      "id": "BR-005",
+      "name": "Payment Tokenization Security",
+      "applies_to": ["ALL"],
+      "behavior": {
+        "card_numbers_never_stored": true,
+        "pci_compliance_via_paytheory": true,
+        "soft_delete_for_removed_cards": true
+      }
+    }
+  ],
+
+  "known_issues": [
+    {
+      "id": "ISSUE-001",
+      "title": "Pause/Resume Loses Refill Offset",
+      "severity": "HIGH",
+      "status": "KNOWN_BUG",
+      "affected_scenarios": ["SC-006", "SC-007"],
+      "description": "When subscription is paused and resumed, the -7 day first refill offset is recalculated from resume date, not preserved",
+      "impact": "Patient refill dates shift unpredictably",
+      "reproduction_steps": [
+        "Create 30-day subscription starting Jan 1",
+        "First refill should be Jan 24",
+        "Pause on Feb 15",
+        "Resume on Mar 10",
+        "New first refill is Apr 2 instead of preserving schedule"
+      ]
+    },
+    {
+      "id": "ISSUE-002",
+      "title": "Potential Refill Duplication",
+      "severity": "MEDIUM",
+      "status": "UNDER_INVESTIGATION",
+      "affected_scenarios": ["SC-007"],
+      "description": "On resume, new OrderRefill records are created while existing refills are kept with status reset",
+      "impact": "May cause duplicate charges for overlapping dates"
+    },
+    {
+      "id": "ISSUE-003",
+      "title": "No Timezone Handling",
+      "severity": "LOW",
+      "status": "KNOWN_LIMITATION",
+      "description": "Refill dates calculated using server timezone (UTC)",
+      "impact": "Patients in different timezones see different dates"
+    },
+    {
+      "id": "ISSUE-004",
+      "title": "Merchant-of-Record Architecture",
+      "severity": "CRITICAL_BUSINESS",
+      "status": "DECISION_NEEDED",
+      "description": "Teligant is merchant-of-record for all tenants. All payments flow to Teligant's account first.",
+      "impact": [
+        "Manual fund distribution to tenants",
+        "Teligant liable for all chargebacks",
+        "Complex accounting",
+        "Security risk: Single API key compromise affects all tenants"
+      ],
+      "recommendation": "Evaluate migration to Stripe Connect or PayFac model"
+    }
+  ],
+
+  "test_suites": {
+    "one_time_purchase": {
+      "scenarios": ["SC-001", "SC-002", "SC-003"],
+      "test_ids": ["OTP-001", "OTP-002", "OTP-003", "OTP-004", "OTP-005"]
+    },
+    "subscription": {
+      "scenarios": ["SC-004", "SC-005", "SC-006", "SC-007", "SC-008", "SC-009", "SC-013", "SC-014"],
+      "test_ids": ["SUB-001", "SUB-002", "SUB-003", "SUB-004", "SUB-005", "SUB-006", "SUB-007", "SUB-008"]
+    },
+    "membership": {
+      "scenarios": ["SC-010", "SC-011"],
+      "test_ids": ["MEM-001", "MEM-002", "MEM-003"]
+    },
+    "consultation": {
+      "scenarios": ["SC-012"],
+      "test_ids": ["CON-001", "CON-002", "CON-003", "CON-004"]
+    },
+    "payment": {
+      "scenarios": ["SC-015", "SC-016"],
+      "test_ids": ["PAY-001", "PAY-002"]
+    }
+  },
+
+  "file_references": {
+    "backend": {
+      "order_core_service": "src/shared/modules/order/modules/order/order-core.service.ts",
+      "subscription_service": "src/shared/modules/purchase-scope/purchase-subscription/purchase-subscription.service.ts",
+      "refill_service": "src/shared/modules/purchase-scope/purchase-subscription-refill/purchase-subscription-refill.service.ts",
+      "paytheory_client": "src/shared/providers/pay-theory/pay-theory-api.client.ts",
+      "checkout_controller": "apps/patient/core/modules/order-scope/order/layers/order-bl/controllers/checkout.controller.ts",
+      "status_enums": "src/shared/enums/purchase-*.enum.ts",
+      "billing_cycle_enum": "src/shared/enums/product-variant-billing-cycle.enum.ts",
+      "payment_constants": "src/shared/constants/payment.constants.ts"
+    },
+    "frontend": {
+      "subscriptions_api": "src/providers/store/api/subscriptions/subscriptions.ts",
+      "orders_api": "src/providers/store/api/orders/",
+      "checkout_page": "src/app/(guest)/checkout/page.tsx",
+      "subscription_list": "src/app/panel/(orders)/subscriptions/page.tsx"
+    },
+    "database": {
+      "schema": "prisma/schema.prisma",
+      "models": ["Order", "OrderLineItem", "OrderRefill", "PayTheoryTransaction", "PayTheorySubscription", "PayTheoryPaymentMethod"]
+    }
+  }
+}

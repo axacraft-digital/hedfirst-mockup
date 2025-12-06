@@ -1,0 +1,165 @@
+Order Management UI: Design Brief
+
+  For UX/UI designers new to the Teligant/Hedfirst platform
+
+  ---
+  What We Do (The 30-Second Version)
+
+  We're a telehealth platform that lets people get prescription medications online. A patient visits the website, answers health questions,
+   and if a doctor approves them, we ship their medication to their door. Many patients also sign up for ongoing subscriptions so they get
+  automatic refills.
+
+  Think of it like buying glasses online: you can't just add prescription lenses to your cart and check out. A doctor has to review your
+  prescription first. We're the same concept, but for medications.
+
+  ---
+  Why Our Orders Are Different
+
+  Here's where it gets interesting for you as a designer.
+
+  When a customer checks out on Amazon, they buy three things, they get one order, done. Our world is more complicated because different 
+  items in the same cart behave completely differently.
+
+  Imagine a customer's cart contains:
+  - A $29 consultation fee (so a doctor will review their request)
+  - A $19/month membership (for discounts and perks)
+  - A $299/month medication (the prescription they actually want)
+  - A free lab kit (to test their blood before starting the medication)
+
+  From the customer's perspective, this is "one order." They clicked checkout once, entered their card once, and expect to see one
+  confirmation.
+
+  But behind the scenes, each of those four items has a completely different life:
+
+  | Item             | When We Charge              | What Happens Next                 |
+  |------------------|-----------------------------|-----------------------------------|
+  | Consultation fee | Right now                   | Done. One-time charge.            |
+  | Membership       | Right now, then every month | Recurring subscription begins     |
+  | Medication       | Only if the doctor approves | Card is saved but not charged yet |
+  | Lab kit          | Right now (it's free)       | Ships immediately                 |
+
+  So one checkout creates four separate "mini-orders" that we track independently. We call these child orders or sub-orders, and they all
+  live under one parent order (the thing the customer sees as "their order").
+
+  ---
+  The Core Design Challenge
+
+  How do we show staff a list of orders that's simple enough to scan quickly, but detailed enough to manage each item's unique status and 
+  actions?
+
+  A single order might have:
+  - One item that's complete
+  - One item waiting for a doctor
+  - One item with a failed payment
+  - One item that's shipping
+
+  The parent order isn't really "complete" or "pending" — it's a mix. Staff need to see the overall picture at a glance, but also drill
+  into specifics without losing context.
+
+  ---
+  The People Using This Interface
+
+  Store Administrators (Primary Users)
+
+  These are the day-to-day operators. They need to:
+  - See which orders need attention (doctor review, payment failures, shipping issues)
+  - Quickly find a specific customer's order when they call in
+  - Take actions like refunding, pausing subscriptions, or resending shipments
+  - Understand the full picture of what a customer purchased
+
+  Their pain points today:
+  - Too many clicks to see what's actually going on with an order
+  - Hard to tell at a glance which orders are stuck and why
+  - Subscription management is scattered across multiple screens
+
+  Providers (Doctors)
+
+  Doctors only care about one thing: prescription items waiting for their review. They need to:
+  - See the patient's health questionnaire answers
+  - Review any lab results
+  - Approve or deny the prescription
+  - Add clinical notes
+
+  They don't need to see the membership, consultation fee, or lab kit details — that's noise for them.
+
+  Patients (Self-Service Portal)
+
+  Patients see a simplified view of "their orders." They want to:
+  - Know if their prescription was approved
+  - Track their shipment
+  - See when their next subscription charge is coming
+  - Pause or cancel recurring items
+
+  ---
+  Key Concepts to Internalize
+
+  1. Parent vs. Child Orders
+
+  Every checkout creates one parent order (HF-1234) containing one or more child orders. The parent is the container; the children are the
+  actual items with their own statuses and lifecycles.
+
+  Design implication: The list view shows parents. Expanding a row reveals children.
+
+  2. Immediate vs. Deferred Payment
+
+  Some items charge immediately (consultation, membership, lab kit). Prescriptions are different — we save the card but don't charge until
+  a doctor approves. If the doctor denies, we never charge at all.
+
+  Design implication: A prescription child order might show "Payment pending approval" while other children in the same order show "Paid."
+
+  3. One-Time vs. Subscription
+
+  Some items are buy-once-done. Others create ongoing subscriptions with their own billing cycles. A single order might have both.
+
+  Design implication: Subscription items need to show next billing date and offer pause/cancel actions. One-time items don't.
+
+  4. The -7 Day Rule
+
+  For medication subscriptions, we charge for refills 7 days before the patient would run out. A "30-day supply" actually bills on day 23.
+  This prevents gaps in treatment while shipping is in transit.
+
+  Design implication: When showing "next refill date," be precise. Don't confuse staff or patients about when charges happen.
+
+  5. Status Inheritance
+
+  The parent order's status is derived from its children. If any child is awaiting review, the parent shows "Awaiting Review." If
+  everything is complete, the parent shows "Complete." Mixed states show "Partial."
+
+  Design implication: You'll need clear visual hierarchy. Parent status is the headline; child statuses are the details.
+
+  ---
+  What Success Looks Like
+
+  A staff member should be able to:
+
+  1. Scan the order list and immediately spot which orders need attention (stuck reviews, failed payments, shipping problems)
+  2. Understand an order's full story by expanding one row — not navigating to a separate page
+  3. Take action on any item without hunting through menus (pause this subscription, refund that consultation, approve this prescription)
+  4. Answer a customer's phone call by searching their name and seeing everything they've ever ordered, with current statuses, in seconds
+
+  ---
+  Documents We've Prepared.  Please look in the /_docs folder
+
+  | Document                       | What It Contains                                                                         |
+  |--------------------------------|------------------------------------------------------------------------------------------|
+  | order-system-logic.md          | Technical deep-dive on how orders work, all the statuses, billing cycles, and edge cases |
+  | purchase-scenarios-catalog.pdf | Every possible purchase scenario documented with flowcharts                              |
+  | purchase-scenarios-schema.json | Machine-readable version of the scenarios (useful for test cases)                        |
+  | Order List Diagrams            | ASCII mockups showing parent/child expansion, filters, and detail views                  |
+
+  Start with this brief, then review the diagrams, then dive into the technical docs as needed for edge cases.
+
+  ---
+  Questions to Keep in Mind
+
+  As you explore the documents and start designing:
+
+  - How do we make the parent row informative enough that staff don't need to expand every single order?
+  - What's the right visual treatment for "this item is waiting on something external" (doctor review, lab results, payment retry)?
+  - How do we handle the provider view, which is essentially a filtered version of the same data?
+  - Should subscription actions (pause, cancel) be prominent or tucked away to prevent accidents?
+  - How do we communicate the -7 day refill timing without confusing patients who expect "30-day" to mean 30 days?
+
+  ---
+  Welcome to the project. The complexity is real, but so is the opportunity to make something that genuinely helps people manage a tricky
+  workflow. Happy to walk through any of this in more detail.

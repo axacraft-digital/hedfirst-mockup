@@ -1,0 +1,475 @@
+{
+  "_meta": {
+    "description": "Reference/lookup data for product detail page dropdowns and form fields",
+    "version": "1.0.0",
+    "generated": "2024-12-06",
+    "usage": "These are the enumeration values that populate dropdowns in the store admin product edit pages",
+    "notes": {
+      "structure": "Each enum has 'options' array with {label, value} pairs ready for select components",
+      "pharmacies": "Pharmacies are store-level entities configured in Store Settings, then referenced by ID in products"
+    }
+  },
+
+  "productTypes": {
+    "description": "Top-level product type tabs in /panel/products",
+    "options": [
+      { "label": "Physical Product", "value": "PHYSICAL_PRODUCT" },
+      { "label": "Service", "value": "SERVICE" },
+      { "label": "Bundle", "value": "BUNDLE" },
+      { "label": "Membership", "value": "MEMBERSHIP" },
+      { "label": "Lab Test", "value": "LAB_TEST" }
+    ]
+  },
+
+  "diseaseStates": {
+    "description": "Medical condition categories - used by PHYSICAL_PRODUCT and SERVICE types",
+    "options": [
+      { "label": "Addiction & Substance Use", "value": "ADDICTION_SUBSTANCE_USE" },
+      { "label": "Allergy & Immunology", "value": "ALLERGY_IMMUNOLOGY" },
+      { "label": "Athletic Performance & Recovery", "value": "ATHLETIC_PERFORMANCE_AND_RECOVERY" },
+      { "label": "Autoimmune & Rheumatology", "value": "AUTOIMMUNE_RHEUMATOLOGY" },
+      { "label": "Bone Health & Osteoporosis", "value": "BONE_HEALTH_OSTEOPOROSIS" },
+      { "label": "Cardiovascular Health", "value": "CARDIOVASCULAR_HEALTH" },
+      { "label": "Dermatology", "value": "DERMATOLOGY" },
+      { "label": "Diabetes Management", "value": "DIABETES_MANAGEMENT" },
+      { "label": "Disease Prevention", "value": "DISEASE_PREVENTION" },
+      { "label": "Endocrine Disorders", "value": "ENDOCRINE_DISORDERS" },
+      { "label": "Fertility", "value": "FERTILITY" },
+      { "label": "Foot Care", "value": "FOOT_CARE" },
+      { "label": "Gastrointestinal Disorders", "value": "GASTROINTESTINAL_DISORDERS" },
+      { "label": "General Health", "value": "GENERAL_HEALTH" },
+      { "label": "Hair Growth", "value": "HAIR_GROWTH" },
+      { "label": "Hormone Therapy", "value": "HORMONE_THERAPY" },
+      { "label": "Immune & Inflammatory", "value": "IMMUNE_INFLAMMATORY" },
+      { "label": "Infectious Diseases", "value": "INFECTIOUS_DISEASES" },
+      { "label": "Joint Pain & Inflammation", "value": "JOINT_PAIN_INFLAMMATION" },
+      { "label": "Longevity", "value": "LONGEVITY" },
+      { "label": "Membership", "value": "MEMBERSHIP" },
+      { "label": "Mental Health", "value": "MENTAL_HEALTH" },
+      { "label": "Migraine", "value": "MIGRAINE" },
+      { "label": "Multiple", "value": "MULTIPLE" },
+      { "label": "Nausea & Vomiting", "value": "NAUSEA_VOMITING" },
+      { "label": "Neurological Conditions", "value": "NEUROLOGICAL_CONDITIONS" },
+      { "label": "Neuropathy", "value": "NEUROPATHY" },
+      { "label": "None", "value": "NONE" },
+      { "label": "Oncology & Cancer", "value": "ONCOLOGY_CANCER" },
+      { "label": "Pain Management", "value": "PAIN_MANAGEMENT" },
+      { "label": "Peptide Therapy", "value": "PEPTIDE_THERAPY" },
+      { "label": "Respiratory & Pulmonary", "value": "RESPIRATORY_PULMONARY" },
+      { "label": "Sexual Wellness", "value": "SEXUAL_WELLNESS" },
+      { "label": "Skin Care", "value": "SKIN_CARE" },
+      { "label": "Sleep & Insomnia", "value": "SLIP_INSOMNIA" },
+      { "label": "Thyroid Function", "value": "THYROID_FUNCTION" },
+      { "label": "UTI", "value": "UTI" },
+      { "label": "Vitamins & Supplements", "value": "VITAMINS_SUPPLEMENTS" },
+      { "label": "Weight Loss", "value": "WEIGHT_LOSS" }
+    ]
+  },
+
+  "physicalTreatmentTypes": {
+    "description": "Treatment category for PHYSICAL_PRODUCT - determines prescription requirements",
+    "appliesTo": ["PHYSICAL_PRODUCT"],
+    "options": [
+      { "label": "Prescription Medication", "value": "PRESCRIPTION_MEDICATION" },
+      { "label": "Topical Treatment", "value": "TOPICAL_TREATMENT" },
+      { "label": "Supplement", "value": "SUPPLEMENT" },
+      { "label": "Compound Medication", "value": "COMPOUND_MEDICATION" }
+    ]
+  },
+
+  "physicalTreatmentUses": {
+    "description": "Dosing schedule/purpose classification for medications",
+    "appliesTo": ["PHYSICAL_PRODUCT"],
+    "options": [
+      { "label": "Abortive/PRN (As Needed)", "value": "Abortive/PRN (As Needed)" },
+      { "label": "Abortive/Fixed Schedule", "value": "Abortive/Fixed Schedule" },
+      { "label": "Adjunctive/Daily", "value": "Adjunctive/Daily" },
+      { "label": "Adjunctive/PRN", "value": "Adjunctive/PRN" },
+      { "label": "Breakthrough/PRN", "value": "Breakthrough/PRN" },
+      { "label": "Maintenance/BID", "value": "Maintenance/BID" },
+      { "label": "Maintenance/Daily", "value": "Maintenance/Daily" },
+      { "label": "Maintenance/QID", "value": "Maintenance/QID" },
+      { "label": "Maintenance/TID", "value": "Maintenance/TID" },
+      { "label": "Preventative/Cyclic", "value": "Preventative/Cyclic" },
+      { "label": "Preventative/Daily", "value": "Preventative/Daily" },
+      { "label": "Preventative/Seasonal", "value": "Preventative/Seasonal" },
+      { "label": "Rescue/Emergency", "value": "Rescue/Emergency" }
+    ]
+  },
+
+  "serviceTreatmentTypes": {
+    "description": "Consultation/appointment type classification",
+    "appliesTo": ["SERVICE"],
+    "options": [
+      { "label": "Initial Consultation", "value": "INITIAL_CONSULTATION" },
+      { "label": "Follow-up Consultation", "value": "FOLLOW_UP_CONSULTATION" },
+      { "label": "Treatment Review", "value": "TREATMENT_REVIEW" },
+      { "label": "Other", "value": "OTHER" }
+    ]
+  },
+
+  "billingCycles": {
+    "description": "Subscription/payment frequency options",
+    "appliesTo": ["PHYSICAL_PRODUCT", "MEMBERSHIP"],
+    "options": [
+      { "label": "Charge Upfront", "value": "CHARGE_UPFRONT" },
+      { "label": "One Time Payment", "value": "ONE_TIME_PAYMENT" },
+      { "label": "Every 30 days", "value": "EVERY_DAY_30" },
+      { "label": "Every 60 days", "value": "EVERY_DAY_60" },
+      { "label": "Every 90 days", "value": "EVERY_DAY_90" },
+      { "label": "Every 120 days", "value": "EVERY_DAY_120" },
+      { "label": "Every 180 days", "value": "EVERY_DAY_180" },
+      { "label": "Annual", "value": "ANNUAL" }
+    ],
+    "subsets": {
+      "physical": ["ONE_TIME_PAYMENT", "EVERY_DAY_30", "EVERY_DAY_90", "EVERY_DAY_180"],
+      "membership": ["EVERY_DAY_180", "ANNUAL"]
+    }
+  },
+
+  "supplyDurations": {
+    "description": "How many days of medication/product a variant provides",
+    "appliesTo": ["PHYSICAL_PRODUCT"],
+    "options": [
+      { "label": "30 day", "value": "DAY_30" },
+      { "label": "60 day", "value": "DAY_60" },
+      { "label": "90 day", "value": "DAY_90" },
+      { "label": "120 day", "value": "DAY_120" },
+      { "label": "180 day", "value": "DAY_180" }
+    ],
+    "note": "Auto-set based on billing cycle in production UI"
+  },
+
+  "dosageUnits": {
+    "description": "Measurement units for medication dosages",
+    "appliesTo": ["PHYSICAL_PRODUCT"],
+    "options": [
+      { "label": "mg", "value": "mg" },
+      { "label": "mcg", "value": "mcg" },
+      { "label": "g", "value": "g" },
+      { "label": "IU", "value": "iu" },
+      { "label": "%", "value": "%" },
+      { "label": "oz", "value": "oz" },
+      { "label": "mL", "value": "ml" }
+    ]
+  },
+
+  "formFactors": {
+    "description": "Physical form of medication/product - comprehensive FDA-style list",
+    "appliesTo": ["PHYSICAL_PRODUCT"],
+    "options": [
+      { "label": "Aerosol, Foam", "value": "Aerosol, Foam" },
+      { "label": "Aerosol, Metered", "value": "Aerosol, Metered" },
+      { "label": "Capsule, Delayed Rel Pellets", "value": "Capsule, Delayed Rel Pellets" },
+      { "label": "Capsule, Delayed Release", "value": "Capsule, Delayed Release" },
+      { "label": "Capsule, Extended Release", "value": "Capsule, Extended Release" },
+      { "label": "Capsule, Pellets", "value": "Capsule, Pellets" },
+      { "label": "Capsule, Tablet", "value": "Capsule, Tablet" },
+      { "label": "Capsules", "value": "Capsules" },
+      { "label": "Cloth", "value": "Cloth" },
+      { "label": "Concentrate", "value": "Concentrate" },
+      { "label": "Cream, Augmented", "value": "Cream, Augmented" },
+      { "label": "Creams", "value": "Creams" },
+      { "label": "Elixir", "value": "Elixir" },
+      { "label": "Emulsion", "value": "Emulsion" },
+      { "label": "Enema", "value": "Enema" },
+      { "label": "Film", "value": "Film" },
+      { "label": "Film, Extended Release", "value": "Film, Extended Release" },
+      { "label": "Foam", "value": "Foam" },
+      { "label": "For Solution", "value": "For Solution" },
+      { "label": "For Suspension", "value": "For Suspension" },
+      { "label": "For Suspension, Delayed Release", "value": "For Suspension, Delayed Release" },
+      { "label": "For Suspension, Extended Release", "value": "For Suspension, Extended Release" },
+      { "label": "Gas", "value": "Gas" },
+      { "label": "Gel", "value": "Gel" },
+      { "label": "Gel, Augmented", "value": "Gel, Augmented" },
+      { "label": "Gel, Metered", "value": "Gel, Metered" },
+      { "label": "Granule", "value": "Granule" },
+      { "label": "Granule, Delayed Release", "value": "Granule, Delayed Release" },
+      { "label": "Granules", "value": "Granules" },
+      { "label": "Gum, Chewing", "value": "Gum, Chewing" },
+      { "label": "Implant", "value": "Implant" },
+      { "label": "Injectable", "value": "Injectable" },
+      { "label": "Injectable, Lipid Complex", "value": "Injectable, Lipid Complex" },
+      { "label": "Injectable, Liposomal", "value": "Injectable, Liposomal" },
+      { "label": "Insert", "value": "Insert" },
+      { "label": "Insert, Extended Release", "value": "Insert, Extended Release" },
+      { "label": "Jelly", "value": "Jelly" },
+      { "label": "Liquid", "value": "Liquid" },
+      { "label": "Liquids", "value": "Liquids" },
+      { "label": "Lotion", "value": "Lotion" },
+      { "label": "Lotion, Augmented", "value": "Lotion, Augmented" },
+      { "label": "Oil", "value": "Oil" },
+      { "label": "Ointment", "value": "Ointment" },
+      { "label": "Ointment, Augmented", "value": "Ointment, Augmented" },
+      { "label": "Paste", "value": "Paste" },
+      { "label": "Patch", "value": "Patch" },
+      { "label": "Patches", "value": "Patches" },
+      { "label": "Pellet", "value": "Pellet" },
+      { "label": "Pellets", "value": "Pellets" },
+      { "label": "Powder, Extended Release", "value": "Powder, Extended Release" },
+      { "label": "Powder, Metered", "value": "Powder, Metered" },
+      { "label": "Powders", "value": "Powders" },
+      { "label": "Ring", "value": "Ring" },
+      { "label": "Shampoo", "value": "Shampoo" },
+      { "label": "Solution", "value": "Solution" },
+      { "label": "Solution/Drops", "value": "Solution/Drops" },
+      { "label": "Solution, Extended Release", "value": "Solution, Extended Release" },
+      { "label": "Solution, Gel Forming/Drops", "value": "Solution, Gel Forming/Drops" },
+      { "label": "Solution, Metered", "value": "Solution, Metered" },
+      { "label": "Sponge", "value": "Sponge" },
+      { "label": "Spray, Metered", "value": "Spray, Metered" },
+      { "label": "Sprays", "value": "Sprays" },
+      { "label": "Suppository", "value": "Suppository" },
+      { "label": "Suspension", "value": "Suspension" },
+      { "label": "Suspension/Drops", "value": "Suspension/Drops" },
+      { "label": "Suspension, Extended Release", "value": "Suspension, Extended Release" },
+      { "label": "Suspension, Liposomal", "value": "Suspension, Liposomal" },
+      { "label": "Swab", "value": "Swab" },
+      { "label": "Syrup", "value": "Syrup" },
+      { "label": "System", "value": "System" },
+      { "label": "Tablet, Chewable", "value": "Tablet, Chewable" },
+      { "label": "Tablet, Delayed Release", "value": "Tablet, Delayed Release" },
+      { "label": "Tablet, Effervescent", "value": "Tablet, Effervescent" },
+      { "label": "Tablet, Extended Release", "value": "Tablet, Extended Release" },
+      { "label": "Tablet, Extended Release, Chewable", "value": "Tablet, Extended Release, Chewable" },
+      { "label": "Tablet, For Suspension", "value": "Tablet, For Suspension" },
+      { "label": "Tablet, Orally Disintegrating", "value": "Tablet, Orally Disintegrating" },
+      { "label": "Tablet, Orally Disintegrating, Delayed Release", "value": "Tablet, Orally Disintegrating, Delayed Release" },
+      { "label": "Tablet, Orally Disintegrating, Extended Release", "value": "Tablet, Orally Disintegrating, Extended Release" },
+      { "label": "Tablets", "value": "Tablets" },
+      { "label": "Tape", "value": "Tape" },
+      { "label": "Troche/Lozenge", "value": "Troche/Lozenge" }
+    ],
+    "commonlyUsed": ["Tablets", "Capsules", "Creams", "Injectable", "Solution", "Gel", "Foam", "Patch"]
+  },
+
+  "labTestTypes": {
+    "description": "ChooseHealth lab test product types for external integration",
+    "appliesTo": ["LAB_TEST"],
+    "options": [
+      { "label": "Core Metabolic Test", "value": "CORE_METABOLIC_TEST" },
+      { "label": "Comprehensive Metabolic Health Test", "value": "COMPREHENSIVE_METABOLIC_HEALTH_TEST" },
+      { "label": "Methylation Screening Test", "value": "METHYLATION_SCREENING_TEST" },
+      { "label": "Kidney Function Test", "value": "KIDNEY_FUNCTION_TEST" },
+      { "label": "Pancreatic Health & Function Test", "value": "PANCREATIC_HEALTH_FUNCTION_TEST" },
+      { "label": "Testosterone & Metabolic Test", "value": "TESTOSTERONE_METABOLIC_TEST" },
+      { "label": "Vitamin D & Metabolic Test", "value": "VITAMIN_D_METABOLIC_TEST" },
+      { "label": "Female Hormone Test", "value": "FEMALE_HORMONE_TEST" },
+      { "label": "Female Wellness Test", "value": "FEMALE_WELLNESS_TEST" },
+      { "label": "Female Fertility & Ovarian Reserve Test", "value": "FEMALE_FERTILITY_OVARIAN_RESERVE_TEST" },
+      { "label": "Male Hormone Test", "value": "MALE_HORMONE_TEST" },
+      { "label": "Male Wellness Test", "value": "MALE_WELLNESS_TEST" },
+      { "label": "Liver Function Test", "value": "LIVER_FUNCTION_TEST" },
+      { "label": "Thyroid Function Test", "value": "THYROID_FUNCTION_TEST" },
+      { "label": "Adrenal Health & Function Test", "value": "ADRENAL_HEALTH_FUNCTION_TEST" },
+      { "label": "Thyroid & Metabolic Test", "value": "THYROID_METABOLIC_TEST" }
+    ]
+  },
+
+  "membershipBenefitProductTypes": {
+    "description": "What product types a membership benefit can apply to",
+    "appliesTo": ["MEMBERSHIP"],
+    "options": [
+      { "label": "Initial Consultation", "value": "INITIAL_CONSULTATION" },
+      { "label": "Follow-up Consultation", "value": "FOLLOW_UP_CONSULTATION" },
+      { "label": "Treatment Review", "value": "TREATMENT_REVIEW" },
+      { "label": "All Consultations", "value": "ALL_CONSULTATIONS" }
+    ]
+  },
+
+  "membershipBenefitTypes": {
+    "description": "Type of discount/benefit a membership provides",
+    "appliesTo": ["MEMBERSHIP"],
+    "options": [
+      { "label": "Free Access (100% off)", "value": "FREE" },
+      { "label": "Percentage Discount", "value": "PERCENTAGE_DISCOUNT" },
+      { "label": "Fixed Amount Discount", "value": "FIXED_AMOUNT_DISCOUNT" }
+    ]
+  },
+
+  "membershipBenefitLimitTypes": {
+    "description": "Usage limits for membership benefits",
+    "appliesTo": ["MEMBERSHIP"],
+    "options": [
+      { "label": "Unlimited (within membership period)", "value": "UNLIMITED" },
+      { "label": "Limited Quantity", "value": "LIMITED_QUANTITY" }
+    ]
+  },
+
+  "membershipBenefitUsagePeriods": {
+    "description": "Time period for benefit usage limits",
+    "appliesTo": ["MEMBERSHIP"],
+    "options": [
+      { "label": "per membership year", "value": "YEAR" },
+      { "label": "per calendar month", "value": "MONTH" },
+      { "label": "per membership lifetime", "value": "LIFETIME" }
+    ]
+  },
+
+  "marketingTemplates": {
+    "description": "Pre-built marketing content templates for product pages",
+    "appliesTo": ["PHYSICAL_PRODUCT"],
+    "options": [
+      { "label": "None", "value": "NONE" },
+      { "label": "Migra Cream", "value": "BLOCK_1", "group": "Migraine" },
+      { "label": "Neur Ease", "value": "BLOCK_2", "group": "Migraine" },
+      { "label": "Zolm Ease", "value": "BLOCK_3", "group": "Migraine" },
+      { "label": "Indo Relief", "value": "BLOCK_4", "group": "Migraine" },
+      { "label": "Suma Relief", "value": "BLOCK_5", "group": "Migraine" },
+      { "label": "Men's AntiAging Cream", "value": "BLOCK_6", "group": "Skin Care Men" },
+      { "label": "Men's Rough Texture Correction Cream", "value": "BLOCK_7", "group": "Skin Care Men" },
+      { "label": "Women's Advanced Brightening System", "value": "BLOCK_8", "group": "Skin Care Women" },
+      { "label": "Women's Complete Renewal Complex", "value": "BLOCK_9", "group": "Skin Care Women" },
+      { "label": "Women's Intensive Smoothing Treatment", "value": "BLOCK_10", "group": "Skin Care Women" },
+      { "label": "Women's Hair Regrowth Serum", "value": "BLOCK_11", "group": "Hair Growth Women" },
+      { "label": "Women's Advanced Hair Regrowth Serum", "value": "BLOCK_12", "group": "Hair Growth Women" },
+      { "label": "Women's Maximum Strength Hair Regrowth Serum", "value": "BLOCK_13", "group": "Hair Growth Women" },
+      { "label": "Women's Specialized Hair Serum", "value": "BLOCK_14", "group": "Hair Growth Women" },
+      { "label": "Men's Hair Serum", "value": "BLOCK_15", "group": "Hair Growth Men" },
+      { "label": "Men's Advanced Hair Serum", "value": "BLOCK_16", "group": "Hair Growth Men" },
+      { "label": "Men's Max Str Hair Serum", "value": "BLOCK_17", "group": "Hair Growth Men" }
+    ],
+    "groups": ["Migraine", "Hair Growth Men", "Hair Growth Women", "Skin Care Men", "Skin Care Women"]
+  },
+
+  "membershipMarketingTemplates": {
+    "description": "Marketing templates specifically for membership products",
+    "appliesTo": ["MEMBERSHIP"],
+    "options": [
+      { "label": "None", "value": "NONE" },
+      { "label": "Comprehensive Membership", "value": "M_BLOCK_1" }
+    ]
+  },
+
+  "pharmacies": {
+    "description": "Store-level pharmacy partners - configured in Store Settings, referenced by ID in products",
+    "configuredAt": "/panel/store-settings/pharmacies",
+    "usedIn": ["PHYSICAL_PRODUCT (when requirePrescription=true)"],
+    "mockData": [
+      {
+        "id": "pharm_001",
+        "name": "Empower Pharmacy",
+        "address": "5980 W Sam Houston Pkwy N, Suite 100, Houston, TX 77041",
+        "phone": "(832) 678-4417",
+        "pic": "Dr. Sarah Mitchell",
+        "externalPharmacyId": "DOSESPOT-EMP-001"
+      },
+      {
+        "id": "pharm_002",
+        "name": "Belmar Pharmacy",
+        "address": "12860 W Cedar Dr, Suite 210, Lakewood, CO 80228",
+        "phone": "(800) 525-9473",
+        "pic": "James Rodriguez",
+        "externalPharmacyId": "DOSESPOT-BEL-002"
+      },
+      {
+        "id": "pharm_003",
+        "name": "Hallandale Pharmacy",
+        "address": "1109 E Hallandale Beach Blvd, Hallandale Beach, FL 33009",
+        "phone": "(954) 455-3822",
+        "pic": "Maria Gonzalez",
+        "externalPharmacyId": "DOSESPOT-HAL-003"
+      },
+      {
+        "id": "pharm_004",
+        "name": "Curexa Pharmacy",
+        "address": "5005 LBJ Fwy, Suite 250, Dallas, TX 75244",
+        "phone": "(469) 444-8767",
+        "pic": "Dr. Michael Chen",
+        "externalPharmacyId": "DOSESPOT-CUR-004"
+      }
+    ],
+    "schema": {
+      "id": "string - internal pharmacy ID",
+      "name": "string - display name",
+      "address": "string - full address",
+      "phone": "string - contact phone",
+      "pic": "string - person in charge / pharmacist name",
+      "externalPharmacyId": "string - DoseSpot pharmacy identifier"
+    }
+  },
+
+  "productFieldMatrix": {
+    "description": "Which fields apply to which product types - useful for conditional form rendering",
+    "fields": {
+      "name": { "types": ["PHYSICAL_PRODUCT", "SERVICE", "MEMBERSHIP", "LAB_TEST", "BUNDLE"], "required": true },
+      "subTitle": { "types": ["PHYSICAL_PRODUCT", "SERVICE", "MEMBERSHIP", "LAB_TEST", "BUNDLE"], "required": false },
+      "badge": { "types": ["PHYSICAL_PRODUCT", "SERVICE", "MEMBERSHIP", "LAB_TEST", "BUNDLE"], "required": false },
+      "slug": { "types": ["PHYSICAL_PRODUCT", "MEMBERSHIP", "LAB_TEST"], "required": true, "note": "Auto-generated from name" },
+      "marketingDescription": { "types": ["PHYSICAL_PRODUCT", "SERVICE", "MEMBERSHIP", "LAB_TEST", "BUNDLE"], "required": false },
+      "diseaseState": { "types": ["PHYSICAL_PRODUCT", "SERVICE"], "required": true },
+      "treatmentType": { "types": ["PHYSICAL_PRODUCT", "SERVICE"], "required": true, "note": "Different enum per product type" },
+      "treatmentUse": { "types": ["PHYSICAL_PRODUCT"], "required": false },
+      "pharmacyId": { "types": ["PHYSICAL_PRODUCT"], "required": false, "note": "Required when requirePrescription=true" },
+      "requirePrescription": { "types": ["PHYSICAL_PRODUCT", "BUNDLE"], "required": true },
+      "isMultipleQuantityAllowed": { "types": ["PHYSICAL_PRODUCT"], "required": false },
+      "ingredients": { "types": ["PHYSICAL_PRODUCT"], "required": true, "note": "Array of ingredient names for dosage mapping" },
+      "variants": { "types": ["PHYSICAL_PRODUCT", "SERVICE", "MEMBERSHIP", "LAB_TEST", "BUNDLE"], "required": true },
+      "testedMarkers": { "types": ["LAB_TEST"], "required": true, "note": "Array of biomarker strings" },
+      "externalProductId": { "types": ["LAB_TEST"], "required": false, "note": "ChooseHealth product ID" },
+      "bundledProducts": { "types": ["BUNDLE"], "required": true, "note": "Array of PHYSICAL_PRODUCT IDs" },
+      "benefits": { "types": ["MEMBERSHIP"], "required": true, "note": "Per-variant array of benefit configs" },
+      "upsells": { "types": ["PHYSICAL_PRODUCT", "MEMBERSHIP", "LAB_TEST"], "required": false },
+      "images": { "types": ["PHYSICAL_PRODUCT", "MEMBERSHIP", "LAB_TEST", "BUNDLE"], "required": false },
+      "optionalProductDetails": { "types": ["PHYSICAL_PRODUCT", "MEMBERSHIP", "LAB_TEST"], "required": false },
+      "searchEngineOptimization": { "types": ["PHYSICAL_PRODUCT", "MEMBERSHIP", "LAB_TEST"], "required": false },
+      "eligibilityData": { "types": ["PHYSICAL_PRODUCT"], "required": false, "note": "JSON for eligibility widget" },
+      "showEligibilityWidget": { "types": ["PHYSICAL_PRODUCT"], "required": false },
+      "marketingTemplate": { "types": ["PHYSICAL_PRODUCT", "MEMBERSHIP"], "required": false }
+    }
+  },
+
+  "variantFieldMatrix": {
+    "description": "Variant-level fields by product type",
+    "PHYSICAL_PRODUCT": {
+      "fields": [
+        "available", "formFactor", "dosages", "qty", "supply", "billingCycle",
+        "refills", "price", "compareAtPrice", "showComparePrice", "sku",
+        "pharmacyNotes", "patientDirections"
+      ]
+    },
+    "SERVICE": {
+      "fields": ["price", "compareAtPrice", "showComparePrice"],
+      "note": "Simple pricing, no SKU or subscription"
+    },
+    "MEMBERSHIP": {
+      "fields": [
+        "sku", "billingCycle", "price", "compareAtPrice", "showComparePrice",
+        "applyBenefitsDuringPurchase", "applyBenefitsForActiveMembers", "benefits"
+      ],
+      "benefitFields": [
+        "diseaseState", "productType", "benefitType", "percentageDiscount",
+        "fixedAmountDiscount", "limitType", "limitDuration", "limit"
+      ]
+    },
+    "LAB_TEST": {
+      "fields": ["sku", "price", "compareAtPrice", "showComparePrice"],
+      "note": "One-time purchase only"
+    },
+    "BUNDLE": {
+      "fields": ["enable", "originalPrice", "bundlePrice", "productVariantId"],
+      "note": "References variants from bundled physical products"
+    }
+  },
+
+  "refillDefaults": {
+    "description": "Default refill counts based on billing cycle (auto-set in production UI)",
+    "mapping": {
+      "ONE_TIME_PAYMENT": 0,
+      "EVERY_DAY_30": 11,
+      "EVERY_DAY_90": 3,
+      "EVERY_DAY_180": 1
+    }
+  },
+
+  "supplyFromBillingCycle": {
+    "description": "Supply duration auto-set based on billing cycle selection",
+    "mapping": {
+      "ONE_TIME_PAYMENT": "DAY_30",
+      "EVERY_DAY_30": "DAY_30",
+      "EVERY_DAY_90": "DAY_90",
+      "EVERY_DAY_180": "DAY_180"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+Product-Type-Specific Fields Matrix
+
+  | Field                     | PHYSICAL     | SERVICE     | MEMBERSHIP     | LAB_TEST    | BUNDLE     |
+  |---------------------------|--------------|-------------|----------------|-------------|------------|
+  | name                      | ✓            | ✓           | ✓              | ✓           | ✓          |
+  | subTitle                  | ✓            | ✓           | ✓              | ✓           | ✓          |
+  | badge                     | ✓            | ✓           | ✓              | ✓           | ✓          |
+  | slug                      | ✓            | -           | ✓              | ✓           | -          |
+  | sku                       | per variant  | ✓           | per variant    | per variant | -          |
+  | marketingDescription      | ✓            | ✓           | ✓              | ✓           | ✓          |
+  | diseaseState              | ✓            | ✓           | -              | -           | -          |
+  | treatmentType             | ✓ (Physical) | ✓ (Service) | -              | -           | -          |
+  | treatmentUse              | ✓            | -           | -              | -           | -          |
+  | pharmacyId                | ✓            | -           | -              | -           | -          |
+  | requirePrescription       | ✓            | -           | -              | -           | ✓          |
+  | isMultipleQuantityAllowed | ✓            | -           | -              | -           | -          |
+  | variants                  | ✓ (complex)  | ✓ (simple)  | ✓ (w/benefits) | ✓           | ✓ (bundle) |
+  | testedMarkers             | -            | -           | -              | ✓           | -          |
+  | externalProductId         | -            | -           | -              | ✓           | -          |
+  | bundledProducts           | -            | -           | -              | -           | ✓          |

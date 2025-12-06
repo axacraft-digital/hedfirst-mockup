@@ -1,0 +1,252 @@
+Let me lay out a framework.
+
+  ---
+  Proposed V2 Technology Stack
+
+  | Layer       | Current V1           | Proposed V2                        | Why                                    |
+  |-------------|----------------------|------------------------------------|----------------------------------------|
+  | Database    | PostgreSQL (AWS RDS) | PostgreSQL (Supabase)              | Same engine, better DX, built-in APIs  |
+  | Backend API | NestJS 10            | Next.js API Routes + Supabase      | Simpler stack, less code to maintain   |
+  | ORM         | Prisma 5.22          | Prisma (or Supabase client)        | Keep Prisma — you know the schema      |
+  | Frontend    | Next.js 14           | Next.js 14 (App Router)            | Keep — your mockups are already this   |
+  | Auth        | JWT + CASL           | Supabase Auth + Row Level Security | Built-in, less custom code             |
+  | Real-time   | Custom (if any)      | Supabase Realtime                  | Free with Supabase, no code needed     |
+  | Hosting     | AWS ($500/mo)        | Vercel + Supabase                  | Likely cheaper, definitely simpler     |
+  | Payments    | PayTheory            | PayTheory                          | Keep — switching processors is painful |
+
+  ---
+  Cost Comparison (Needs Verification)
+
+  | Service          | Current                | Proposed                             | Notes
+   |
+  |------------------|------------------------|--------------------------------------|-----------------------------------------------------
+  -|
+  | Database + API   | AWS RDS + EC2? (~$500) | Supabase Pro ($25) or Enterprise (?) | HIPAA requires Enterprise tier — need to get pricing
+   |
+  | Frontend Hosting | (included in AWS?)     | Vercel Pro ($20)                     |
+   |
+  | Auth             | Custom                 | Included in Supabase                 |
+   |
+  | Total            | ~$500/month            | ~$50-200/month?                      | Depends on Supabase Enterprise pricing
+   |
+
+  First information gap: What exactly is the $500/month AWS bill?
+
+  ---
+  Investigation Plan
+
+  Phase 1: Infrastructure Audit (This Week)
+
+  We need to understand what we're replacing before we can compare costs.
+
+  Questions to answer:
+
+  1. What's running on AWS?
+    - RDS instance size/cost?
+    - EC2 instances? How many, what size?
+    - S3 storage? (for documents, images)
+    - Any Lambda functions?
+    - Load balancers, NAT gateways, etc.?
+  2. What's the database size?
+    - Total rows, total GB
+    - This affects Supabase tier selection
+  3. What external services does V1 integrate with?
+    - PayTheory (payments)
+    - ChooseHealth (labs)
+    - Pharmacy (prescriptions)
+    - ActiveCampaign (email)
+    - Zoom (appointments)
+    - Others?
+
+  Action: Can you pull up your AWS billing breakdown? Or I can help you query the production database for size metrics.
+
+  ---
+  Phase 2: HIPAA Compliance Path
+
+  This is non-negotiable for healthcare. We need to understand:
+
+  | Platform    | HIPAA Status                      | What's Required                   |
+  |-------------|-----------------------------------|-----------------------------------|
+  | Supabase    | Enterprise tier has BAA available | Need to contact sales for pricing |
+  | Vercel      | Enterprise tier has HIPAA/BAA     | Need to verify requirements       |
+  | Current AWS | HIPAA-eligible services exist     | Assuming already configured?      |
+
+  Action:
+  - Check if current AWS setup has BAA in place
+  - Contact Supabase sales for Enterprise pricing with HIPAA
+  - Determine if Vercel's standard tier is sufficient or if Enterprise is needed
+
+  ---
+  Phase 3: Feature Parity Inventory
+
+  What does V1 actually do that V2 needs to replicate?
+
+  I have knowledge of the system, but let's make it explicit:
+
+  PATIENT PORTAL
+  ├── Registration / Onboarding
+  │   ├── Account creation
+  │   ├── Health questionnaire
+  │   ├── ID verification
+  │   └── Payment method tokenization
+  ├── Shopping / Checkout
+  │   ├── Product browsing
+  │   ├── Cart management
+  │   ├── Checkout flow (multi-item, parent-child orders)
+  │   └── Discount codes
+  ├── Orders / Prescriptions
+  │   ├── Order history
+  │   ├── Order status tracking
+  │   ├── Prescription refills
+  │   └── Subscription management (pause, cancel, update)
+  ├── Appointments
+  │   ├── Booking
+  │   ├── Zoom integration
+  │   └── Rescheduling
+  ├── Messaging
+  │   └── Provider communication
+  └── Account Management
+      ├── Profile updates
+      ├── Address management
+      └── Payment method updates
+
+  PROVIDER PORTAL
+  ├── Patient Queue
+  │   ├── Pending reviews
+  │   └── Assigned patients
+  ├── Patient Records
+  │   ├── Health history
+  │   ├── Questionnaire responses
+  │   ├── Lab results
+  │   └── Previous prescriptions
+  ├── Prescription Actions
+  │   ├── Approve / Deny
+  │   ├── Dosage adjustments
+  │   └── Send to pharmacy
+  ├── SOAP Notes
+  │   └── Clinical documentation
+  └── Messaging
+      └── Patient communication
+
+  STORE ADMIN PORTAL
+  ├── Orders Management
+  │   ├── Order list (your mockup!)
+  │   ├── Order details
+  │   └── Refunds / Adjustments
+  ├── Patient Management
+  │   ├── Patient list
+  │   ├── Patient details
+  │   └── Status management
+  ├── Subscription Management
+  │   ├── Active subscriptions
+  │   ├── Pause / Resume
+  │   └── Payment failures
+  ├── Products / Catalog
+  │   ├── Product management
+  │   └── Pricing / Variants
+  ├── Providers
+  │   └── Provider management
+  └── Reporting
+      └── Basic analytics
+
+  Action: Review this against actual V1 functionality. What's missing? What's unused? What's MVP vs nice-to-have?
+
+  ---
+  Phase 4: Complexity Assessment
+
+  Not all features are equal. Let's rate them:
+
+  | Feature                        | Complexity  | Why                                                         |
+  |--------------------------------|-------------|-------------------------------------------------------------|
+  | User auth + registration       | Low         | Supabase Auth handles 90%                                   |
+  | Product catalog / CRUD         | Low         | Basic database operations                                   |
+  | Patient questionnaires         | Low-Medium  | Form state, conditional logic                               |
+  | Order creation (parent-child)  | Medium      | Business logic, but you understand it deeply                |
+  | PayTheory checkout             | Medium-High | Tokenization, webhooks, error handling                      |
+  | Subscription lifecycle         | High        | Pause/resume workaround, payment retries, the -7 day offset |
+  | Provider approval flow         | Medium      | State machine, notifications                                |
+  | Pharmacy integration           | High        | External system, specific protocols                         |
+  | Lab integration (ChooseHealth) | Medium-High | External API, results handling                              |
+  | Zoom integration               | Medium      | OAuth, meeting creation                                     |
+  | Real-time messaging            | Low         | Supabase Realtime makes this easy                           |
+  | Multi-tenant isolation         | Medium      | RLS policies, needs to be right                             |
+  | Audit logging                  | Medium      | Every PHI access logged with actor                          |
+
+  Action: Identify which "High" complexity items have existing code we can reference vs. need to be built from scratch.
+
+  ---
+  Phase 5: Migration Path
+
+  If we proceed, what's the sequence?
+
+  PROPOSED BUILD ORDER
+
+  1. Foundation (Week 1-2)
+     ├── Supabase project setup
+     ├── Schema migration from Prisma
+     ├── Auth configuration
+     └── Basic RLS policies
+
+  2. Patient Portal MVP (Week 3-4)
+     ├── Registration flow
+     ├── Product browsing
+     ├── Basic checkout (stubbed payments)
+     └── Order history
+
+  3. Payment Integration (Week 5-6)
+     ├── PayTheory integration
+     ├── Webhook handling
+     ├── Subscription creation
+     └── Edge case handling
+
+  4. Provider Portal (Week 7-8)
+     ├── Review queue
+     ├── Approval flow
+     ├── Patient records view
+     └── SOAP notes
+
+  5. Admin Portal (Week 9-10)
+     ├── Your mockup code!
+     ├── Order management
+     ├── Subscription management
+     └── Patient management
+
+  6. Integrations (Week 11-12)
+     ├── Pharmacy
+     ├── ChooseHealth labs
+     ├── Zoom
+     └── Email (ActiveCampaign or switch to Resend?)
+
+  7. Hardening (Week 13-14)
+     ├── Audit logging
+     ├── Security review
+     ├── HIPAA controls verification
+     └── Load testing
+
+  ---
+  Immediate Next Steps
+
+  Let's fill in the information gaps systematically:
+
+  This conversation:
+
+  1. AWS Billing Breakdown — Can you share what services are consuming the $500/month? This tells us what we're replacing.
+  2. Database Size — I can help you query this if you want to run something against production.
+  3. Integration Inventory — Let me verify the external systems. Are there any beyond PayTheory, ChooseHealth, pharmacy, ActiveCampaign,
+  Zoom?
+
+  This week:
+
+  4. Supabase Enterprise Pricing — Contact their sales for HIPAA tier pricing. This is the key cost variable.
+  5. Feature Parity Review — Validate my feature tree against actual V1. What's missing?
+
+  Before committing:
+
+  6. Proof of Concept — Take ONE complex flow (e.g., checkout with PayTheory) and build it in the new stack. See how it feels. This is the
+  "walking a mile" test.
+
+  ---
+  What would you like to dig into first?
+
+  I'd suggest starting with the AWS billing breakdown — that tells us whether the cost savings are real, and what infrastructure complexity
+   we're dealing with.

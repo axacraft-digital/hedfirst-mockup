@@ -1,0 +1,2431 @@
+{
+  "_metadata": {
+    "version": "1.0.0",
+    "generated": "2024-12-05",
+    "description": "Complete mock dataset for Hedfirst/Teligant marketing screenshots",
+    "notes": {
+      "amounts": "All monetary values in cents (4500 = $45.00)",
+      "dates": "ISO 8601 format",
+      "ids": "Prefixed for clarity (usr_, ord_, sub_, etc.)"
+    }
+  },
+
+  "store": {
+    "id": "store_001",
+    "name": "Hedfirst",
+    "domain": "hedfirst.com",
+    "description": "Telehealth for hair loss, weight loss, and sexual wellness",
+    "active": true,
+    "currency": "USD",
+    "orderIdPrefix": "HF",
+    "firstOrderId": "10001",
+    "shippingSettings": {
+      "freeShippingThreshold": 5000,
+      "standardShippingPrice": 799,
+      "expeditedShippingPrice": 1499
+    }
+  },
+
+  "providers": [
+    {
+      "id": "usr_doc001",
+      "email": "dr.chen@hedfirst.com",
+      "firstName": "Michelle",
+      "lastName": "Chen",
+      "status": "ACTIVE",
+      "roles": ["DOCTOR"],
+      "avatarUrl": "/avatars/dr-chen.jpg",
+      "doctorCredential": {
+        "deaNumber": "AC1234567",
+        "npiNumber": "1234567890",
+        "boardCertification": "American Board of Internal Medicine"
+      },
+      "degree": { "name": "MD" },
+      "speciality": { "name": "Internal Medicine" },
+      "licenses": [
+        { "state": "TX", "licenseNumber": "TX-12345", "expiryDate": "2026-12-31" },
+        { "state": "CA", "licenseNumber": "CA-67890", "expiryDate": "2025-08-15" },
+        { "state": "FL", "licenseNumber": "FL-11111", "expiryDate": "2026-03-01" }
+      ],
+      "stats": { "patientsReviewed": 1247, "avgResponseTime": "2.4 hrs" }
+    },
+    {
+      "id": "usr_doc002",
+      "email": "dr.martinez@hedfirst.com",
+      "firstName": "Carlos",
+      "lastName": "Martinez",
+      "status": "ACTIVE",
+      "roles": ["DOCTOR"],
+      "avatarUrl": "/avatars/dr-martinez.jpg",
+      "doctorCredential": {
+        "deaNumber": "BM9876543",
+        "npiNumber": "0987654321",
+        "boardCertification": "American Board of Family Medicine"
+      },
+      "degree": { "name": "DO" },
+      "speciality": { "name": "Family Medicine" },
+      "licenses": [
+        { "state": "TX", "licenseNumber": "TX-22222", "expiryDate": "2025-09-30" },
+        { "state": "AZ", "licenseNumber": "AZ-33333", "expiryDate": "2026-01-15" }
+      ],
+      "stats": { "patientsReviewed": 892, "avgResponseTime": "1.8 hrs" }
+    },
+    {
+      "id": "usr_doc003",
+      "email": "dr.patel@hedfirst.com",
+      "firstName": "Priya",
+      "lastName": "Patel",
+      "status": "ACTIVE",
+      "roles": ["DOCTOR"],
+      "avatarUrl": "/avatars/dr-patel.jpg",
+      "doctorCredential": {
+        "deaNumber": "CP5555555",
+        "npiNumber": "5555555555",
+        "boardCertification": "American Board of Obesity Medicine"
+      },
+      "degree": { "name": "MD" },
+      "speciality": { "name": "Obesity Medicine" },
+      "licenses": [
+        { "state": "CA", "licenseNumber": "CA-44444", "expiryDate": "2026-06-30" },
+        { "state": "NY", "licenseNumber": "NY-55555", "expiryDate": "2025-12-31" }
+      ],
+      "stats": { "patientsReviewed": 634, "avgResponseTime": "3.1 hrs" }
+    },
+    {
+      "id": "usr_doc004",
+      "email": "dr.williams@hedfirst.com",
+      "firstName": "David",
+      "lastName": "Williams",
+      "status": "ACTIVE",
+      "roles": ["DOCTOR"],
+      "avatarUrl": "/avatars/dr-williams.jpg",
+      "doctorCredential": {
+        "deaNumber": "DW7777777",
+        "npiNumber": "7777777777",
+        "boardCertification": "American Board of Urology"
+      },
+      "degree": { "name": "MD" },
+      "speciality": { "name": "Urology" },
+      "licenses": [
+        { "state": "FL", "licenseNumber": "FL-66666", "expiryDate": "2026-02-28" },
+        { "state": "GA", "licenseNumber": "GA-77777", "expiryDate": "2025-11-30" }
+      ],
+      "stats": { "patientsReviewed": 456, "avgResponseTime": "2.9 hrs" }
+    },
+    {
+      "id": "usr_doc005",
+      "email": "dr.thompson@hedfirst.com",
+      "firstName": "Sarah",
+      "lastName": "Thompson",
+      "status": "ACTIVE",
+      "roles": ["DOCTOR"],
+      "avatarUrl": "/avatars/dr-thompson.jpg",
+      "doctorCredential": {
+        "deaNumber": "ST8888888",
+        "npiNumber": "8888888888",
+        "boardCertification": "American Board of Dermatology"
+      },
+      "degree": { "name": "MD" },
+      "speciality": { "name": "Dermatology" },
+      "licenses": [
+        { "state": "TX", "licenseNumber": "TX-88888", "expiryDate": "2026-04-15" },
+        { "state": "CO", "licenseNumber": "CO-99999", "expiryDate": "2025-10-01" }
+      ],
+      "stats": { "patientsReviewed": 789, "avgResponseTime": "2.2 hrs" }
+    }
+  ],
+
+  "products": [
+    {
+      "id": "prod_001",
+      "type": "PHYSICAL_PRODUCT",
+      "available": true,
+      "name": "Finasteride",
+      "subTitle": "Hair Loss Treatment",
+      "badge": "Most Popular",
+      "slug": "finasteride",
+      "diseaseState": "HAIR_GROWTH",
+      "treatmentType": "PRESCRIPTION_MEDICATION",
+      "requirePrescription": true,
+      "variants": [
+        { "id": "var_001a", "sku": "FIN-1MG-90", "supply": "DAY_90", "billingCycle": "EVERY_DAY_90", "qty": 90, "price": 4500, "compareAtPrice": 8500, "dosages": { "strength": "1mg", "form": "Tablet" } },
+        { "id": "var_001b", "sku": "FIN-1MG-180", "supply": "DAY_180", "billingCycle": "EVERY_DAY_180", "qty": 180, "price": 7900, "compareAtPrice": 15000, "dosages": { "strength": "1mg", "form": "Tablet" } }
+      ]
+    },
+    {
+      "id": "prod_002",
+      "type": "PHYSICAL_PRODUCT",
+      "available": true,
+      "name": "Minoxidil Solution",
+      "subTitle": "Topical Hair Regrowth",
+      "badge": null,
+      "slug": "minoxidil",
+      "diseaseState": "HAIR_GROWTH",
+      "treatmentType": "TOPICAL_TREATMENT",
+      "requirePrescription": false,
+      "variants": [
+        { "id": "var_002a", "sku": "MIN-5-60", "supply": "DAY_60", "billingCycle": "EVERY_DAY_60", "qty": 1, "price": 3500, "compareAtPrice": 5500, "dosages": { "strength": "5%", "form": "Solution" } }
+      ]
+    },
+    {
+      "id": "prod_003",
+      "type": "PHYSICAL_PRODUCT",
+      "available": true,
+      "name": "Semaglutide",
+      "subTitle": "Weight Loss Injection",
+      "badge": "New",
+      "slug": "semaglutide",
+      "diseaseState": "WEIGHT_LOSS",
+      "treatmentType": "PRESCRIPTION_MEDICATION",
+      "requirePrescription": true,
+      "variants": [
+        { "id": "var_003a", "sku": "SEM-0.25-30", "supply": "DAY_30", "billingCycle": "EVERY_DAY_30", "qty": 4, "price": 29900, "compareAtPrice": 45000, "dosages": { "strength": "0.25mg", "form": "Injection" } },
+        { "id": "var_003b", "sku": "SEM-0.5-30", "supply": "DAY_30", "billingCycle": "EVERY_DAY_30", "qty": 4, "price": 34900, "compareAtPrice": 50000, "dosages": { "strength": "0.5mg", "form": "Injection" } },
+        { "id": "var_003c", "sku": "SEM-1.0-30", "supply": "DAY_30", "billingCycle": "EVERY_DAY_30", "qty": 4, "price": 39900, "compareAtPrice": 55000, "dosages": { "strength": "1.0mg", "form": "Injection" } }
+      ]
+    },
+    {
+      "id": "prod_004",
+      "type": "PHYSICAL_PRODUCT",
+      "available": true,
+      "name": "Tirzepatide",
+      "subTitle": "Advanced Weight Loss",
+      "badge": "Premium",
+      "slug": "tirzepatide",
+      "diseaseState": "WEIGHT_LOSS",
+      "treatmentType": "PRESCRIPTION_MEDICATION",
+      "requirePrescription": true,
+      "variants": [
+        { "id": "var_004a", "sku": "TIR-2.5-30", "supply": "DAY_30", "billingCycle": "EVERY_DAY_30", "qty": 4, "price": 44900, "compareAtPrice": 65000, "dosages": { "strength": "2.5mg", "form": "Injection" } },
+        { "id": "var_004b", "sku": "TIR-5.0-30", "supply": "DAY_30", "billingCycle": "EVERY_DAY_30", "qty": 4, "price": 49900, "compareAtPrice": 70000, "dosages": { "strength": "5.0mg", "form": "Injection" } }
+      ]
+    },
+    {
+      "id": "prod_005",
+      "type": "PHYSICAL_PRODUCT",
+      "available": true,
+      "name": "Sildenafil",
+      "subTitle": "Erectile Dysfunction",
+      "badge": null,
+      "slug": "sildenafil",
+      "diseaseState": "SEXUAL_WELLNESS",
+      "treatmentType": "PRESCRIPTION_MEDICATION",
+      "requirePrescription": true,
+      "variants": [
+        { "id": "var_005a", "sku": "SIL-50-10", "supply": "DAY_30", "billingCycle": "ONE_TIME_PAYMENT", "qty": 10, "price": 4500, "compareAtPrice": 9000, "dosages": { "strength": "50mg", "form": "Tablet" } },
+        { "id": "var_005b", "sku": "SIL-100-10", "supply": "DAY_30", "billingCycle": "ONE_TIME_PAYMENT", "qty": 10, "price": 5500, "compareAtPrice": 12000, "dosages": { "strength": "100mg", "form": "Tablet" } }
+      ]
+    },
+    {
+      "id": "prod_006",
+      "type": "PHYSICAL_PRODUCT",
+      "available": true,
+      "name": "Tadalafil",
+      "subTitle": "Daily ED Treatment",
+      "badge": "Best Value",
+      "slug": "tadalafil",
+      "diseaseState": "SEXUAL_WELLNESS",
+      "treatmentType": "PRESCRIPTION_MEDICATION",
+      "requirePrescription": true,
+      "variants": [
+        { "id": "var_006a", "sku": "TAD-5-30", "supply": "DAY_30", "billingCycle": "EVERY_DAY_30", "qty": 30, "price": 3900, "compareAtPrice": 8500, "dosages": { "strength": "5mg", "form": "Tablet" } },
+        { "id": "var_006b", "sku": "TAD-5-90", "supply": "DAY_90", "billingCycle": "EVERY_DAY_90", "qty": 90, "price": 9900, "compareAtPrice": 22000, "dosages": { "strength": "5mg", "form": "Tablet" } }
+      ]
+    },
+    {
+      "id": "prod_007",
+      "type": "SERVICE",
+      "available": true,
+      "name": "Initial Consultation",
+      "subTitle": "Video visit with provider",
+      "slug": "initial-consultation",
+      "diseaseState": "GENERAL_HEALTH",
+      "treatmentType": "INITIAL_CONSULTATION",
+      "requirePrescription": false,
+      "variants": [
+        { "id": "var_007a", "sku": "CONSULT-INIT", "price": 0, "compareAtPrice": 7500 }
+      ]
+    },
+    {
+      "id": "prod_008",
+      "type": "SERVICE",
+      "available": true,
+      "name": "Follow-up Consultation",
+      "subTitle": "Check-in with your provider",
+      "slug": "followup-consultation",
+      "diseaseState": "GENERAL_HEALTH",
+      "treatmentType": "FOLLOW_UP_CONSULTATION",
+      "requirePrescription": false,
+      "variants": [
+        { "id": "var_008a", "sku": "CONSULT-FU", "price": 0, "compareAtPrice": 5000 }
+      ]
+    },
+    {
+      "id": "prod_009",
+      "type": "BUNDLE",
+      "available": true,
+      "name": "Complete Hair Loss Kit",
+      "subTitle": "Finasteride + Minoxidil",
+      "badge": "Save 20%",
+      "slug": "hair-loss-bundle",
+      "diseaseState": "HAIR_GROWTH",
+      "requirePrescription": true,
+      "bundledProducts": ["prod_001", "prod_002"],
+      "variants": [
+        { "id": "var_009a", "sku": "HAIR-BUNDLE-90", "supply": "DAY_90", "billingCycle": "EVERY_DAY_90", "price": 6400, "compareAtPrice": 8000 }
+      ]
+    },
+    {
+      "id": "prod_010",
+      "type": "LAB_TEST",
+      "available": true,
+      "name": "Metabolic Health Panel",
+      "subTitle": "At-home blood test",
+      "slug": "metabolic-panel",
+      "diseaseState": "WEIGHT_LOSS",
+      "testedMarkers": ["HbA1c", "Fasting Glucose", "Lipid Panel", "TSH"],
+      "variants": [
+        { "id": "var_010a", "sku": "LAB-METAB", "price": 14900, "compareAtPrice": 25000 }
+      ]
+    },
+    {
+      "id": "prod_011",
+      "type": "MEMBERSHIP",
+      "available": true,
+      "name": "Care Membership",
+      "subTitle": "Ongoing care & savings",
+      "badge": "Most Popular",
+      "slug": "care-membership",
+      "diseaseState": "GENERAL_HEALTH",
+      "benefits": ["Free consultations", "10% off prescriptions", "Priority support", "Free lab kits"],
+      "variants": [
+        { "id": "var_011a", "sku": "MEM-CARE-MONTHLY", "billingCycle": "MONTHLY", "price": 1900, "compareAtPrice": 2900 },
+        { "id": "var_011b", "sku": "MEM-CARE-ANNUAL", "billingCycle": "ANNUAL", "price": 14900, "compareAtPrice": 22800 }
+      ]
+    },
+    {
+      "id": "prod_012",
+      "type": "MEMBERSHIP",
+      "available": true,
+      "name": "Premium Membership",
+      "subTitle": "All-inclusive care",
+      "badge": "Best Value",
+      "slug": "premium-membership",
+      "diseaseState": "GENERAL_HEALTH",
+      "benefits": ["Everything in Care", "20% off prescriptions", "Dedicated provider", "Quarterly labs included", "Same-day messaging response"],
+      "variants": [
+        { "id": "var_012a", "sku": "MEM-PREM-MONTHLY", "billingCycle": "MONTHLY", "price": 4900, "compareAtPrice": 7500 },
+        { "id": "var_012b", "sku": "MEM-PREM-ANNUAL", "billingCycle": "ANNUAL", "price": 39900, "compareAtPrice": 58800 }
+      ]
+    },
+    {
+      "id": "prod_013",
+      "type": "SERVICE",
+      "available": true,
+      "name": "Video Appointment",
+      "subTitle": "Live video visit with provider",
+      "slug": "video-appointment",
+      "diseaseState": "GENERAL_HEALTH",
+      "treatmentType": "VIDEO_CONSULTATION",
+      "durationMinutes": 15,
+      "requirePrescription": false,
+      "variants": [
+        { "id": "var_013a", "sku": "APPT-VIDEO-15", "price": 7500, "compareAtPrice": 12500 },
+        { "id": "var_013b", "sku": "APPT-VIDEO-FREE", "price": 0, "compareAtPrice": 7500, "memberOnly": true }
+      ]
+    }
+  ],
+
+  "patients": [
+    {
+      "id": "usr_pat001",
+      "email": "sarah.johnson@email.com",
+      "phone": "+15551234001",
+      "firstName": "Sarah",
+      "lastName": "Johnson",
+      "dateOfBirth": "1988-03-15",
+      "gender": "Female",
+      "status": "ACTIVE",
+      "patientStatus": "ACTIVE",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-06-15T10:30:00Z",
+      "address": { "addressLineOne": "123 Oak Street", "addressLineTwo": "Apt 4B", "city": "Austin", "state": "TX", "zipCode": "78701" },
+      "patientDetails": { "heightFeet": 5, "heightInches": 6, "currentWeightLbs": 145, "allergiesOrSubstances": "Penicillin" },
+      "assignedProviderId": "usr_doc001",
+      "diseaseStates": ["HAIR_GROWTH"],
+      "lastActivity": "2024-12-04T14:30:00Z"
+    },
+    {
+      "id": "usr_pat002",
+      "email": "michael.thompson@email.com",
+      "phone": "+15551234002",
+      "firstName": "Michael",
+      "lastName": "Thompson",
+      "dateOfBirth": "1975-08-22",
+      "gender": "Male",
+      "status": "ACTIVE",
+      "patientStatus": "ACTIVE",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-03-10T08:15:00Z",
+      "address": { "addressLineOne": "456 Maple Ave", "city": "Dallas", "state": "TX", "zipCode": "75201" },
+      "patientDetails": { "heightFeet": 5, "heightInches": 11, "currentWeightLbs": 245, "allergiesOrSubstances": "None" },
+      "assignedProviderId": "usr_doc003",
+      "diseaseStates": ["WEIGHT_LOSS"],
+      "lastActivity": "2024-12-03T09:45:00Z",
+      "membership": {
+        "type": "Care Membership",
+        "status": "ACTIVE",
+        "subscriptionId": "sub_mem_001",
+        "startDate": "2024-12-04",
+        "nextBillDate": "2025-01-04",
+        "billingCycle": "MONTHLY"
+      }
+    },
+    {
+      "id": "usr_pat003",
+      "email": "james.wilson@email.com",
+      "phone": "+15551234003",
+      "firstName": "James",
+      "lastName": "Wilson",
+      "dateOfBirth": "1990-11-30",
+      "gender": "Male",
+      "status": "ACTIVE",
+      "patientStatus": "AWAITING_REVIEW",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-12-01T16:20:00Z",
+      "address": { "addressLineOne": "789 Pine Rd", "city": "Houston", "state": "TX", "zipCode": "77001" },
+      "patientDetails": { "heightFeet": 6, "heightInches": 0, "currentWeightLbs": 180, "allergiesOrSubstances": "Sulfa drugs" },
+      "assignedProviderId": null,
+      "diseaseStates": ["HAIR_GROWTH"],
+      "lastActivity": "2024-12-01T16:45:00Z"
+    },
+    {
+      "id": "usr_pat004",
+      "email": "emily.davis@email.com",
+      "phone": "+15551234004",
+      "firstName": "Emily",
+      "lastName": "Davis",
+      "dateOfBirth": "1992-05-18",
+      "gender": "Female",
+      "status": "ACTIVE",
+      "patientStatus": "ACTIVE",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-07-22T11:00:00Z",
+      "address": { "addressLineOne": "321 Cedar Ln", "addressLineTwo": "Suite 100", "city": "San Antonio", "state": "TX", "zipCode": "78201" },
+      "patientDetails": { "heightFeet": 5, "heightInches": 4, "currentWeightLbs": 195, "allergiesOrSubstances": "None" },
+      "assignedProviderId": "usr_doc003",
+      "diseaseStates": ["WEIGHT_LOSS"],
+      "lastActivity": "2024-12-02T10:15:00Z",
+      "membership": {
+        "type": "Care Membership",
+        "status": "ACTIVE",
+        "subscriptionId": "sub_mem_002",
+        "startDate": "2024-10-15",
+        "nextBillDate": "2024-12-15",
+        "billingCycle": "MONTHLY",
+        "benefits": ["10% prescription discount applied"]
+      }
+    },
+    {
+      "id": "usr_pat005",
+      "email": "robert.brown@email.com",
+      "phone": "+15551234005",
+      "firstName": "Robert",
+      "lastName": "Brown",
+      "dateOfBirth": "1968-02-14",
+      "gender": "Male",
+      "status": "ACTIVE",
+      "patientStatus": "NEEDS_ATTENTION",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-01-08T09:30:00Z",
+      "address": { "addressLineOne": "654 Birch St", "city": "Fort Worth", "state": "TX", "zipCode": "76101" },
+      "patientDetails": { "heightFeet": 5, "heightInches": 9, "currentWeightLbs": 210, "allergiesOrSubstances": "Aspirin" },
+      "assignedProviderId": "usr_doc004",
+      "diseaseStates": ["SEXUAL_WELLNESS"],
+      "lastActivity": "2024-11-28T15:00:00Z",
+      "flagReason": "Payment failed - card declined"
+    },
+    {
+      "id": "usr_pat006",
+      "email": "jennifer.garcia@email.com",
+      "phone": "+15551234006",
+      "firstName": "Jennifer",
+      "lastName": "Garcia",
+      "dateOfBirth": "1985-09-03",
+      "gender": "Female",
+      "status": "ACTIVE",
+      "patientStatus": "IN_PROGRESS",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-12-03T14:00:00Z",
+      "address": { "addressLineOne": "987 Elm Way", "city": "Plano", "state": "TX", "zipCode": "75024" },
+      "patientDetails": { "heightFeet": 5, "heightInches": 7, "currentWeightLbs": 220, "allergiesOrSubstances": "Latex" },
+      "assignedProviderId": "usr_doc003",
+      "diseaseStates": ["WEIGHT_LOSS"],
+      "lastActivity": "2024-12-04T11:30:00Z"
+    },
+    {
+      "id": "usr_pat007",
+      "email": "david.martinez@email.com",
+      "phone": "+15551234007",
+      "firstName": "David",
+      "lastName": "Martinez",
+      "dateOfBirth": "1979-12-25",
+      "gender": "Male",
+      "status": "ACTIVE",
+      "patientStatus": "ACTIVE",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-04-17T13:45:00Z",
+      "address": { "addressLineOne": "147 Spruce Dr", "city": "Irving", "state": "TX", "zipCode": "75038" },
+      "patientDetails": { "heightFeet": 5, "heightInches": 10, "currentWeightLbs": 175, "allergiesOrSubstances": "None" },
+      "assignedProviderId": "usr_doc001",
+      "diseaseStates": ["HAIR_GROWTH"],
+      "lastActivity": "2024-12-01T08:20:00Z",
+      "membership": {
+        "type": "Care Membership",
+        "status": "ACTIVE",
+        "subscriptionId": "sub_mem_005",
+        "startDate": "2024-08-20",
+        "nextBillDate": "2025-08-20",
+        "billingCycle": "ANNUAL"
+      }
+    },
+    {
+      "id": "usr_pat008",
+      "email": "amanda.lee@email.com",
+      "phone": "+15551234008",
+      "firstName": "Amanda",
+      "lastName": "Lee",
+      "dateOfBirth": "1995-04-07",
+      "gender": "Female",
+      "status": "ACTIVE",
+      "patientStatus": "AWAITING_REVIEW",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-12-04T09:00:00Z",
+      "address": { "addressLineOne": "258 Willow Ct", "city": "Arlington", "state": "TX", "zipCode": "76010" },
+      "patientDetails": { "heightFeet": 5, "heightInches": 5, "currentWeightLbs": 165, "allergiesOrSubstances": "Shellfish" },
+      "assignedProviderId": null,
+      "diseaseStates": ["WEIGHT_LOSS"],
+      "lastActivity": "2024-12-04T09:30:00Z"
+    },
+    {
+      "id": "usr_pat009",
+      "email": "chris.anderson@email.com",
+      "phone": "+15551234009",
+      "firstName": "Christopher",
+      "lastName": "Anderson",
+      "dateOfBirth": "1982-07-19",
+      "gender": "Male",
+      "status": "ACTIVE",
+      "patientStatus": "ACTIVE",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-02-28T10:00:00Z",
+      "address": { "addressLineOne": "369 Ash Blvd", "city": "Frisco", "state": "TX", "zipCode": "75034" },
+      "patientDetails": { "heightFeet": 6, "heightInches": 2, "currentWeightLbs": 195, "allergiesOrSubstances": "None" },
+      "assignedProviderId": "usr_doc004",
+      "diseaseStates": ["SEXUAL_WELLNESS", "HAIR_GROWTH"],
+      "lastActivity": "2024-11-30T16:45:00Z"
+    },
+    {
+      "id": "usr_pat010",
+      "email": "jessica.taylor@email.com",
+      "phone": "+15551234010",
+      "firstName": "Jessica",
+      "lastName": "Taylor",
+      "dateOfBirth": "1991-01-28",
+      "gender": "Female",
+      "status": "ACTIVE",
+      "patientStatus": "ACTIVE",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-05-12T15:30:00Z",
+      "address": { "addressLineOne": "741 Hickory Ln", "city": "McKinney", "state": "TX", "zipCode": "75069" },
+      "patientDetails": { "heightFeet": 5, "heightInches": 8, "currentWeightLbs": 185, "allergiesOrSubstances": "Codeine" },
+      "assignedProviderId": "usr_doc003",
+      "diseaseStates": ["WEIGHT_LOSS"],
+      "lastActivity": "2024-12-03T12:00:00Z",
+      "membership": {
+        "type": "Premium Membership",
+        "status": "ACTIVE",
+        "subscriptionId": "sub_mem_003",
+        "startDate": "2024-09-01",
+        "nextBillDate": "2024-12-01",
+        "billingCycle": "MONTHLY",
+        "benefits": ["20% prescription discount", "Dedicated provider", "Quarterly labs included"]
+      }
+    },
+    {
+      "id": "usr_pat011",
+      "email": "daniel.white@email.com",
+      "phone": "+15551234011",
+      "firstName": "Daniel",
+      "lastName": "White",
+      "dateOfBirth": "1987-06-11",
+      "gender": "Male",
+      "status": "ACTIVE",
+      "patientStatus": "AWAITING_REVIEW",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-12-04T11:15:00Z",
+      "address": { "addressLineOne": "852 Poplar St", "city": "Garland", "state": "TX", "zipCode": "75040" },
+      "patientDetails": { "heightFeet": 5, "heightInches": 11, "currentWeightLbs": 170, "allergiesOrSubstances": "None" },
+      "assignedProviderId": null,
+      "diseaseStates": ["SEXUAL_WELLNESS"],
+      "lastActivity": "2024-12-04T11:45:00Z"
+    },
+    {
+      "id": "usr_pat012",
+      "email": "ashley.harris@email.com",
+      "phone": "+15551234012",
+      "firstName": "Ashley",
+      "lastName": "Harris",
+      "dateOfBirth": "1993-10-05",
+      "gender": "Female",
+      "status": "ACTIVE",
+      "patientStatus": "ACTIVE",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-08-03T08:45:00Z",
+      "address": { "addressLineOne": "963 Sycamore Ave", "city": "Denton", "state": "TX", "zipCode": "76201" },
+      "patientDetails": { "heightFeet": 5, "heightInches": 3, "currentWeightLbs": 155, "allergiesOrSubstances": "Ibuprofen" },
+      "assignedProviderId": "usr_doc005",
+      "diseaseStates": ["SKIN_CARE"],
+      "lastActivity": "2024-12-02T14:20:00Z"
+    },
+    {
+      "id": "usr_pat013",
+      "email": "matthew.clark@email.com",
+      "phone": "+15551234013",
+      "firstName": "Matthew",
+      "lastName": "Clark",
+      "dateOfBirth": "1972-03-22",
+      "gender": "Male",
+      "status": "ACTIVE",
+      "patientStatus": "ACTIVE",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-01-25T12:00:00Z",
+      "address": { "addressLineOne": "159 Magnolia Dr", "city": "Richardson", "state": "TX", "zipCode": "75080" },
+      "patientDetails": { "heightFeet": 5, "heightInches": 8, "currentWeightLbs": 225, "allergiesOrSubstances": "None" },
+      "assignedProviderId": "usr_doc003",
+      "diseaseStates": ["WEIGHT_LOSS"],
+      "lastActivity": "2024-11-29T09:30:00Z"
+    },
+    {
+      "id": "usr_pat014",
+      "email": "brittany.lewis@email.com",
+      "phone": "+15551234014",
+      "firstName": "Brittany",
+      "lastName": "Lewis",
+      "dateOfBirth": "1989-08-17",
+      "gender": "Female",
+      "status": "ACTIVE",
+      "patientStatus": "IN_PROGRESS",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-12-02T16:30:00Z",
+      "address": { "addressLineOne": "357 Dogwood Ln", "city": "Carrollton", "state": "TX", "zipCode": "75006" },
+      "patientDetails": { "heightFeet": 5, "heightInches": 6, "currentWeightLbs": 175, "allergiesOrSubstances": "Eggs" },
+      "assignedProviderId": "usr_doc003",
+      "diseaseStates": ["WEIGHT_LOSS"],
+      "lastActivity": "2024-12-04T10:00:00Z"
+    },
+    {
+      "id": "usr_pat015",
+      "email": "kevin.walker@email.com",
+      "phone": "+15551234015",
+      "firstName": "Kevin",
+      "lastName": "Walker",
+      "dateOfBirth": "1984-11-09",
+      "gender": "Male",
+      "status": "ACTIVE",
+      "patientStatus": "ACTIVE",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-06-08T14:15:00Z",
+      "address": { "addressLineOne": "468 Chestnut Rd", "city": "Lewisville", "state": "TX", "zipCode": "75067" },
+      "patientDetails": { "heightFeet": 6, "heightInches": 1, "currentWeightLbs": 190, "allergiesOrSubstances": "Penicillin" },
+      "assignedProviderId": "usr_doc001",
+      "diseaseStates": ["HAIR_GROWTH"],
+      "lastActivity": "2024-12-01T11:00:00Z"
+    },
+    {
+      "id": "usr_pat016",
+      "email": "nicole.young@email.com",
+      "phone": "+15551234016",
+      "firstName": "Nicole",
+      "lastName": "Young",
+      "dateOfBirth": "1996-02-28",
+      "gender": "Female",
+      "status": "ACTIVE",
+      "patientStatus": "NEEDS_ATTENTION",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-09-14T10:30:00Z",
+      "address": { "addressLineOne": "579 Redwood Way", "city": "Allen", "state": "TX", "zipCode": "75002" },
+      "patientDetails": { "heightFeet": 5, "heightInches": 5, "currentWeightLbs": 200, "allergiesOrSubstances": "None" },
+      "assignedProviderId": "usr_doc003",
+      "diseaseStates": ["WEIGHT_LOSS"],
+      "lastActivity": "2024-11-25T08:45:00Z",
+      "flagReason": "Missed follow-up appointment"
+    },
+    {
+      "id": "usr_pat017",
+      "email": "jason.king@email.com",
+      "phone": "+15551234017",
+      "firstName": "Jason",
+      "lastName": "King",
+      "dateOfBirth": "1977-05-31",
+      "gender": "Male",
+      "status": "ACTIVE",
+      "patientStatus": "ACTIVE",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-02-14T09:00:00Z",
+      "address": { "addressLineOne": "680 Juniper St", "city": "Mesquite", "state": "TX", "zipCode": "75149" },
+      "patientDetails": { "heightFeet": 5, "heightInches": 10, "currentWeightLbs": 185, "allergiesOrSubstances": "Sulfa drugs" },
+      "assignedProviderId": "usr_doc004",
+      "diseaseStates": ["SEXUAL_WELLNESS"],
+      "lastActivity": "2024-11-27T14:30:00Z"
+    },
+    {
+      "id": "usr_pat018",
+      "email": "stephanie.scott@email.com",
+      "phone": "+15551234018",
+      "firstName": "Stephanie",
+      "lastName": "Scott",
+      "dateOfBirth": "1994-12-12",
+      "gender": "Female",
+      "status": "ACTIVE",
+      "patientStatus": "ACTIVE",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-06-10T10:00:00Z",
+      "address": { "addressLineOne": "791 Cypress Ct", "city": "Euless", "state": "TX", "zipCode": "76039" },
+      "patientDetails": { "heightFeet": 5, "heightInches": 7, "currentWeightLbs": 180, "allergiesOrSubstances": "Dairy" },
+      "assignedProviderId": "usr_doc002",
+      "diseaseStates": ["HAIR_GROWTH"],
+      "lastActivity": "2024-11-01T09:00:00Z",
+      "membership": {
+        "type": "Care Membership",
+        "status": "PAUSED",
+        "subscriptionId": "sub_mem_004",
+        "startDate": "2024-06-10",
+        "pausedAt": "2024-11-01",
+        "pauseReason": "Financial reasons - will resume in new year",
+        "billingCycle": "MONTHLY"
+      }
+    },
+    {
+      "id": "usr_pat019",
+      "email": "brian.green@email.com",
+      "phone": "+15551234019",
+      "firstName": "Brian",
+      "lastName": "Green",
+      "dateOfBirth": "1981-04-25",
+      "gender": "Male",
+      "status": "ACTIVE",
+      "patientStatus": "ACTIVE",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-03-30T11:30:00Z",
+      "address": { "addressLineOne": "802 Walnut Blvd", "city": "Bedford", "state": "TX", "zipCode": "76021" },
+      "patientDetails": { "heightFeet": 5, "heightInches": 9, "currentWeightLbs": 168, "allergiesOrSubstances": "None" },
+      "assignedProviderId": "usr_doc001",
+      "diseaseStates": ["HAIR_GROWTH"],
+      "lastActivity": "2024-12-02T15:45:00Z"
+    },
+    {
+      "id": "usr_pat020",
+      "email": "megan.hall@email.com",
+      "phone": "+15551234020",
+      "firstName": "Megan",
+      "lastName": "Hall",
+      "dateOfBirth": "1990-07-08",
+      "gender": "Female",
+      "status": "ACTIVE",
+      "patientStatus": "ACTIVE",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-07-01T13:00:00Z",
+      "address": { "addressLineOne": "913 Hawthorn Ave", "city": "Grapevine", "state": "TX", "zipCode": "76051" },
+      "patientDetails": { "heightFeet": 5, "heightInches": 4, "currentWeightLbs": 205, "allergiesOrSubstances": "Peanuts" },
+      "assignedProviderId": "usr_doc003",
+      "diseaseStates": ["WEIGHT_LOSS"],
+      "lastActivity": "2024-11-30T10:15:00Z"
+    },
+    {
+      "id": "usr_pat021",
+      "email": "ryan.adams@email.com",
+      "phone": "+15551234021",
+      "firstName": "Ryan",
+      "lastName": "Adams",
+      "dateOfBirth": "1986-09-14",
+      "gender": "Male",
+      "status": "ACTIVE",
+      "patientStatus": "IN_PROGRESS",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-12-04T08:30:00Z",
+      "address": { "addressLineOne": "124 Beech Dr", "city": "Southlake", "state": "TX", "zipCode": "76092" },
+      "patientDetails": { "heightFeet": 6, "heightInches": 0, "currentWeightLbs": 178, "allergiesOrSubstances": "None" },
+      "assignedProviderId": "usr_doc001",
+      "diseaseStates": ["HAIR_GROWTH"],
+      "lastActivity": "2024-12-04T13:00:00Z"
+    },
+    {
+      "id": "usr_pat022",
+      "email": "lauren.nelson@email.com",
+      "phone": "+15551234022",
+      "firstName": "Lauren",
+      "lastName": "Nelson",
+      "dateOfBirth": "1997-11-20",
+      "gender": "Female",
+      "status": "ACTIVE",
+      "patientStatus": "NEEDS_ATTENTION",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-07-05T08:00:00Z",
+      "address": { "addressLineOne": "235 Laurel Ln", "city": "Keller", "state": "TX", "zipCode": "76248" },
+      "patientDetails": { "heightFeet": 5, "heightInches": 6, "currentWeightLbs": 158, "allergiesOrSubstances": "Gluten" },
+      "assignedProviderId": "usr_doc003",
+      "diseaseStates": ["WEIGHT_LOSS"],
+      "lastActivity": "2024-12-05T08:00:00Z",
+      "flagReason": "Membership payment failed - card expired",
+      "membership": {
+        "type": "Care Membership",
+        "status": "PAYMENT_FAILED",
+        "subscriptionId": "sub_mem_006",
+        "startDate": "2024-07-05",
+        "lastPaymentAttempt": "2024-12-05",
+        "paymentRetryCount": 2,
+        "billingCycle": "MONTHLY"
+      }
+    },
+    {
+      "id": "usr_pat023",
+      "email": "tyler.carter@email.com",
+      "phone": "+15551234023",
+      "firstName": "Tyler",
+      "lastName": "Carter",
+      "dateOfBirth": "1983-01-03",
+      "gender": "Male",
+      "status": "ACTIVE",
+      "patientStatus": "ACTIVE",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-04-22T14:00:00Z",
+      "address": { "addressLineOne": "346 Aspen Way", "city": "Flower Mound", "state": "TX", "zipCode": "75028" },
+      "patientDetails": { "heightFeet": 5, "heightInches": 11, "currentWeightLbs": 240, "allergiesOrSubstances": "None" },
+      "assignedProviderId": "usr_doc003",
+      "diseaseStates": ["WEIGHT_LOSS"],
+      "lastActivity": "2024-11-28T11:00:00Z"
+    },
+    {
+      "id": "usr_pat024",
+      "email": "rachel.mitchell@email.com",
+      "phone": "+15551234024",
+      "firstName": "Rachel",
+      "lastName": "Mitchell",
+      "dateOfBirth": "1992-06-27",
+      "gender": "Female",
+      "status": "INACTIVE",
+      "patientStatus": "DEACTIVATED",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-01-10T10:00:00Z",
+      "deactivatedAt": "2024-10-15T12:00:00Z",
+      "address": { "addressLineOne": "457 Palm St", "city": "Colleyville", "state": "TX", "zipCode": "76034" },
+      "patientDetails": { "heightFeet": 5, "heightInches": 5, "currentWeightLbs": 145, "allergiesOrSubstances": "None" },
+      "assignedProviderId": "usr_doc003",
+      "diseaseStates": ["WEIGHT_LOSS"],
+      "lastActivity": "2024-10-15T12:00:00Z",
+      "deactivationReason": "Patient requested cancellation"
+    },
+    {
+      "id": "usr_pat025",
+      "email": "andrew.roberts@email.com",
+      "phone": "+15551234025",
+      "firstName": "Andrew",
+      "lastName": "Roberts",
+      "dateOfBirth": "1978-08-09",
+      "gender": "Male",
+      "status": "ACTIVE",
+      "patientStatus": "ACTIVE",
+      "roles": ["USER"],
+      "appOfRegistration": "PATIENT",
+      "createdAt": "2024-05-28T15:00:00Z",
+      "address": { "addressLineOne": "568 Ivy Rd", "city": "Coppell", "state": "TX", "zipCode": "75019" },
+      "patientDetails": { "heightFeet": 6, "heightInches": 0, "currentWeightLbs": 195, "allergiesOrSubstances": "Morphine" },
+      "assignedProviderId": "usr_doc002",
+      "diseaseStates": ["HAIR_GROWTH", "SEXUAL_WELLNESS"],
+      "lastActivity": "2024-12-03T08:30:00Z"
+    }
+  ],
+
+  "orders": [
+    {
+      "id": "ord_001",
+      "publicOrderId": "HF-10001",
+      "type": "MAIN",
+      "status": "COMPLETED",
+      "createdAt": "2024-06-15T10:45:00Z",
+      "userId": "usr_pat001",
+      "approvalDoctorId": "usr_doc001",
+      "subtotal": 4500,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 371,
+      "amount": 4871,
+      "billingCycle": "EVERY_DAY_90",
+      "lineItems": [
+        { "productName": "Finasteride", "sku": "FIN-1MG-90", "dosages": { "strength": "1mg" }, "supply": "DAY_90", "price": 4500, "qty": 90, "diseaseState": "HAIR_GROWTH" }
+      ]
+    },
+    {
+      "id": "ord_002",
+      "publicOrderId": "HF-10002",
+      "type": "MAIN",
+      "status": "ACTIVE",
+      "createdAt": "2024-03-10T08:30:00Z",
+      "userId": "usr_pat002",
+      "approvalDoctorId": "usr_doc003",
+      "subtotal": 29900,
+      "discount": 0,
+      "discountByCode": 2990,
+      "shippingPrice": 0,
+      "tax": 2220,
+      "amount": 29130,
+      "billingCycle": "EVERY_DAY_30",
+      "discountCode": { "code": "SAVE10", "discountPercent": 10 },
+      "lineItems": [
+        { "productName": "Semaglutide", "sku": "SEM-0.25-30", "dosages": { "strength": "0.25mg" }, "supply": "DAY_30", "price": 29900, "qty": 4, "diseaseState": "WEIGHT_LOSS" }
+      ]
+    },
+    {
+      "id": "ord_003",
+      "publicOrderId": "HF-10003",
+      "type": "MAIN",
+      "status": "AWAITING_REVIEW",
+      "createdAt": "2024-12-01T16:30:00Z",
+      "userId": "usr_pat003",
+      "approvalDoctorId": null,
+      "subtotal": 4500,
+      "discount": 0,
+      "discountByCode": 450,
+      "shippingPrice": 0,
+      "tax": 334,
+      "amount": 4384,
+      "billingCycle": "EVERY_DAY_90",
+      "discountCode": { "code": "WELCOME10", "discountPercent": 10 },
+      "lineItems": [
+        { "productName": "Finasteride", "sku": "FIN-1MG-90", "dosages": { "strength": "1mg" }, "supply": "DAY_90", "price": 4500, "qty": 90, "diseaseState": "HAIR_GROWTH" }
+      ]
+    },
+    {
+      "id": "ord_004",
+      "publicOrderId": "HF-10004",
+      "type": "MAIN",
+      "status": "ACTIVE",
+      "createdAt": "2024-07-22T11:15:00Z",
+      "userId": "usr_pat004",
+      "approvalDoctorId": "usr_doc003",
+      "subtotal": 34900,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 2880,
+      "amount": 37780,
+      "billingCycle": "EVERY_DAY_30",
+      "lineItems": [
+        { "productName": "Semaglutide", "sku": "SEM-0.5-30", "dosages": { "strength": "0.5mg" }, "supply": "DAY_30", "price": 34900, "qty": 4, "diseaseState": "WEIGHT_LOSS" }
+      ]
+    },
+    {
+      "id": "ord_005",
+      "publicOrderId": "HF-10005",
+      "type": "MAIN",
+      "status": "PAUSED",
+      "createdAt": "2024-01-08T09:45:00Z",
+      "userId": "usr_pat005",
+      "approvalDoctorId": "usr_doc004",
+      "subtotal": 9900,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 817,
+      "amount": 10717,
+      "billingCycle": "EVERY_DAY_90",
+      "lineItems": [
+        { "productName": "Tadalafil", "sku": "TAD-5-90", "dosages": { "strength": "5mg" }, "supply": "DAY_90", "price": 9900, "qty": 90, "diseaseState": "SEXUAL_WELLNESS" }
+      ]
+    },
+    {
+      "id": "ord_006",
+      "publicOrderId": "HF-10006",
+      "type": "MAIN",
+      "status": "AWAITING_REVIEW",
+      "createdAt": "2024-12-03T14:15:00Z",
+      "userId": "usr_pat006",
+      "approvalDoctorId": null,
+      "subtotal": 44900,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 3704,
+      "amount": 48604,
+      "billingCycle": "EVERY_DAY_30",
+      "lineItems": [
+        { "productName": "Tirzepatide", "sku": "TIR-2.5-30", "dosages": { "strength": "2.5mg" }, "supply": "DAY_30", "price": 44900, "qty": 4, "diseaseState": "WEIGHT_LOSS" }
+      ]
+    },
+    {
+      "id": "ord_007",
+      "publicOrderId": "HF-10007",
+      "type": "MAIN",
+      "status": "COMPLETED",
+      "createdAt": "2024-04-17T14:00:00Z",
+      "userId": "usr_pat007",
+      "approvalDoctorId": "usr_doc001",
+      "subtotal": 6400,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 528,
+      "amount": 6928,
+      "billingCycle": "EVERY_DAY_90",
+      "lineItems": [
+        { "productName": "Complete Hair Loss Kit", "sku": "HAIR-BUNDLE-90", "supply": "DAY_90", "price": 6400, "diseaseState": "HAIR_GROWTH" }
+      ]
+    },
+    {
+      "id": "ord_008",
+      "publicOrderId": "HF-10008",
+      "type": "MAIN",
+      "status": "AWAITING_REVIEW",
+      "createdAt": "2024-12-04T09:15:00Z",
+      "userId": "usr_pat008",
+      "approvalDoctorId": null,
+      "subtotal": 29900,
+      "discount": 0,
+      "discountByCode": 5980,
+      "shippingPrice": 0,
+      "tax": 1973,
+      "amount": 25893,
+      "billingCycle": "EVERY_DAY_30",
+      "discountCode": { "code": "NEWYEAR20", "discountPercent": 20 },
+      "lineItems": [
+        { "productName": "Semaglutide", "sku": "SEM-0.25-30", "dosages": { "strength": "0.25mg" }, "supply": "DAY_30", "price": 29900, "qty": 4, "diseaseState": "WEIGHT_LOSS" }
+      ]
+    },
+    {
+      "id": "ord_009",
+      "publicOrderId": "HF-10009",
+      "type": "MAIN",
+      "status": "ACTIVE",
+      "createdAt": "2024-02-28T10:15:00Z",
+      "userId": "usr_pat009",
+      "approvalDoctorId": "usr_doc004",
+      "subtotal": 5500,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 454,
+      "amount": 5954,
+      "billingCycle": "ONE_TIME_PAYMENT",
+      "lineItems": [
+        { "productName": "Sildenafil", "sku": "SIL-100-10", "dosages": { "strength": "100mg" }, "supply": "DAY_30", "price": 5500, "qty": 10, "diseaseState": "SEXUAL_WELLNESS" }
+      ]
+    },
+    {
+      "id": "ord_010",
+      "publicOrderId": "HF-10010",
+      "type": "MAIN",
+      "status": "ACTIVE",
+      "createdAt": "2024-05-12T15:45:00Z",
+      "userId": "usr_pat010",
+      "approvalDoctorId": "usr_doc003",
+      "subtotal": 39900,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 3292,
+      "amount": 43192,
+      "billingCycle": "EVERY_DAY_30",
+      "lineItems": [
+        { "productName": "Semaglutide", "sku": "SEM-1.0-30", "dosages": { "strength": "1.0mg" }, "supply": "DAY_30", "price": 39900, "qty": 4, "diseaseState": "WEIGHT_LOSS" }
+      ]
+    },
+    {
+      "id": "ord_011",
+      "publicOrderId": "HF-10011",
+      "type": "MAIN",
+      "status": "AWAITING_REVIEW",
+      "createdAt": "2024-12-04T11:30:00Z",
+      "userId": "usr_pat011",
+      "approvalDoctorId": null,
+      "subtotal": 3900,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 322,
+      "amount": 4222,
+      "billingCycle": "EVERY_DAY_30",
+      "lineItems": [
+        { "productName": "Tadalafil", "sku": "TAD-5-30", "dosages": { "strength": "5mg" }, "supply": "DAY_30", "price": 3900, "qty": 30, "diseaseState": "SEXUAL_WELLNESS" }
+      ]
+    },
+    {
+      "id": "ord_012",
+      "publicOrderId": "HF-10012",
+      "type": "MAIN",
+      "status": "ORDER_SHIPPED",
+      "createdAt": "2024-11-25T09:00:00Z",
+      "userId": "usr_pat012",
+      "approvalDoctorId": "usr_doc005",
+      "subtotal": 8500,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 701,
+      "amount": 9201,
+      "billingCycle": "EVERY_DAY_60",
+      "lineItems": [
+        { "productName": "Tretinoin Cream", "sku": "TRET-0.025-60", "dosages": { "strength": "0.025%" }, "supply": "DAY_60", "price": 8500, "qty": 1, "diseaseState": "SKIN_CARE" }
+      ],
+      "tracking": { "carrier": "USPS", "trackingNumber": "9400111899223456789012", "estimatedDelivery": "2024-12-06" }
+    },
+    {
+      "id": "ord_013",
+      "publicOrderId": "HF-10013",
+      "type": "MAIN",
+      "status": "ACTIVE",
+      "createdAt": "2024-01-25T12:15:00Z",
+      "userId": "usr_pat013",
+      "approvalDoctorId": "usr_doc003",
+      "subtotal": 49900,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 4117,
+      "amount": 54017,
+      "billingCycle": "EVERY_DAY_30",
+      "lineItems": [
+        { "productName": "Tirzepatide", "sku": "TIR-5.0-30", "dosages": { "strength": "5.0mg" }, "supply": "DAY_30", "price": 49900, "qty": 4, "diseaseState": "WEIGHT_LOSS" }
+      ]
+    },
+    {
+      "id": "ord_014",
+      "publicOrderId": "HF-10014",
+      "type": "MAIN",
+      "status": "AWAITING_REVIEW",
+      "createdAt": "2024-12-02T16:45:00Z",
+      "userId": "usr_pat014",
+      "approvalDoctorId": null,
+      "subtotal": 29900,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 2467,
+      "amount": 32367,
+      "billingCycle": "EVERY_DAY_30",
+      "lineItems": [
+        { "productName": "Semaglutide", "sku": "SEM-0.25-30", "dosages": { "strength": "0.25mg" }, "supply": "DAY_30", "price": 29900, "qty": 4, "diseaseState": "WEIGHT_LOSS" }
+      ]
+    },
+    {
+      "id": "ord_015",
+      "publicOrderId": "HF-10015",
+      "type": "MAIN",
+      "status": "COMPLETED",
+      "createdAt": "2024-06-08T14:30:00Z",
+      "userId": "usr_pat015",
+      "approvalDoctorId": "usr_doc001",
+      "subtotal": 7900,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 652,
+      "amount": 8552,
+      "billingCycle": "EVERY_DAY_180",
+      "lineItems": [
+        { "productName": "Finasteride", "sku": "FIN-1MG-180", "dosages": { "strength": "1mg" }, "supply": "DAY_180", "price": 7900, "qty": 180, "diseaseState": "HAIR_GROWTH" }
+      ]
+    },
+    {
+      "id": "ord_016",
+      "publicOrderId": "HF-10016",
+      "type": "MAIN",
+      "status": "FAILED",
+      "createdAt": "2024-11-20T10:00:00Z",
+      "userId": "usr_pat016",
+      "approvalDoctorId": "usr_doc003",
+      "subtotal": 34900,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 2880,
+      "amount": 37780,
+      "billingCycle": "EVERY_DAY_30",
+      "lineItems": [
+        { "productName": "Semaglutide", "sku": "SEM-0.5-30", "dosages": { "strength": "0.5mg" }, "supply": "DAY_30", "price": 34900, "qty": 4, "diseaseState": "WEIGHT_LOSS" }
+      ],
+      "failureReason": "Card declined - insufficient funds"
+    },
+    {
+      "id": "ord_017",
+      "publicOrderId": "HF-10017",
+      "type": "MAIN",
+      "status": "ACTIVE",
+      "createdAt": "2024-02-14T09:15:00Z",
+      "userId": "usr_pat017",
+      "approvalDoctorId": "usr_doc004",
+      "subtotal": 4500,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 371,
+      "amount": 4871,
+      "billingCycle": "ONE_TIME_PAYMENT",
+      "lineItems": [
+        { "productName": "Sildenafil", "sku": "SIL-50-10", "dosages": { "strength": "50mg" }, "supply": "DAY_30", "price": 4500, "qty": 10, "diseaseState": "SEXUAL_WELLNESS" }
+      ]
+    },
+    {
+      "id": "ord_018",
+      "publicOrderId": "HF-10018",
+      "type": "MAIN",
+      "status": "AWAITING_REVIEW",
+      "createdAt": "2024-12-03T17:15:00Z",
+      "userId": "usr_pat018",
+      "approvalDoctorId": null,
+      "subtotal": 44900,
+      "discount": 0,
+      "discountByCode": 4490,
+      "shippingPrice": 0,
+      "tax": 3334,
+      "amount": 43744,
+      "billingCycle": "EVERY_DAY_30",
+      "discountCode": { "code": "SAVE10", "discountPercent": 10 },
+      "lineItems": [
+        { "productName": "Tirzepatide", "sku": "TIR-2.5-30", "dosages": { "strength": "2.5mg" }, "supply": "DAY_30", "price": 44900, "qty": 4, "diseaseState": "WEIGHT_LOSS" }
+      ]
+    },
+    {
+      "id": "ord_019",
+      "publicOrderId": "HF-10019",
+      "type": "MAIN",
+      "status": "ACTIVE",
+      "createdAt": "2024-03-30T11:45:00Z",
+      "userId": "usr_pat019",
+      "approvalDoctorId": "usr_doc001",
+      "subtotal": 4500,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 371,
+      "amount": 4871,
+      "billingCycle": "EVERY_DAY_90",
+      "lineItems": [
+        { "productName": "Finasteride", "sku": "FIN-1MG-90", "dosages": { "strength": "1mg" }, "supply": "DAY_90", "price": 4500, "qty": 90, "diseaseState": "HAIR_GROWTH" }
+      ]
+    },
+    {
+      "id": "ord_020",
+      "publicOrderId": "HF-10020",
+      "type": "MAIN",
+      "status": "SENT_TO_PHARMACY",
+      "createdAt": "2024-12-01T08:00:00Z",
+      "userId": "usr_pat020",
+      "approvalDoctorId": "usr_doc003",
+      "subtotal": 34900,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 2880,
+      "amount": 37780,
+      "billingCycle": "EVERY_DAY_30",
+      "lineItems": [
+        { "productName": "Semaglutide", "sku": "SEM-0.5-30", "dosages": { "strength": "0.5mg" }, "supply": "DAY_30", "price": 34900, "qty": 4, "diseaseState": "WEIGHT_LOSS" }
+      ]
+    },
+    {
+      "id": "ord_021",
+      "publicOrderId": "HF-10021",
+      "type": "MAIN",
+      "status": "AWAITING_REVIEW",
+      "createdAt": "2024-12-04T08:45:00Z",
+      "userId": "usr_pat021",
+      "approvalDoctorId": null,
+      "subtotal": 6400,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 528,
+      "amount": 6928,
+      "billingCycle": "EVERY_DAY_90",
+      "lineItems": [
+        { "productName": "Complete Hair Loss Kit", "sku": "HAIR-BUNDLE-90", "supply": "DAY_90", "price": 6400, "diseaseState": "HAIR_GROWTH" }
+      ]
+    },
+    {
+      "id": "ord_022",
+      "publicOrderId": "HF-10022",
+      "type": "MAIN",
+      "status": "COMPLETED",
+      "createdAt": "2024-10-05T10:00:00Z",
+      "userId": "usr_pat022",
+      "approvalDoctorId": "usr_doc005",
+      "subtotal": 8500,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 701,
+      "amount": 9201,
+      "billingCycle": "EVERY_DAY_60",
+      "lineItems": [
+        { "productName": "Tretinoin Cream", "sku": "TRET-0.025-60", "dosages": { "strength": "0.025%" }, "supply": "DAY_60", "price": 8500, "qty": 1, "diseaseState": "SKIN_CARE" }
+      ]
+    },
+    {
+      "id": "ord_023",
+      "publicOrderId": "HF-10023",
+      "type": "MAIN",
+      "status": "ACTIVE",
+      "createdAt": "2024-04-22T14:15:00Z",
+      "userId": "usr_pat023",
+      "approvalDoctorId": "usr_doc003",
+      "subtotal": 39900,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 3292,
+      "amount": 43192,
+      "billingCycle": "EVERY_DAY_30",
+      "lineItems": [
+        { "productName": "Semaglutide", "sku": "SEM-1.0-30", "dosages": { "strength": "1.0mg" }, "supply": "DAY_30", "price": 39900, "qty": 4, "diseaseState": "WEIGHT_LOSS" }
+      ]
+    },
+    {
+      "id": "ord_024",
+      "publicOrderId": "HF-10024",
+      "type": "MAIN",
+      "status": "CANCELED",
+      "createdAt": "2024-09-01T11:00:00Z",
+      "userId": "usr_pat024",
+      "approvalDoctorId": "usr_doc003",
+      "canceledAt": "2024-10-15T12:00:00Z",
+      "subtotal": 29900,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 2467,
+      "amount": 32367,
+      "billingCycle": "EVERY_DAY_30",
+      "lineItems": [
+        { "productName": "Semaglutide", "sku": "SEM-0.25-30", "dosages": { "strength": "0.25mg" }, "supply": "DAY_30", "price": 29900, "qty": 4, "diseaseState": "WEIGHT_LOSS" }
+      ],
+      "cancellationReason": "Patient requested cancellation"
+    },
+    {
+      "id": "ord_025",
+      "publicOrderId": "HF-10025",
+      "type": "MAIN",
+      "status": "ACTIVE",
+      "createdAt": "2024-05-28T15:15:00Z",
+      "userId": "usr_pat025",
+      "approvalDoctorId": "usr_doc002",
+      "subtotal": 14400,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 1188,
+      "amount": 15588,
+      "billingCycle": "EVERY_DAY_90",
+      "lineItems": [
+        { "productName": "Finasteride", "sku": "FIN-1MG-90", "dosages": { "strength": "1mg" }, "supply": "DAY_90", "price": 4500, "qty": 90, "diseaseState": "HAIR_GROWTH" },
+        { "productName": "Tadalafil", "sku": "TAD-5-90", "dosages": { "strength": "5mg" }, "supply": "DAY_90", "price": 9900, "qty": 90, "diseaseState": "SEXUAL_WELLNESS" }
+      ]
+    },
+
+    {
+      "_comment": "PARENT ORDER - Multi-item checkout with membership, consultation, lab kit, and prescription",
+      "id": "ord_026",
+      "publicOrderId": "HF-10026",
+      "type": "MAIN",
+      "status": "AWAITING_REVIEW",
+      "createdAt": "2024-12-04T14:30:00Z",
+      "userId": "usr_pat002",
+      "approvalDoctorId": null,
+      "subtotal": 34700,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 2463,
+      "amount": 37163,
+      "children": [
+        {
+          "id": "ord_026_child_001",
+          "parentOrderId": "ord_026",
+          "type": "SUBORDER",
+          "productType": "SERVICE",
+          "status": "PROCESSED",
+          "productName": "Initial Consultation",
+          "sku": "CONSULT-INIT",
+          "amount": 0,
+          "billingCycle": "ONE_TIME_PAYMENT",
+          "paidAt": "2024-12-04T14:30:00Z"
+        },
+        {
+          "id": "ord_026_child_002",
+          "parentOrderId": "ord_026",
+          "type": "SUBORDER",
+          "productType": "MEMBERSHIP",
+          "status": "ACTIVE",
+          "productName": "Care Membership",
+          "sku": "MEM-CARE-MONTHLY",
+          "amount": 1900,
+          "billingCycle": "MONTHLY",
+          "subscriptionId": "sub_mem_001",
+          "nextBillDate": "2025-01-04",
+          "paidAt": "2024-12-04T14:30:00Z"
+        },
+        {
+          "id": "ord_026_child_003",
+          "parentOrderId": "ord_026",
+          "type": "SUBORDER",
+          "productType": "LAB_TEST",
+          "status": "ORDER_SHIPPED",
+          "productName": "Metabolic Health Panel",
+          "sku": "LAB-METAB",
+          "amount": 0,
+          "billingCycle": "ONE_TIME_PAYMENT",
+          "tracking": "9400111899223456789012",
+          "carrier": "USPS",
+          "paidAt": "2024-12-04T14:30:00Z",
+          "_note": "Free with membership"
+        },
+        {
+          "id": "ord_026_child_004",
+          "parentOrderId": "ord_026",
+          "type": "SUBORDER",
+          "productType": "PHYSICAL_PRODUCT",
+          "status": "AWAITING_REVIEW",
+          "productName": "Semaglutide",
+          "sku": "SEM-0.5-30",
+          "dosages": { "strength": "0.5mg" },
+          "supply": "DAY_30",
+          "amount": 34900,
+          "billingCycle": "EVERY_DAY_30",
+          "subscriptionId": null,
+          "_note": "Pending provider approval - card tokenized"
+        }
+      ]
+    },
+
+    {
+      "_comment": "PARENT ORDER - Membership + Prescription, fully approved and active",
+      "id": "ord_027",
+      "publicOrderId": "HF-10027",
+      "type": "MAIN",
+      "status": "ACTIVE",
+      "createdAt": "2024-10-15T11:00:00Z",
+      "userId": "usr_pat004",
+      "approvalDoctorId": "usr_doc003",
+      "subtotal": 32800,
+      "discount": 3290,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 2436,
+      "amount": 31946,
+      "children": [
+        {
+          "id": "ord_027_child_001",
+          "parentOrderId": "ord_027",
+          "type": "SUBORDER",
+          "productType": "SERVICE",
+          "status": "PROCESSED",
+          "productName": "Initial Consultation",
+          "sku": "CONSULT-INIT",
+          "amount": 0,
+          "billingCycle": "ONE_TIME_PAYMENT",
+          "paidAt": "2024-10-15T11:00:00Z"
+        },
+        {
+          "id": "ord_027_child_002",
+          "parentOrderId": "ord_027",
+          "type": "SUBORDER",
+          "productType": "MEMBERSHIP",
+          "status": "ACTIVE",
+          "productName": "Care Membership",
+          "sku": "MEM-CARE-MONTHLY",
+          "amount": 1900,
+          "billingCycle": "MONTHLY",
+          "subscriptionId": "sub_mem_002",
+          "nextBillDate": "2024-12-15",
+          "paidAt": "2024-10-15T11:00:00Z"
+        },
+        {
+          "id": "ord_027_child_003",
+          "parentOrderId": "ord_027",
+          "type": "SUBORDER",
+          "productType": "PHYSICAL_PRODUCT",
+          "status": "ACTIVE",
+          "productName": "Semaglutide",
+          "sku": "SEM-0.25-30",
+          "dosages": { "strength": "0.25mg" },
+          "supply": "DAY_30",
+          "amount": 29900,
+          "discount": 2990,
+          "billingCycle": "EVERY_DAY_30",
+          "subscriptionId": "sub_rx_001",
+          "nextBillDate": "2024-12-08",
+          "approvedAt": "2024-10-15T14:22:00Z",
+          "paidAt": "2024-10-15T14:22:00Z",
+          "_note": "10% member discount applied"
+        }
+      ]
+    },
+
+    {
+      "_comment": "PARENT ORDER - Premium membership with multiple prescriptions",
+      "id": "ord_028",
+      "publicOrderId": "HF-10028",
+      "type": "MAIN",
+      "status": "ACTIVE",
+      "createdAt": "2024-09-01T09:30:00Z",
+      "userId": "usr_pat010",
+      "approvalDoctorId": "usr_doc001",
+      "subtotal": 54700,
+      "discount": 9980,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 3689,
+      "amount": 48409,
+      "children": [
+        {
+          "id": "ord_028_child_001",
+          "parentOrderId": "ord_028",
+          "type": "SUBORDER",
+          "productType": "SERVICE",
+          "status": "PROCESSED",
+          "productName": "Initial Consultation",
+          "sku": "CONSULT-INIT",
+          "amount": 0,
+          "billingCycle": "ONE_TIME_PAYMENT",
+          "paidAt": "2024-09-01T09:30:00Z"
+        },
+        {
+          "id": "ord_028_child_002",
+          "parentOrderId": "ord_028",
+          "type": "SUBORDER",
+          "productType": "MEMBERSHIP",
+          "status": "ACTIVE",
+          "productName": "Premium Membership",
+          "sku": "MEM-PREM-MONTHLY",
+          "amount": 4900,
+          "billingCycle": "MONTHLY",
+          "subscriptionId": "sub_mem_003",
+          "nextBillDate": "2024-12-01",
+          "paidAt": "2024-09-01T09:30:00Z"
+        },
+        {
+          "id": "ord_028_child_003",
+          "parentOrderId": "ord_028",
+          "type": "SUBORDER",
+          "productType": "PHYSICAL_PRODUCT",
+          "status": "ACTIVE",
+          "productName": "Semaglutide",
+          "sku": "SEM-1.0-30",
+          "dosages": { "strength": "1.0mg" },
+          "supply": "DAY_30",
+          "amount": 39900,
+          "discount": 7980,
+          "billingCycle": "EVERY_DAY_30",
+          "subscriptionId": "sub_rx_002",
+          "nextBillDate": "2024-12-08",
+          "approvedAt": "2024-09-01T11:45:00Z",
+          "paidAt": "2024-09-01T11:45:00Z",
+          "_note": "20% premium member discount"
+        },
+        {
+          "id": "ord_028_child_004",
+          "parentOrderId": "ord_028",
+          "type": "SUBORDER",
+          "productType": "LAB_TEST",
+          "status": "COMPLETED",
+          "productName": "Metabolic Health Panel",
+          "sku": "LAB-METAB",
+          "amount": 0,
+          "billingCycle": "ONE_TIME_PAYMENT",
+          "labResultsReceivedAt": "2024-09-08T10:00:00Z",
+          "_note": "Quarterly lab included with Premium"
+        }
+      ]
+    },
+
+    {
+      "_comment": "PARENT ORDER - Consultation only, no purchase (abandoned/browsing)",
+      "id": "ord_029",
+      "publicOrderId": "HF-10029",
+      "type": "MAIN",
+      "status": "COMPLETED",
+      "createdAt": "2024-11-20T16:45:00Z",
+      "userId": "usr_pat015",
+      "approvalDoctorId": null,
+      "subtotal": 2900,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 239,
+      "amount": 3139,
+      "children": [
+        {
+          "id": "ord_029_child_001",
+          "parentOrderId": "ord_029",
+          "type": "SUBORDER",
+          "productType": "SERVICE",
+          "status": "PROCESSED",
+          "productName": "Initial Consultation",
+          "sku": "CONSULT-INIT",
+          "amount": 2900,
+          "billingCycle": "ONE_TIME_PAYMENT",
+          "paidAt": "2024-11-20T16:45:00Z",
+          "_note": "Patient paid for consultation but did not proceed with treatment"
+        }
+      ]
+    },
+
+    {
+      "_comment": "PARENT ORDER - Membership paused, prescription paused (winback candidate)",
+      "id": "ord_030",
+      "publicOrderId": "HF-10030",
+      "type": "MAIN",
+      "status": "PAUSED",
+      "createdAt": "2024-06-10T10:00:00Z",
+      "userId": "usr_pat018",
+      "approvalDoctorId": "usr_doc002",
+      "subtotal": 6400,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 528,
+      "amount": 6928,
+      "pausedAt": "2024-11-01T09:00:00Z",
+      "pauseReason": "Financial reasons - will resume in new year",
+      "children": [
+        {
+          "id": "ord_030_child_001",
+          "parentOrderId": "ord_030",
+          "type": "SUBORDER",
+          "productType": "MEMBERSHIP",
+          "status": "PAUSED",
+          "productName": "Care Membership",
+          "sku": "MEM-CARE-MONTHLY",
+          "amount": 1900,
+          "billingCycle": "MONTHLY",
+          "subscriptionId": "sub_mem_004",
+          "pausedAt": "2024-11-01T09:00:00Z"
+        },
+        {
+          "id": "ord_030_child_002",
+          "parentOrderId": "ord_030",
+          "type": "SUBORDER",
+          "productType": "PHYSICAL_PRODUCT",
+          "status": "PAUSED",
+          "productName": "Finasteride",
+          "sku": "FIN-1MG-90",
+          "dosages": { "strength": "1mg" },
+          "supply": "DAY_90",
+          "amount": 4500,
+          "billingCycle": "EVERY_DAY_90",
+          "subscriptionId": "sub_rx_003",
+          "pausedAt": "2024-11-01T09:00:00Z"
+        }
+      ]
+    },
+
+    {
+      "_comment": "PARENT ORDER - Annual membership with one-time purchase (Sildenafil)",
+      "id": "ord_031",
+      "publicOrderId": "HF-10031",
+      "type": "MAIN",
+      "status": "COMPLETED",
+      "createdAt": "2024-08-20T13:15:00Z",
+      "userId": "usr_pat007",
+      "approvalDoctorId": "usr_doc004",
+      "subtotal": 19400,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 1600,
+      "amount": 21000,
+      "children": [
+        {
+          "id": "ord_031_child_001",
+          "parentOrderId": "ord_031",
+          "type": "SUBORDER",
+          "productType": "SERVICE",
+          "status": "PROCESSED",
+          "productName": "Initial Consultation",
+          "sku": "CONSULT-INIT",
+          "amount": 0,
+          "billingCycle": "ONE_TIME_PAYMENT",
+          "paidAt": "2024-08-20T13:15:00Z"
+        },
+        {
+          "id": "ord_031_child_002",
+          "parentOrderId": "ord_031",
+          "type": "SUBORDER",
+          "productType": "MEMBERSHIP",
+          "status": "ACTIVE",
+          "productName": "Care Membership",
+          "sku": "MEM-CARE-ANNUAL",
+          "amount": 14900,
+          "billingCycle": "ANNUAL",
+          "subscriptionId": "sub_mem_005",
+          "nextBillDate": "2025-08-20",
+          "paidAt": "2024-08-20T13:15:00Z"
+        },
+        {
+          "id": "ord_031_child_003",
+          "parentOrderId": "ord_031",
+          "type": "SUBORDER",
+          "productType": "PHYSICAL_PRODUCT",
+          "status": "COMPLETED",
+          "productName": "Sildenafil",
+          "sku": "SIL-100-10",
+          "dosages": { "strength": "100mg" },
+          "amount": 4500,
+          "billingCycle": "ONE_TIME_PAYMENT",
+          "approvedAt": "2024-08-20T15:30:00Z",
+          "paidAt": "2024-08-20T15:30:00Z",
+          "shippedAt": "2024-08-21T09:00:00Z",
+          "_note": "One-time purchase, no subscription"
+        }
+      ]
+    },
+
+    {
+      "_comment": "PARENT ORDER - Payment failed on membership renewal",
+      "id": "ord_032",
+      "publicOrderId": "HF-10032",
+      "type": "MAIN",
+      "status": "PAYMENT_FAILED",
+      "createdAt": "2024-07-05T08:00:00Z",
+      "userId": "usr_pat022",
+      "approvalDoctorId": "usr_doc003",
+      "subtotal": 31800,
+      "discount": 0,
+      "discountByCode": 0,
+      "shippingPrice": 0,
+      "tax": 2623,
+      "amount": 34423,
+      "paymentFailedAt": "2024-12-05T08:00:00Z",
+      "paymentRetryCount": 2,
+      "children": [
+        {
+          "id": "ord_032_child_001",
+          "parentOrderId": "ord_032",
+          "type": "SUBORDER",
+          "productType": "MEMBERSHIP",
+          "status": "PAYMENT_FAILED",
+          "productName": "Care Membership",
+          "sku": "MEM-CARE-MONTHLY",
+          "amount": 1900,
+          "billingCycle": "MONTHLY",
+          "subscriptionId": "sub_mem_006",
+          "lastPaymentAttempt": "2024-12-05T08:00:00Z",
+          "paymentRetryCount": 2,
+          "_note": "Card expired, awaiting update"
+        },
+        {
+          "id": "ord_032_child_002",
+          "parentOrderId": "ord_032",
+          "type": "SUBORDER",
+          "productType": "PHYSICAL_PRODUCT",
+          "status": "ACTIVE",
+          "productName": "Semaglutide",
+          "sku": "SEM-0.5-30",
+          "dosages": { "strength": "0.5mg" },
+          "supply": "DAY_30",
+          "amount": 29900,
+          "billingCycle": "EVERY_DAY_30",
+          "subscriptionId": "sub_rx_004",
+          "nextBillDate": "2024-12-12",
+          "_note": "Rx subscription still active, different billing date"
+        }
+      ]
+    }
+  ],
+
+  "subscriptions": [
+    {
+      "id": "sub_001",
+      "orderId": "ord_001",
+      "userId": "usr_pat001",
+      "status": "SUCCESS",
+      "amount": 4871,
+      "paymentInterval": "EVERY_DAY_90",
+      "nextBillDate": "2025-03-15",
+      "paymentCount": 6,
+      "startDate": "2024-06-15",
+      "productName": "Finasteride"
+    },
+    {
+      "id": "sub_002",
+      "orderId": "ord_002",
+      "userId": "usr_pat002",
+      "status": "SUCCESS",
+      "amount": 29130,
+      "paymentInterval": "EVERY_DAY_30",
+      "nextBillDate": "2025-01-03",
+      "paymentCount": 9,
+      "startDate": "2024-03-10",
+      "productName": "Semaglutide 0.25mg"
+    },
+    {
+      "id": "sub_003",
+      "orderId": "ord_004",
+      "userId": "usr_pat004",
+      "status": "SUCCESS",
+      "amount": 37780,
+      "paymentInterval": "EVERY_DAY_30",
+      "nextBillDate": "2024-12-22",
+      "paymentCount": 5,
+      "startDate": "2024-07-22",
+      "productName": "Semaglutide 0.5mg"
+    },
+    {
+      "id": "sub_004",
+      "orderId": "ord_005",
+      "userId": "usr_pat005",
+      "status": "INSTRUMENT_FAILURE",
+      "amount": 10717,
+      "paymentInterval": "EVERY_DAY_90",
+      "nextBillDate": null,
+      "paymentCount": 3,
+      "startDate": "2024-01-08",
+      "pausedAt": "2024-11-28",
+      "productName": "Tadalafil 5mg"
+    },
+    {
+      "id": "sub_005",
+      "orderId": "ord_007",
+      "userId": "usr_pat007",
+      "status": "SUCCESS",
+      "amount": 6928,
+      "paymentInterval": "EVERY_DAY_90",
+      "nextBillDate": "2025-01-17",
+      "paymentCount": 3,
+      "startDate": "2024-04-17",
+      "productName": "Complete Hair Loss Kit"
+    },
+    {
+      "id": "sub_006",
+      "orderId": "ord_010",
+      "userId": "usr_pat010",
+      "status": "SUCCESS",
+      "amount": 43192,
+      "paymentInterval": "EVERY_DAY_30",
+      "nextBillDate": "2024-12-12",
+      "paymentCount": 7,
+      "startDate": "2024-05-12",
+      "productName": "Semaglutide 1.0mg"
+    },
+    {
+      "id": "sub_007",
+      "orderId": "ord_013",
+      "userId": "usr_pat013",
+      "status": "SUCCESS",
+      "amount": 54017,
+      "paymentInterval": "EVERY_DAY_30",
+      "nextBillDate": "2024-12-25",
+      "paymentCount": 11,
+      "startDate": "2024-01-25",
+      "productName": "Tirzepatide 5.0mg"
+    },
+    {
+      "id": "sub_008",
+      "orderId": "ord_015",
+      "userId": "usr_pat015",
+      "status": "SUCCESS",
+      "amount": 8552,
+      "paymentInterval": "EVERY_DAY_180",
+      "nextBillDate": "2024-12-08",
+      "paymentCount": 1,
+      "startDate": "2024-06-08",
+      "productName": "Finasteride"
+    },
+    {
+      "id": "sub_009",
+      "orderId": "ord_019",
+      "userId": "usr_pat019",
+      "status": "SUCCESS",
+      "amount": 4871,
+      "paymentInterval": "EVERY_DAY_90",
+      "nextBillDate": "2024-12-30",
+      "paymentCount": 3,
+      "startDate": "2024-03-30",
+      "productName": "Finasteride"
+    },
+    {
+      "id": "sub_010",
+      "orderId": "ord_023",
+      "userId": "usr_pat023",
+      "status": "SUCCESS",
+      "amount": 43192,
+      "paymentInterval": "EVERY_DAY_30",
+      "nextBillDate": "2024-12-22",
+      "paymentCount": 8,
+      "startDate": "2024-04-22",
+      "productName": "Semaglutide 1.0mg"
+    },
+    {
+      "id": "sub_011",
+      "orderId": "ord_025",
+      "userId": "usr_pat025",
+      "status": "SUCCESS",
+      "amount": 15588,
+      "paymentInterval": "EVERY_DAY_90",
+      "nextBillDate": "2025-02-28",
+      "paymentCount": 2,
+      "startDate": "2024-05-28",
+      "productName": "Finasteride + Tadalafil"
+    },
+
+    {
+      "_comment": "MEMBERSHIP SUBSCRIPTIONS",
+      "id": "sub_mem_001",
+      "orderId": "ord_026",
+      "userId": "usr_pat002",
+      "type": "MEMBERSHIP",
+      "status": "SUCCESS",
+      "amount": 1900,
+      "paymentInterval": "MONTHLY",
+      "nextBillDate": "2025-01-04",
+      "paymentCount": 1,
+      "startDate": "2024-12-04",
+      "productName": "Care Membership"
+    },
+    {
+      "id": "sub_mem_002",
+      "orderId": "ord_027",
+      "userId": "usr_pat004",
+      "type": "MEMBERSHIP",
+      "status": "SUCCESS",
+      "amount": 1900,
+      "paymentInterval": "MONTHLY",
+      "nextBillDate": "2024-12-15",
+      "paymentCount": 2,
+      "startDate": "2024-10-15",
+      "productName": "Care Membership"
+    },
+    {
+      "id": "sub_mem_003",
+      "orderId": "ord_028",
+      "userId": "usr_pat010",
+      "type": "MEMBERSHIP",
+      "status": "SUCCESS",
+      "amount": 4900,
+      "paymentInterval": "MONTHLY",
+      "nextBillDate": "2024-12-01",
+      "paymentCount": 3,
+      "startDate": "2024-09-01",
+      "productName": "Premium Membership"
+    },
+    {
+      "id": "sub_mem_004",
+      "orderId": "ord_030",
+      "userId": "usr_pat018",
+      "type": "MEMBERSHIP",
+      "status": "PAUSED",
+      "amount": 1900,
+      "paymentInterval": "MONTHLY",
+      "nextBillDate": null,
+      "paymentCount": 5,
+      "startDate": "2024-06-10",
+      "pausedAt": "2024-11-01",
+      "productName": "Care Membership"
+    },
+    {
+      "id": "sub_mem_005",
+      "orderId": "ord_031",
+      "userId": "usr_pat007",
+      "type": "MEMBERSHIP",
+      "status": "SUCCESS",
+      "amount": 14900,
+      "paymentInterval": "ANNUAL",
+      "nextBillDate": "2025-08-20",
+      "paymentCount": 1,
+      "startDate": "2024-08-20",
+      "productName": "Care Membership (Annual)"
+    },
+    {
+      "id": "sub_mem_006",
+      "orderId": "ord_032",
+      "userId": "usr_pat022",
+      "type": "MEMBERSHIP",
+      "status": "INSTRUMENT_FAILURE",
+      "amount": 1900,
+      "paymentInterval": "MONTHLY",
+      "nextBillDate": null,
+      "paymentCount": 5,
+      "startDate": "2024-07-05",
+      "lastPaymentAttempt": "2024-12-05",
+      "paymentRetryCount": 2,
+      "productName": "Care Membership"
+    },
+
+    {
+      "_comment": "PRESCRIPTION SUBSCRIPTIONS (from parent-child orders)",
+      "id": "sub_rx_001",
+      "orderId": "ord_027",
+      "userId": "usr_pat004",
+      "type": "PRESCRIPTION",
+      "status": "SUCCESS",
+      "amount": 26910,
+      "paymentInterval": "EVERY_DAY_30",
+      "nextBillDate": "2024-12-08",
+      "paymentCount": 2,
+      "startDate": "2024-10-15",
+      "productName": "Semaglutide 0.25mg",
+      "_note": "10% member discount applied"
+    },
+    {
+      "id": "sub_rx_002",
+      "orderId": "ord_028",
+      "userId": "usr_pat010",
+      "type": "PRESCRIPTION",
+      "status": "SUCCESS",
+      "amount": 31920,
+      "paymentInterval": "EVERY_DAY_30",
+      "nextBillDate": "2024-12-08",
+      "paymentCount": 3,
+      "startDate": "2024-09-01",
+      "productName": "Semaglutide 1.0mg",
+      "_note": "20% premium member discount applied"
+    },
+    {
+      "id": "sub_rx_003",
+      "orderId": "ord_030",
+      "userId": "usr_pat018",
+      "type": "PRESCRIPTION",
+      "status": "PAUSED",
+      "amount": 4500,
+      "paymentInterval": "EVERY_DAY_90",
+      "nextBillDate": null,
+      "paymentCount": 2,
+      "startDate": "2024-06-10",
+      "pausedAt": "2024-11-01",
+      "productName": "Finasteride"
+    },
+    {
+      "id": "sub_rx_004",
+      "orderId": "ord_032",
+      "userId": "usr_pat022",
+      "type": "PRESCRIPTION",
+      "status": "SUCCESS",
+      "amount": 29900,
+      "paymentInterval": "EVERY_DAY_30",
+      "nextBillDate": "2024-12-12",
+      "paymentCount": 5,
+      "startDate": "2024-07-05",
+      "productName": "Semaglutide 0.5mg"
+    }
+  ],
+
+  "appointments": [
+    {
+      "id": "appt_001",
+      "name": "Initial Weight Loss Consultation",
+      "type": "INITIAL_ASSESSMENT",
+      "status": "COMPLETED",
+      "patientId": "usr_pat002",
+      "doctorId": "usr_doc003",
+      "startAtLocal": "2024-03-10T09:00:00Z",
+      "durationMinutes": "15",
+      "timezone": "America/Chicago"
+    },
+    {
+      "id": "appt_002",
+      "name": "Weight Loss Follow-up",
+      "type": "FOLLOW_UP",
+      "status": "SCHEDULED",
+      "patientId": "usr_pat004",
+      "doctorId": "usr_doc003",
+      "startAtLocal": "2024-12-10T14:00:00Z",
+      "durationMinutes": "15",
+      "timezone": "America/Chicago",
+      "meetingUrl": "https://zoom.us/j/123456789"
+    },
+    {
+      "id": "appt_003",
+      "name": "Initial Hair Loss Consultation",
+      "type": "INITIAL_ASSESSMENT",
+      "status": "NEEDS_SCHEDULING",
+      "patientId": "usr_pat003",
+      "doctorId": null,
+      "startAtLocal": null
+    },
+    {
+      "id": "appt_004",
+      "name": "Weight Loss Check-in",
+      "type": "FOLLOW_UP",
+      "status": "COMPLETED",
+      "patientId": "usr_pat010",
+      "doctorId": "usr_doc003",
+      "startAtLocal": "2024-11-12T11:00:00Z",
+      "durationMinutes": "15",
+      "timezone": "America/Chicago"
+    },
+    {
+      "id": "appt_005",
+      "name": "ED Treatment Consultation",
+      "type": "INITIAL_ASSESSMENT",
+      "status": "COMPLETED",
+      "patientId": "usr_pat005",
+      "doctorId": "usr_doc004",
+      "startAtLocal": "2024-01-08T10:00:00Z",
+      "durationMinutes": "15",
+      "timezone": "America/Chicago"
+    },
+    {
+      "id": "appt_006",
+      "name": "Weight Loss Progress Review",
+      "type": "FOLLOW_UP",
+      "status": "SCHEDULED",
+      "patientId": "usr_pat013",
+      "doctorId": "usr_doc003",
+      "startAtLocal": "2024-12-15T10:00:00Z",
+      "durationMinutes": "15",
+      "timezone": "America/Chicago",
+      "meetingUrl": "https://zoom.us/j/987654321"
+    },
+    {
+      "id": "appt_007",
+      "name": "Initial Weight Loss Consultation",
+      "type": "INITIAL_ASSESSMENT",
+      "status": "NEEDS_SCHEDULING",
+      "patientId": "usr_pat008",
+      "doctorId": null,
+      "startAtLocal": null
+    },
+    {
+      "id": "appt_008",
+      "name": "Hair Loss Follow-up",
+      "type": "FOLLOW_UP",
+      "status": "CANCELLED",
+      "patientId": "usr_pat016",
+      "doctorId": "usr_doc003",
+      "startAtLocal": "2024-11-25T15:00:00Z",
+      "durationMinutes": "15",
+      "timezone": "America/Chicago",
+      "cancelledAt": "2024-11-24T10:00:00Z",
+      "cancellationReason": "Patient no-show"
+    },
+    {
+      "id": "appt_009",
+      "name": "Skin Care Consultation",
+      "type": "INITIAL_ASSESSMENT",
+      "status": "COMPLETED",
+      "patientId": "usr_pat012",
+      "doctorId": "usr_doc005",
+      "startAtLocal": "2024-11-25T09:30:00Z",
+      "durationMinutes": "15",
+      "timezone": "America/Chicago"
+    },
+    {
+      "id": "appt_010",
+      "name": "Weight Loss Consultation",
+      "type": "INITIAL_ASSESSMENT",
+      "status": "NEEDS_SCHEDULING",
+      "patientId": "usr_pat018",
+      "doctorId": null,
+      "startAtLocal": null
+    }
+  ],
+
+  "conversations": [
+    {
+      "id": "chat_001",
+      "type": "PATIENT_ORDER_CHAT",
+      "patientId": "usr_pat001",
+      "providerId": "usr_doc001",
+      "orderId": "ord_001",
+      "createdAt": "2024-06-15T11:00:00Z",
+      "lastMessageAt": "2024-12-04T14:30:00Z",
+      "unreadCount": 0,
+      "messages": [
+        { "id": "msg_001a", "senderId": "usr_pat001", "text": "Hi Dr. Chen, I had a quick question about my Finasteride prescription. Is it okay to take it with my daily vitamin?", "createdAt": "2024-06-15T11:00:00Z" },
+        { "id": "msg_001b", "senderId": "usr_doc001", "text": "Hi Sarah! Yes, it's perfectly safe to take Finasteride with your daily vitamins. Just make sure to take it at the same time each day for best results. Let me know if you have any other questions!", "createdAt": "2024-06-15T11:15:00Z" },
+        { "id": "msg_001c", "senderId": "usr_pat001", "text": "Great, thank you so much!", "createdAt": "2024-06-15T11:20:00Z" },
+        { "id": "msg_001d", "senderId": "usr_pat001", "text": "Quick update - I've been on Finasteride for 6 months now and I'm starting to see some regrowth! Thank you!", "createdAt": "2024-12-04T14:30:00Z" }
+      ]
+    },
+    {
+      "id": "chat_002",
+      "type": "PATIENT_ORDER_CHAT",
+      "patientId": "usr_pat002",
+      "providerId": "usr_doc003",
+      "orderId": "ord_002",
+      "createdAt": "2024-03-10T09:30:00Z",
+      "lastMessageAt": "2024-12-03T09:45:00Z",
+      "unreadCount": 1,
+      "messages": [
+        { "id": "msg_002a", "senderId": "usr_doc003", "text": "Hi Michael, I've reviewed your questionnaire and approved your Semaglutide prescription. You'll start at the 0.25mg dose. Please let me know if you experience any nausea.", "createdAt": "2024-03-10T09:30:00Z" },
+        { "id": "msg_002b", "senderId": "usr_pat002", "text": "Thank you Dr. Patel! I'll keep you posted on my progress.", "createdAt": "2024-03-10T10:00:00Z" },
+        { "id": "msg_002c", "senderId": "usr_pat002", "text": "Update: Down 35 lbs so far! The nausea was mild the first week but went away.", "createdAt": "2024-09-15T14:00:00Z" },
+        { "id": "msg_002d", "senderId": "usr_doc003", "text": "That's fantastic progress Michael! Keep it up. Let me know when you're ready to discuss increasing your dose.", "createdAt": "2024-09-15T15:30:00Z" },
+        { "id": "msg_002e", "senderId": "usr_pat002", "text": "I think I'm ready to move up to 0.5mg. The weight loss has plateaued a bit.", "createdAt": "2024-12-03T09:45:00Z" }
+      ]
+    },
+    {
+      "id": "chat_003",
+      "type": "PATIENT_ORDER_CHAT",
+      "patientId": "usr_pat005",
+      "providerId": "usr_doc004",
+      "orderId": "ord_005",
+      "createdAt": "2024-01-08T10:30:00Z",
+      "lastMessageAt": "2024-11-28T15:00:00Z",
+      "unreadCount": 2,
+      "messages": [
+        { "id": "msg_003a", "senderId": "usr_doc004", "text": "Hi Robert, I've approved your Tadalafil prescription. Taking 5mg daily should help with consistent results. Let me know how it goes.", "createdAt": "2024-01-08T10:30:00Z" },
+        { "id": "msg_003b", "senderId": "usr_pat005", "text": "Thanks Dr. Williams. Quick question - are there any foods I should avoid?", "createdAt": "2024-01-08T11:00:00Z" },
+        { "id": "msg_003c", "senderId": "usr_doc004", "text": "Good question. Avoid excessive grapefruit juice as it can increase the medication levels. Otherwise, no major restrictions.", "createdAt": "2024-01-08T11:30:00Z" },
+        { "id": "msg_003d", "senderId": "usr_pat005", "text": "My card was declined for this month's refill. I'm updating my payment info now.", "createdAt": "2024-11-28T15:00:00Z" }
+      ]
+    },
+    {
+      "id": "chat_004",
+      "type": "PATIENT_ORDER_CHAT",
+      "patientId": "usr_pat010",
+      "providerId": "usr_doc003",
+      "orderId": "ord_010",
+      "createdAt": "2024-05-12T16:00:00Z",
+      "lastMessageAt": "2024-12-03T12:00:00Z",
+      "unreadCount": 0,
+      "messages": [
+        { "id": "msg_004a", "senderId": "usr_doc003", "text": "Hi Jessica, welcome! I've approved your Semaglutide prescription at the 1.0mg dose based on your previous experience with the medication. How has your journey been so far?", "createdAt": "2024-05-12T16:00:00Z" },
+        { "id": "msg_004b", "senderId": "usr_pat010", "text": "Great! I was on it before through another provider but switched for the better pricing here.", "createdAt": "2024-05-12T16:30:00Z" },
+        { "id": "msg_004c", "senderId": "usr_pat010", "text": "Just wanted to let you know I'm down 40 lbs total now. Feeling amazing!", "createdAt": "2024-12-03T12:00:00Z" }
+      ]
+    },
+    {
+      "id": "chat_005",
+      "type": "PATIENT_ORDER_CHAT",
+      "patientId": "usr_pat012",
+      "providerId": "usr_doc005",
+      "orderId": "ord_012",
+      "createdAt": "2024-11-25T10:00:00Z",
+      "lastMessageAt": "2024-12-02T14:20:00Z",
+      "unreadCount": 0,
+      "messages": [
+        { "id": "msg_005a", "senderId": "usr_doc005", "text": "Hi Ashley, I've reviewed your skin concerns and prescribed Tretinoin 0.025%. Start by applying a pea-sized amount every other night for the first 2 weeks.", "createdAt": "2024-11-25T10:00:00Z" },
+        { "id": "msg_005b", "senderId": "usr_pat012", "text": "Thank you Dr. Thompson! Should I expect any peeling?", "createdAt": "2024-11-25T10:30:00Z" },
+        { "id": "msg_005c", "senderId": "usr_doc005", "text": "Yes, mild peeling is normal initially. Use a gentle moisturizer and sunscreen daily. If irritation is severe, skip a night.", "createdAt": "2024-11-25T11:00:00Z" },
+        { "id": "msg_005d", "senderId": "usr_pat012", "text": "Got my shipment! Starting tonight. Thanks!", "createdAt": "2024-12-02T14:20:00Z" }
+      ]
+    }
+  ],
+
+  "soapNotes": [
+    {
+      "id": "soap_001",
+      "patientId": "usr_pat001",
+      "authorId": "usr_doc001",
+      "authorType": "PROVIDER",
+      "createdAt": "2024-06-15T11:30:00Z",
+      "subjective": {
+        "chiefComplaint": "Hair thinning at crown and temples",
+        "historyOfPresentIllness": "Patient reports gradual hair loss over past 2 years. Family history of male pattern baldness on maternal side. No recent stressors or medication changes.",
+        "reviewOfSystems": "Denies scalp itching, pain, or skin changes"
+      },
+      "objective": {
+        "physicalExam": "Photos reviewed - Norwood Stage II-III pattern baldness. No scarring or inflammation noted."
+      },
+      "assessment": {
+        "diagnoses": ["Androgenetic alopecia"],
+        "clinicalImpression": "Classic presentation of androgenetic alopecia in 36yo female. Good candidate for Finasteride therapy."
+      },
+      "plan": {
+        "medications": ["Finasteride 1mg daily"],
+        "instructions": "Continue for minimum 6 months to assess efficacy. Take at same time daily.",
+        "followUp": "Follow-up in 3 months to assess progress"
+      }
+    },
+    {
+      "id": "soap_002",
+      "patientId": "usr_pat002",
+      "authorId": "usr_doc003",
+      "authorType": "PROVIDER",
+      "createdAt": "2024-03-10T10:00:00Z",
+      "subjective": {
+        "chiefComplaint": "Weight management",
+        "historyOfPresentIllness": "49yo male with BMI 34.2, seeking medical weight loss. Has tried diet and exercise with limited success. No history of bariatric surgery.",
+        "reviewOfSystems": "Reports occasional heartburn, denies chest pain, shortness of breath"
+      },
+      "objective": {
+        "vitalSigns": { "weight": "245 lbs", "height": "5'11\"", "bmi": "34.2" },
+        "physicalExam": "Labs reviewed - HbA1c 5.8% (prediabetic range), lipid panel mildly elevated"
+      },
+      "assessment": {
+        "diagnoses": ["Obesity (BMI 34.2)", "Prediabetes", "Hyperlipidemia"],
+        "clinicalImpression": "Good candidate for GLP-1 therapy given metabolic comorbidities"
+      },
+      "plan": {
+        "medications": ["Semaglutide 0.25mg weekly x 4 weeks, then titrate"],
+        "instructions": "Inject subcutaneously once weekly. Start with 0.25mg, increase to 0.5mg after 4 weeks if tolerated.",
+        "followUp": "Follow-up in 1 month for dose adjustment"
+      }
+    },
+    {
+      "id": "soap_003",
+      "patientId": "usr_pat005",
+      "authorId": "usr_doc004",
+      "authorType": "PROVIDER",
+      "createdAt": "2024-01-08T10:45:00Z",
+      "subjective": {
+        "chiefComplaint": "Erectile dysfunction",
+        "historyOfPresentIllness": "56yo male with gradual onset ED over past year. Able to achieve partial erections. No morning erections. Denies relationship stress.",
+        "reviewOfSystems": "History of hypertension (controlled), denies chest pain, takes lisinopril 10mg daily"
+      },
+      "objective": {
+        "physicalExam": "Not applicable for telehealth visit. Labs reviewed - testosterone within normal range."
+      },
+      "assessment": {
+        "diagnoses": ["Erectile dysfunction, likely vasculogenic"],
+        "clinicalImpression": "ED likely secondary to vascular changes from hypertension. No contraindication to PDE5 inhibitor."
+      },
+      "plan": {
+        "medications": ["Tadalafil 5mg daily"],
+        "instructions": "Take once daily at same time. May take up to 2 weeks to see full effect.",
+        "followUp": "Follow-up in 4-6 weeks to assess response"
+      }
+    },
+    {
+      "id": "soap_004",
+      "patientId": "usr_pat010",
+      "authorId": "usr_doc003",
+      "authorType": "PROVIDER",
+      "createdAt": "2024-05-12T16:30:00Z",
+      "subjective": {
+        "chiefComplaint": "Weight management - continuing care",
+        "historyOfPresentIllness": "33yo female transferring care, previously on Semaglutide 1.0mg through another provider. Reports good tolerance and 25 lb weight loss over 6 months.",
+        "reviewOfSystems": "No nausea, constipation well-controlled with fiber"
+      },
+      "objective": {
+        "vitalSigns": { "weight": "185 lbs", "height": "5'8\"", "bmi": "28.1" }
+      },
+      "assessment": {
+        "diagnoses": ["Obesity under treatment"],
+        "clinicalImpression": "Good response to GLP-1 therapy. Continue current dose."
+      },
+      "plan": {
+        "medications": ["Semaglutide 1.0mg weekly - continue"],
+        "instructions": "Continue current regimen. Maintain balanced diet and regular exercise.",
+        "followUp": "Follow-up in 3 months"
+      }
+    },
+    {
+      "id": "soap_005",
+      "patientId": "usr_pat012",
+      "authorId": "usr_doc005",
+      "authorType": "PROVIDER",
+      "createdAt": "2024-11-25T10:30:00Z",
+      "subjective": {
+        "chiefComplaint": "Acne and skin texture concerns",
+        "historyOfPresentIllness": "31yo female with persistent adult acne and concerns about skin texture. Has tried OTC products with limited success.",
+        "reviewOfSystems": "Not pregnant, using reliable contraception"
+      },
+      "objective": {
+        "physicalExam": "Photos reviewed - mild inflammatory acne on chin and jawline, some post-inflammatory hyperpigmentation, mild textural irregularities"
+      },
+      "assessment": {
+        "diagnoses": ["Acne vulgaris, mild", "Post-inflammatory hyperpigmentation"],
+        "clinicalImpression": "Good candidate for topical retinoid therapy"
+      },
+      "plan": {
+        "medications": ["Tretinoin 0.025% cream - apply nightly"],
+        "instructions": "Start every other night for 2 weeks, then nightly. Use sunscreen daily. Expect mild peeling initially.",
+        "followUp": "Follow-up in 6-8 weeks to assess tolerance and efficacy"
+      }
+    }
+  ],
+
+  "transactions": [
+    { "id": "txn_001", "orderId": "ord_001", "subscriptionId": "sub_001", "amount": 4871, "status": "SETTLED", "moneyDirection": "IN", "createdAt": "2024-06-15T10:50:00Z" },
+    { "id": "txn_002", "orderId": "ord_001", "subscriptionId": "sub_001", "amount": 4871, "status": "SETTLED", "moneyDirection": "IN", "createdAt": "2024-09-15T10:00:00Z" },
+    { "id": "txn_003", "orderId": "ord_001", "subscriptionId": "sub_001", "amount": 4871, "status": "SETTLED", "moneyDirection": "IN", "createdAt": "2024-12-15T10:00:00Z" },
+    { "id": "txn_004", "orderId": "ord_002", "subscriptionId": "sub_002", "amount": 29130, "status": "SETTLED", "moneyDirection": "IN", "createdAt": "2024-03-10T08:35:00Z" },
+    { "id": "txn_005", "orderId": "ord_002", "subscriptionId": "sub_002", "amount": 29130, "status": "SETTLED", "moneyDirection": "IN", "createdAt": "2024-04-10T08:00:00Z" },
+    { "id": "txn_006", "orderId": "ord_004", "subscriptionId": "sub_003", "amount": 37780, "status": "SETTLED", "moneyDirection": "IN", "createdAt": "2024-07-22T11:20:00Z" },
+    { "id": "txn_007", "orderId": "ord_005", "subscriptionId": "sub_004", "amount": 10717, "status": "SETTLED", "moneyDirection": "IN", "createdAt": "2024-01-08T09:50:00Z" },
+    { "id": "txn_008", "orderId": "ord_005", "subscriptionId": "sub_004", "amount": 10717, "status": "FAILED", "moneyDirection": "IN", "createdAt": "2024-11-08T09:00:00Z", "failureReason": "Card declined" },
+    { "id": "txn_009", "orderId": "ord_007", "subscriptionId": "sub_005", "amount": 6928, "status": "SETTLED", "moneyDirection": "IN", "createdAt": "2024-04-17T14:05:00Z" },
+    { "id": "txn_010", "orderId": "ord_010", "subscriptionId": "sub_006", "amount": 43192, "status": "SETTLED", "moneyDirection": "IN", "createdAt": "2024-05-12T15:50:00Z" },
+    { "id": "txn_011", "orderId": "ord_013", "subscriptionId": "sub_007", "amount": 54017, "status": "SETTLED", "moneyDirection": "IN", "createdAt": "2024-01-25T12:20:00Z" },
+    { "id": "txn_012", "orderId": "ord_015", "subscriptionId": "sub_008", "amount": 8552, "status": "SETTLED", "moneyDirection": "IN", "createdAt": "2024-06-08T14:35:00Z" },
+    { "id": "txn_013", "orderId": "ord_016", "subscriptionId": null, "amount": 37780, "status": "FAILED", "moneyDirection": "IN", "createdAt": "2024-11-20T10:05:00Z", "failureReason": "Insufficient funds" },
+    { "id": "txn_014", "orderId": "ord_019", "subscriptionId": "sub_009", "amount": 4871, "status": "SETTLED", "moneyDirection": "IN", "createdAt": "2024-03-30T11:50:00Z" },
+    { "id": "txn_015", "orderId": "ord_023", "subscriptionId": "sub_010", "amount": 43192, "status": "SETTLED", "moneyDirection": "IN", "createdAt": "2024-04-22T14:20:00Z" },
+    { "id": "txn_016", "orderId": "ord_024", "subscriptionId": null, "amount": 32367, "status": "REFUNDED", "moneyDirection": "OUT", "createdAt": "2024-10-15T12:30:00Z", "refundReason": "Patient cancellation" },
+    { "id": "txn_017", "orderId": "ord_025", "subscriptionId": "sub_011", "amount": 15588, "status": "SETTLED", "moneyDirection": "IN", "createdAt": "2024-05-28T15:20:00Z" }
+  ],
+
+  "discountCodes": [
+    { "id": "dc_001", "code": "WELCOME10", "discountPercent": 10, "active": true, "timesUsed": 156 },
+    { "id": "dc_002", "code": "SAVE10", "discountPercent": 10, "active": true, "timesUsed": 89 },
+    { "id": "dc_003", "code": "NEWYEAR20", "discountPercent": 20, "active": true, "timesUsed": 34 },
+    { "id": "dc_004", "code": "SUMMER15", "discountPercent": 15, "active": false, "timesUsed": 245 },
+    { "id": "dc_005", "code": "FRIEND25", "discountPercent": 25, "active": true, "timesUsed": 12 }
+  ],
+
+  "notifications": [
+    { "id": "notif_001", "userId": "usr_pat005", "type": "PAYMENT_FAILED", "title": "Payment Failed", "message": "Your payment for Tadalafil subscription could not be processed. Please update your payment method.", "read": false, "createdAt": "2024-11-28T09:00:00Z" },
+    { "id": "notif_002", "userId": "usr_pat004", "type": "APPOINTMENT_REMINDER", "title": "Upcoming Appointment", "message": "You have a follow-up appointment with Dr. Patel on Dec 10 at 2:00 PM.", "read": true, "createdAt": "2024-12-08T09:00:00Z" },
+    { "id": "notif_003", "userId": "usr_pat012", "type": "ORDER_SHIPPED", "title": "Your Order Has Shipped", "message": "Your Tretinoin cream is on its way! Track your package with USPS.", "read": true, "createdAt": "2024-12-02T14:00:00Z" },
+    { "id": "notif_004", "userId": "usr_pat013", "type": "REFILL_REMINDER", "title": "Refill Coming Up", "message": "Your Tirzepatide subscription will renew on Dec 25. Make sure your payment method is up to date.", "read": false, "createdAt": "2024-12-18T09:00:00Z" },
+    { "id": "notif_005", "userId": "usr_pat016", "type": "APPOINTMENT_MISSED", "title": "Missed Appointment", "message": "You missed your follow-up appointment on Nov 25. Please reschedule at your convenience.", "read": false, "createdAt": "2024-11-25T16:00:00Z" }
+  ],
+
+  "_summary": {
+    "totalPatients": 25,
+    "patientsByStatus": {
+      "ACTIVE": 17,
+      "AWAITING_REVIEW": 5,
+      "IN_PROGRESS": 3,
+      "NEEDS_ATTENTION": 2,
+      "DEACTIVATED": 1
+    },
+    "totalOrders": 25,
+    "ordersByStatus": {
+      "COMPLETED": 4,
+      "ACTIVE": 9,
+      "AWAITING_REVIEW": 7,
+      "ORDER_SHIPPED": 1,
+      "SENT_TO_PHARMACY": 1,
+      "PAUSED": 1,
+      "FAILED": 1,
+      "CANCELED": 1
+    },
+    "totalSubscriptions": 11,
+    "totalProviders": 5,
+    "totalProducts": 10,
+    "diseaseStateDistribution": {
+      "WEIGHT_LOSS": 12,
+      "HAIR_GROWTH": 8,
+      "SEXUAL_WELLNESS": 4,
+      "SKIN_CARE": 2
+    }
+  }
+}
