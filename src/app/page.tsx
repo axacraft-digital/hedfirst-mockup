@@ -81,18 +81,16 @@ export default function PortalPickerPage() {
                   >
                     <portal.icon className="h-6 w-6" />
                   </div>
-                  <div className="flex items-center gap-2">
-                    <CardTitle className="text-xl">{portal.title}</CardTitle>
-                    {portal.disabled ? (
-                      <Badge variant="secondary" className="text-xs">
-                        Coming Soon
-                      </Badge>
-                    ) : (
-                      <Badge className="bg-emerald-500/10 text-emerald-600 hover:bg-emerald-500/10 dark:text-emerald-400 text-xs">
-                        Ready to Review
-                      </Badge>
-                    )}
-                  </div>
+                  <CardTitle className="text-xl">{portal.title}</CardTitle>
+                  {portal.disabled ? (
+                    <Badge variant="secondary" className="text-xs w-fit">
+                      Coming Soon
+                    </Badge>
+                  ) : (
+                    <Badge className="bg-emerald-500/10 text-emerald-600 hover:bg-emerald-500/10 dark:text-emerald-400 text-xs w-fit">
+                      Ready to Review
+                    </Badge>
+                  )}
                   <CardDescription>
                     {portal.description}
                   </CardDescription>
