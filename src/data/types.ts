@@ -652,6 +652,7 @@ export interface StoreUser {
   role: StoreUserRole
   status: StoreUserStatus
   createdAt: string
+  lastLoginAt: string | null // null if user has never logged in
 }
 
 // ============================================================================
@@ -707,6 +708,37 @@ export interface IntegrationStatusRecord {
   connectionTest: IntegrationConnectionTest | null
   issue?: IntegrationIssue
   usage?: IntegrationUsage
+}
+
+// ============================================================================
+// Lab Kit (Choose Health Integration)
+// ============================================================================
+
+export type LabKitCategory =
+  | "Metabolic"
+  | "Liver"
+  | "Endocrine"
+  | "Female Hormone"
+  | "Male Hormone"
+
+export interface LabKitCatalog {
+  source: string
+  version: string
+  lastUpdated: string
+  collectionMethod: string
+}
+
+export interface LabKit {
+  id: string
+  name: string
+  category: LabKitCategory
+  description: string
+  focus: string
+  biomarkerCount: number
+  biomarkers: string[]
+  price?: number // in cents
+  sku?: string
+  onStore?: boolean
 }
 
 // ============================================================================

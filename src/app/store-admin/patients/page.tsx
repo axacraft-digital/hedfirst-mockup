@@ -30,6 +30,7 @@ import {
 } from "@/data"
 import type { Patient, PatientStatus } from "@/data/types"
 import { columns } from "./components/patients-columns"
+import { CreatePatientDrawer } from "./components/create-patient-drawer"
 import { PatientsTable } from "./components/patients-table"
 
 type TabValue = "all" | PatientStatus
@@ -71,6 +72,7 @@ const tabs: TabConfig[] = [
 export default function PatientsPage() {
   const [activeTab, setActiveTab] = useState<TabValue>("all")
   const [selectedProvider, setSelectedProvider] = useState<string>("all")
+  const [createDrawerOpen, setCreateDrawerOpen] = useState(false)
 
   // Filter patients by provider first
   const providerFilteredPatients = useMemo(() => {
@@ -128,7 +130,7 @@ export default function PatientsPage() {
                   </SelectGroup>
                 </SelectContent>
               </Select>
-              <Button className="space-x-1">
+              <Button className="space-x-1" onClick={() => setCreateDrawerOpen(true)}>
                 <span>Create Patient</span>
                 <IconUserPlus size={18} />
               </Button>
@@ -160,6 +162,8 @@ export default function PatientsPage() {
           ))}
         </Tabs>
       </div>
+
+      <CreatePatientDrawer open={createDrawerOpen} setOpen={setCreateDrawerOpen} />
     </>
   )
 }

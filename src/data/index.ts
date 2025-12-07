@@ -7,6 +7,8 @@ import type {
   IntegrationCategory,
   IntegrationStatus,
   IntegrationStatusRecord,
+  LabKit,
+  LabKitCatalog,
   Order,
   OrderStatus,
   Patient,
@@ -47,6 +49,7 @@ import paymentHistoryJson from "./mock/financial/payment-history.json"
 import documentsJson from "./mock/documents/documents.json"
 import activityHistoryJson from "./mock/audit/activity-history.json"
 import integrationStatusJson from "./mock/integrations/status.json"
+import labKitsJson from "./mock/reference/lab-kits.json"
 
 // Typed exports from discrete files (currently empty, will be populated in Phase 2+)
 export const diseaseStateEntities = diseaseStatesJson as DiseaseStateEntity[]
@@ -68,6 +71,8 @@ export const mockPaymentHistory = paymentHistoryJson as PaymentTransaction[]
 export const mockDocuments = documentsJson as unknown[] // PatientDocument - already in documents.ts
 export const mockActivityHistory = activityHistoryJson as ActivityEvent[]
 export const mockIntegrationStatus = integrationStatusJson as IntegrationStatusRecord[]
+export const labKitCatalog = labKitsJson.catalog as LabKitCatalog
+export const mockLabKits = labKitsJson.labKits as LabKit[]
 
 // ============================================================================
 // Patient Helpers
@@ -418,6 +423,26 @@ export function getIntegrationDashboardSummary(): {
     }))
 
   return { total, connected, issues, notConfigured, issueDetails }
+}
+
+// ============================================================================
+// Lab Kit Helpers
+// ============================================================================
+
+export function getLabKitById(id: string): LabKit | undefined {
+  return mockLabKits.find((kit) => kit.id === id)
+}
+
+export function getLabKitsByCategory(category: string): LabKit[] {
+  return mockLabKits.filter((kit) => kit.category === category)
+}
+
+export function getLabKitsOnStore(): LabKit[] {
+  return mockLabKits.filter((kit) => kit.onStore)
+}
+
+export function getLabKitCategories(): string[] {
+  return [...new Set(mockLabKits.map((kit) => kit.category))]
 }
 
 // ============================================================================

@@ -2,7 +2,6 @@ import {
   IconBox,
   IconBrain,
   IconCreditCard,
-  IconDiscount,
   IconLayoutDashboard,
   IconMessage,
   IconPill,
@@ -10,17 +9,20 @@ import {
   IconReceipt,
   IconSettings,
   IconStethoscope,
-  IconTruck,
   IconUsers,
   IconUserShield,
 } from "@tabler/icons-react"
 import { Building2 } from "lucide-react"
+import { mockStoreUsers, getStoreUserFullName } from "@/data"
 import { type SidebarData } from "../types"
+
+// Get the current logged-in admin user from shared data
+const currentUser = mockStoreUsers.find((u) => u.role === "admin") ?? mockStoreUsers[0]
 
 export const storeAdminSidebar: SidebarData = {
   user: {
-    name: "Admin User",
-    email: "admin@hedfirst.com",
+    name: getStoreUserFullName(currentUser),
+    email: currentUser.email,
     avatar: "/avatars/avatar-3.png",
   },
   teams: [
@@ -103,21 +105,24 @@ export const storeAdminSidebar: SidebarData = {
         },
         {
           title: "Billing",
-          url: "/store-admin/billing",
           icon: IconCreditCard,
+          items: [
+            {
+              title: "Plan",
+              url: "/store-admin/billing/plan",
+            },
+            {
+              title: "Payment Method",
+              url: "/store-admin/billing/payment",
+            },
+            {
+              title: "Invoices",
+              url: "/store-admin/billing/invoices",
+            },
+          ],
         },
         {
-          title: "Shipping",
-          url: "/store-admin/shipping",
-          icon: IconTruck,
-        },
-        {
-          title: "Discount Codes",
-          url: "/store-admin/discounts",
-          icon: IconDiscount,
-        },
-        {
-          title: "Hedfirst AI",
+          title: "Teligant AI",
           url: "/store-admin/ai",
           icon: IconBrain,
         },

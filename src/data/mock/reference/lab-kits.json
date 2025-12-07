@@ -1,0 +1,346 @@
+{
+  "catalog": {
+    "source": "Choose Health",
+    "version": "1.0",
+    "lastUpdated": "2025-01-01",
+    "collectionMethod": "finger-prick blood test"
+  },
+  "labKits": [
+    {
+      "id": "lab_core-metabolic",
+      "name": "Core Metabolic Test",
+      "category": "Metabolic",
+      "description": "Tests 7 key biomarkers linked to overall metabolic health & function.",
+      "focus": "metabolic",
+      "biomarkerCount": 7,
+      "biomarkers": [
+        "Lipids (Total Cholesterol, HDL, LDL, Triglycerides)",
+        "Insulin Resistance (HOMA-IR)",
+        "HbA1c (Average Blood Sugars)",
+        "hsCRP (Inflammation)",
+        "Glucose",
+        "Visceral Fat Index"
+      ],
+      "price": 12900,
+      "sku": "LAB-CORE-METAB",
+      "onStore": true
+    },
+    {
+      "id": "lab_comprehensive-metabolic",
+      "name": "Comprehensive Metabolic Test",
+      "category": "Metabolic",
+      "description": "Tests 14 key biomarkers linked to metabolic function.",
+      "focus": "metabolic",
+      "biomarkerCount": 14,
+      "biomarkers": [
+        "Vitamin D (25-OH)",
+        "Lipids (Total Cholesterol, HDL, LDL, Triglycerides)",
+        "Insulin Resistance (HOMA-IR)",
+        "HbA1c (Average Blood Sugars)",
+        "hsCRP (Inflammation)",
+        "Glucose",
+        "AST",
+        "ALT",
+        "GGT",
+        "Creatinine",
+        "eGFR",
+        "Visceral Fat Index"
+      ],
+      "price": 19900,
+      "sku": "LAB-COMP-METAB",
+      "onStore": true
+    },
+    {
+      "id": "lab_liver-function",
+      "name": "Liver Function Test",
+      "category": "Liver",
+      "description": "Tests 7 biomarkers tied to liver health & function.",
+      "focus": "liver",
+      "biomarkerCount": 7,
+      "biomarkers": [
+        "AST (Aspartate Aminotransferase)",
+        "ALT (Alanine Aminotransferase)",
+        "ALP (Alkaline Phosphatase)",
+        "GGT (Gamma-Glutamyl Transferase)",
+        "Bilirubin (Total)",
+        "Albumin",
+        "Total Protein"
+      ],
+      "price": 9900,
+      "sku": "LAB-LIVER",
+      "onStore": true
+    },
+    {
+      "id": "lab_methylation-screening",
+      "name": "Methylation Screening Test",
+      "category": "Metabolic",
+      "description": "Measures 3 biomarkers related to methylation health.",
+      "focus": "methylation",
+      "biomarkerCount": 3,
+      "biomarkers": [
+        "Homocysteine",
+        "Folate (Vitamin B9)",
+        "Vitamin B12"
+      ],
+      "price": 7900,
+      "sku": "LAB-METHYL",
+      "onStore": true
+    },
+    {
+      "id": "lab_kidney-function",
+      "name": "Kidney Function Test",
+      "category": "Metabolic",
+      "description": "Tests 6 biomarkers linked to kidney health.",
+      "focus": "kidney wellness",
+      "biomarkerCount": 6,
+      "biomarkers": [
+        "BUN (Blood Urea Nitrogen)",
+        "Creatinine",
+        "eGFR (Estimated Glomerular Filtration Rate)",
+        "Albumin",
+        "Uric Acid",
+        "Cystatin C"
+      ],
+      "price": 8900,
+      "sku": "LAB-KIDNEY",
+      "onStore": true
+    },
+    {
+      "id": "lab_pancreatic-health",
+      "name": "Pancreatic Health & Function Test",
+      "category": "Metabolic",
+      "description": "Measures 2 biomarkers reflecting pancreatic function.",
+      "focus": "pancreatic",
+      "biomarkerCount": 2,
+      "biomarkers": [
+        "Lipase",
+        "Amylase"
+      ],
+      "price": 5900,
+      "sku": "LAB-PANCREAS",
+      "onStore": true
+    },
+    {
+      "id": "lab_thyroid-function",
+      "name": "Thyroid Function Test",
+      "category": "Endocrine",
+      "description": "Tests 4 biomarkers related to thyroid health.",
+      "focus": "thyroid",
+      "biomarkerCount": 4,
+      "biomarkers": [
+        "TSH (Thyroid Stimulating Hormone)",
+        "Free T4 (Thyroxine)",
+        "Free T3 (Triiodothyronine)",
+        "TPO Antibodies (Thyroid Peroxidase)"
+      ],
+      "price": 9900,
+      "sku": "LAB-THYROID",
+      "onStore": true
+    },
+    {
+      "id": "lab_adrenal-health",
+      "name": "Adrenal Health & Function Test",
+      "category": "Endocrine",
+      "description": "Measures 4 biomarkers linked to adrenal performance.",
+      "focus": "adrenal",
+      "biomarkerCount": 4,
+      "biomarkers": [
+        "Cortisol",
+        "DHEA-S (Dehydroepiandrosterone Sulfate)",
+        "Aldosterone",
+        "Pregnenolone"
+      ],
+      "price": 11900,
+      "sku": "LAB-ADRENAL",
+      "onStore": true
+    },
+    {
+      "id": "lab_complete-female-hormone",
+      "name": "Complete Female Hormone Test",
+      "category": "Female Hormone",
+      "description": "Measures 6 hormones tied to female hormone balance.",
+      "focus": "female hormone evaluation",
+      "biomarkerCount": 6,
+      "biomarkers": [
+        "Estradiol (E2)",
+        "Progesterone",
+        "Total Testosterone",
+        "FSH (Follicle Stimulating Hormone)",
+        "LH (Luteinizing Hormone)",
+        "DHEA-S"
+      ],
+      "price": 14900,
+      "sku": "LAB-FEM-HORMONE",
+      "onStore": true
+    },
+    {
+      "id": "lab_female-hormone",
+      "name": "Female Hormone Test",
+      "category": "Female Hormone",
+      "description": "Measures 6 biomarkers and hormones.",
+      "focus": "female hormone health",
+      "biomarkerCount": 6,
+      "biomarkers": [
+        "Estradiol (E2)",
+        "Progesterone",
+        "FSH (Follicle Stimulating Hormone)",
+        "LH (Luteinizing Hormone)",
+        "Testosterone",
+        "SHBG (Sex Hormone Binding Globulin)"
+      ],
+      "price": 12900,
+      "sku": "LAB-FEM-BASIC",
+      "onStore": true
+    },
+    {
+      "id": "lab_male-hormone",
+      "name": "Male Hormone Test",
+      "category": "Male Hormone",
+      "description": "Tests 7 biomarkers and hormones associated with male hormone health.",
+      "focus": "male hormone",
+      "biomarkerCount": 7,
+      "biomarkers": [
+        "Total Testosterone",
+        "Free Testosterone",
+        "SHBG (Sex Hormone Binding Globulin)",
+        "Estradiol (E2)",
+        "FSH (Follicle Stimulating Hormone)",
+        "LH (Luteinizing Hormone)",
+        "DHEA-S"
+      ],
+      "price": 14900,
+      "sku": "LAB-MALE-HORMONE",
+      "onStore": true
+    },
+    {
+      "id": "lab_male-wellness",
+      "name": "Male Wellness Test",
+      "category": "Male Hormone",
+      "description": "Comprehensive male wellness panel with 12 biomarkers.",
+      "focus": "male wellness",
+      "biomarkerCount": 12,
+      "biomarkers": [
+        "Total Testosterone",
+        "Free Testosterone",
+        "SHBG (Sex Hormone Binding Globulin)",
+        "Estradiol (E2)",
+        "FSH (Follicle Stimulating Hormone)",
+        "LH (Luteinizing Hormone)",
+        "DHEA-S",
+        "PSA (Prostate Specific Antigen)",
+        "Cortisol",
+        "Vitamin D (25-OH)",
+        "TSH",
+        "hsCRP (Inflammation)"
+      ],
+      "price": 24900,
+      "sku": "LAB-MALE-WELLNESS",
+      "onStore": true
+    },
+    {
+      "id": "lab_female-wellness",
+      "name": "Female Wellness Test",
+      "category": "Female Hormone",
+      "description": "Comprehensive female wellness panel measuring 12 biomarkers.",
+      "focus": "female wellness",
+      "biomarkerCount": 12,
+      "biomarkers": [
+        "Estradiol (E2)",
+        "Progesterone",
+        "FSH (Follicle Stimulating Hormone)",
+        "LH (Luteinizing Hormone)",
+        "Testosterone",
+        "SHBG (Sex Hormone Binding Globulin)",
+        "DHEA-S",
+        "TSH",
+        "Cortisol",
+        "Vitamin D (25-OH)",
+        "hsCRP (Inflammation)",
+        "Ferritin"
+      ],
+      "price": 24900,
+      "sku": "LAB-FEM-WELLNESS",
+      "onStore": true
+    },
+    {
+      "id": "lab_female-fertility-ovarian-reserve",
+      "name": "Female Fertility & Ovarian Reserve Test",
+      "category": "Female Hormone",
+      "description": "Measures 7 hormones used to assess ovarian reserve.",
+      "focus": "fertility",
+      "biomarkerCount": 7,
+      "biomarkers": [
+        "AMH (Anti-Müllerian Hormone)",
+        "FSH (Follicle Stimulating Hormone)",
+        "LH (Luteinizing Hormone)",
+        "Estradiol (E2)",
+        "Progesterone",
+        "TSH",
+        "Prolactin"
+      ],
+      "price": 17900,
+      "sku": "LAB-FERTILITY",
+      "onStore": true
+    },
+    {
+      "id": "lab_testosterone-metabolic",
+      "name": "Testosterone & Metabolic Test",
+      "category": "Metabolic",
+      "description": "Measures 7 biomarkers linked to testosterone and metabolic health.",
+      "focus": "testosterone + metabolic",
+      "biomarkerCount": 7,
+      "biomarkers": [
+        "Total Testosterone",
+        "Free Testosterone",
+        "SHBG (Sex Hormone Binding Globulin)",
+        "Glucose",
+        "HbA1c",
+        "Lipids (Total Cholesterol, HDL, LDL, Triglycerides)",
+        "hsCRP (Inflammation)"
+      ],
+      "price": 15900,
+      "sku": "LAB-TEST-METAB",
+      "onStore": true
+    },
+    {
+      "id": "lab_vitamin-d-metabolic",
+      "name": "Vitamin D & Metabolic Test",
+      "category": "Metabolic",
+      "description": "Measures vitamin D–related biomarkers with metabolic indicators.",
+      "focus": "vitamin D + metabolic",
+      "biomarkerCount": 7,
+      "biomarkers": [
+        "Vitamin D (25-OH)",
+        "Calcium",
+        "Magnesium",
+        "Glucose",
+        "HbA1c",
+        "Lipids (Total Cholesterol, HDL, LDL, Triglycerides)",
+        "hsCRP (Inflammation)"
+      ],
+      "price": 13900,
+      "sku": "LAB-VITD-METAB",
+      "onStore": true
+    },
+    {
+      "id": "lab_thyroid-metabolic",
+      "name": "Thyroid & Metabolic Test",
+      "category": "Endocrine",
+      "description": "Measures 7 biomarkers tied to thyroid + metabolic interaction.",
+      "focus": "thyroid + metabolic",
+      "biomarkerCount": 7,
+      "biomarkers": [
+        "TSH (Thyroid Stimulating Hormone)",
+        "Free T4 (Thyroxine)",
+        "Free T3 (Triiodothyronine)",
+        "Glucose",
+        "HbA1c",
+        "Lipids (Total Cholesterol, HDL, LDL, Triglycerides)",
+        "hsCRP (Inflammation)"
+      ],
+      "price": 14900,
+      "sku": "LAB-THYROID-METAB",
+      "onStore": true
+    }
+  ]
+}

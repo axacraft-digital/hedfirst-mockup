@@ -11,8 +11,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Shadcnblocks - Admin Kit",
-  description: "Shadcnblocks - Admin Kit built with NextJS",
+  title: "Teligant Admin",
+  description: "Teligant - Enterprise Telehealth Platform",
 }
 
 export default function RootLayout({

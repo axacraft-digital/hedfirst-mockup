@@ -91,21 +91,29 @@ export default function ProductsPage() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-[180px]">
-                <DropdownMenuItem>
-                  <IconPill className="mr-2 h-4 w-4" />
-                  Physical Product
+                <DropdownMenuItem asChild>
+                  <Link href="/store-admin/products/new/physical-product">
+                    <IconPill className="mr-2 h-4 w-4" />
+                    Physical Product
+                  </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <IconMessageCircle className="mr-2 h-4 w-4" />
-                  Service
+                <DropdownMenuItem asChild>
+                  <Link href="/store-admin/products/new/service">
+                    <IconMessageCircle className="mr-2 h-4 w-4" />
+                    Service
+                  </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <IconUser className="mr-2 h-4 w-4" />
-                  Membership
+                <DropdownMenuItem asChild>
+                  <Link href="/store-admin/products/new/membership">
+                    <IconUser className="mr-2 h-4 w-4" />
+                    Membership
+                  </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <IconTestPipe className="mr-2 h-4 w-4" />
-                  Lab Test
+                <DropdownMenuItem asChild>
+                  <Link href="/store-admin/products/new/lab-test">
+                    <IconTestPipe className="mr-2 h-4 w-4" />
+                    Lab Test
+                  </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

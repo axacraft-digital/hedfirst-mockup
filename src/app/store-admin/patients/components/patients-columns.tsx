@@ -2,19 +2,10 @@
 
 import { format } from "date-fns"
 import { ColumnDef } from "@tanstack/react-table"
-import { IconDotsVertical } from "@tabler/icons-react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import LongText from "@/components/long-text"
 import { mockOrders, mockProviders, getProviderDisplayName } from "@/data"
 import type { Patient } from "@/data/types"
@@ -60,36 +51,6 @@ function getStatusStyle(status: Patient["patientStatus"]) {
 
 export const columns: ColumnDef<Patient>[] = [
   {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-        className="translate-y-[2px]"
-      />
-    ),
-    meta: {
-      className: cn(
-        "sticky md:table-cell left-0 z-10 rounded-tl",
-        "bg-background transition-colors duration-200 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted"
-      ),
-    },
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-        className="translate-y-[2px]"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
     id: "fullName",
     accessorFn: (row) => `${row.firstName} ${row.lastName}`,
     header: ({ column }) => (
@@ -99,11 +60,7 @@ export const columns: ColumnDef<Patient>[] = [
       const { firstName, lastName } = row.original
       const fullName = `${firstName} ${lastName}`
       return (
-        <Button variant="link" className="h-auto p-0 font-medium" asChild>
-          <Link href={`/store-admin/patients/${row.original.id}`}>
-            <LongText className="max-w-36">{fullName}</LongText>
-          </Link>
-        </Button>
+        <LongText className="max-w-36 font-medium">{fullName}</LongText>
       )
     },
     meta: { className: "w-40" },
@@ -182,24 +139,16 @@ export const columns: ColumnDef<Patient>[] = [
   },
   {
     id: "actions",
-    header: "Actions",
-    cell: () => {
+    header: () => <div className="text-right">Actions</div>,
+    cell: ({ row }) => {
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <IconDotsVertical className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem>Send Message</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-destructive">
-              Deactivate Patient
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="text-right">
+          <Button variant="outline" size="sm" asChild>
+            <Link href={`/store-admin/patients/${row.original.id}`}>
+              View Details
+            </Link>
+          </Button>
+        </div>
       )
     },
   },

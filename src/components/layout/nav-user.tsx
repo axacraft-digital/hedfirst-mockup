@@ -2,9 +2,7 @@
 
 import {
   BadgeCheck,
-  Bell,
   ChevronsUpDown,
-  CreditCard,
   LogOut,
 } from "lucide-react"
 import Link from "next/link"
@@ -31,9 +29,10 @@ interface Props {
     email: string
     avatar: string
   }
+  profileUrl?: string
 }
 
-export function NavUser({ user }: Props) {
+export function NavUser({ user, profileUrl = "/settings/profile" }: Props) {
   const { isMobile } = useSidebar()
 
   return (
@@ -77,21 +76,9 @@ export function NavUser({ user }: Props) {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem asChild>
-                <Link href="/settings/profile">
+                <Link href={profileUrl}>
                   <BadgeCheck />
                   Profile
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/settings/billing">
-                  <CreditCard />
-                  Billing
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/settings/notifications">
-                  <Bell />
-                  Notifications
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>

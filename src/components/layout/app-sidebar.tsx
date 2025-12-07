@@ -29,8 +29,15 @@ const portalSidebarMap = {
   "store-admin": storeAdminSidebar,
 }
 
+const portalProfileUrlMap: Record<PortalType, string> = {
+  "patient-admin": "/patient-admin/profile",
+  "provider-admin": "/provider-admin/profile",
+  "store-admin": "/store-admin/profile",
+}
+
 export function AppSidebar({ portal, ...props }: AppSidebarProps) {
   const sidebarData = portal ? portalSidebarMap[portal] : defaultSidebarData
+  const profileUrl = portal ? portalProfileUrlMap[portal] : "/settings/profile"
   return (
     <div className="relative">
       <Sidebar collapsible="icon" {...props}>
@@ -43,7 +50,7 @@ export function AppSidebar({ portal, ...props }: AppSidebarProps) {
           ))}
         </SidebarContent>
         <SidebarFooter>
-          <NavUser user={sidebarData.user} />
+          <NavUser user={sidebarData.user} profileUrl={profileUrl} />
         </SidebarFooter>
         <SidebarRail />
       </Sidebar>
