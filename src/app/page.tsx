@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 
 const portals = [
   {
@@ -17,6 +18,7 @@ const portals = [
     icon: Heart,
     gradient: "from-rose-500/10 to-rose-500/5",
     iconColor: "text-rose-500",
+    disabled: true,
   },
   {
     title: "Provider Portal",
@@ -25,6 +27,7 @@ const portals = [
     icon: Stethoscope,
     gradient: "from-blue-500/10 to-blue-500/5",
     iconColor: "text-blue-500",
+    disabled: true,
   },
   {
     title: "Store Admin",
@@ -33,6 +36,7 @@ const portals = [
     icon: Building2,
     gradient: "from-violet-500/10 to-violet-500/5",
     iconColor: "text-violet-500",
+    disabled: false,
   },
 ]
 
@@ -47,24 +51,56 @@ export default function PortalPickerPage() {
       </div>
 
       <div className="grid w-full max-w-4xl gap-6 md:grid-cols-3">
-        {portals.map((portal) => (
-          <Link key={portal.href} href={portal.href}>
-            <Card className="group relative h-full overflow-hidden transition-all hover:shadow-lg hover:shadow-primary/5">
-              <div
-                className={`absolute inset-0 bg-gradient-to-br ${portal.gradient} opacity-0 transition-opacity group-hover:opacity-100`}
-              />
-              <CardHeader className="relative">
+        {portals.map((portal) => {
+          const CardWrapper = portal.disabled ? "div" : Link
+          const wrapperProps = portal.disabled
+            ? {}
+            : { href: portal.href }
+
+          return (
+            <CardWrapper key={portal.href} {...wrapperProps}>
+              <Card
+                className={`group relative h-full overflow-hidden transition-all ${
+                  portal.disabled
+                    ? "cursor-not-allowed opacity-50"
+                    : "hover:shadow-lg hover:shadow-primary/5"
+                }`}
+              >
                 <div
-                  className={`mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-muted ${portal.iconColor}`}
-                >
-                  <portal.icon className="h-6 w-6" />
-                </div>
-                <CardTitle className="text-xl">{portal.title}</CardTitle>
-                <CardDescription>{portal.description}</CardDescription>
-              </CardHeader>
-            </Card>
-          </Link>
-        ))}
+                  className={`absolute inset-0 bg-gradient-to-br ${portal.gradient} opacity-0 transition-opacity ${
+                    portal.disabled ? "" : "group-hover:opacity-100"
+                  }`}
+                />
+                <CardHeader className="relative">
+                  <div
+                    className={`mb-4 flex h-12 w-12 items-center justify-center rounded-lg ${
+                      portal.disabled
+                        ? "bg-muted text-muted-foreground"
+                        : `bg-muted ${portal.iconColor}`
+                    }`}
+                  >
+                    <portal.icon className="h-6 w-6" />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CardTitle className="text-xl">{portal.title}</CardTitle>
+                    {portal.disabled ? (
+                      <Badge variant="secondary" className="text-xs">
+                        Coming Soon
+                      </Badge>
+                    ) : (
+                      <Badge className="bg-emerald-500/10 text-emerald-600 hover:bg-emerald-500/10 dark:text-emerald-400 text-xs">
+                        Ready to Review
+                      </Badge>
+                    )}
+                  </div>
+                  <CardDescription>
+                    {portal.description}
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </CardWrapper>
+          )
+        })}
       </div>
 
       <p className="mt-12 text-sm text-muted-foreground">
