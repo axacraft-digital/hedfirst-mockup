@@ -24,8 +24,8 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Header } from "@/components/layout/header"
 import {
-  patients,
-  providers,
+  mockPatients,
+  mockProviders,
   getProviderDisplayName,
 } from "@/data"
 import type { Patient, PatientStatus } from "@/data/types"
@@ -74,8 +74,8 @@ export default function PatientsPage() {
 
   // Filter patients by provider first
   const providerFilteredPatients = useMemo(() => {
-    if (selectedProvider === "all") return patients
-    return patients.filter((p) => p.assignedProviderId === selectedProvider)
+    if (selectedProvider === "all") return mockPatients
+    return mockPatients.filter((p) => p.assignedProviderId === selectedProvider)
   }, [selectedProvider])
 
   // Then filter by tab/status
@@ -120,7 +120,7 @@ export default function PatientsPage() {
                   <SelectGroup>
                     <SelectLabel>Provider</SelectLabel>
                     <SelectItem value="all">All Providers</SelectItem>
-                    {providers.map((provider) => (
+                    {mockProviders.map((provider) => (
                       <SelectItem key={provider.id} value={provider.id}>
                         {getProviderDisplayName(provider)}
                       </SelectItem>
