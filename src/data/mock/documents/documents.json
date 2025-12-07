@@ -1,0 +1,164 @@
+[
+  {
+    "id": "doc_jacob_001",
+    "patientId": "usr_pat_jacob",
+    "name": "Peptide Therapy Intake Questionnaire",
+    "uploadedAt": "2025-11-16T17:30:00Z",
+    "source": "Questionnaire Response",
+    "fileType": "pdf",
+    "fileSize": 245000
+  },
+  {
+    "id": "doc_jacob_002",
+    "patientId": "usr_pat_jacob",
+    "name": "Medical History Questionnaire",
+    "uploadedAt": "2025-11-16T17:45:00Z",
+    "source": "Questionnaire Response",
+    "fileType": "pdf",
+    "fileSize": 312000
+  },
+  {
+    "id": "doc_jacob_003",
+    "patientId": "usr_pat_jacob",
+    "name": "Lifestyle & Fitness Assessment",
+    "uploadedAt": "2025-11-16T17:50:00Z",
+    "source": "Questionnaire Response",
+    "fileType": "pdf",
+    "fileSize": 189000
+  },
+  {
+    "id": "doc_jacob_004",
+    "patientId": "usr_pat_jacob",
+    "name": "Previous Lab Results - Hormone Panel",
+    "uploadedAt": "2025-11-16T18:00:00Z",
+    "source": "Patient Upload",
+    "fileType": "pdf",
+    "fileSize": 1240000
+  },
+  {
+    "id": "doc_jacob_005",
+    "patientId": "usr_pat_jacob",
+    "name": "Consent for Peptide Therapy",
+    "uploadedAt": "2025-11-17T08:30:00Z",
+    "source": "System Generated",
+    "fileType": "pdf",
+    "fileSize": 98000
+  },
+  {
+    "id": "doc_jacob_006",
+    "patientId": "usr_pat_jacob",
+    "name": "Weight Management Intake Questionnaire",
+    "uploadedAt": "2025-12-01T14:00:00Z",
+    "source": "Questionnaire Response",
+    "fileType": "pdf",
+    "fileSize": 156000
+  },
+  {
+    "id": "doc_jacob_007",
+    "patientId": "usr_pat_jacob",
+    "name": "Consent for GLP-1 Therapy",
+    "uploadedAt": "2025-12-01T15:30:00Z",
+    "source": "System Generated",
+    "fileType": "pdf",
+    "fileSize": 102000
+  },
+  {
+    "id": "doc_101",
+    "patientId": "usr_pat001",
+    "name": "Hair Loss Intake Questionnaire",
+    "uploadedAt": "2024-06-14T10:35:00Z",
+    "source": "Questionnaire Response",
+    "fileType": "pdf",
+    "fileSize": 234000
+  },
+  {
+    "id": "doc_102",
+    "patientId": "usr_pat001",
+    "name": "Medical History Questionnaire",
+    "uploadedAt": "2024-06-14T10:45:00Z",
+    "source": "Questionnaire Response",
+    "fileType": "pdf",
+    "fileSize": 287000
+  },
+  {
+    "id": "doc_103",
+    "patientId": "usr_pat001",
+    "name": "Previous Dermatology Records",
+    "uploadedAt": "2024-06-15T11:20:00Z",
+    "source": "EHR Import",
+    "fileType": "pdf",
+    "fileSize": 2450000
+  },
+  {
+    "id": "doc_104",
+    "patientId": "usr_pat001",
+    "name": "Consent for Treatment",
+    "uploadedAt": "2024-06-15T11:30:00Z",
+    "source": "System Generated",
+    "fileType": "pdf",
+    "fileSize": 98000
+  },
+  {
+    "id": "doc_105",
+    "patientId": "usr_pat001",
+    "name": "Progress Photos - Baseline",
+    "uploadedAt": "2024-06-15T11:35:00Z",
+    "source": "Patient Upload",
+    "fileType": "pdf",
+    "fileSize": 3100000
+  },
+  {
+    "id": "doc_106",
+    "patientId": "usr_pat001",
+    "name": "Follow-up Questionnaire - Month 3",
+    "uploadedAt": "2024-09-16T14:00:00Z",
+    "source": "Questionnaire Response",
+    "fileType": "pdf",
+    "fileSize": 198000
+  },
+  {
+    "id": "doc_107",
+    "patientId": "usr_pat001",
+    "name": "Progress Photos - September",
+    "uploadedAt": "2024-09-16T14:25:00Z",
+    "source": "Patient Upload",
+    "fileType": "pdf",
+    "fileSize": 3200000
+  },
+  {
+    "id": "doc_108",
+    "patientId": "usr_pat001",
+    "name": "Follow-up Questionnaire - Month 6",
+    "uploadedAt": "2024-12-02T10:00:00Z",
+    "source": "Questionnaire Response",
+    "fileType": "pdf",
+    "fileSize": 205000
+  },
+  {
+    "id": "doc_109",
+    "patientId": "usr_pat001",
+    "name": "Progress Photos - December",
+    "uploadedAt": "2024-12-02T10:30:00Z",
+    "source": "Patient Upload",
+    "fileType": "pdf",
+    "fileSize": 3450000
+  },
+  {
+    "id": "doc_201",
+    "patientId": "usr_pat002",
+    "name": "Sexual Wellness Intake Questionnaire",
+    "uploadedAt": "2025-12-01T09:20:00Z",
+    "source": "Questionnaire Response",
+    "fileType": "pdf",
+    "fileSize": 267000
+  },
+  {
+    "id": "doc_202",
+    "patientId": "usr_pat002",
+    "name": "Medical History Questionnaire",
+    "uploadedAt": "2025-12-01T09:25:00Z",
+    "source": "Questionnaire Response",
+    "fileType": "pdf",
+    "fileSize": 298000
+  }
+]

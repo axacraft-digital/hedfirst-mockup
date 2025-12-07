@@ -37,13 +37,29 @@ export type AppointmentStatus =
   | "COMPLETED"
   | "CANCELLED"
 
-export type DiseaseState =
+export type DiseaseStateCode =
   | "HAIR_GROWTH"
   | "WEIGHT_LOSS"
   | "SEXUAL_WELLNESS"
   | "SKIN_CARE"
   | "GENERAL_HEALTH"
   | "MENTAL_HEALTH"
+  | "PEPTIDE_THERAPY"
+
+// Legacy alias for backwards compatibility
+export type DiseaseState = DiseaseStateCode
+
+// ============================================================================
+// Disease State Entity (Reference Data)
+// ============================================================================
+
+export interface DiseaseStateEntity {
+  id: string // e.g., "ds_peptide", "ds_weight"
+  code: DiseaseStateCode
+  name: string // e.g., "Peptide Therapy", "Weight Management"
+  description: string
+  active: boolean
+}
 
 export type ProductType =
   | "PHYSICAL_PRODUCT"
@@ -272,6 +288,7 @@ export interface Message {
   type: string
   senderId: string
   createdAt: string
+  read?: boolean
 }
 
 export interface Conversation {
@@ -325,6 +342,93 @@ export interface SoapNote {
 }
 
 // ============================================================================
+// Questionnaire
+// ============================================================================
+
+export type QuestionnaireStatus = "PENDING" | "COMPLETED" | "EXPIRED"
+
+export interface QuestionnaireQuestion {
+  id: string
+  text: string
+  type: "TEXT" | "SINGLE_CHOICE" | "MULTI_CHOICE" | "DATE" | "FILE_UPLOAD"
+  options?: string[]
+  required: boolean
+}
+
+export interface QuestionnaireAnswer {
+  questionId: string
+  value: string | string[]
+  fileUrl?: string
+}
+
+export interface Questionnaire {
+  id: string
+  patientId: string
+  type: string // e.g., "INTAKE", "FOLLOW_UP", "LIFESTYLE"
+  title: string
+  diseaseStateId?: string
+  status: QuestionnaireStatus
+  version: string
+  questions: QuestionnaireQuestion[]
+  answers: QuestionnaireAnswer[]
+  submittedAt?: string
+  createdAt: string
+}
+
+// ============================================================================
+// Treatment
+// ============================================================================
+
+export type TreatmentStatus = "ACTIVE" | "PAUSED" | "CANCELLED" | "COMPLETED"
+export type TreatmentType = "SUBSCRIPTION" | "ONE_TIME" | "MEMBERSHIP"
+
+export interface Treatment {
+  id: string
+  patientId: string
+  productId: string
+  variantId?: string
+  type: TreatmentType
+  status: TreatmentStatus
+  diseaseStateId: string
+  prescribedById?: string
+  dosage?: string
+  instructions?: string
+  startDate: string
+  endDate?: string
+  nextRefillDate?: string
+  refillCount: number
+  createdAt: string
+  updatedAt: string
+}
+
+// ============================================================================
+// Consultation
+// ============================================================================
+
+export type ConsultationStatus =
+  | "PENDING_REVIEW"
+  | "IN_PROGRESS"
+  | "COMPLETED"
+  | "CANCELLED"
+  | "NEEDS_INFO"
+
+export type ConsultationType = "INITIAL" | "FOLLOW_UP" | "URGENT" | "TELEHEALTH"
+
+export interface Consultation {
+  id: string
+  patientId: string
+  providerId?: string
+  diseaseStateId: string
+  type: ConsultationType
+  status: ConsultationStatus
+  reason: string
+  notes?: string
+  scheduledAt?: string
+  completedAt?: string
+  createdAt: string
+}
+
+// ============================================================================
 // Transaction
 // ============================================================================
 
@@ -339,6 +443,66 @@ export interface Transaction {
   fee: number
   moneyDirection: "IN" | "OUT"
   status: string
+  createdAt: string
+}
+
+// ============================================================================
+// Payment Method
+// ============================================================================
+
+export type PaymentMethodType = "CARD" | "BANK_ACCOUNT" | "PAYPAL"
+export type CardBrand = "VISA" | "MASTERCARD" | "AMEX" | "DISCOVER"
+
+export interface PaymentMethod {
+  id: string
+  patientId: string
+  type: PaymentMethodType
+  isDefault: boolean
+  // Card-specific fields
+  cardBrand?: CardBrand
+  lastFour?: string
+  expiryMonth?: number
+  expiryYear?: number
+  cardholderName?: string
+  // Bank-specific fields
+  bankName?: string
+  accountLastFour?: string
+  accountType?: "CHECKING" | "SAVINGS"
+  createdAt: string
+  updatedAt: string
+}
+
+// ============================================================================
+// Payment Transaction (History)
+// ============================================================================
+
+export type PaymentTransactionStatus =
+  | "PENDING"
+  | "COMPLETED"
+  | "FAILED"
+  | "REFUNDED"
+  | "PARTIALLY_REFUNDED"
+
+export type PaymentTransactionType =
+  | "CHARGE"
+  | "REFUND"
+  | "CHARGEBACK"
+  | "ADJUSTMENT"
+
+export interface PaymentTransaction {
+  id: string
+  patientId: string
+  orderId?: string
+  subscriptionId?: string
+  paymentMethodId: string
+  type: PaymentTransactionType
+  status: PaymentTransactionStatus
+  amount: number
+  currency: string
+  description: string
+  failureReason?: string
+  refundedAmount?: number
+  processedAt: string
   createdAt: string
 }
 
@@ -429,6 +593,48 @@ export interface PatientDocument {
   fileType: string
   fileSize: number
   uploadedBy?: string
+}
+
+// ============================================================================
+// Activity Event (Audit Trail)
+// ============================================================================
+
+export type ActivityEventType =
+  | "ACCOUNT_CREATED"
+  | "ACCOUNT_UPDATED"
+  | "STATUS_CHANGED"
+  | "ORDER_PLACED"
+  | "ORDER_APPROVED"
+  | "ORDER_DENIED"
+  | "ORDER_SHIPPED"
+  | "PRESCRIPTION_CREATED"
+  | "PRESCRIPTION_REFILLED"
+  | "CONSULTATION_SCHEDULED"
+  | "CONSULTATION_COMPLETED"
+  | "MESSAGE_SENT"
+  | "MESSAGE_RECEIVED"
+  | "DOCUMENT_UPLOADED"
+  | "QUESTIONNAIRE_SUBMITTED"
+  | "PAYMENT_PROCESSED"
+  | "PAYMENT_FAILED"
+  | "SUBSCRIPTION_STARTED"
+  | "SUBSCRIPTION_PAUSED"
+  | "SUBSCRIPTION_CANCELLED"
+  | "PROVIDER_ASSIGNED"
+  | "NOTE_ADDED"
+  | "LOGIN"
+  | "PASSWORD_CHANGED"
+
+export interface ActivityEvent {
+  id: string
+  patientId: string
+  type: ActivityEventType
+  title: string
+  description: string
+  actorId?: string // Who performed the action
+  actorType?: "PATIENT" | "PROVIDER" | "ADMIN" | "SYSTEM"
+  metadata?: Record<string, unknown> // Additional context (orderId, etc.)
+  createdAt: string
 }
 
 // ============================================================================

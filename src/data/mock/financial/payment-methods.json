@@ -1,0 +1,54 @@
+[
+  {
+    "id": "pm_jacob_001",
+    "patientId": "usr_pat_jacob",
+    "type": "CARD",
+    "isDefault": true,
+    "cardBrand": "VISA",
+    "lastFour": "4242",
+    "expiryMonth": 12,
+    "expiryYear": 2027,
+    "cardholderName": "Jacob Henderson",
+    "createdAt": "2025-11-16T17:00:00Z",
+    "updatedAt": "2025-11-16T17:00:00Z"
+  },
+  {
+    "id": "pm_jacob_002",
+    "patientId": "usr_pat_jacob",
+    "type": "CARD",
+    "isDefault": false,
+    "cardBrand": "AMEX",
+    "lastFour": "1001",
+    "expiryMonth": 8,
+    "expiryYear": 2026,
+    "cardholderName": "Jacob Henderson",
+    "createdAt": "2025-12-01T14:25:00Z",
+    "updatedAt": "2025-12-01T14:25:00Z"
+  },
+  {
+    "id": "pm_001",
+    "patientId": "usr_pat001",
+    "type": "CARD",
+    "isDefault": true,
+    "cardBrand": "MASTERCARD",
+    "lastFour": "8888",
+    "expiryMonth": 3,
+    "expiryYear": 2026,
+    "cardholderName": "Sarah Chen",
+    "createdAt": "2024-06-15T10:40:00Z",
+    "updatedAt": "2024-06-15T10:40:00Z"
+  },
+  {
+    "id": "pm_002",
+    "patientId": "usr_pat002",
+    "type": "CARD",
+    "isDefault": true,
+    "cardBrand": "VISA",
+    "lastFour": "5555",
+    "expiryMonth": 11,
+    "expiryYear": 2028,
+    "cardholderName": "Michael Torres",
+    "createdAt": "2025-12-01T09:18:00Z",
+    "updatedAt": "2025-12-01T09:18:00Z"
+  }
+]

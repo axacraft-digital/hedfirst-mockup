@@ -1,0 +1,66 @@
+[
+  {
+    "id": "usr_doc001",
+    "email": "dr.chen@hedfirst.com",
+    "firstName": "Michelle",
+    "lastName": "Chen",
+    "status": "ACTIVE",
+    "roles": ["DOCTOR"],
+    "avatarUrl": "/avatars/dr-chen.jpg",
+    "doctorCredential": {
+      "deaNumber": "AC1234567",
+      "npiNumber": "1234567890",
+      "boardCertification": "American Board of Internal Medicine"
+    },
+    "degree": { "name": "MD" },
+    "speciality": { "name": "Internal Medicine" },
+    "licenses": [
+      { "state": "TX", "licenseNumber": "TX-12345", "expiryDate": "2026-12-31" },
+      { "state": "CA", "licenseNumber": "CA-67890", "expiryDate": "2025-08-15" },
+      { "state": "FL", "licenseNumber": "FL-11111", "expiryDate": "2026-03-01" }
+    ],
+    "stats": { "patientsReviewed": 1247, "avgResponseTime": "2.4 hrs" }
+  },
+  {
+    "id": "usr_doc002",
+    "email": "dr.baldwin@hedfirst.com",
+    "firstName": "Nicole",
+    "lastName": "Baldwin",
+    "status": "ACTIVE",
+    "roles": ["DOCTOR"],
+    "avatarUrl": "/avatars/dr-baldwin.jpg",
+    "doctorCredential": {
+      "deaNumber": "NB2468135",
+      "npiNumber": "2468135790",
+      "boardCertification": "American Board of Anti-Aging Medicine"
+    },
+    "degree": { "name": "MD" },
+    "speciality": { "name": "Anti-Aging & Regenerative Medicine" },
+    "licenses": [
+      { "state": "TX", "licenseNumber": "TX-24680", "expiryDate": "2026-08-15" },
+      { "state": "FL", "licenseNumber": "FL-13579", "expiryDate": "2026-05-30" }
+    ],
+    "stats": { "patientsReviewed": 856, "avgResponseTime": "1.9 hrs" }
+  },
+  {
+    "id": "usr_doc003",
+    "email": "dr.patel@hedfirst.com",
+    "firstName": "Priya",
+    "lastName": "Patel",
+    "status": "ACTIVE",
+    "roles": ["DOCTOR"],
+    "avatarUrl": "/avatars/dr-patel.jpg",
+    "doctorCredential": {
+      "deaNumber": "CP5555555",
+      "npiNumber": "5555555555",
+      "boardCertification": "American Board of Obesity Medicine"
+    },
+    "degree": { "name": "MD" },
+    "speciality": { "name": "Obesity Medicine" },
+    "licenses": [
+      { "state": "CA", "licenseNumber": "CA-44444", "expiryDate": "2026-06-30" },
+      { "state": "NY", "licenseNumber": "NY-55555", "expiryDate": "2025-12-31" }
+    ],
+    "stats": { "patientsReviewed": 634, "avgResponseTime": "3.1 hrs" }
+  }
+]

@@ -1,0 +1,95 @@
+[
+  {
+    "id": "quest_jacob_001",
+    "patientId": "usr_pat_jacob",
+    "type": "INTAKE",
+    "title": "Peptide Therapy Intake Questionnaire",
+    "diseaseStateId": "ds_peptide",
+    "status": "COMPLETED",
+    "version": "2.1",
+    "questions": [
+      { "id": "q1", "text": "What are your primary health goals?", "type": "MULTI_CHOICE", "options": ["Muscle growth", "Improved sleep", "Recovery", "Anti-aging", "Energy", "Cognitive function"], "required": true },
+      { "id": "q2", "text": "How often do you exercise per week?", "type": "SINGLE_CHOICE", "options": ["0-1 times", "2-3 times", "4-5 times", "6+ times"], "required": true },
+      { "id": "q3", "text": "Do you have any known allergies?", "type": "TEXT", "required": true },
+      { "id": "q4", "text": "Are you comfortable with self-administered injections?", "type": "SINGLE_CHOICE", "options": ["Yes", "No", "Need training"], "required": true },
+      { "id": "q5", "text": "Please upload recent lab work (within 6 months)", "type": "FILE_UPLOAD", "required": true }
+    ],
+    "answers": [
+      { "questionId": "q1", "value": ["Muscle growth", "Improved sleep", "Recovery", "Anti-aging", "Energy", "Cognitive function"] },
+      { "questionId": "q2", "value": "4-5 times" },
+      { "questionId": "q3", "value": "None known" },
+      { "questionId": "q4", "value": "Need training" },
+      { "questionId": "q5", "value": "lab_results_2025.pdf", "fileUrl": "/uploads/usr_pat_jacob/lab_results_2025.pdf" }
+    ],
+    "submittedAt": "2025-11-16T17:30:00Z",
+    "createdAt": "2025-11-16T16:54:00Z"
+  },
+  {
+    "id": "quest_jacob_002",
+    "patientId": "usr_pat_jacob",
+    "type": "INTAKE",
+    "title": "Weight Management Intake Questionnaire",
+    "diseaseStateId": "ds_weight",
+    "status": "COMPLETED",
+    "version": "3.0",
+    "questions": [
+      { "id": "q1", "text": "What is your current weight?", "type": "TEXT", "required": true },
+      { "id": "q2", "text": "What is your goal weight?", "type": "TEXT", "required": true },
+      { "id": "q3", "text": "Have you tried weight loss medications before?", "type": "SINGLE_CHOICE", "options": ["Yes", "No"], "required": true },
+      { "id": "q4", "text": "Do you have diabetes or prediabetes?", "type": "SINGLE_CHOICE", "options": ["Yes - Type 1", "Yes - Type 2", "Prediabetes", "No"], "required": true },
+      { "id": "q5", "text": "Describe your typical daily diet", "type": "TEXT", "required": true }
+    ],
+    "answers": [
+      { "questionId": "q1", "value": "160 lbs" },
+      { "questionId": "q2", "value": "155 lbs (lower body fat percentage)" },
+      { "questionId": "q3", "value": "No" },
+      { "questionId": "q4", "value": "No" },
+      { "questionId": "q5", "value": "High protein, whole foods focused. Around 2500 calories on training days. Meal prep on Sundays." }
+    ],
+    "submittedAt": "2025-12-01T14:00:00Z",
+    "createdAt": "2025-12-01T13:45:00Z"
+  },
+  {
+    "id": "quest_001",
+    "patientId": "usr_pat001",
+    "type": "INTAKE",
+    "title": "Hair Loss Intake Questionnaire",
+    "diseaseStateId": "ds_hair",
+    "status": "COMPLETED",
+    "version": "2.0",
+    "questions": [
+      { "id": "q1", "text": "When did you first notice hair loss?", "type": "SINGLE_CHOICE", "options": ["Less than 6 months", "6-12 months", "1-2 years", "2+ years"], "required": true },
+      { "id": "q2", "text": "Where is the hair loss most noticeable?", "type": "MULTI_CHOICE", "options": ["Crown", "Temples", "Hairline", "Overall thinning"], "required": true },
+      { "id": "q3", "text": "Family history of hair loss?", "type": "SINGLE_CHOICE", "options": ["Yes - maternal side", "Yes - paternal side", "Yes - both sides", "No"], "required": true },
+      { "id": "q4", "text": "Have you tried any hair loss treatments before?", "type": "TEXT", "required": false },
+      { "id": "q5", "text": "Please upload photos of affected areas", "type": "FILE_UPLOAD", "required": true }
+    ],
+    "answers": [
+      { "questionId": "q1", "value": "1-2 years" },
+      { "questionId": "q2", "value": ["Crown", "Temples"] },
+      { "questionId": "q3", "value": "Yes - maternal side" },
+      { "questionId": "q4", "value": "Tried OTC biotin supplements with no noticeable results" },
+      { "questionId": "q5", "value": "hair_photos.pdf", "fileUrl": "/uploads/usr_pat001/hair_photos.pdf" }
+    ],
+    "submittedAt": "2024-06-15T10:45:00Z",
+    "createdAt": "2024-06-15T10:30:00Z"
+  },
+  {
+    "id": "quest_002",
+    "patientId": "usr_pat002",
+    "type": "INTAKE",
+    "title": "Sexual Wellness Intake Questionnaire",
+    "diseaseStateId": "ds_sexual",
+    "status": "PENDING",
+    "version": "2.5",
+    "questions": [
+      { "id": "q1", "text": "How long have you experienced symptoms?", "type": "SINGLE_CHOICE", "options": ["Less than 3 months", "3-6 months", "6-12 months", "1+ year"], "required": true },
+      { "id": "q2", "text": "How would you rate symptom severity?", "type": "SINGLE_CHOICE", "options": ["Mild", "Moderate", "Severe"], "required": true },
+      { "id": "q3", "text": "Do you have any cardiovascular conditions?", "type": "SINGLE_CHOICE", "options": ["Yes", "No"], "required": true },
+      { "id": "q4", "text": "Are you currently taking nitrates?", "type": "SINGLE_CHOICE", "options": ["Yes", "No", "Not sure"], "required": true },
+      { "id": "q5", "text": "List any current medications", "type": "TEXT", "required": true }
+    ],
+    "answers": [],
+    "createdAt": "2025-12-01T09:15:00Z"
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "id": "note_jacob_001",
+    "patientId": "usr_pat_jacob",
+    "title": "Initial peptide consultation completed",
+    "content": "Patient completed initial consultation with Dr. Baldwin for peptide therapy. Approved for CJC 1295 + Ipamorelin protocol.\n\nKey points:\n- Patient is 29yo male, very active (4-5x/week exercise)\n- Primary goals: muscle recovery, sleep improvement, athletic performance\n- Labs reviewed and within normal limits\n- Comfortable with self-injection after education\n\nPrescription sent to pharmacy. Follow-up as needed.",
+    "createdAt": "2025-11-17T09:00:00Z",
+    "createdBy": "Dr. Nicole Baldwin",
+    "createdByRole": "Provider"
+  },
+  {
+    "id": "note_jacob_002",
+    "patientId": "usr_pat_jacob",
+    "title": "Insurance verification - peptide therapy",
+    "content": "Verified patient's insurance coverage. Peptide therapy is not covered by insurance - patient will pay out of pocket.\n\nPayment method on file: VISA ending in 4242\nMonthly cost: $75 for CJC 1295 + Ipamorelin",
+    "createdAt": "2025-11-16T17:15:00Z",
+    "createdBy": "Admin Staff",
+    "createdByRole": "Admin"
+  },
+  {
+    "id": "note_jacob_003",
+    "patientId": "usr_pat_jacob",
+    "title": "Added Semaglutide for body composition",
+    "content": "Patient returned for weight management consultation. Adding low-dose Semaglutide to support body composition goals while maintaining muscle mass.\n\nStarting dose: 0.25mg weekly\nGoal: Reduce body fat while preserving lean mass from resistance training\n\nPatient educated on injection rotation, protein intake requirements, and potential GI side effects.",
+    "createdAt": "2025-12-01T15:30:00Z",
+    "createdBy": "Dr. Nicole Baldwin",
+    "createdByRole": "Provider"
+  },
+  {
+    "id": "note_jacob_004",
+    "patientId": "usr_pat_jacob",
+    "title": "Patient reports improved sleep",
+    "content": "Patient messaged reporting improved sleep quality since starting peptide therapy. Also notes faster recovery between workouts. No side effects reported.\n\nWill continue current protocol.",
+    "createdAt": "2025-12-04T10:30:00Z",
+    "createdBy": "Dr. Nicole Baldwin",
+    "createdByRole": "Provider"
+  },
+  {
+    "id": "note_001",
+    "patientId": "usr_pat001",
+    "title": "Treatment plan initiated",
+    "content": "Started patient on Finasteride 1mg daily for hair loss treatment. Discussed expected timeline for results (3-6 months for visible improvement).\n\nSide effects reviewed:\n- Decreased libido (rare)\n- Must not handle crushed tablets if pregnant\n\nPatient acknowledged understanding and signed consent form. Will follow up in 3 months to assess progress.",
+    "createdAt": "2024-06-16T11:00:00Z",
+    "createdBy": "Dr. Michelle Chen",
+    "createdByRole": "Provider"
+  },
+  {
+    "id": "note_002",
+    "patientId": "usr_pat001",
+    "title": "3-month follow-up - good response",
+    "content": "Patient reports early signs of improvement. Less hair shedding noted in the shower and on pillowcase. No side effects experienced.\n\nProgress photos taken and compared to baseline - slight improvement in crown area density visible.\n\nPlan: Continue current treatment. Add topical Minoxidil 5% if patient interested in accelerating results. Patient will consider and follow up.",
+    "createdAt": "2024-09-16T14:30:00Z",
+    "createdBy": "Dr. Michelle Chen",
+    "createdByRole": "Provider"
+  },
+  {
+    "id": "note_003",
+    "patientId": "usr_pat001",
+    "title": "Biotin inquiry resolved",
+    "content": "Patient called asking about combining Finasteride with biotin supplements. Advised that biotin is safe to take alongside Finasteride and may provide additional support for hair health. No prescription needed for biotin.",
+    "createdAt": "2024-08-22T15:20:00Z",
+    "createdBy": "Admin Staff",
+    "createdByRole": "Admin"
+  },
+  {
+    "id": "note_004",
+    "patientId": "usr_pat001",
+    "title": "Added Minoxidil to regimen",
+    "content": "Patient decided to add Minoxidil 5% solution to treatment regimen. Discussed expected temporary shedding phase in first 2-4 weeks.\n\nInstructions: Apply to dry scalp BID (morning and evening).",
+    "createdAt": "2024-12-02T11:00:00Z",
+    "createdBy": "Dr. Michelle Chen",
+    "createdByRole": "Provider"
+  },
+  {
+    "id": "note_101",
+    "patientId": "usr_pat002",
+    "title": "New patient intake received",
+    "content": "New patient registration received for sexual wellness consultation. Patient has submitted order for Sildenafil 50mg.\n\nStatus: Awaiting provider review\nQuestionnaire: Pending completion",
+    "createdAt": "2025-12-01T09:25:00Z",
+    "createdBy": "System",
+    "createdByRole": "Admin"
+  },
+  {
+    "id": "note_102",
+    "patientId": "usr_pat002",
+    "title": "Reminder sent for questionnaire",
+    "content": "Automated reminder sent to patient to complete medical questionnaire. Required before provider can review consultation request.",
+    "createdAt": "2025-12-02T09:00:00Z",
+    "createdBy": "System",
+    "createdByRole": "Admin"
+  }
+]

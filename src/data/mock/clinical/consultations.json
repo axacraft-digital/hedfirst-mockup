@@ -1,0 +1,73 @@
+[
+  {
+    "id": "consult_jacob_001",
+    "patientId": "usr_pat_jacob",
+    "providerId": "usr_doc002",
+    "diseaseStateId": "ds_peptide",
+    "type": "INITIAL",
+    "status": "COMPLETED",
+    "reason": "Initial consultation for peptide therapy - CJC 1295 + Ipamorelin",
+    "notes": "Patient approved for peptide therapy. See chart note soap_jacob_001 for details.",
+    "completedAt": "2025-11-17T08:30:00Z",
+    "createdAt": "2025-11-16T17:30:00Z"
+  },
+  {
+    "id": "consult_jacob_002",
+    "patientId": "usr_pat_jacob",
+    "providerId": "usr_doc002",
+    "diseaseStateId": "ds_weight",
+    "type": "INITIAL",
+    "status": "COMPLETED",
+    "reason": "Weight management consultation - Semaglutide for body composition",
+    "notes": "Patient approved for low-dose GLP-1 therapy. See chart note soap_jacob_002.",
+    "completedAt": "2025-12-01T15:30:00Z",
+    "createdAt": "2025-12-01T14:00:00Z"
+  },
+  {
+    "id": "consult_001",
+    "patientId": "usr_pat001",
+    "providerId": "usr_doc001",
+    "diseaseStateId": "ds_hair",
+    "type": "INITIAL",
+    "status": "COMPLETED",
+    "reason": "Initial consultation for hair loss treatment",
+    "notes": "Androgenetic alopecia diagnosed. Started on Finasteride 1mg. See soap_001.",
+    "completedAt": "2024-06-15T11:45:00Z",
+    "createdAt": "2024-06-15T10:45:00Z"
+  },
+  {
+    "id": "consult_001b",
+    "patientId": "usr_pat001",
+    "providerId": "usr_doc001",
+    "diseaseStateId": "ds_hair",
+    "type": "FOLLOW_UP",
+    "status": "COMPLETED",
+    "reason": "3-month follow-up for hair loss treatment",
+    "notes": "Excellent response at 3 months. Continuing Finasteride. See soap_001b.",
+    "completedAt": "2024-09-16T14:30:00Z",
+    "createdAt": "2024-09-16T14:00:00Z"
+  },
+  {
+    "id": "consult_001c",
+    "patientId": "usr_pat001",
+    "providerId": "usr_doc001",
+    "diseaseStateId": "ds_hair",
+    "type": "FOLLOW_UP",
+    "status": "COMPLETED",
+    "reason": "6-month follow-up, adding Minoxidil",
+    "notes": "Added Minoxidil 5% for combination therapy. See soap_001c.",
+    "completedAt": "2024-12-02T11:00:00Z",
+    "createdAt": "2024-12-02T10:30:00Z"
+  },
+  {
+    "id": "consult_002",
+    "patientId": "usr_pat002",
+    "providerId": null,
+    "diseaseStateId": "ds_sexual",
+    "type": "INITIAL",
+    "status": "PENDING_REVIEW",
+    "reason": "Initial consultation for sexual wellness - ED treatment",
+    "notes": null,
+    "createdAt": "2025-12-01T09:20:00Z"
+  }
+]

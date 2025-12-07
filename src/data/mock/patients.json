@@ -1,0 +1,95 @@
+[
+  {
+    "id": "usr_pat_jacob",
+    "email": "jacob.henderson@email.com",
+    "phone": "+15559876543",
+    "firstName": "Jacob",
+    "lastName": "Henderson",
+    "dateOfBirth": "1996-03-15",
+    "gender": "Male",
+    "status": "ACTIVE",
+    "patientStatus": "ACTIVE",
+    "roles": ["USER"],
+    "appOfRegistration": "PATIENT",
+    "createdAt": "2025-11-16T16:54:00Z",
+    "address": {
+      "addressLineOne": "456 Maple Avenue",
+      "addressLineTwo": null,
+      "city": "Dallas",
+      "state": "TX",
+      "zipCode": "75201"
+    },
+    "patientDetails": {
+      "heightFeet": 5,
+      "heightInches": 7,
+      "currentWeightLbs": 160,
+      "allergiesOrSubstances": "None known",
+      "emergencyContactName": "Maria Henderson",
+      "emergencyContactPhone": "+15559876000",
+      "emergencyContactRelationship": "Mother"
+    },
+    "assignedProviderId": "usr_doc002",
+    "diseaseStates": ["PEPTIDE_THERAPY", "WEIGHT_LOSS"],
+    "lastActivity": "2025-12-05T14:30:00Z"
+  },
+  {
+    "id": "usr_pat001",
+    "email": "sarah.chen@email.com",
+    "phone": "+15551234001",
+    "firstName": "Sarah",
+    "lastName": "Chen",
+    "dateOfBirth": "1988-07-22",
+    "gender": "Female",
+    "status": "ACTIVE",
+    "patientStatus": "ACTIVE",
+    "roles": ["USER"],
+    "appOfRegistration": "PATIENT",
+    "createdAt": "2024-06-15T10:30:00Z",
+    "address": {
+      "addressLineOne": "123 Oak Street",
+      "addressLineTwo": "Apt 4B",
+      "city": "Austin",
+      "state": "TX",
+      "zipCode": "78701"
+    },
+    "patientDetails": {
+      "heightFeet": 5,
+      "heightInches": 6,
+      "currentWeightLbs": 145,
+      "allergiesOrSubstances": "Penicillin"
+    },
+    "assignedProviderId": "usr_doc001",
+    "diseaseStates": ["HAIR_GROWTH", "GENERAL_HEALTH"],
+    "lastActivity": "2025-12-04T14:30:00Z"
+  },
+  {
+    "id": "usr_pat002",
+    "email": "michael.torres@email.com",
+    "phone": "+15551234002",
+    "firstName": "Michael",
+    "lastName": "Torres",
+    "dateOfBirth": "1982-11-08",
+    "gender": "Male",
+    "status": "PENDING",
+    "patientStatus": "AWAITING_REVIEW",
+    "roles": ["USER"],
+    "appOfRegistration": "PATIENT",
+    "createdAt": "2025-12-01T09:15:00Z",
+    "address": {
+      "addressLineOne": "789 Pine Road",
+      "addressLineTwo": "Suite 100",
+      "city": "Houston",
+      "state": "TX",
+      "zipCode": "77002"
+    },
+    "patientDetails": {
+      "heightFeet": 5,
+      "heightInches": 10,
+      "currentWeightLbs": 185,
+      "allergiesOrSubstances": "Sulfa drugs"
+    },
+    "assignedProviderId": "usr_doc003",
+    "diseaseStates": ["SEXUAL_WELLNESS"],
+    "lastActivity": "2025-12-01T09:20:00Z"
+  }
+]

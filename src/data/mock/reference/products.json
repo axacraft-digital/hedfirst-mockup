@@ -1,0 +1,420 @@
+[
+  {
+    "id": "prod_001",
+    "type": "PHYSICAL_PRODUCT",
+    "available": true,
+    "name": "Finasteride",
+    "subTitle": "Hair Loss Treatment",
+    "badge": "Most Popular",
+    "slug": "finasteride",
+    "diseaseState": "HAIR_GROWTH",
+    "treatmentType": "PRESCRIPTION_MEDICATION",
+    "requirePrescription": true,
+    "variants": [
+      {
+        "id": "var_001a",
+        "sku": "FIN-1MG-90",
+        "supply": "DAY_90",
+        "billingCycle": "EVERY_DAY_90",
+        "qty": 90,
+        "price": 4500,
+        "compareAtPrice": 8500,
+        "dosages": {
+          "strength": "1mg",
+          "form": "Tablet"
+        }
+      },
+      {
+        "id": "var_001b",
+        "sku": "FIN-1MG-180",
+        "supply": "DAY_180",
+        "billingCycle": "EVERY_DAY_180",
+        "qty": 180,
+        "price": 7900,
+        "compareAtPrice": 15000,
+        "dosages": {
+          "strength": "1mg",
+          "form": "Tablet"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod_002",
+    "type": "PHYSICAL_PRODUCT",
+    "available": true,
+    "name": "Minoxidil Solution",
+    "subTitle": "Topical Hair Regrowth",
+    "badge": null,
+    "slug": "minoxidil",
+    "diseaseState": "HAIR_GROWTH",
+    "treatmentType": "TOPICAL_TREATMENT",
+    "requirePrescription": false,
+    "variants": [
+      {
+        "id": "var_002a",
+        "sku": "MIN-5-60",
+        "supply": "DAY_60",
+        "billingCycle": "EVERY_DAY_60",
+        "qty": 1,
+        "price": 3500,
+        "compareAtPrice": 5500,
+        "dosages": {
+          "strength": "5%",
+          "form": "Solution"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod_003",
+    "type": "PHYSICAL_PRODUCT",
+    "available": true,
+    "name": "Semaglutide",
+    "subTitle": "Weight Loss Injection",
+    "badge": "New",
+    "slug": "semaglutide",
+    "diseaseState": "WEIGHT_LOSS",
+    "treatmentType": "PRESCRIPTION_MEDICATION",
+    "requirePrescription": true,
+    "variants": [
+      {
+        "id": "var_003a",
+        "sku": "SEM-0.25-30",
+        "supply": "DAY_30",
+        "billingCycle": "EVERY_DAY_30",
+        "qty": 4,
+        "price": 29900,
+        "compareAtPrice": 45000,
+        "dosages": {
+          "strength": "0.25mg",
+          "form": "Injection"
+        }
+      },
+      {
+        "id": "var_003b",
+        "sku": "SEM-0.5-30",
+        "supply": "DAY_30",
+        "billingCycle": "EVERY_DAY_30",
+        "qty": 4,
+        "price": 34900,
+        "compareAtPrice": 50000,
+        "dosages": {
+          "strength": "0.5mg",
+          "form": "Injection"
+        }
+      },
+      {
+        "id": "var_003c",
+        "sku": "SEM-1.0-30",
+        "supply": "DAY_30",
+        "billingCycle": "EVERY_DAY_30",
+        "qty": 4,
+        "price": 39900,
+        "compareAtPrice": 55000,
+        "dosages": {
+          "strength": "1.0mg",
+          "form": "Injection"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod_004",
+    "type": "PHYSICAL_PRODUCT",
+    "available": true,
+    "name": "Tirzepatide",
+    "subTitle": "Advanced Weight Loss",
+    "badge": "Premium",
+    "slug": "tirzepatide",
+    "diseaseState": "WEIGHT_LOSS",
+    "treatmentType": "PRESCRIPTION_MEDICATION",
+    "requirePrescription": true,
+    "variants": [
+      {
+        "id": "var_004a",
+        "sku": "TIR-2.5-30",
+        "supply": "DAY_30",
+        "billingCycle": "EVERY_DAY_30",
+        "qty": 4,
+        "price": 44900,
+        "compareAtPrice": 65000,
+        "dosages": {
+          "strength": "2.5mg",
+          "form": "Injection"
+        }
+      },
+      {
+        "id": "var_004b",
+        "sku": "TIR-5.0-30",
+        "supply": "DAY_30",
+        "billingCycle": "EVERY_DAY_30",
+        "qty": 4,
+        "price": 49900,
+        "compareAtPrice": 70000,
+        "dosages": {
+          "strength": "5.0mg",
+          "form": "Injection"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod_005",
+    "type": "PHYSICAL_PRODUCT",
+    "available": true,
+    "name": "Sildenafil",
+    "subTitle": "Erectile Dysfunction",
+    "badge": null,
+    "slug": "sildenafil",
+    "diseaseState": "SEXUAL_WELLNESS",
+    "treatmentType": "PRESCRIPTION_MEDICATION",
+    "requirePrescription": true,
+    "variants": [
+      {
+        "id": "var_005a",
+        "sku": "SIL-50-10",
+        "supply": "DAY_30",
+        "billingCycle": "ONE_TIME_PAYMENT",
+        "qty": 10,
+        "price": 4500,
+        "compareAtPrice": 9000,
+        "dosages": {
+          "strength": "50mg",
+          "form": "Tablet"
+        }
+      },
+      {
+        "id": "var_005b",
+        "sku": "SIL-100-10",
+        "supply": "DAY_30",
+        "billingCycle": "ONE_TIME_PAYMENT",
+        "qty": 10,
+        "price": 5500,
+        "compareAtPrice": 12000,
+        "dosages": {
+          "strength": "100mg",
+          "form": "Tablet"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod_006",
+    "type": "PHYSICAL_PRODUCT",
+    "available": true,
+    "name": "Tadalafil",
+    "subTitle": "Daily ED Treatment",
+    "badge": "Best Value",
+    "slug": "tadalafil",
+    "diseaseState": "SEXUAL_WELLNESS",
+    "treatmentType": "PRESCRIPTION_MEDICATION",
+    "requirePrescription": true,
+    "variants": [
+      {
+        "id": "var_006a",
+        "sku": "TAD-5-30",
+        "supply": "DAY_30",
+        "billingCycle": "EVERY_DAY_30",
+        "qty": 30,
+        "price": 3900,
+        "compareAtPrice": 8500,
+        "dosages": {
+          "strength": "5mg",
+          "form": "Tablet"
+        }
+      },
+      {
+        "id": "var_006b",
+        "sku": "TAD-5-90",
+        "supply": "DAY_90",
+        "billingCycle": "EVERY_DAY_90",
+        "qty": 90,
+        "price": 9900,
+        "compareAtPrice": 22000,
+        "dosages": {
+          "strength": "5mg",
+          "form": "Tablet"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod_007",
+    "type": "SERVICE",
+    "available": true,
+    "name": "Initial Consultation",
+    "subTitle": "Video visit with provider",
+    "slug": "initial-consultation",
+    "diseaseState": "GENERAL_HEALTH",
+    "treatmentType": "INITIAL_CONSULTATION",
+    "requirePrescription": false,
+    "variants": [
+      {
+        "id": "var_007a",
+        "sku": "CONSULT-INIT",
+        "price": 0,
+        "compareAtPrice": 7500
+      }
+    ]
+  },
+  {
+    "id": "prod_008",
+    "type": "SERVICE",
+    "available": true,
+    "name": "Follow-up Consultation",
+    "subTitle": "Check-in with your provider",
+    "slug": "followup-consultation",
+    "diseaseState": "GENERAL_HEALTH",
+    "treatmentType": "FOLLOW_UP_CONSULTATION",
+    "requirePrescription": false,
+    "variants": [
+      {
+        "id": "var_008a",
+        "sku": "CONSULT-FU",
+        "price": 0,
+        "compareAtPrice": 5000
+      }
+    ]
+  },
+  {
+    "id": "prod_009",
+    "type": "BUNDLE",
+    "available": true,
+    "name": "Complete Hair Loss Kit",
+    "subTitle": "Finasteride + Minoxidil",
+    "badge": "Save 20%",
+    "slug": "hair-loss-bundle",
+    "diseaseState": "HAIR_GROWTH",
+    "requirePrescription": true,
+    "bundledProducts": [
+      "prod_001",
+      "prod_002"
+    ],
+    "variants": [
+      {
+        "id": "var_009a",
+        "sku": "HAIR-BUNDLE-90",
+        "supply": "DAY_90",
+        "billingCycle": "EVERY_DAY_90",
+        "price": 6400,
+        "compareAtPrice": 8000
+      }
+    ]
+  },
+  {
+    "id": "prod_010",
+    "type": "LAB_TEST",
+    "available": true,
+    "name": "Metabolic Health Panel",
+    "subTitle": "At-home blood test",
+    "slug": "metabolic-panel",
+    "diseaseState": "WEIGHT_LOSS",
+    "testedMarkers": [
+      "HbA1c",
+      "Fasting Glucose",
+      "Lipid Panel",
+      "TSH"
+    ],
+    "variants": [
+      {
+        "id": "var_010a",
+        "sku": "LAB-METAB",
+        "price": 14900,
+        "compareAtPrice": 25000
+      }
+    ]
+  },
+  {
+    "id": "prod_011",
+    "type": "MEMBERSHIP",
+    "available": true,
+    "name": "Care Membership",
+    "subTitle": "Ongoing care & savings",
+    "badge": "Most Popular",
+    "slug": "care-membership",
+    "diseaseState": "GENERAL_HEALTH",
+    "benefits": [
+      "Free consultations",
+      "10% off prescriptions",
+      "Priority support",
+      "Free lab kits"
+    ],
+    "variants": [
+      {
+        "id": "var_011a",
+        "sku": "MEM-CARE-MONTHLY",
+        "billingCycle": "MONTHLY",
+        "price": 1900,
+        "compareAtPrice": 2900
+      },
+      {
+        "id": "var_011b",
+        "sku": "MEM-CARE-ANNUAL",
+        "billingCycle": "ANNUAL",
+        "price": 14900,
+        "compareAtPrice": 22800
+      }
+    ]
+  },
+  {
+    "id": "prod_012",
+    "type": "MEMBERSHIP",
+    "available": true,
+    "name": "Premium Membership",
+    "subTitle": "All-inclusive care",
+    "badge": "Best Value",
+    "slug": "premium-membership",
+    "diseaseState": "GENERAL_HEALTH",
+    "benefits": [
+      "Everything in Care",
+      "20% off prescriptions",
+      "Dedicated provider",
+      "Quarterly labs included",
+      "Same-day messaging response"
+    ],
+    "variants": [
+      {
+        "id": "var_012a",
+        "sku": "MEM-PREM-MONTHLY",
+        "billingCycle": "MONTHLY",
+        "price": 4900,
+        "compareAtPrice": 7500
+      },
+      {
+        "id": "var_012b",
+        "sku": "MEM-PREM-ANNUAL",
+        "billingCycle": "ANNUAL",
+        "price": 39900,
+        "compareAtPrice": 58800
+      }
+    ]
+  },
+  {
+    "id": "prod_013",
+    "type": "SERVICE",
+    "available": true,
+    "name": "Video Appointment",
+    "subTitle": "Live video visit with provider",
+    "slug": "video-appointment",
+    "diseaseState": "GENERAL_HEALTH",
+    "treatmentType": "VIDEO_CONSULTATION",
+    "durationMinutes": 15,
+    "requirePrescription": false,
+    "variants": [
+      {
+        "id": "var_013a",
+        "sku": "APPT-VIDEO-15",
+        "price": 7500,
+        "compareAtPrice": 12500
+      },
+      {
+        "id": "var_013b",
+        "sku": "APPT-VIDEO-FREE",
+        "price": 0,
+        "compareAtPrice": 7500,
+        "memberOnly": true
+      }
+    ]
+  }
+]

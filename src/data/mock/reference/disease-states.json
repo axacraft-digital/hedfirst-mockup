@@ -1,0 +1,37 @@
+[
+  {
+    "id": "ds_weight",
+    "code": "WEIGHT_LOSS",
+    "name": "Weight Management",
+    "description": "GLP-1 medications and comprehensive weight loss programs",
+    "active": true
+  },
+  {
+    "id": "ds_hair",
+    "code": "HAIR_GROWTH",
+    "name": "Hair Loss",
+    "description": "Finasteride, Minoxidil, and hair restoration treatments",
+    "active": true
+  },
+  {
+    "id": "ds_sexual",
+    "code": "SEXUAL_WELLNESS",
+    "name": "Sexual Wellness",
+    "description": "ED medications and sexual health treatments",
+    "active": true
+  },
+  {
+    "id": "ds_peptide",
+    "code": "PEPTIDE_THERAPY",
+    "name": "Peptide Therapy",
+    "description": "CJC 1295, Ipamorelin, and other peptide protocols for optimization",
+    "active": true
+  },
+  {
+    "id": "ds_general",
+    "code": "GENERAL_HEALTH",
+    "name": "General Health",
+    "description": "Vitamins, supplements, and general wellness products",
+    "active": true
+  }
+]

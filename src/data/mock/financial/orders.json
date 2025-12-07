@@ -1,0 +1,215 @@
+[
+  {
+    "id": "ord_jacob_001",
+    "publicOrderId": "HF-20001",
+    "type": "MAIN",
+    "status": "COMPLETED",
+    "createdAt": "2025-11-17T10:00:00Z",
+    "userId": "usr_pat_jacob",
+    "approvalDoctorId": "usr_doc002",
+    "subtotal": 7500,
+    "discount": 0,
+    "discountByCode": 0,
+    "shippingPrice": 0,
+    "tax": 619,
+    "amount": 8119,
+    "billingCycle": "EVERY_DAY_30",
+    "lineItems": [
+      {
+        "productName": "Initial Consultation",
+        "sku": "CONSULT-INIT",
+        "supply": "ONE_TIME",
+        "price": 0,
+        "qty": 1,
+        "diseaseState": "GENERAL_HEALTH"
+      },
+      {
+        "productName": "CJC 1295 + Ipamorelin",
+        "sku": "PEPTIDE-CJC-30",
+        "dosages": { "strength": "1.2mg/2mg" },
+        "supply": "DAY_30",
+        "price": 7500,
+        "qty": 1,
+        "diseaseState": "PEPTIDE_THERAPY"
+      }
+    ],
+    "shippingAddress": {
+      "addressLineOne": "456 Maple Avenue",
+      "city": "Dallas",
+      "state": "TX",
+      "zipCode": "75201"
+    }
+  },
+  {
+    "id": "ord_jacob_002",
+    "publicOrderId": "HF-20015",
+    "type": "MAIN",
+    "status": "ORDER_SHIPPED",
+    "createdAt": "2025-12-01T14:30:00Z",
+    "userId": "usr_pat_jacob",
+    "approvalDoctorId": "usr_doc002",
+    "subtotal": 29900,
+    "discount": 0,
+    "discountByCode": 2990,
+    "shippingPrice": 0,
+    "tax": 2220,
+    "amount": 29130,
+    "billingCycle": "EVERY_DAY_30",
+    "lineItems": [
+      {
+        "productName": "Semaglutide",
+        "sku": "SEM-0.25-30",
+        "dosages": { "strength": "0.25mg" },
+        "supply": "DAY_30",
+        "price": 29900,
+        "qty": 4,
+        "diseaseState": "WEIGHT_LOSS"
+      }
+    ],
+    "discountCode": {
+      "code": "WELCOME10",
+      "discountPercent": 10
+    },
+    "shippingAddress": {
+      "addressLineOne": "456 Maple Avenue",
+      "city": "Dallas",
+      "state": "TX",
+      "zipCode": "75201"
+    }
+  },
+  {
+    "id": "ord_jacob_003",
+    "publicOrderId": "HF-20042",
+    "type": "REFILL",
+    "status": "APPROVED",
+    "createdAt": "2025-12-05T09:00:00Z",
+    "userId": "usr_pat_jacob",
+    "approvalDoctorId": "usr_doc002",
+    "subtotal": 7500,
+    "discount": 0,
+    "discountByCode": 0,
+    "shippingPrice": 0,
+    "tax": 619,
+    "amount": 8119,
+    "billingCycle": "EVERY_DAY_30",
+    "lineItems": [
+      {
+        "productName": "CJC 1295 + Ipamorelin",
+        "sku": "PEPTIDE-CJC-30",
+        "dosages": { "strength": "1.2mg/2mg" },
+        "supply": "DAY_30",
+        "price": 7500,
+        "qty": 1,
+        "diseaseState": "PEPTIDE_THERAPY"
+      }
+    ],
+    "shippingAddress": {
+      "addressLineOne": "456 Maple Avenue",
+      "city": "Dallas",
+      "state": "TX",
+      "zipCode": "75201"
+    }
+  },
+  {
+    "id": "ord_001",
+    "publicOrderId": "HF-10001",
+    "type": "MAIN",
+    "status": "COMPLETED",
+    "createdAt": "2024-06-15T10:45:00Z",
+    "userId": "usr_pat001",
+    "approvalDoctorId": "usr_doc001",
+    "subtotal": 4500,
+    "discount": 0,
+    "discountByCode": 0,
+    "shippingPrice": 0,
+    "tax": 371,
+    "amount": 4871,
+    "billingCycle": "EVERY_DAY_90",
+    "lineItems": [
+      {
+        "productName": "Finasteride",
+        "sku": "FIN-1MG-90",
+        "dosages": { "strength": "1mg" },
+        "supply": "DAY_90",
+        "price": 4500,
+        "qty": 90,
+        "diseaseState": "HAIR_GROWTH"
+      }
+    ],
+    "shippingAddress": {
+      "addressLineOne": "123 Oak Street",
+      "addressLineTwo": "Apt 4B",
+      "city": "Austin",
+      "state": "TX",
+      "zipCode": "78701"
+    }
+  },
+  {
+    "id": "ord_002",
+    "publicOrderId": "HF-10089",
+    "type": "REFILL",
+    "status": "SENT_TO_PHARMACY",
+    "createdAt": "2025-12-02T11:20:00Z",
+    "userId": "usr_pat001",
+    "approvalDoctorId": "usr_doc001",
+    "subtotal": 4500,
+    "discount": 0,
+    "discountByCode": 0,
+    "shippingPrice": 0,
+    "tax": 371,
+    "amount": 4871,
+    "billingCycle": "EVERY_DAY_90",
+    "lineItems": [
+      {
+        "productName": "Finasteride",
+        "sku": "FIN-1MG-90",
+        "dosages": { "strength": "1mg" },
+        "supply": "DAY_90",
+        "price": 4500,
+        "qty": 90,
+        "diseaseState": "HAIR_GROWTH"
+      }
+    ],
+    "shippingAddress": {
+      "addressLineOne": "123 Oak Street",
+      "addressLineTwo": "Apt 4B",
+      "city": "Austin",
+      "state": "TX",
+      "zipCode": "78701"
+    }
+  },
+  {
+    "id": "ord_003",
+    "publicOrderId": "HF-20050",
+    "type": "MAIN",
+    "status": "AWAITING_REVIEW",
+    "createdAt": "2025-12-01T09:20:00Z",
+    "userId": "usr_pat002",
+    "approvalDoctorId": null,
+    "subtotal": 4500,
+    "discount": 0,
+    "discountByCode": 0,
+    "shippingPrice": 0,
+    "tax": 371,
+    "amount": 4871,
+    "billingCycle": "ONE_TIME_PAYMENT",
+    "lineItems": [
+      {
+        "productName": "Sildenafil",
+        "sku": "SIL-50-10",
+        "dosages": { "strength": "50mg" },
+        "supply": "DAY_30",
+        "price": 4500,
+        "qty": 10,
+        "diseaseState": "SEXUAL_WELLNESS"
+      }
+    ],
+    "shippingAddress": {
+      "addressLineOne": "789 Pine Road",
+      "addressLineTwo": "Suite 100",
+      "city": "Houston",
+      "state": "TX",
+      "zipCode": "77002"
+    }
+  }
+]

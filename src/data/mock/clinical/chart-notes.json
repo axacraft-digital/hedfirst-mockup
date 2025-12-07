@@ -1,0 +1,142 @@
+[
+  {
+    "id": "soap_jacob_001",
+    "patientId": "usr_pat_jacob",
+    "authorId": "usr_doc002",
+    "authorType": "PROVIDER",
+    "createdAt": "2025-11-17T07:55:00Z",
+    "subjective": {
+      "chiefComplaint": "Initial consultation for CJC 1295 + Ipamorelin peptide therapy",
+      "historyOfPresentIllness": "Jacob Henderson is a 29-year-old male seeking CJC 1295 1.2mg + Ipamorelin 2mg monthly for health optimization. This is his first experience with peptide therapy. His primary health goals include muscle growth and recovery, improved sleep quality, injury recovery and healing, athletic performance enhancement, enhanced cognitive function and focus, increased energy and vitality, anti-aging and longevity, and stress management and mood improvement.\n\nPatient reports being very active and working out daily, exercising 4-5 times per week. He states he has had some minor overuse issues in the past from training, so recovery and injury prevention are important to him. He reports no major medical conditions but wants to support his body as he continues to train consistently. His primary motivation for considering peptide therapy is general health optimization and wellness. Patient is comfortable with self-administering subcutaneous injections but will need education on proper technique.",
+      "reviewOfSystems": "No concerns reported. Patient denies any current symptoms or issues."
+    },
+    "objective": {
+      "vitalSigns": "Height: 5'7\" | Weight: 160 lbs | BMI: 25.1",
+      "physicalExam": "Current medications: Multivitamin and creatine 5 grams daily\nAllergies: No known allergies",
+      "labResults": "Recent laboratory results from March 2025:\n• Hepatitis C antibody: Non-reactive\n• TSH: 1.35 (within normal limits)\n• Lipid panel: Normal, no concerns\n• CBC: All values within normal limits\n• HCV antibody: Negative\n• CMP: All values within normal limits except calcium 10.4 (normal range 8.7-10.2)\n• AST: 47 (slightly elevated, normal range 0-40)\n• ALT: 35 (within normal range)\n• Urinalysis: Negative, within normal limits"
+    },
+    "assessment": {
+      "diagnoses": ["Health optimization candidate", "Athletic performance enhancement"],
+      "differentialDiagnoses": [],
+      "clinicalImpression": "29-year-old healthy male candidate for peptide therapy with CJC 1295 and Ipamorelin. Patient has completed the safety questionnaire and uploaded recent comprehensive laboratory work from 2025 showing overall normal results with only minor elevations in calcium (10.4) and AST (47), neither of which is of clinical concern at this time. No contraindications to peptide therapy identified. Patient maintains an active lifestyle with regular exercise 4-5 times weekly, follows a balanced diet focused on whole foods, rarely consumes alcohol, and does not use tobacco or nicotine products. No recent surgeries or procedures. Patient is an appropriate candidate for the requested peptide therapy for health optimization and athletic performance enhancement."
+    },
+    "plan": {
+      "medications": ["CJC 1295 without DAC 1.2mg + Ipamorelin 2mg in 5mL vial"],
+      "instructions": "Inject 10 units subcutaneous nightly 90 minutes after last meal. If well tolerated, may increase to 20 units at week 3. Dispense 5 milliliters with 11 refills, 30-day supply each. Prescription sent on 11/17/2025 at 9:45 AM Eastern Standard Time. Patient will be provided education on subcutaneous peptide injection technique. Patient instructed to reach out with any concerns or questions during treatment.",
+      "followUp": "As needed or if concerns arise",
+      "referrals": null
+    }
+  },
+  {
+    "id": "soap_jacob_002",
+    "patientId": "usr_pat_jacob",
+    "authorId": "usr_doc002",
+    "authorType": "PROVIDER",
+    "createdAt": "2025-12-01T15:00:00Z",
+    "subjective": {
+      "chiefComplaint": "Weight management consultation - adding Semaglutide",
+      "historyOfPresentIllness": "Patient returns for weight management consultation. Currently on peptide therapy with good tolerance. Reports interest in adding GLP-1 medication to support body composition goals. Current weight 160 lbs, goal is to reduce body fat percentage while maintaining muscle mass.",
+      "reviewOfSystems": "No concerns. Peptide therapy well tolerated. Sleep quality improved since starting CJC 1295."
+    },
+    "objective": {
+      "vitalSigns": "Weight: 160 lbs | BP: 118/76",
+      "physicalExam": "Healthy appearing male. No concerning findings.",
+      "labResults": null
+    },
+    "assessment": {
+      "diagnoses": ["Body composition optimization", "Health optimization - ongoing"],
+      "differentialDiagnoses": [],
+      "clinicalImpression": "Active 29-year-old male seeking to optimize body composition. Good candidate for low-dose GLP-1 therapy for fat loss while maintaining muscle mass from resistance training."
+    },
+    "plan": {
+      "medications": ["Semaglutide 0.25mg weekly - starting dose", "Continue CJC 1295 + Ipamorelin as prescribed"],
+      "instructions": "Start Semaglutide at 0.25mg weekly. Maintain high protein intake (1g/lb body weight) to preserve muscle. Continue resistance training. Monitor for GI side effects in first 2 weeks.",
+      "followUp": "Follow-up in 4 weeks for dose assessment",
+      "referrals": null
+    }
+  },
+  {
+    "id": "soap_001",
+    "patientId": "usr_pat001",
+    "authorId": "usr_doc001",
+    "authorType": "PROVIDER",
+    "createdAt": "2024-06-15T11:30:00Z",
+    "subjective": {
+      "chiefComplaint": "Hair thinning at crown and temples",
+      "historyOfPresentIllness": "Patient reports gradual hair loss over past 2 years. Family history of pattern baldness. No recent stressors or medication changes.",
+      "reviewOfSystems": "Denies scalp itching, pain, or skin changes"
+    },
+    "objective": {
+      "vitalSigns": null,
+      "physicalExam": "Photos reviewed - Norwood Stage II-III pattern baldness. No scarring or inflammation noted.",
+      "labResults": null
+    },
+    "assessment": {
+      "diagnoses": ["Androgenetic alopecia"],
+      "differentialDiagnoses": [],
+      "clinicalImpression": "Classic presentation of androgenetic alopecia in 36yo female. Good candidate for Finasteride therapy."
+    },
+    "plan": {
+      "medications": ["Finasteride 1mg daily"],
+      "instructions": "Continue for minimum 6 months to assess efficacy. Take at same time daily.",
+      "followUp": "Follow-up in 3 months to assess progress",
+      "referrals": null
+    }
+  },
+  {
+    "id": "soap_001b",
+    "patientId": "usr_pat001",
+    "authorId": "usr_doc001",
+    "authorType": "PROVIDER",
+    "createdAt": "2024-09-16T14:00:00Z",
+    "subjective": {
+      "chiefComplaint": "3-month follow-up for hair loss treatment",
+      "historyOfPresentIllness": "Patient returns for follow-up. Reports decreased shedding and early signs of regrowth at temples. No side effects from Finasteride. Adherent to daily regimen.",
+      "reviewOfSystems": "No concerns. Denies any new symptoms."
+    },
+    "objective": {
+      "vitalSigns": null,
+      "physicalExam": "Photos compared to baseline - visible improvement in hair density at temples and crown. Hairline appears more defined.",
+      "labResults": null
+    },
+    "assessment": {
+      "diagnoses": ["Androgenetic alopecia - responding to treatment"],
+      "differentialDiagnoses": [],
+      "clinicalImpression": "Excellent response to Finasteride at 3 months. Patient motivated to continue."
+    },
+    "plan": {
+      "medications": ["Continue Finasteride 1mg daily"],
+      "instructions": "Continue current regimen. Consider adding Minoxidil 5% if patient desires accelerated results.",
+      "followUp": "Follow-up in 3 months",
+      "referrals": null
+    }
+  },
+  {
+    "id": "soap_001c",
+    "patientId": "usr_pat001",
+    "authorId": "usr_doc001",
+    "authorType": "PROVIDER",
+    "createdAt": "2024-12-02T10:30:00Z",
+    "subjective": {
+      "chiefComplaint": "6-month follow-up, considering adding topical treatment",
+      "historyOfPresentIllness": "Patient continues on Finasteride with good results. Interested in adding Minoxidil to further enhance results. No side effects reported.",
+      "reviewOfSystems": "No concerns."
+    },
+    "objective": {
+      "vitalSigns": null,
+      "physicalExam": "Continued improvement from 3-month visit. Crown density significantly improved. Temple regrowth maintained.",
+      "labResults": null
+    },
+    "assessment": {
+      "diagnoses": ["Androgenetic alopecia - good treatment response"],
+      "differentialDiagnoses": [],
+      "clinicalImpression": "Sustained response to oral therapy. Good candidate for combination therapy."
+    },
+    "plan": {
+      "medications": ["Continue Finasteride 1mg daily", "Add Minoxidil 5% solution - apply to scalp BID"],
+      "instructions": "Apply Minoxidil to dry scalp morning and evening. Allow to dry before styling. May experience temporary shedding in first 2-4 weeks.",
+      "followUp": "Follow-up in 3 months to assess combination therapy",
+      "referrals": null
+    }
+  }
+]

@@ -1,0 +1,174 @@
+[
+  {
+    "id": "thread_jacob_001",
+    "type": "PATIENT_SUPPORT",
+    "storeId": "store_hedfirst",
+    "createdAt": "2025-11-18T10:00:00Z",
+    "participants": [
+      { "userId": "usr_pat_jacob", "role": "PATIENT", "assignedAt": "2025-11-18T10:00:00Z" },
+      { "userId": "usr_doc002", "role": "PROVIDER", "assignedAt": "2025-11-18T10:05:00Z" }
+    ],
+    "messages": [
+      {
+        "id": "msg_j001",
+        "text": "Hi Dr. Baldwin, I started my peptide injections last night. Just wanted to confirm I'm doing this correctly - I injected 10 units into my abdomen about 90 minutes after dinner. Is that right?",
+        "type": "TEXT",
+        "senderId": "usr_pat_jacob",
+        "createdAt": "2025-11-18T10:00:00Z",
+        "read": true
+      },
+      {
+        "id": "msg_j002",
+        "text": "Hi Jacob! Yes, that's perfect. Abdomen is a great injection site, and 90 minutes post-meal is ideal timing. How did the injection go? Any discomfort?",
+        "type": "TEXT",
+        "senderId": "usr_doc002",
+        "createdAt": "2025-11-18T10:15:00Z",
+        "read": true
+      },
+      {
+        "id": "msg_j003",
+        "text": "It went smoothly! Barely felt it. I'm excited to see how this helps with my recovery and sleep. Thanks for the quick response!",
+        "type": "TEXT",
+        "senderId": "usr_pat_jacob",
+        "createdAt": "2025-11-18T10:20:00Z",
+        "read": true
+      }
+    ]
+  },
+  {
+    "id": "thread_jacob_002",
+    "type": "PATIENT_SUPPORT",
+    "storeId": "store_hedfirst",
+    "createdAt": "2025-12-04T08:30:00Z",
+    "participants": [
+      { "userId": "usr_pat_jacob", "role": "PATIENT", "assignedAt": "2025-12-04T08:30:00Z" },
+      { "userId": "usr_doc002", "role": "PROVIDER", "assignedAt": "2025-12-04T09:00:00Z" }
+    ],
+    "messages": [
+      {
+        "id": "msg_j010",
+        "text": "Quick question about my Semaglutide - I'm about to do my second injection. Should I rotate injection sites or can I use the same spot?",
+        "type": "TEXT",
+        "senderId": "usr_pat_jacob",
+        "createdAt": "2025-12-04T08:30:00Z",
+        "read": true
+      },
+      {
+        "id": "msg_j011",
+        "text": "Great question! Yes, definitely rotate your injection sites. You can use abdomen, thigh, or upper arm. Try to stay at least 1 inch away from your previous injection site. This helps prevent skin irritation and ensures consistent absorption.",
+        "type": "TEXT",
+        "senderId": "usr_doc002",
+        "createdAt": "2025-12-04T09:15:00Z",
+        "read": true
+      },
+      {
+        "id": "msg_j012",
+        "text": "Also, I noticed my appetite has definitely decreased this week. Is that normal this early?",
+        "type": "TEXT",
+        "senderId": "usr_pat_jacob",
+        "createdAt": "2025-12-04T09:20:00Z",
+        "read": false
+      },
+      {
+        "id": "msg_j013",
+        "text": "Yes, that's a great sign! Many patients notice appetite changes within the first 1-2 weeks. Make sure you're still eating enough protein to support your training - aim for at least 120-140g daily. Let me know if you have any GI symptoms like nausea.",
+        "type": "TEXT",
+        "senderId": "usr_doc002",
+        "createdAt": "2025-12-04T10:00:00Z",
+        "read": false
+      }
+    ]
+  },
+  {
+    "id": "thread_001",
+    "type": "PATIENT_SUPPORT",
+    "storeId": "store_hedfirst",
+    "createdAt": "2024-08-20T14:00:00Z",
+    "participants": [
+      { "userId": "usr_pat001", "role": "PATIENT", "assignedAt": "2024-08-20T14:00:00Z" },
+      { "userId": "admin_001", "role": "ADMIN", "assignedAt": "2024-08-20T14:05:00Z" }
+    ],
+    "messages": [
+      {
+        "id": "msg_s001",
+        "text": "Hi, I have a question about my Finasteride prescription. Can I take it with biotin supplements?",
+        "type": "TEXT",
+        "senderId": "usr_pat001",
+        "createdAt": "2024-08-20T14:00:00Z",
+        "read": true
+      },
+      {
+        "id": "msg_s002",
+        "text": "Hi Sarah! Yes, biotin is safe to take alongside Finasteride. Many patients find it helpful for overall hair health. You can get biotin over the counter at any pharmacy. Is there anything else I can help with?",
+        "type": "TEXT",
+        "senderId": "admin_001",
+        "createdAt": "2024-08-20T14:15:00Z",
+        "read": true
+      },
+      {
+        "id": "msg_s003",
+        "text": "That's great, thank you! I'll pick some up today.",
+        "type": "TEXT",
+        "senderId": "usr_pat001",
+        "createdAt": "2024-08-20T14:20:00Z",
+        "read": true
+      }
+    ]
+  },
+  {
+    "id": "thread_001b",
+    "type": "PATIENT_SUPPORT",
+    "storeId": "store_hedfirst",
+    "createdAt": "2025-12-03T11:00:00Z",
+    "participants": [
+      { "userId": "usr_pat001", "role": "PATIENT", "assignedAt": "2025-12-03T11:00:00Z" },
+      { "userId": "usr_doc001", "role": "PROVIDER", "assignedAt": "2025-12-03T11:30:00Z" }
+    ],
+    "messages": [
+      {
+        "id": "msg_s010",
+        "text": "Dr. Chen, I just started the Minoxidil you prescribed. I noticed some extra shedding - is this normal?",
+        "type": "TEXT",
+        "senderId": "usr_pat001",
+        "createdAt": "2025-12-03T11:00:00Z",
+        "read": true
+      },
+      {
+        "id": "msg_s011",
+        "text": "Hi Sarah! Yes, this is completely normal and actually a good sign. It's called the 'shedding phase' and typically lasts 2-4 weeks. The Minoxidil is pushing out the old, weak hairs to make room for stronger, healthier ones. Don't stop using it - this is temporary!",
+        "type": "TEXT",
+        "senderId": "usr_doc001",
+        "createdAt": "2025-12-03T11:45:00Z",
+        "read": false
+      }
+    ]
+  },
+  {
+    "id": "thread_002",
+    "type": "PATIENT_SUPPORT",
+    "storeId": "store_hedfirst",
+    "createdAt": "2025-12-01T09:25:00Z",
+    "participants": [
+      { "userId": "usr_pat002", "role": "PATIENT", "assignedAt": "2025-12-01T09:25:00Z" },
+      { "userId": "admin_001", "role": "ADMIN", "assignedAt": "2025-12-01T09:30:00Z" }
+    ],
+    "messages": [
+      {
+        "id": "msg_m001",
+        "text": "Hi, I just submitted my intake questionnaire. How long does it usually take for a provider to review my case?",
+        "type": "TEXT",
+        "senderId": "usr_pat002",
+        "createdAt": "2025-12-01T09:25:00Z",
+        "read": true
+      },
+      {
+        "id": "msg_m002",
+        "text": "Hi Michael! Thank you for completing your intake. Our providers typically review new cases within 24-48 hours. You'll receive a notification once your consultation is complete. In the meantime, please complete your medical questionnaire if you haven't already. Let me know if you have any questions!",
+        "type": "TEXT",
+        "senderId": "admin_001",
+        "createdAt": "2025-12-01T09:35:00Z",
+        "read": true
+      }
+    ]
+  }
+]
