@@ -1,0 +1,80 @@
+  Proposed Data Architecture
+
+  src/data/
+  ├── patients.json                 # Core patient records (20 patients)
+  │
+  ├── clinical/
+  │   ├── chart-notes.json          # SOAP notes, clinical documentation
+  │   ├── questionnaires.json       # Intake responses
+  │   └── treatments.json           # Subscriptions, treatment plans
+  │
+  ├── communication/
+  │   ├── messages.json             # Threads + messages
+  │   ├── appointments.json         # Scheduled visits
+  │   └── notes.json                # Internal staff notes
+  │
+  ├── financial/
+  │   ├── orders.json               # Order history
+  │   └── payments.json             # Payment methods + transactions
+  │
+  ├── documents/
+  │   └── documents.json            # Uploaded files, ID, consent
+  │
+  ├── audit/
+  │   └── activity-history.json     # Event log
+  │
+  ├── reference/                    # Shared lookup tables
+  │   ├── providers.json            # Dr. Nicole Baldwin, etc.
+  │   ├── disease-states.json       # Peptide Therapy, Weight Management, etc.
+  │   └── products.json             # Product catalog
+  │
+  ├── types.ts                      # All TypeScript interfaces
+  └── index.ts                      # Helper functions + exports
+
+  Key Principles
+
+  1. patientId is the foreign key everywhere - Every record in every file links back to patients.json
+  2. Each file = one API endpoint - Mimics real architecture:
+    - GET /patients → patients.json
+    - GET /patients/:id/chart-notes → filter chart-notes.json
+    - GET /patients/:id/orders → filter orders.json
+  3. Reference data is separate - Providers, products, disease states are shared lookups (avoids duplication)
+  4. Helper functions abstract everything:
+  getPatientById(id)
+  getChartNotesByPatientId(id)
+  getOrdersByPatientId(id)
+  getProviderById(id)
+  5. LLM-friendly generation - You can prompt: "Generate 20 patient records for chart-notes.json following this schema..." Each file is independent.
+
+  Example Schema Sketch
+
+  patients.json:
+  [
+    {
+      "id": "usr_pat001",
+      "firstName": "Jacob",
+      "lastName": "Henderson",
+      "email": "jacob@example.com",
+      "status": "active",
+      ...
+    }
+  ]
+
+  clinical/chart-notes.json:
+  [
+    {
+      "id": "soap_001",
+      "patientId": "usr_pat001",
+      "providerId": "prov_001",
+      "type": "soap",
+      "date": "2025-11-16",
+      "sections": { ... }
+    }
+  ]
+
+  This approach lets you:
+  - Generate one file at a time with another LLM
+  - Keep each file under ~500 lines (manageable)
+  - Add patients incrementally
+  - Have any developer click any patient and see realistic data
+

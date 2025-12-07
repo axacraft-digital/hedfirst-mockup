@@ -175,7 +175,10 @@ export function getTransactionsByOrder(orderId: string): Transaction[] {
 }
 
 // ============================================================================
-// Re-export types
+// Re-export types and modules
 // ============================================================================
 
 export * from "./types"
+export * from "./documents"
+export * from "./notes"
+export * from "./chart-notes"

@@ -1,10 +1,9 @@
 import {
   IconCalendar,
+  IconClipboardList,
   IconCreditCard,
   IconFileText,
-  IconFlask,
   IconHistory,
-  IconLayoutDashboard,
   IconMessage,
   IconNotes,
   IconPill,
@@ -12,6 +11,7 @@ import {
   IconRobot,
   IconStethoscope,
   IconUserCircle,
+  IconVideo,
 } from "@tabler/icons-react"
 import Link from "next/link"
 import { Header } from "@/components/layout/header"
@@ -32,22 +32,25 @@ export default async function PatientDetailLayout({ children, params }: Props) {
     : "Patient"
 
   // Build nav items with patient ID
+  // Ordered by workflow: Identity/Intake → Clinical → Communication → Financial → Utility
   const sidebarNavItems = [
+    // Identity & Intake
     {
       title: "Patient Overview",
       icon: <IconUserCircle />,
       href: `/store-admin/patients/${id}`,
     },
     {
+      title: "Questionnaires",
+      icon: <IconClipboardList />,
+      href: `/store-admin/patients/${id}/questionnaires`,
+    },
+    {
       title: "Documents",
       icon: <IconFileText />,
       href: `/store-admin/patients/${id}/documents`,
     },
-    {
-      title: "Notes",
-      icon: <IconNotes />,
-      href: `/store-admin/patients/${id}/notes`,
-    },
+    // Clinical
     {
       title: "Chart Notes",
       icon: <IconStethoscope />,
@@ -59,25 +62,16 @@ export default async function PatientDetailLayout({ children, params }: Props) {
       href: `/store-admin/patients/${id}/treatments`,
     },
     {
-      title: "AI Assistant",
-      icon: <IconRobot />,
-      href: `/store-admin/patients/${id}/ai`,
+      title: "Consultations",
+      icon: <IconVideo />,
+      href: `/store-admin/patients/${id}/consultations`,
     },
     {
-      title: "Lab Tests",
-      icon: <IconFlask />,
-      href: `/store-admin/patients/${id}/lab-tests`,
+      title: "Notes",
+      icon: <IconNotes />,
+      href: `/store-admin/patients/${id}/notes`,
     },
-    {
-      title: "Orders",
-      icon: <IconReceipt />,
-      href: `/store-admin/patients/${id}/orders`,
-    },
-    {
-      title: "Payments",
-      icon: <IconCreditCard />,
-      href: `/store-admin/patients/${id}/payments`,
-    },
+    // Communication
     {
       title: "Messages",
       icon: <IconMessage />,
@@ -88,15 +82,27 @@ export default async function PatientDetailLayout({ children, params }: Props) {
       icon: <IconCalendar />,
       href: `/store-admin/patients/${id}/appointments`,
     },
+    // Financial
+    {
+      title: "Orders",
+      icon: <IconReceipt />,
+      href: `/store-admin/patients/${id}/orders`,
+    },
+    {
+      title: "Payments",
+      icon: <IconCreditCard />,
+      href: `/store-admin/patients/${id}/payments`,
+    },
+    // Utility
+    {
+      title: "AI Assistant",
+      icon: <IconRobot />,
+      href: `/store-admin/patients/${id}/ai-assistant`,
+    },
     {
       title: "History",
       icon: <IconHistory />,
       href: `/store-admin/patients/${id}/history`,
-    },
-    {
-      title: "Dashboard",
-      icon: <IconLayoutDashboard />,
-      href: `/store-admin/patients/${id}/dashboard`,
     },
   ]
 

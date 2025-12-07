@@ -395,6 +395,43 @@ export interface AdminDiscountCode {
 }
 
 // ============================================================================
+// Patient Note (Quick Notes)
+// ============================================================================
+
+export interface PatientNote {
+  id: string
+  patientId: string
+  title: string
+  content: string
+  createdAt: string
+  createdBy: string
+  createdByRole: "Admin" | "Provider" | "System"
+}
+
+// ============================================================================
+// Patient Document
+// ============================================================================
+
+export type DocumentSource =
+  | "Questionnaire Response"
+  | "Manual Upload"
+  | "Patient Upload"
+  | "EHR Import"
+  | "Provider Upload"
+  | "System Generated"
+
+export interface PatientDocument {
+  id: string
+  patientId: string
+  name: string
+  uploadedAt: string
+  source: DocumentSource
+  fileType: string
+  fileSize: number
+  uploadedBy?: string
+}
+
+// ============================================================================
 // Complete Dataset
 // ============================================================================
 
