@@ -40,6 +40,52 @@ const portals = [
   },
 ]
 
+function PortalCard({ portal }: { portal: (typeof portals)[number] }) {
+  const cardContent = (
+    <Card
+      className={`group relative h-full overflow-hidden transition-all ${
+        portal.disabled
+          ? "cursor-not-allowed opacity-50"
+          : "hover:shadow-lg hover:shadow-primary/5"
+      }`}
+    >
+      <div
+        className={`absolute inset-0 bg-gradient-to-br ${portal.gradient} opacity-0 transition-opacity ${
+          portal.disabled ? "" : "group-hover:opacity-100"
+        }`}
+      />
+      <CardHeader className="relative">
+        <div
+          className={`mb-4 flex h-12 w-12 items-center justify-center rounded-lg ${
+            portal.disabled
+              ? "bg-muted text-muted-foreground"
+              : `bg-muted ${portal.iconColor}`
+          }`}
+        >
+          <portal.icon className="h-6 w-6" />
+        </div>
+        <CardTitle className="text-xl">{portal.title}</CardTitle>
+        {portal.disabled ? (
+          <Badge variant="secondary" className="w-fit text-xs">
+            Coming Soon
+          </Badge>
+        ) : (
+          <Badge className="w-fit bg-emerald-500/10 text-xs text-emerald-600 hover:bg-emerald-500/10 dark:text-emerald-400">
+            Ready to Review
+          </Badge>
+        )}
+        <CardDescription>{portal.description}</CardDescription>
+      </CardHeader>
+    </Card>
+  )
+
+  if (portal.disabled) {
+    return <div>{cardContent}</div>
+  }
+
+  return <Link href={portal.href}>{cardContent}</Link>
+}
+
 export default function PortalPickerPage() {
   return (
     <div className="flex min-h-svh flex-col items-center justify-center bg-gradient-to-b from-background to-muted/20 p-4">
@@ -51,54 +97,9 @@ export default function PortalPickerPage() {
       </div>
 
       <div className="grid w-full max-w-4xl gap-6 md:grid-cols-3">
-        {portals.map((portal) => {
-          const CardWrapper = portal.disabled ? "div" : Link
-          const wrapperProps = portal.disabled
-            ? {}
-            : { href: portal.href }
-
-          return (
-            <CardWrapper key={portal.href} {...wrapperProps}>
-              <Card
-                className={`group relative h-full overflow-hidden transition-all ${
-                  portal.disabled
-                    ? "cursor-not-allowed opacity-50"
-                    : "hover:shadow-lg hover:shadow-primary/5"
-                }`}
-              >
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${portal.gradient} opacity-0 transition-opacity ${
-                    portal.disabled ? "" : "group-hover:opacity-100"
-                  }`}
-                />
-                <CardHeader className="relative">
-                  <div
-                    className={`mb-4 flex h-12 w-12 items-center justify-center rounded-lg ${
-                      portal.disabled
-                        ? "bg-muted text-muted-foreground"
-                        : `bg-muted ${portal.iconColor}`
-                    }`}
-                  >
-                    <portal.icon className="h-6 w-6" />
-                  </div>
-                  <CardTitle className="text-xl">{portal.title}</CardTitle>
-                  {portal.disabled ? (
-                    <Badge variant="secondary" className="text-xs w-fit">
-                      Coming Soon
-                    </Badge>
-                  ) : (
-                    <Badge className="bg-emerald-500/10 text-emerald-600 hover:bg-emerald-500/10 dark:text-emerald-400 text-xs w-fit">
-                      Ready to Review
-                    </Badge>
-                  )}
-                  <CardDescription>
-                    {portal.description}
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-            </CardWrapper>
-          )
-        })}
+        {portals.map((portal) => (
+          <PortalCard key={portal.href} portal={portal} />
+        ))}
       </div>
 
       <p className="mt-12 text-sm text-muted-foreground">
