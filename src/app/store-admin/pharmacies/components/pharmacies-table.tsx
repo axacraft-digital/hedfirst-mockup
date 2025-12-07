@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import type { Pharmacy } from "../data/pharmacy-types"
+import type { Pharmacy } from "@/data/types"
 
 interface Props {
   pharmacies: Pharmacy[]

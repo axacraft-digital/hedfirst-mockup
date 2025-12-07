@@ -16,13 +16,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import LongText from "@/components/long-text"
-import { orders, getProviderById, getProviderDisplayName } from "@/data"
+import { mockOrders, mockProviders, getProviderDisplayName } from "@/data"
 import type { Patient } from "@/data/types"
 import { DataTableColumnHeader } from "./data-table-column-header"
 
 // Get the most recent order for a patient
 function getLastOrderDate(patientId: string): Date | null {
-  const patientOrders = orders.filter((o) => o.userId === patientId)
+  const patientOrders = mockOrders.filter((o) => o.userId === patientId)
   if (patientOrders.length === 0) return null
   const sorted = patientOrders.sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
@@ -157,7 +157,7 @@ export const columns: ColumnDef<Patient>[] = [
     cell: ({ row }) => {
       const providerId = row.original.assignedProviderId
       if (!providerId) return <span className="text-muted-foreground">Unassigned</span>
-      const provider = getProviderById(providerId)
+      const provider = mockProviders.find((p) => p.id === providerId)
       if (!provider) return <span className="text-muted-foreground">Unknown</span>
       return <div className="w-fit text-nowrap">{getProviderDisplayName(provider)}</div>
     },

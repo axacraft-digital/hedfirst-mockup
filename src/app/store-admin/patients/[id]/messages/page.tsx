@@ -20,160 +20,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { getMessageThreadsForUI, type UIMessageThread } from "@/data/messages"
 
-// Message thread types
-type MessageStatus = "unread" | "open" | "resolved"
-type SenderType = "patient" | "provider" | "admin"
-
-interface MessageThread {
-  id: string
-  patientId: string
-  subject: string
-  lastMessage: {
-    preview: string
-    senderType: SenderType
-    senderName: string
-    date: string
-  }
-  status: MessageStatus
-  messageCount: number
-  createdAt: string
-}
-
-// Mock message threads
-const mockThreads: MessageThread[] = [
-  {
-    id: "thread_001",
-    patientId: "usr_pat001",
-    subject: "Question about medication dosage",
-    lastMessage: {
-      preview:
-        "Hi Daria! Thank you for providing this info. I will begin therapy with the provided dose as I understand it has already been shipped...",
-      senderType: "patient",
-      senderName: "Jacob Henderson",
-      date: "2024-11-17T15:30:00Z",
-    },
-    status: "unread",
-    messageCount: 3,
-    createdAt: "2024-11-17T09:30:00Z",
-  },
-  {
-    id: "thread_006",
-    patientId: "usr_pat001",
-    subject: "Lab results ready for review",
-    lastMessage: {
-      preview:
-        "Your recent bloodwork results are in. Your testosterone levels look good at 780 ng/dL. Let's discuss at your next...",
-      senderType: "provider",
-      senderName: "Dr. Nicole Baldwin",
-      date: "2024-11-15T11:20:00Z",
-    },
-    status: "open",
-    messageCount: 1,
-    createdAt: "2024-11-15T11:20:00Z",
-  },
-  {
-    id: "thread_007",
-    patientId: "usr_pat001",
-    subject: "Welcome to Hedfirst - Getting Started",
-    lastMessage: {
-      preview:
-        "Thanks for the thorough onboarding info! I've reviewed everything and scheduled my initial consultation for next week.",
-      senderType: "patient",
-      senderName: "Jacob Henderson",
-      date: "2024-11-12T09:45:00Z",
-    },
-    status: "resolved",
-    messageCount: 4,
-    createdAt: "2024-09-28T14:00:00Z",
-  },
-  {
-    id: "thread_002",
-    patientId: "usr_pat001",
-    subject: "Shipping delay inquiry",
-    lastMessage: {
-      preview:
-        "Your order has been shipped and should arrive within 2-3 business days. Tracking number has been sent to your email.",
-      senderType: "admin",
-      senderName: "Support Team",
-      date: "2024-11-10T16:45:00Z",
-    },
-    status: "resolved",
-    messageCount: 4,
-    createdAt: "2024-11-08T11:20:00Z",
-  },
-  {
-    id: "thread_008",
-    patientId: "usr_pat001",
-    subject: "Prescription renewal reminder",
-    lastMessage: {
-      preview:
-        "Hi Jacob, this is a friendly reminder that your CJC/Ipamorelin prescription will need renewal in 2 weeks. Would you like us to...",
-      senderType: "admin",
-      senderName: "Care Coordinator",
-      date: "2024-11-05T10:00:00Z",
-    },
-    status: "open",
-    messageCount: 1,
-    createdAt: "2024-11-05T10:00:00Z",
-  },
-  {
-    id: "thread_003",
-    patientId: "usr_pat001",
-    subject: "Follow-up on injection technique",
-    lastMessage: {
-      preview:
-        "Great question! For subcutaneous injections, pinch a fold of skin and insert the needle at a 45-degree angle...",
-      senderType: "provider",
-      senderName: "Dr. Nicole Baldwin",
-      date: "2024-10-20T14:30:00Z",
-    },
-    status: "resolved",
-    messageCount: 2,
-    createdAt: "2024-10-20T10:15:00Z",
-  },
-  {
-    id: "thread_004",
-    patientId: "usr_pat001",
-    subject: "Appointment rescheduling request",
-    lastMessage: {
-      preview:
-        "November 25th at 2:00 PM works perfectly.",
-      senderType: "patient",
-      senderName: "Jacob Henderson",
-      date: "2024-10-15T09:00:00Z",
-    },
-    status: "open",
-    messageCount: 5,
-    createdAt: "2024-10-12T14:00:00Z",
-  },
-  // Other patients
-  {
-    id: "thread_005",
-    patientId: "usr_pat001",
-    subject: "Hair loss treatment progress",
-    lastMessage: {
-      preview: "I've noticed some improvement after 3 months. Should I continue with the same dosage?",
-      senderType: "patient",
-      senderName: "Sarah Johnson",
-      date: "2024-11-15T10:00:00Z",
-    },
-    status: "unread",
-    messageCount: 2,
-    createdAt: "2024-11-15T10:00:00Z",
-  },
-]
-
-// Get threads by patient ID
-function getThreadsByPatientId(patientId: string): MessageThread[] {
-  return mockThreads
-    .filter((t) => t.patientId === patientId)
-    .sort(
-      (a, b) =>
-        new Date(b.lastMessage.date).getTime() -
-        new Date(a.lastMessage.date).getTime()
-    )
-}
+// Message types (derived from UI helper)
+type MessageStatus = UIMessageThread["status"]
+type SenderType = UIMessageThread["lastMessage"]["senderType"]
 
 // Status badge styles
 const statusStyles: Record<
@@ -210,7 +61,7 @@ interface Props {
 
 export default function PatientMessagesPage({ params }: Props) {
   const { id } = use(params)
-  const threads = getThreadsByPatientId(id)
+  const threads = getMessageThreadsForUI(id)
 
   const unreadCount = threads.filter((t) => t.status === "unread").length
 

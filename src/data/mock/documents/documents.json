@@ -2,7 +2,7 @@
   {
     "id": "doc_jacob_001",
     "patientId": "usr_pat_jacob",
-    "name": "Peptide Therapy Intake Questionnaire",
+    "name": "Hormone Therapy Intake Questionnaire",
     "uploadedAt": "2025-11-16T17:30:00Z",
     "source": "Questionnaire Response",
     "fileType": "pdf",
@@ -38,7 +38,7 @@
   {
     "id": "doc_jacob_005",
     "patientId": "usr_pat_jacob",
-    "name": "Consent for Peptide Therapy",
+    "name": "Consent for TRT Therapy",
     "uploadedAt": "2025-11-17T08:30:00Z",
     "source": "System Generated",
     "fileType": "pdf",

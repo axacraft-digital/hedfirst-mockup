@@ -19,7 +19,7 @@ import { Separator } from "@/components/ui/separator"
 import { ConfirmDialog } from "@/components/confirm-dialog"
 import { toast } from "@/hooks/use-toast"
 import { Header } from "@/components/layout/header"
-import { pharmacies } from "../data/pharmacy-data"
+import { mockPharmacies as pharmacies } from "@/data"
 
 interface Props {
   params: Promise<{ id: string }>

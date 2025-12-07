@@ -32,11 +32,10 @@ interface Questionnaire {
 
 // All available disease states (subset for mockup)
 const diseaseStates = [
-  "Peptide Therapy",
+  "Hormone Optimization",
   "Weight Management",
   "Hair Growth",
   "Sexual Wellness",
-  "Hormone Therapy",
   "Sleep/Insomnia",
   "Mental Health",
   "Skin Care",
@@ -52,12 +51,12 @@ const diseaseStates = [
 // Mock questionnaire data - generates full list with some completed
 function generateQuestionnaires(patientId: string): Questionnaire[] {
   return diseaseStates.map((diseaseState, index) => {
-    // Make Peptide Therapy and Weight Management completed for our demo patient
+    // Make Hormone Optimization and Weight Management completed for our demo patient
     const isCompleted =
       patientId === "usr_pat001" &&
-      (diseaseState === "Peptide Therapy" || diseaseState === "Weight Management")
+      (diseaseState === "Hormone Optimization" || diseaseState === "Weight Management")
 
-    const isPeptide = diseaseState === "Peptide Therapy"
+    const isHormone = diseaseState === "Hormone Optimization"
     const isWeight = diseaseState === "Weight Management"
 
     return {
@@ -65,9 +64,9 @@ function generateQuestionnaires(patientId: string): Questionnaire[] {
       patientId,
       diseaseState,
       status: isCompleted ? "completed" : "no_purchase",
-      startedDate: isPeptide ? "2025-11-16" : isWeight ? "2025-10-01" : null,
-      completedDate: isPeptide ? "2025-11-16" : isWeight ? "2025-10-01" : null,
-      rxExpireDate: isPeptide ? "2026-11-16" : isWeight ? "2026-10-01" : null,
+      startedDate: isHormone ? "2025-11-16" : isWeight ? "2025-10-01" : null,
+      completedDate: isHormone ? "2025-11-16" : isWeight ? "2025-10-01" : null,
+      rxExpireDate: isHormone ? "2026-11-16" : isWeight ? "2026-10-01" : null,
       questionnaireLink: `https://app.hedfirst.com/questionnaire/${diseaseState.toLowerCase().replace(/\s+/g, "-")}`,
     }
   })

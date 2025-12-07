@@ -27,113 +27,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { cn } from "@/lib/utils"
-
-// Order types
-type OrderStatus =
-  | "pending"
-  | "processing"
-  | "processed"
-  | "shipped"
-  | "completed"
-  | "canceled"
-
-interface OrderItem {
-  id: string
-  name: string
-  quantity: number
-  price: number // in cents
-}
-
-interface PatientOrder {
-  id: string
-  publicOrderId: string
-  patientId: string
-  status: OrderStatus
-  date: string
-  items: OrderItem[]
-  total: number // in cents
-}
-
-// Mock orders data
-const mockOrders: PatientOrder[] = [
-  {
-    id: "ord_jacob_001",
-    publicOrderId: "HF-1129",
-    patientId: "usr_pat_jacob",
-    status: "processed",
-    date: "2024-11-16T10:30:00Z",
-    items: [
-      {
-        id: "item_001",
-        name: "CJC/ Ipamorelin 5mL",
-        quantity: 1,
-        price: 27300,
-      },
-      {
-        id: "item_002",
-        name: "Consultation Fee",
-        quantity: 1,
-        price: 9000,
-      },
-    ],
-    total: 36300,
-  },
-  {
-    id: "ord_jacob_002",
-    publicOrderId: "HF-1128",
-    patientId: "usr_pat_jacob",
-    status: "shipped",
-    date: "2024-11-10T14:15:00Z",
-    items: [
-      {
-        id: "item_003",
-        name: "CJC/ Ipamorelin 5mL",
-        quantity: 1,
-        price: 27300,
-      },
-    ],
-    total: 27300,
-  },
-  {
-    id: "ord_jacob_003",
-    publicOrderId: "HF-1100",
-    patientId: "usr_pat_jacob",
-    status: "completed",
-    date: "2024-10-01T09:00:00Z",
-    items: [
-      {
-        id: "item_004",
-        name: "Telehealth Membership",
-        quantity: 1,
-        price: 1900,
-      },
-    ],
-    total: 1900,
-  },
-  // Other patients
-  {
-    id: "ord_sarah_001",
-    publicOrderId: "HF-1050",
-    patientId: "usr_pat001",
-    status: "processing",
-    date: "2024-09-15T11:00:00Z",
-    items: [
-      {
-        id: "item_005",
-        name: "Finasteride 1mg (90 day)",
-        quantity: 1,
-        price: 8500,
-      },
-    ],
-    total: 8500,
-  },
-]
+import { mockOrders } from "@/data"
+import type { Order, OrderStatus } from "@/data/types"
 
 // Get orders by patient ID
-function getOrdersByPatientId(patientId: string): PatientOrder[] {
+function getOrdersByPatientId(patientId: string): Order[] {
   return mockOrders
-    .filter((o) => o.patientId === patientId)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .filter((o) => o.userId === patientId)
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 }
 
 // Format currency
@@ -153,33 +54,57 @@ function formatDate(isoString: string): string {
   }).format(date)
 }
 
-// Status badge styles
+// Status badge styles (maps to centralized OrderStatus type)
 const statusStyles: Record<
   OrderStatus,
   { label: string; className: string }
 > = {
-  pending: {
-    label: "Pending",
+  NEW: {
+    label: "New",
+    className: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200",
+  },
+  AWAITING_REVIEW: {
+    label: "Awaiting Review",
     className: "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200",
   },
-  processing: {
-    label: "Processing",
-    className: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
-  },
-  processed: {
-    label: "Processed",
+  APPROVED: {
+    label: "Approved",
     className: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200",
   },
-  shipped: {
+  PAID: {
+    label: "Paid",
+    className: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
+  },
+  SENT_TO_PHARMACY: {
+    label: "Sent to Pharmacy",
+    className: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
+  },
+  ORDER_SHIPPED: {
     label: "Shipped",
     className: "bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-200",
   },
-  completed: {
+  COMPLETED: {
     label: "Completed",
     className: "bg-neutral-100 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200",
   },
-  canceled: {
+  DENIED: {
+    label: "Denied",
+    className: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
+  },
+  CANCELED: {
     label: "Canceled",
+    className: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
+  },
+  PAUSED: {
+    label: "Paused",
+    className: "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
+  },
+  ACTIVE: {
+    label: "Active",
+    className: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
+  },
+  FAILED: {
+    label: "Failed",
     className: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
   },
 }
@@ -270,24 +195,24 @@ export default function PatientOrdersPage({ params }: Props) {
                                 #{order.publicOrderId}
                               </span>
                               <span className="text-muted-foreground ml-2 text-sm">
-                                ({order.items.length} item
-                                {order.items.length !== 1 ? "s" : ""})
+                                ({order.lineItems?.length ?? 0} item
+                                {(order.lineItems?.length ?? 0) !== 1 ? "s" : ""})
                               </span>
                             </div>
                           </TableCell>
                           <TableCell>
                             <Badge
                               variant="outline"
-                              className={statusStyle.className}
+                              className={statusStyle?.className ?? ""}
                             >
-                              {statusStyle.label}
+                              {statusStyle?.label ?? order.status}
                             </Badge>
                           </TableCell>
                           <TableCell className="text-muted-foreground">
-                            {formatDate(order.date)}
+                            {formatDate(order.createdAt)}
                           </TableCell>
                           <TableCell className="text-right font-medium">
-                            {formatCurrency(order.total)}
+                            {formatCurrency(order.amount)}
                           </TableCell>
                           <TableCell>
                             <DropdownMenu>
@@ -326,18 +251,18 @@ export default function PatientOrdersPage({ params }: Props) {
                           <TableRow>
                             <TableCell colSpan={6} className="bg-muted/20 p-0">
                               <div className="divide-y">
-                                {order.items.map((item) => (
+                                {order.lineItems?.map((item, idx) => (
                                   <div
-                                    key={item.id}
+                                    key={`${order.id}-item-${idx}`}
                                     className="flex items-center justify-between py-3 pl-14 pr-4"
                                   >
                                     <div className="flex items-center gap-2">
                                       <span className="font-medium">
-                                        {item.name}
+                                        {item.productName}
                                       </span>
-                                      {item.quantity > 1 && (
+                                      {(item.qty ?? 1) > 1 && (
                                         <span className="text-muted-foreground text-sm">
-                                          x{item.quantity}
+                                          x{item.qty}
                                         </span>
                                       )}
                                     </div>

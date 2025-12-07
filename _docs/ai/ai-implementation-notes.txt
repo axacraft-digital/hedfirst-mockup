@@ -1,0 +1,166 @@
+Framework: Evaluate AI Infrastructure on These Criteria
+
+  | Criterion          | Why It Matters for Healthcare                        |
+  |--------------------|------------------------------------------------------|
+  | HIPAA compliance   | Must have BAA, audit logging, data controls          |
+  | Multi-model access | Don't lock into one vendor (Anthropic, OpenAI, etc.) |
+  | Cost optimization  | AI is expensive; caching/routing saves $$$$          |
+  | Observability      | Track usage, costs, errors per patient/provider      |
+  | Reliability        | Healthcare can't have downtime (fallback/retries)    |
+  | Flexibility        | AI landscape changes fast; avoid hard lock-in        |
+
+  ---
+  Option 1: AWS Bedrock
+
+  What it is: Unified API for multiple LLMs (Anthropic, Meta, Cohere, Amazon Titan, etc.)
+
+  Pros:
+  - ✅ HIPAA eligible with BAA from AWS
+  - ✅ Multi-model (switch providers without code changes)
+  - ✅ Guardrails built-in for safety/content filtering
+  - ✅ VPC isolation (data never leaves your AWS account)
+  - ✅ Already on AWS (you use ECS) — infrastructure synergy
+  - ✅ Enterprise-grade monitoring, logging, compliance
+
+  Cons:
+  - ❌ AWS lock-in (hard to move off later)
+  - ❌ Abstraction lag (Bedrock APIs lag behind native provider APIs)
+  - ❌ Cost (Bedrock markup + AWS data transfer costs)
+  - ❌ Complexity (IAM roles, VPCs, AWS-specific setup)
+  - ❌ Feature gaps (not all provider features available)
+
+  Best for: Enterprises already heavily on AWS, strict compliance needs, willing to trade flexibility for integration.
+
+  ---
+  Option 2: Vercel AI Gateway
+
+  What it is: Intelligent proxy that sits between your app and LLM APIs (Anthropic, OpenAI, etc.)
+
+  Pros:
+  - ✅ No vendor lock-in (just a proxy — can remove anytime)
+  - ✅ Native APIs (direct access to latest Anthropic/OpenAI features)
+  - ✅ Semantic caching (huge cost savings on repeated queries)
+  - ✅ Simple (drop-in replacement for existing API calls)
+  - ✅ Analytics (usage, cost, latency tracking built-in)
+  - ✅ Rate limiting & fallbacks (automatic retry/failover)
+  - ✅ Works with your Next.js stack
+
+  Cons:
+  - ❌ Newer product (less battle-tested than Bedrock)
+  - ❌ Multiple BAAs needed (Anthropic, OpenAI, Vercel)
+  - ❌ Less healthcare-specific (no built-in HIPAA guardrails)
+  - ❌ Vercel dependency (another vendor in the mix)
+  - ❌ Data routing (requests go through Vercel infrastructure)
+
+  Best for: Teams that want simplicity, cost optimization, and direct access to latest LLM features. Willing to manage compliance per-provider.
+
+  ---
+  Option 3: Hybrid / DIY (What I'd Recommend for V2)
+
+  Build your own lightweight abstraction + use native APIs:
+
+  // Your abstraction layer
+  interface LLMProvider {
+    generateResponse(prompt: string, config: GenerationConfig): Promise<Response>
+    getUsage(): UsageStats
+    testConnection(): Promise<boolean>
+  }
+
+  // Implementations
+  class AnthropicProvider implements LLMProvider { /* native SDK */ }
+  class OpenAIProvider implements LLMProvider { /* native SDK */ }
+
+  // Optional: Add Vercel AI Gateway for caching/analytics
+  const anthropic = new AnthropicProvider({
+    apiKey: process.env.ANTHROPIC_KEY,
+    gateway: process.env.USE_VERCEL_GATEWAY ? 'vercel' : 'direct'
+  })
+
+  Why this approach:
+  - ✅ No hard lock-in (abstraction is yours, swap providers easily)
+  - ✅ Native features (direct SDK access)
+  - ✅ Optional optimization (add Vercel Gateway for caching without dependency)
+  - ✅ Direct BAAs (with Anthropic, OpenAI — simpler compliance)
+  - ✅ Cost control (choose when to cache, route, fallback)
+
+  What you build:
+  - Provider abstraction interface (yours, ~200 lines)
+  - Config management (which provider for which use case)
+  - Audit logging (HIPAA requirement)
+  - Optional: Add Vercel Gateway for caching layer
+
+  ---
+  Specific Recommendation for V2
+
+  Start with: Direct native APIs + your own abstraction
+
+  Add later: Vercel AI Gateway as caching layer (optional optimization)
+
+  Consider Bedrock if: You go all-in on AWS, need VPC isolation, enterprise compliance frameworks
+
+  Why This Sequence?
+
+  Phase 1 (V2 MVP):
+  Your App → Anthropic SDK → Claude API
+  Your App → OpenAI SDK → GPT API
+  - Simplest to build
+  - Direct BAAs (Anthropic, OpenAI)
+  - No abstraction lag
+  - Learn actual usage patterns
+
+  Phase 2 (Optimization):
+  Your App → [Vercel AI Gateway] → Anthropic/OpenAI
+  - Add semantic caching (30-50% cost reduction)
+  - Get analytics/monitoring
+  - Still using native APIs underneath
+  - Can remove gateway if needed
+
+  Phase 3 (Enterprise, if needed):
+  Your App → AWS Bedrock → Multiple LLMs
+  - If customers demand AWS-only infrastructure
+  - If compliance requires VPC isolation
+  - If multi-model switching is critical
+
+  ---
+  Decision Matrix
+
+  | Your Priority            | Choose                                 |
+  |--------------------------|----------------------------------------|
+  | Simplicity + flexibility | Native APIs + your abstraction         |
+  | Cost optimization        | Vercel AI Gateway (caching)            |
+  | AWS-native compliance    | AWS Bedrock                            |
+  | Latest features first    | Native APIs (no gateway)               |
+  | B2B enterprise sales     | Consider Bedrock (checkbox for buyers) |
+
+  ---
+  For Your V2 Mockup
+
+  Mock data should reflect the abstraction you designed:
+  // This maps to your "AI Use Cases" settings page
+  const aiUseCases = [
+    {
+      id: 'chart-notes',
+      name: 'Chart Note Summarization',
+      provider: 'anthropic',  // References integration
+      model: 'claude-sonnet-4.5',
+      config: { temperature: 0.3, maxTokens: 4096 }
+    },
+    {
+      id: 'patient-messages',
+      name: 'Patient Message Drafting',
+      provider: 'openai',  // Cost optimization
+      model: 'gpt-4o-mini',
+      config: { temperature: 0.5, maxTokens: 2048 }
+    }
+  ]
+
+  This design works with any underlying infrastructure (native APIs, Vercel Gateway, or Bedrock).
+
+  ---
+  My Recommendation
+
+  V2 Launch: Native APIs + lightweight abstraction (no gateway)
+  V2.1: Add Vercel AI Gateway for caching/cost optimization
+  Enterprise tier: Consider Bedrock if AWS-only compliance is a customer requirement
+
+  This gives you maximum flexibility while keeping implementation simple.

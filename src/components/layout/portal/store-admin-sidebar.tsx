@@ -1,13 +1,16 @@
 import {
   IconBox,
+  IconBrain,
   IconCreditCard,
   IconDiscount,
   IconLayoutDashboard,
   IconMessage,
   IconPill,
+  IconPlugConnected,
   IconReceipt,
   IconSettings,
   IconStethoscope,
+  IconTruck,
   IconUsers,
   IconUserShield,
 } from "@tabler/icons-react"
@@ -62,11 +65,6 @@ export const storeAdminSidebar: SidebarData = {
           url: "/store-admin/products",
           icon: IconPill,
         },
-        {
-          title: "Discount Codes",
-          url: "/store-admin/discounts",
-          icon: IconDiscount,
-        },
       ],
     },
     {
@@ -107,6 +105,26 @@ export const storeAdminSidebar: SidebarData = {
           title: "Billing",
           url: "/store-admin/billing",
           icon: IconCreditCard,
+        },
+        {
+          title: "Shipping",
+          url: "/store-admin/shipping",
+          icon: IconTruck,
+        },
+        {
+          title: "Discount Codes",
+          url: "/store-admin/discounts",
+          icon: IconDiscount,
+        },
+        {
+          title: "Hedfirst AI",
+          url: "/store-admin/ai",
+          icon: IconBrain,
+        },
+        {
+          title: "Integrations",
+          url: "/store-admin/integrations",
+          icon: IconPlugConnected,
         },
       ],
     },

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "pharm_001",
+    "name": "Empower Pharmacy",
+    "address": "5980 W Sam Houston Pkwy N, Suite 100, Houston, TX 77041",
+    "phone": "(832) 678-4417",
+    "pic": "Dr. Sarah Mitchell",
+    "externalPharmacyId": "DOSESPOT-EMP-001",
+    "state": "TX"
+  },
+  {
+    "id": "pharm_002",
+    "name": "Belmar Pharmacy",
+    "address": "12860 W Cedar Dr, Suite 210, Lakewood, CO 80228",
+    "phone": "(800) 525-9473",
+    "pic": "James Rodriguez",
+    "externalPharmacyId": "DOSESPOT-BEL-002",
+    "state": "CO"
+  },
+  {
+    "id": "pharm_003",
+    "name": "Hallandale Pharmacy",
+    "address": "1109 E Hallandale Beach Blvd, Hallandale Beach, FL 33009",
+    "phone": "(954) 455-3822",
+    "pic": "Maria Gonzalez",
+    "externalPharmacyId": "DOSESPOT-HAL-003",
+    "state": "FL"
+  },
+  {
+    "id": "pharm_004",
+    "name": "Curexa Pharmacy",
+    "address": "5005 LBJ Fwy, Suite 250, Dallas, TX 75244",
+    "phone": "(469) 444-8767",
+    "pic": "Dr. Michael Chen",
+    "externalPharmacyId": "DOSESPOT-CUR-004",
+    "state": "TX"
+  }
+]

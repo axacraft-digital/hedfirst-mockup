@@ -13,7 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import type { StoreUser } from "../data/users-data"
+import type { StoreUser } from "@/data/types"
 import { DataTableColumnHeader } from "./data-table-column-header"
 
 // Status badge styles matching the admin kit

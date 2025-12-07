@@ -1,7 +1,7 @@
 [
   {
     "id": "appt_jacob_001",
-    "name": "Initial Peptide Therapy Consultation",
+    "name": "Initial Hormone Therapy Consultation",
     "type": "VIDEO",
     "status": "COMPLETED",
     "patientId": "usr_pat_jacob",

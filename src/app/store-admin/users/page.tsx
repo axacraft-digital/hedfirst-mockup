@@ -11,7 +11,7 @@ import { Header } from "@/components/layout/header"
 import { AddUserButton } from "./components/add-user-button"
 import { columns } from "./components/users-columns"
 import { UsersTable } from "./components/users-table"
-import { storeUsers } from "./data/users-data"
+import { mockStoreUsers } from "@/data"
 
 export default function StoreUsersPage() {
   return (
@@ -52,7 +52,7 @@ export default function StoreUsersPage() {
         </div>
 
         {/* Users Table */}
-        <UsersTable data={storeUsers} columns={columns} />
+        <UsersTable data={mockStoreUsers} columns={columns} />
       </div>
     </>
   )

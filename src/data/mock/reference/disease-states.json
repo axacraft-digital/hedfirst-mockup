@@ -21,10 +21,10 @@
     "active": true
   },
   {
-    "id": "ds_peptide",
-    "code": "PEPTIDE_THERAPY",
-    "name": "Peptide Therapy",
-    "description": "CJC 1295, Ipamorelin, and other peptide protocols for optimization",
+    "id": "ds_hormone",
+    "code": "HORMONE_THERAPY",
+    "name": "Hormone Optimization",
+    "description": "Testosterone replacement therapy and hormone optimization protocols",
     "active": true
   },
   {

@@ -2,8 +2,8 @@
   {
     "id": "note_jacob_001",
     "patientId": "usr_pat_jacob",
-    "title": "Initial peptide consultation completed",
-    "content": "Patient completed initial consultation with Dr. Baldwin for peptide therapy. Approved for CJC 1295 + Ipamorelin protocol.\n\nKey points:\n- Patient is 29yo male, very active (4-5x/week exercise)\n- Primary goals: muscle recovery, sleep improvement, athletic performance\n- Labs reviewed and within normal limits\n- Comfortable with self-injection after education\n\nPrescription sent to pharmacy. Follow-up as needed.",
+    "title": "Initial TRT consultation completed",
+    "content": "Patient completed initial consultation with Dr. Baldwin for testosterone replacement therapy. Approved for Testosterone Cypionate protocol.\n\nKey points:\n- Patient is 29yo male, very active (4-5x/week exercise)\n- Primary goals: energy improvement, muscle recovery, strength optimization\n- Labs confirmed low-normal total T, low free T\n- Comfortable with self-injection after IM education\n\nPrescription sent to pharmacy. Follow-up in 6 weeks for labs.",
     "createdAt": "2025-11-17T09:00:00Z",
     "createdBy": "Dr. Nicole Baldwin",
     "createdByRole": "Provider"
@@ -11,8 +11,8 @@
   {
     "id": "note_jacob_002",
     "patientId": "usr_pat_jacob",
-    "title": "Insurance verification - peptide therapy",
-    "content": "Verified patient's insurance coverage. Peptide therapy is not covered by insurance - patient will pay out of pocket.\n\nPayment method on file: VISA ending in 4242\nMonthly cost: $75 for CJC 1295 + Ipamorelin",
+    "title": "Insurance verification - TRT",
+    "content": "Verified patient's insurance coverage. Testosterone therapy is not covered by insurance - patient will pay out of pocket.\n\nPayment method on file: VISA ending in 4242\nEvery 10 weeks cost: $89 for Testosterone Cypionate 10mL vial",
     "createdAt": "2025-11-16T17:15:00Z",
     "createdBy": "Admin Staff",
     "createdByRole": "Admin"
@@ -29,8 +29,8 @@
   {
     "id": "note_jacob_004",
     "patientId": "usr_pat_jacob",
-    "title": "Patient reports improved sleep",
-    "content": "Patient messaged reporting improved sleep quality since starting peptide therapy. Also notes faster recovery between workouts. No side effects reported.\n\nWill continue current protocol.",
+    "title": "Patient reports improved energy",
+    "content": "Patient messaged reporting improved energy levels since starting testosterone therapy. Also notes faster recovery between workouts and better motivation. No injection site reactions or side effects reported.\n\nWill continue current protocol and recheck labs at 6-week mark.",
     "createdAt": "2025-12-04T10:30:00Z",
     "createdBy": "Dr. Nicole Baldwin",
     "createdByRole": "Provider"

@@ -8,7 +8,7 @@
     "status": "COMPLETED",
     "amount": 8119,
     "currency": "USD",
-    "description": "Initial consultation + CJC 1295 peptide therapy",
+    "description": "Initial consultation + Testosterone Cypionate TRT",
     "processedAt": "2025-11-17T10:02:00Z",
     "createdAt": "2025-11-17T10:00:00Z"
   },
@@ -34,7 +34,7 @@
     "status": "PENDING",
     "amount": 8119,
     "currency": "USD",
-    "description": "CJC 1295 peptide refill",
+    "description": "Testosterone Cypionate refill",
     "processedAt": "2025-12-05T09:00:00Z",
     "createdAt": "2025-12-05T09:00:00Z"
   },

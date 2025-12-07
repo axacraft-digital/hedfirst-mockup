@@ -52,21 +52,21 @@ const mockThreadDetails: MessageThreadDetail[] = [
         senderType: "patient",
         senderName: "Jacob Henderson",
         content:
-          "Hi, I just received my CJC/Ipamorelin order but I'm confused about the dosage instructions. The label says 10 units but I thought I was supposed to start at a higher dose. Can you clarify?",
+          "Hi, I just did my first testosterone injection this morning. I wanted to confirm I did it correctly - I injected 0.5mL into my thigh intramuscularly. Is that the right technique?",
         date: "2024-11-17T09:30:00Z",
       },
       {
         id: "msg_001b",
         senderType: "provider",
         senderName: "Dr. Nicole Baldwin",
-        content: `Hi Jacob! Great question. The 10 units is the correct starting dose. Here are some tips to maximize your results:
+        content: `Hi Jacob! Yes, that sounds perfect. The thigh is a great injection site for IM injections. Here are some tips to maximize your results:
 
-**Tips to Maximize Results**
-• Avoid eating for **90 minutes before dosing**
-• Focus on high-protein meals
+**Tips for TRT Success**
+• Inject at the **same time each week** for consistency
+• Rotate injection sites between thighs and deltoids
+• Focus on high-protein meals to support muscle recovery
 • Resistance training enhances benefits
-• Keep a regular sleep schedule
-• Minimize alcohol intake (disrupts GH release)
+• Stay hydrated and get adequate sleep
 
 Let me know if you have any other questions!`,
         date: "2024-11-17T13:04:00Z",
@@ -76,7 +76,7 @@ Let me know if you have any other questions!`,
         senderType: "patient",
         senderName: "Jacob Henderson",
         content:
-          "Hi Daria! Thank you for providing this info. I will begin therapy with the provided dose as I understand it has already been shipped to me, however, I am VERY disappointed that this new blend was sent to me rather than the one I ordered. Looking at the blend, both contain 2mg of Ipamorelin - therefore, it is NOT the same and is NOT a higher concentrate of Ipamorelin as you have stated. I am disappointed by your team's lack of clarity on this. Do NOT refill my order unless it is with the original strength I ordered, or unless I confirm I would like to continue with this new formulation.",
+          "Thanks Dr. Baldwin! That's really helpful. One more question - I noticed a small amount of oil leaking out after I removed the needle. Is that normal? Should I be concerned about the full dose not being absorbed?",
         date: "2024-11-17T15:30:00Z",
       },
     ],

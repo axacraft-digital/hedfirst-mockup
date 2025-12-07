@@ -1,0 +1,17 @@
+Based on your migration reports, yes, you created mock data for all of these:
+
+  | Menu Item        | Mock Data File                                       | Records   |
+  |------------------|------------------------------------------------------|-----------|
+  | Patient Overview | Composite (uses patient + provider + disease states) | -         |
+  | Questionnaires   | clinical/questionnaires.json                         | 4         |
+  | Documents        | documents/documents.json                             | 18        |
+  | Chart Notes      | clinical/chart-notes.json                            | 5         |
+  | Treatments       | clinical/treatments.json                             | 4         |
+  | Consultations    | clinical/consultations.json                          | 6         |
+  | Notes            | communication/notes.json                             | 10 ✅      |
+  | Messages         | communication/messages.json                          | 5 threads |
+  | Appointments     | communication/appointments.json                      | 8         |
+  | Orders           | financial/orders.json                                | 6         |
+  | Payments         | payment-methods.json + payment-history.json          | 4 + 6     |
+  | History          | audit/activity-history.json                          | 26 events |
+  | AI Assistant     | (Feature, not data)                                  | -         |

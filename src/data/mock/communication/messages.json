@@ -11,7 +11,7 @@
     "messages": [
       {
         "id": "msg_j001",
-        "text": "Hi Dr. Baldwin, I started my peptide injections last night. Just wanted to confirm I'm doing this correctly - I injected 10 units into my abdomen about 90 minutes after dinner. Is that right?",
+        "text": "Hi Dr. Baldwin, I did my first testosterone injection this morning. Just wanted to confirm I'm doing this correctly - I injected 0.5mL into my thigh intramuscularly. Is that right?",
         "type": "TEXT",
         "senderId": "usr_pat_jacob",
         "createdAt": "2025-11-18T10:00:00Z",
@@ -19,7 +19,7 @@
       },
       {
         "id": "msg_j002",
-        "text": "Hi Jacob! Yes, that's perfect. Abdomen is a great injection site, and 90 minutes post-meal is ideal timing. How did the injection go? Any discomfort?",
+        "text": "Hi Jacob! Yes, that's perfect. The thigh is a great injection site for IM injections. Make sure to rotate between left and right thigh each week, or you can also use the deltoid muscle. How did the injection go? Any discomfort?",
         "type": "TEXT",
         "senderId": "usr_doc002",
         "createdAt": "2025-11-18T10:15:00Z",
@@ -27,7 +27,7 @@
       },
       {
         "id": "msg_j003",
-        "text": "It went smoothly! Barely felt it. I'm excited to see how this helps with my recovery and sleep. Thanks for the quick response!",
+        "text": "It went smoothly! A little pressure but no pain. I'm excited to see how this helps with my energy and recovery. Thanks for the quick response!",
         "type": "TEXT",
         "senderId": "usr_pat_jacob",
         "createdAt": "2025-11-18T10:20:00Z",

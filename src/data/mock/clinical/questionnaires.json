@@ -3,19 +3,19 @@
     "id": "quest_jacob_001",
     "patientId": "usr_pat_jacob",
     "type": "INTAKE",
-    "title": "Peptide Therapy Intake Questionnaire",
-    "diseaseStateId": "ds_peptide",
+    "title": "Hormone Therapy Intake Questionnaire",
+    "diseaseStateId": "ds_hormone",
     "status": "COMPLETED",
     "version": "2.1",
     "questions": [
-      { "id": "q1", "text": "What are your primary health goals?", "type": "MULTI_CHOICE", "options": ["Muscle growth", "Improved sleep", "Recovery", "Anti-aging", "Energy", "Cognitive function"], "required": true },
+      { "id": "q1", "text": "What symptoms are you experiencing?", "type": "MULTI_CHOICE", "options": ["Fatigue", "Low energy", "Decreased muscle mass", "Poor recovery", "Low motivation", "Decreased strength"], "required": true },
       { "id": "q2", "text": "How often do you exercise per week?", "type": "SINGLE_CHOICE", "options": ["0-1 times", "2-3 times", "4-5 times", "6+ times"], "required": true },
       { "id": "q3", "text": "Do you have any known allergies?", "type": "TEXT", "required": true },
       { "id": "q4", "text": "Are you comfortable with self-administered injections?", "type": "SINGLE_CHOICE", "options": ["Yes", "No", "Need training"], "required": true },
-      { "id": "q5", "text": "Please upload recent lab work (within 6 months)", "type": "FILE_UPLOAD", "required": true }
+      { "id": "q5", "text": "Please upload recent lab work including testosterone levels", "type": "FILE_UPLOAD", "required": true }
     ],
     "answers": [
-      { "questionId": "q1", "value": ["Muscle growth", "Improved sleep", "Recovery", "Anti-aging", "Energy", "Cognitive function"] },
+      { "questionId": "q1", "value": ["Fatigue", "Low energy", "Poor recovery", "Decreased strength"] },
       { "questionId": "q2", "value": "4-5 times" },
       { "questionId": "q3", "value": "None known" },
       { "questionId": "q4", "value": "Need training" },

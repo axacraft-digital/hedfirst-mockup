@@ -28,178 +28,37 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-
-// Payment method types
-type CardBrand = "visa" | "mastercard" | "amex" | "discover" | "other"
-type PaymentStatus = "processed" | "pending" | "failed" | "refunded"
-
-interface PaymentMethod {
-  id: string
-  patientId: string
-  brand: CardBrand
-  last4: string
-  expMonth: number
-  expYear: number
-  isDefault: boolean
-  cardholderName: string
-}
-
-interface PaymentTransaction {
-  id: string
-  patientId: string
-  transactionId: string
-  date: string
-  amount: number // in cents
-  brand: CardBrand
-  last4: string
-  orderId: string
-  status: PaymentStatus
-}
-
-// Mock payment methods data
-const mockPaymentMethods: PaymentMethod[] = [
-  {
-    id: "pm_001",
-    patientId: "usr_pat001",
-    brand: "visa",
-    last4: "8292",
-    expMonth: 12,
-    expYear: 2025,
-    isDefault: true,
-    cardholderName: "Jacob Henderson",
-  },
-  {
-    id: "pm_002",
-    patientId: "usr_pat001",
-    brand: "mastercard",
-    last4: "4521",
-    expMonth: 3,
-    expYear: 2026,
-    isDefault: false,
-    cardholderName: "Jacob Henderson",
-  },
-  {
-    id: "pm_003",
-    patientId: "usr_pat002",
-    brand: "visa",
-    last4: "1234",
-    expMonth: 8,
-    expYear: 2025,
-    isDefault: true,
-    cardholderName: "Sarah Johnson",
-  },
-  {
-    id: "pm_004",
-    patientId: "usr_pat003",
-    brand: "amex",
-    last4: "3456",
-    expMonth: 11,
-    expYear: 2026,
-    isDefault: true,
-    cardholderName: "Michael Thompson",
-  },
-]
-
-// Mock payment history data
-const mockPaymentHistory: PaymentTransaction[] = [
-  {
-    id: "txn_001",
-    patientId: "usr_pat001",
-    transactionId: "pt_txn_7cA6a76HXeL4gUnwjTJ4So",
-    date: "2025-11-17T10:30:00Z",
-    amount: 26488,
-    brand: "visa",
-    last4: "8292",
-    orderId: "HF-1129-S-1",
-    status: "processed",
-  },
-  {
-    id: "txn_002",
-    patientId: "usr_pat001",
-    transactionId: "pt_txn_3x1rnLz9OhszHfb3L7zARH",
-    date: "2025-11-16T14:15:00Z",
-    amount: 8719,
-    brand: "visa",
-    last4: "8292",
-    orderId: "HF-1129-OTP",
-    status: "processed",
-  },
-  {
-    id: "txn_003",
-    patientId: "usr_pat001",
-    transactionId: "pt_txn_9kLmN2pQrStUvWxYz1234",
-    date: "2025-10-17T09:00:00Z",
-    amount: 26488,
-    brand: "visa",
-    last4: "8292",
-    orderId: "HF-1129-S-1",
-    status: "processed",
-  },
-  {
-    id: "txn_004",
-    patientId: "usr_pat001",
-    transactionId: "pt_txn_5aBcDeFgHiJkLmNoPqRs",
-    date: "2025-09-17T09:00:00Z",
-    amount: 26488,
-    brand: "mastercard",
-    last4: "4521",
-    orderId: "HF-1129-S-1",
-    status: "processed",
-  },
-  {
-    id: "txn_005",
-    patientId: "usr_pat001",
-    transactionId: "pt_txn_2TuVwXyZ3AbCdEfGhIjK",
-    date: "2025-08-17T09:00:00Z",
-    amount: 26488,
-    brand: "mastercard",
-    last4: "4521",
-    orderId: "HF-1129-S-1",
-    status: "refunded",
-  },
-]
-
-// Get payment methods by patient ID
-function getPaymentMethodsByPatientId(patientId: string): PaymentMethod[] {
-  return mockPaymentMethods.filter((pm) => pm.patientId === patientId)
-}
-
-// Get payment history by patient ID
-function getPaymentHistoryByPatientId(patientId: string): PaymentTransaction[] {
-  return mockPaymentHistory
-    .filter((txn) => txn.patientId === patientId)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-}
+import {
+  getPaymentMethodsByPatientId,
+  getPaymentHistoryByPatientId,
+  paymentMethods as allPaymentMethods,
+} from "@/data/payments"
+import type { CardBrand, PaymentTransactionStatus } from "@/data/types"
 
 // Card brand display info
 const cardBrandInfo: Record<
   CardBrand,
   { label: string; icon: typeof IconCreditCard; color: string }
 > = {
-  visa: {
+  VISA: {
     label: "Visa",
     icon: IconBrandVisa,
     color: "text-blue-600 dark:text-blue-400",
   },
-  mastercard: {
+  MASTERCARD: {
     label: "Mastercard",
     icon: IconBrandMastercard,
     color: "text-orange-600 dark:text-orange-400",
   },
-  amex: {
+  AMEX: {
     label: "American Express",
     icon: IconCreditCard,
     color: "text-sky-600 dark:text-sky-400",
   },
-  discover: {
+  DISCOVER: {
     label: "Discover",
     icon: IconCreditCard,
     color: "text-amber-600 dark:text-amber-400",
-  },
-  other: {
-    label: "Card",
-    icon: IconCreditCard,
-    color: "text-muted-foreground",
   },
 }
 
@@ -242,25 +101,30 @@ function formatDate(isoString: string): string {
 
 // Payment status styles
 const paymentStatusStyles: Record<
-  PaymentStatus,
+  PaymentTransactionStatus,
   { label: string; className: string }
 > = {
-  processed: {
+  COMPLETED: {
     label: "Processed",
     className:
       "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200",
   },
-  pending: {
+  PENDING: {
     label: "Pending",
     className:
       "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200",
   },
-  failed: {
+  FAILED: {
     label: "Failed",
     className: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
   },
-  refunded: {
+  REFUNDED: {
     label: "Refunded",
+    className:
+      "bg-neutral-100 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200",
+  },
+  PARTIALLY_REFUNDED: {
+    label: "Partial Refund",
     className:
       "bg-neutral-100 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200",
   },
@@ -312,11 +176,11 @@ export default function PatientPaymentsPage({ params }: Props) {
                 <TableBody>
                   {paymentMethods.length > 0 ? (
                     paymentMethods.map((method) => {
-                      const brandInfo = cardBrandInfo[method.brand]
-                      const BrandIcon = brandInfo.icon
+                      const brandInfo = method.cardBrand ? cardBrandInfo[method.cardBrand] : null
+                      const BrandIcon = brandInfo?.icon ?? IconCreditCard
                       const expStatus = getExpirationStatus(
-                        method.expMonth,
-                        method.expYear
+                        method.expiryMonth ?? 0,
+                        method.expiryYear ?? 0
                       )
 
                       return (
@@ -324,15 +188,15 @@ export default function PatientPaymentsPage({ params }: Props) {
                           <TableCell>
                             <div className="flex items-center gap-2">
                               <BrandIcon
-                                className={`size-6 ${brandInfo.color}`}
+                                className={`size-6 ${brandInfo?.color ?? "text-muted-foreground"}`}
                               />
                               <span className="font-medium">
-                                {brandInfo.label}
+                                {brandInfo?.label ?? "Card"}
                               </span>
                             </div>
                           </TableCell>
                           <TableCell className="font-mono">
-                            •••• {method.last4}
+                            •••• {method.lastFour}
                           </TableCell>
                           <TableCell>
                             <span
@@ -344,7 +208,7 @@ export default function PatientPaymentsPage({ params }: Props) {
                                     : "text-muted-foreground"
                               }
                             >
-                              {formatExpiration(method.expMonth, method.expYear)}
+                              {formatExpiration(method.expiryMonth ?? 0, method.expiryYear ?? 0)}
                             </span>
                           </TableCell>
                           <TableCell>
@@ -438,17 +302,19 @@ export default function PatientPaymentsPage({ params }: Props) {
                 <TableBody>
                   {paymentHistory.length > 0 ? (
                     paymentHistory.map((txn) => {
-                      const brandInfo = cardBrandInfo[txn.brand]
-                      const BrandIcon = brandInfo.icon
+                      // Look up payment method for card details
+                      const paymentMethod = allPaymentMethods.find((pm) => pm.id === txn.paymentMethodId)
+                      const brandInfo = paymentMethod?.cardBrand ? cardBrandInfo[paymentMethod.cardBrand] : null
+                      const BrandIcon = brandInfo?.icon ?? IconCreditCard
                       const statusStyle = paymentStatusStyles[txn.status]
 
                       return (
                         <TableRow key={txn.id}>
                           <TableCell className="font-mono text-sm">
-                            #{txn.transactionId.slice(0, 24)}...
+                            #{txn.id.slice(0, 20)}...
                           </TableCell>
                           <TableCell className="text-muted-foreground">
-                            {formatDate(txn.date)}
+                            {formatDate(txn.createdAt)}
                           </TableCell>
                           <TableCell className="text-right font-medium">
                             {formatCurrency(txn.amount)}
@@ -456,20 +322,24 @@ export default function PatientPaymentsPage({ params }: Props) {
                           <TableCell>
                             <div className="flex items-center gap-2">
                               <BrandIcon
-                                className={`size-5 ${brandInfo.color}`}
+                                className={`size-5 ${brandInfo?.color ?? "text-muted-foreground"}`}
                               />
                               <span className="text-muted-foreground text-sm">
-                                ••••{txn.last4}
+                                ••••{paymentMethod?.lastFour ?? "****"}
                               </span>
                             </div>
                           </TableCell>
                           <TableCell>
-                            <Link
-                              href={`/store-admin/orders/${txn.orderId}`}
-                              className="font-mono text-sm hover:underline"
-                            >
-                              {txn.orderId}
-                            </Link>
+                            {txn.orderId ? (
+                              <Link
+                                href={`/store-admin/orders/${txn.orderId}`}
+                                className="font-mono text-sm hover:underline"
+                              >
+                                {txn.orderId}
+                              </Link>
+                            ) : (
+                              <span className="text-muted-foreground text-sm">—</span>
+                            )}
                           </TableCell>
                           <TableCell>
                             <Badge

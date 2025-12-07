@@ -53,7 +53,7 @@ const mockQuestionnaireDetails: QuestionnaireDetail[] = [
   {
     id: "quest_000",
     patientId: "usr_pat001",
-    diseaseState: "Peptide Therapy",
+    diseaseState: "Hormone Optimization",
     versions: [
       {
         id: "v1",
@@ -64,7 +64,7 @@ const mockQuestionnaireDetails: QuestionnaireDetail[] = [
         status: "completed",
       },
     ],
-    primaryGoals: `My primary goals are to support recovery, improve sleep quality, increase lean muscle mass, and enhance overall body composition. I train consistently and want to optimize my natural growth hormone production in a safe, supervised way. I'm hoping peptide therapy can help improve recovery between workouts, support muscle growth, and help me feel more energized day-to-day.`,
+    primaryGoals: `My primary goals are to support recovery, improve energy levels, increase lean muscle mass, and enhance overall body composition. I train consistently and have noticed declining energy and slower recovery over the past year. I've had labs done that show my testosterone is on the lower end of normal, and I'm interested in testosterone replacement therapy to help optimize my hormone levels, improve recovery between workouts, support muscle growth, and restore my energy throughout the day.`,
     uploads: [
       {
         id: "file_001",
@@ -99,12 +99,12 @@ const mockQuestionnaireDetails: QuestionnaireDetail[] = [
           "Muscle growth and recovery, Improved sleep quality, Injury recovery and healing, Athletic performance enhancement, Enhanced cognitive function and focus, Increased energy and vitality, Anti-aging and longevity, Stress management and mood",
       },
       {
-        question: "Have you used peptide therapy before?",
-        answer: "No, this is my first time considering peptides",
+        question: "Have you used testosterone replacement therapy before?",
+        answer: "No, this is my first time considering TRT",
       },
       {
         question:
-          "Are you comfortable with self-administering subcutaneous injections?",
+          "Are you comfortable with self-administering intramuscular injections?",
         answer: "Yes, but I would need instruction",
       },
       {
@@ -157,7 +157,7 @@ const mockQuestionnaireDetails: QuestionnaireDetail[] = [
       },
       {
         question:
-          "What is your primary motivation for considering peptide therapy?",
+          "What is your primary motivation for considering testosterone replacement therapy?",
         answer: "General health optimization and wellness",
       },
       {
@@ -167,9 +167,9 @@ const mockQuestionnaireDetails: QuestionnaireDetail[] = [
       },
       {
         question:
-          "Is there anything else about your health history, fitness goals, or lifestyle that would be important for your provider to know when considering peptide therapy?",
+          "Is there anything else about your health history, fitness goals, or lifestyle that would be important for your provider to know when considering hormone therapy?",
         answer:
-          "I'm very active and work out daily. I've had some minor overuse issues in the past from training, so recovery and injury prevention are important to me. No major medical conditions, but I want to support my body as I continue to train consistently.",
+          "I'm very active and work out daily. I've had some minor overuse issues in the past from training, so recovery and injury prevention are important to me. No major medical conditions, but I want to support my body as I continue to train consistently. My energy has been declining over the past year despite consistent training.",
       },
     ],
   },

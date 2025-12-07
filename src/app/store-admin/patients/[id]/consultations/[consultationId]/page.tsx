@@ -51,7 +51,7 @@ const mockConsultationDetails: ConsultationDetail[] = [
     masterOrderId: "HF-1129",
     consultationOrderId: "HF-1129-OTP",
     date: "2025-11-16T17:00:00Z",
-    diseaseState: "Peptide Therapy",
+    diseaseState: "Hormone Optimization",
     status: "processed",
     provider: {
       name: "Dr. Nicole Baldwin",
@@ -59,16 +59,16 @@ const mockConsultationDetails: ConsultationDetail[] = [
       npi: "1234567890",
     },
     consultation: {
-      type: "Peptide Therapy Consultation",
+      type: "TRT Consultation",
       price: 9000,
       duration: "30 minutes",
     },
     payment: {
-      subtotal: 36300,
+      subtotal: 17900,
       discount: 0,
       shipping: 0,
       tax: 0,
-      total: 36300,
+      total: 17900,
     },
     history: [
       {
@@ -95,7 +95,7 @@ const mockConsultationDetails: ConsultationDetail[] = [
     masterOrderId: "HF-1128",
     consultationOrderId: "HF-1128-OTP",
     date: "2025-11-16T17:00:00Z",
-    diseaseState: "Peptide Therapy",
+    diseaseState: "Hormone Optimization",
     status: "pending",
     provider: {
       name: "Dr. Nicole Baldwin",
@@ -103,7 +103,7 @@ const mockConsultationDetails: ConsultationDetail[] = [
       npi: "1234567890",
     },
     consultation: {
-      type: "Peptide Therapy Consultation",
+      type: "TRT Consultation",
       price: 9000,
       duration: "30 minutes",
     },

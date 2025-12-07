@@ -1,0 +1,36 @@
+The Case for Shared Data
+
+  1. Interfaces as API Contracts
+
+  Your src/data/types.ts is essentially a proto-schema. When you build real APIs, these TypeScript interfaces become the response shapes. The migration path is:
+
+  Today:  import { Patient } from '@/data/types' → JSON file
+  Future: import { Patient } from '@/data/types' → fetch('/api/patients')
+
+  The types stay identical. Only the data source changes.
+
+  2. Helpers Become API Wrappers
+
+  Your current helpers like getPatientById() are mock implementations of what will be API calls:
+
+  // Today (mock)
+  export function getPatientById(id: string): Patient | undefined {
+    return mockPatients.find((p) => p.id === id)
+  }
+
+  // Future (real)
+  export async function getPatientById(id: string): Promise<Patient | undefined> {
+    return fetch(`/api/patients/${id}`).then(r => r.json())
+  }
+
+  Same signature, same consuming code, different implementation.
+
+  3. Domain Model Clarity
+
+  A telehealth platform has a finite set of domain entities: Patients, Providers, Orders, Consultations, and Admin Users. Having them all in one place (src/data/types.ts)
+  makes the domain model explicit and discoverable.
+
+  4. Real Telehealth Architecture
+
+  In production systems, admin users, providers, and patients are typically in the same user system with different roles/permissions. The shared data layer reflects this
+  reality - they're all "users" in the broader sense.

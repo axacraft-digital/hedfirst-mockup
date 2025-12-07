@@ -21,61 +21,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { getConsultationsForUI, type UIConsultation } from "@/data/consultations"
 
-// Consultation types
-type ConsultationStatus = "processed" | "pending" | "scheduled" | "completed" | "canceled"
-
-interface Consultation {
-  id: string
-  patientId: string
-  masterOrderId: string
-  date: string
-  diseaseState: string
-  doctor: string
-  value: number | null // in cents, null if included
-  status: ConsultationStatus
-}
-
-// Mock consultations data
-const mockConsultations: Consultation[] = [
-  {
-    id: "consult_001",
-    patientId: "usr_pat001",
-    masterOrderId: "HF-1129",
-    date: "2025-11-16T17:00:00Z",
-    diseaseState: "Peptide Therapy",
-    doctor: "Nicole Baldwin",
-    value: null,
-    status: "processed",
-  },
-  {
-    id: "consult_002",
-    patientId: "usr_pat001",
-    masterOrderId: "HF-1128",
-    date: "2025-11-16T17:00:00Z",
-    diseaseState: "Peptide Therapy",
-    doctor: "Nicole Baldwin",
-    value: null,
-    status: "pending",
-  },
-  {
-    id: "consult_003",
-    patientId: "usr_pat001",
-    masterOrderId: "HF-1100",
-    date: "2025-10-01T09:00:00Z",
-    diseaseState: "Weight Management",
-    doctor: "Sarah Chen",
-    value: 9000,
-    status: "completed",
-  },
-]
-
-// Get consultations by patient ID
-function getConsultationsByPatientId(patientId: string): Consultation[] {
-  return mockConsultations
-    .filter((c) => c.patientId === patientId)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-}
+// Consultation status type (matches UI helper output)
+type ConsultationStatus = UIConsultation["status"]
 
 // Format date
 function formatDate(isoString: string): string {
@@ -129,7 +78,7 @@ interface Props {
 
 export default function PatientConsultationsPage({ params }: Props) {
   const { id } = use(params)
-  const consultations = getConsultationsByPatientId(id)
+  const consultations = getConsultationsForUI(id)
 
   return (
     <div className="flex flex-1 flex-col">
@@ -163,12 +112,16 @@ export default function PatientConsultationsPage({ params }: Props) {
                     return (
                       <TableRow key={consultation.id}>
                         <TableCell>
-                          <Link
-                            href={`/store-admin/orders/${consultation.masterOrderId}`}
-                            className="font-mono font-medium hover:underline"
-                          >
-                            #{consultation.masterOrderId}
-                          </Link>
+                          {consultation.masterOrderId ? (
+                            <Link
+                              href={`/store-admin/orders/${consultation.masterOrderId}`}
+                              className="font-mono font-medium hover:underline"
+                            >
+                              #{consultation.masterOrderId}
+                            </Link>
+                          ) : (
+                            <span className="text-muted-foreground">—</span>
+                          )}
                         </TableCell>
                         <TableCell className="text-muted-foreground">
                           {formatDate(consultation.date)}
@@ -208,13 +161,15 @@ export default function PatientConsultationsPage({ params }: Props) {
                                   View Details
                                 </Link>
                               </DropdownMenuItem>
-                              <DropdownMenuItem asChild>
-                                <Link
-                                  href={`/store-admin/orders/${consultation.masterOrderId}`}
-                                >
-                                  View Parent Order
-                                </Link>
-                              </DropdownMenuItem>
+                              {consultation.masterOrderId && (
+                                <DropdownMenuItem asChild>
+                                  <Link
+                                    href={`/store-admin/orders/${consultation.masterOrderId}`}
+                                  >
+                                    View Parent Order
+                                  </Link>
+                                </DropdownMenuItem>
+                              )}
                             </DropdownMenuContent>
                           </DropdownMenu>
                         </TableCell>

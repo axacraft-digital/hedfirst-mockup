@@ -29,124 +29,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { cn } from "@/lib/utils"
+import {
+  getTreatmentsForUI,
+  filterTreatmentsByType,
+  type UITreatment,
+} from "@/data/treatments"
 
-// Treatment types matching the screenshot
-type TreatmentType = "subscription" | "one-time" | "membership"
-type TreatmentStatus = "active" | "paused" | "canceled" | "completed"
+// Treatment types (derived from UI helper)
+type _TreatmentType = UITreatment["type"]
+type TreatmentStatus = UITreatment["status"]
 type TreatmentTab = "all" | "subscriptions" | "one-time" | "membership"
-
-interface Treatment {
-  id: string
-  masterOrderId: string
-  patientId: string
-  productName: string
-  orderDate: string
-  billingCycle: string | null
-  nextBilledDate: string | null
-  status: TreatmentStatus
-  value: number // in cents
-  type: TreatmentType
-  children?: TreatmentChild[]
-}
-
-interface TreatmentChild {
-  id: string
-  productName: string
-  status: TreatmentStatus
-  value: number
-}
-
-// Mock treatments data for Jacob Henderson
-const mockTreatments: Treatment[] = [
-  {
-    id: "treat_001",
-    masterOrderId: "#HF-1129",
-    patientId: "usr_pat_jacob",
-    productName: "CJC/ Ipamorelin 5mL",
-    orderDate: "2024-11-16T10:30:00Z",
-    billingCycle: "Every 30 days",
-    nextBilledDate: null,
-    status: "canceled",
-    value: 27300,
-    type: "subscription",
-    children: [
-      {
-        id: "treat_001_child_001",
-        productName: "CJC/ Ipamorelin 5mL - Initial Fill",
-        status: "canceled",
-        value: 27300,
-      },
-    ],
-  },
-  {
-    id: "treat_002",
-    masterOrderId: "#HF-1128",
-    patientId: "usr_pat_jacob",
-    productName: "CJC/ Ipamorelin 5mL",
-    orderDate: "2024-11-16T09:15:00Z",
-    billingCycle: "Every 30 days",
-    nextBilledDate: null,
-    status: "active",
-    value: 27300,
-    type: "subscription",
-  },
-  {
-    id: "treat_003",
-    masterOrderId: "#HF-1100",
-    patientId: "usr_pat_jacob",
-    productName: "Telehealth Membership",
-    orderDate: "2024-10-01T14:00:00Z",
-    billingCycle: "Monthly",
-    nextBilledDate: "2024-12-01T00:00:00Z",
-    status: "active",
-    value: 1900,
-    type: "membership",
-  },
-  // Add some treatments for other patients for testing
-  {
-    id: "treat_004",
-    masterOrderId: "#HF-1050",
-    patientId: "usr_pat001",
-    productName: "Finasteride 1mg",
-    orderDate: "2024-09-15T11:00:00Z",
-    billingCycle: "Every 90 days",
-    nextBilledDate: "2024-12-15T00:00:00Z",
-    status: "active",
-    value: 8500,
-    type: "subscription",
-  },
-  {
-    id: "treat_005",
-    masterOrderId: "#HF-1045",
-    patientId: "usr_pat002",
-    productName: "Semaglutide 0.5mg",
-    orderDate: "2024-08-20T09:30:00Z",
-    billingCycle: "Every 30 days",
-    nextBilledDate: "2024-12-20T00:00:00Z",
-    status: "active",
-    value: 34900,
-    type: "subscription",
-  },
-]
-
-// Get treatments by patient ID
-function getTreatmentsByPatientId(patientId: string): Treatment[] {
-  return mockTreatments.filter((t) => t.patientId === patientId)
-}
-
-// Filter treatments by tab
-function filterTreatmentsByTab(treatments: Treatment[], tab: TreatmentTab): Treatment[] {
-  switch (tab) {
-    case "subscriptions":
-      return treatments.filter((t) => t.type === "subscription")
-    case "one-time":
-      return treatments.filter((t) => t.type === "one-time")
-    case "membership":
-      return treatments.filter((t) => t.type === "membership")
-    default:
-      return treatments
-  }
-}
 
 // Format currency
 function formatCurrency(cents: number): string {
@@ -195,16 +87,16 @@ export default function PatientTreatmentsPage({ params }: Props) {
   const [searchQuery, setSearchQuery] = useState("")
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set())
 
-  const allTreatments = getTreatmentsByPatientId(id)
+  const allTreatments = getTreatmentsForUI(id)
 
   const filteredTreatments = useMemo(() => {
-    let result = filterTreatmentsByTab(allTreatments, activeTab)
+    let result = filterTreatmentsByType(allTreatments, activeTab)
 
     if (searchQuery) {
       const query = searchQuery.toLowerCase()
       result = result.filter(
         (t) =>
-          t.masterOrderId.toLowerCase().includes(query) ||
+          (t.masterOrderId?.toLowerCase().includes(query) ?? false) ||
           t.productName.toLowerCase().includes(query)
       )
     }
@@ -326,7 +218,7 @@ export default function PatientTreatmentsPage({ params }: Props) {
                               className="text-blue-600 hover:underline dark:text-blue-400"
                               onClick={(e) => e.stopPropagation()}
                             >
-                              {treatment.masterOrderId}
+                              {treatment.masterOrderId ?? `#${treatment.id.slice(0, 10)}`}
                             </Link>
                           </TableCell>
                           <TableCell>{treatment.productName}</TableCell>

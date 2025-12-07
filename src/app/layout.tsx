@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { Toaster } from "@/components/ui/toaster"
+import { SonnerToaster } from "@/components/ui/sonner"
 import "./globals.css"
 import { Providers } from "./providers"
 
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body className={`${inter.className} group/body antialiased`}>
         <Providers>{children}</Providers>
         <Toaster />
+        <SonnerToaster />
       </body>
     </html>
   )

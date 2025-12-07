@@ -416,5 +416,32 @@
         "memberOnly": true
       }
     ]
+  },
+  {
+    "id": "prod_014",
+    "type": "PHYSICAL_PRODUCT",
+    "available": true,
+    "name": "Testosterone Cypionate",
+    "subTitle": "Hormone Replacement Therapy",
+    "badge": null,
+    "slug": "testosterone-cypionate",
+    "diseaseState": "HORMONE_THERAPY",
+    "treatmentType": "PRESCRIPTION_MEDICATION",
+    "requirePrescription": true,
+    "variants": [
+      {
+        "id": "var_014a",
+        "sku": "TEST-CYP-200-10",
+        "supply": "DAY_70",
+        "billingCycle": "EVERY_DAY_70",
+        "qty": 1,
+        "price": 8900,
+        "compareAtPrice": 15000,
+        "dosages": {
+          "strength": "200mg/mL",
+          "form": "Injection (10mL vial)"
+        }
+      }
+    ]
   }
 ]

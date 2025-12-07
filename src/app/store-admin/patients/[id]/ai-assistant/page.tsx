@@ -206,13 +206,12 @@ export default function AIAssistantPage({ params }: Props) {
                           summary of their current treatment plan:
                         </p>
                         <p>
-                          <strong>Current Medication:</strong> CJC-1295 (w/o
-                          DAC) 1.2mg + Ipamorelin 2mg, administered
-                          subcutaneously nightly.
+                          <strong>Current Medication:</strong> Testosterone
+                          Cypionate 100mg weekly, administered intramuscularly.
                         </p>
                         <p>
-                          <strong>Treatment Goal:</strong> Health optimization,
-                          muscle recovery, and athletic performance enhancement.
+                          <strong>Treatment Goal:</strong> Hormone optimization,
+                          energy improvement, and athletic recovery enhancement.
                         </p>
                         <p>
                           <strong>Recent Lab Results (March 2025):</strong> All

@@ -44,7 +44,7 @@ export type DiseaseStateCode =
   | "SKIN_CARE"
   | "GENERAL_HEALTH"
   | "MENTAL_HEALTH"
-  | "PEPTIDE_THERAPY"
+  | "HORMONE_THERAPY"
 
 // Legacy alias for backwards compatibility
 export type DiseaseState = DiseaseStateCode
@@ -54,9 +54,9 @@ export type DiseaseState = DiseaseStateCode
 // ============================================================================
 
 export interface DiseaseStateEntity {
-  id: string // e.g., "ds_peptide", "ds_weight"
+  id: string // e.g., "ds_hormone", "ds_weight"
   code: DiseaseStateCode
-  name: string // e.g., "Peptide Therapy", "Weight Management"
+  name: string // e.g., "Hormone Optimization", "Weight Management"
   description: string
   active: boolean
 }
@@ -635,6 +635,78 @@ export interface ActivityEvent {
   actorType?: "PATIENT" | "PROVIDER" | "ADMIN" | "SYSTEM"
   metadata?: Record<string, unknown> // Additional context (orderId, etc.)
   createdAt: string
+}
+
+// ============================================================================
+// Store User (Admin Staff)
+// ============================================================================
+
+export type StoreUserRole = "admin" | "manager" | "support"
+export type StoreUserStatus = "ACTIVE" | "INACTIVE" | "INVITED"
+
+export interface StoreUser {
+  id: string
+  firstName: string
+  lastName: string
+  email: string
+  role: StoreUserRole
+  status: StoreUserStatus
+  createdAt: string
+}
+
+// ============================================================================
+// Pharmacy (Fulfillment Partner)
+// ============================================================================
+
+export interface Pharmacy {
+  id: string
+  name: string
+  address: string
+  phone: string
+  pic: string // Person in charge
+  externalPharmacyId: string // DoseSpot pharmacy ID
+  state: string // State abbreviation (e.g., "TX", "CO")
+}
+
+// ============================================================================
+// Integration Status (System Integrations)
+// ============================================================================
+
+export type IntegrationStatus = "connected" | "issue" | "not_connected" | "not_tested"
+export type IntegrationCategory = "clinical" | "payment" | "fulfillment" | "communication" | "marketing" | "utility" | "ai" | "infrastructure"
+export type ConnectionTestResult = "success" | "failed"
+export type IssueSeverity = "warning" | "critical"
+
+export interface IntegrationConnectionTest {
+  lastTested: string
+  result: ConnectionTestResult
+  message: string
+  errorCode?: string
+  responseTime: number
+}
+
+export interface IntegrationIssue {
+  severity: IssueSeverity
+  message: string
+  timestamp: string
+  affectedFeature?: string
+}
+
+export interface IntegrationUsage {
+  requestsThisMonth: number
+  costThisMonth?: number // In cents, for AI providers
+  errorRate: number
+}
+
+export interface IntegrationStatusRecord {
+  id: string
+  name: string
+  category: IntegrationCategory
+  status: IntegrationStatus
+  enabled: boolean
+  connectionTest: IntegrationConnectionTest | null
+  issue?: IntegrationIssue
+  usage?: IntegrationUsage
 }
 
 // ============================================================================

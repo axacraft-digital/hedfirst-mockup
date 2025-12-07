@@ -1,0 +1,51 @@
+ Let me break down what you built:
+
+  1. Raw Data Accessors
+
+  // Get data exactly as stored in JSON
+  getAllConsultations()        // → every consultation in the system
+  getConsultationById(id)      // → one specific consultation
+
+  What they do: Direct access to the normalized data. Useful for admin views, reports, or when you need to join data yourself.
+
+  Example: An admin dashboard showing "all consultations across all patients" would use getAllConsultations().
+
+  2. UI-Shaped Helpers
+
+  // Get data transformed for a specific UI view
+  getConsultationsForUI(patientId)  // → consultations ready to render
+
+  What they do: Take normalized data (with foreign keys like providerId: "usr_doc002") and return denormalized data (with providerName: "Dr. Nicole Baldwin"). The UI
+  component doesn't need to do lookups.
+
+  Example:
+  // Raw (normalized)
+  { providerId: "usr_doc002", diseaseStateId: "ds_peptide" }
+
+  // UI-shaped (denormalized)
+  { providerName: "Dr. Nicole Baldwin", diseaseState: "Peptide Therapy" }
+
+  3. UI Type Interface
+
+  // TypeScript interface for what the UI component receives
+  export interface UIConsultation {
+    id: string
+    providerName: string      // not providerId
+    diseaseState: string      // not diseaseStateId
+    status: string
+    // ... fields the component actually renders
+  }
+
+  What it does: Gives your page components type safety. When you import UIConsultation, TypeScript knows exactly what fields are available.
+
+  ---
+  The pattern in action:
+
+  // In your page component
+  import { getConsultationsForUI, UIConsultation } from '@/data/consultations'
+
+  const consultations: UIConsultation[] = getConsultationsForUI(patientId)
+  // TypeScript knows consultations[0].providerName exists
+  // Component just renders, no data transformation needed
+
+  This separation keeps your components simple — they receive ready-to-render data.

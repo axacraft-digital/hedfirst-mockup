@@ -31,7 +31,7 @@ import { toast } from "@/hooks/use-toast"
 import { ConfirmDialog } from "@/components/confirm-dialog"
 import { Header } from "@/components/layout/header"
 import { getProductDetailById } from "../data/product-details-data"
-import { pharmacies } from "../../pharmacies/data/pharmacy-data"
+import { mockPharmacies as pharmacies } from "@/data"
 import {
   diseaseStateLabels,
   treatmentTypeLabels,

@@ -1,7 +1,4 @@
-"use client"
-
 import Link from "next/link"
-import { IconPlus } from "@tabler/icons-react"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -10,10 +7,10 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { Button } from "@/components/ui/button"
 import { Header } from "@/components/layout/header"
+import { AddPharmacyButton } from "./components/add-pharmacy-button"
 import { PharmaciesTable } from "./components/pharmacies-table"
-import { pharmacies } from "./data/pharmacy-data"
+import { mockPharmacies as pharmacies } from "@/data"
 
 export default function PharmaciesPage() {
   return (
@@ -45,10 +42,7 @@ export default function PharmaciesPage() {
           </div>
 
           <div className="flex flex-wrap items-center justify-end gap-3">
-            <Button>
-              <IconPlus className="mr-2 h-4 w-4" />
-              Add pharmacy
-            </Button>
+            <AddPharmacyButton />
           </div>
         </div>
 

@@ -1,0 +1,180 @@
+[
+  {
+    "id": "dosespot",
+    "name": "DoseSpot",
+    "category": "clinical",
+    "status": "connected",
+    "enabled": true,
+    "connectionTest": {
+      "lastTested": "2025-12-07T10:30:00Z",
+      "result": "success",
+      "message": "Connected to DoseSpot API successfully. EPCS enabled.",
+      "responseTime": 187
+    },
+    "usage": {
+      "requestsThisMonth": 1247,
+      "errorRate": 0.002
+    }
+  },
+  {
+    "id": "paytheory",
+    "name": "PayTheory",
+    "category": "payment",
+    "status": "issue",
+    "enabled": true,
+    "connectionTest": {
+      "lastTested": "2025-12-03T05:30:00Z",
+      "result": "failed",
+      "message": "Webhook validation failed - the configured webhook URL returned a 404 error. Please verify the URL is correct and accessible.",
+      "errorCode": "WEBHOOK_INVALID",
+      "responseTime": 2340
+    },
+    "issue": {
+      "severity": "warning",
+      "message": "Webhook validation failed",
+      "timestamp": "2025-12-03T05:30:00Z",
+      "affectedFeature": "Payment notifications"
+    }
+  },
+  {
+    "id": "shipstation",
+    "name": "ShipStation",
+    "category": "fulfillment",
+    "status": "not_connected",
+    "enabled": false,
+    "connectionTest": null
+  },
+  {
+    "id": "zoom",
+    "name": "Zoom",
+    "category": "communication",
+    "status": "issue",
+    "enabled": true,
+    "connectionTest": {
+      "lastTested": "2025-12-06T14:22:00Z",
+      "result": "failed",
+      "message": "OAuth token expired. Please re-authenticate with Zoom to restore video consultation functionality.",
+      "errorCode": "TOKEN_EXPIRED",
+      "responseTime": 445
+    },
+    "issue": {
+      "severity": "critical",
+      "message": "OAuth token expired",
+      "timestamp": "2025-12-06T14:22:00Z",
+      "affectedFeature": "Video consultations"
+    }
+  },
+  {
+    "id": "activecampaign",
+    "name": "ActiveCampaign",
+    "category": "marketing",
+    "status": "issue",
+    "enabled": true,
+    "connectionTest": {
+      "lastTested": "2025-12-05T09:15:00Z",
+      "result": "failed",
+      "message": "Authentication error - invalid API key. The provided API key was rejected by ActiveCampaign.",
+      "errorCode": "AUTH_INVALID",
+      "responseTime": 312
+    },
+    "issue": {
+      "severity": "warning",
+      "message": "Invalid API key",
+      "timestamp": "2025-12-05T09:15:00Z",
+      "affectedFeature": "Marketing automation"
+    }
+  },
+  {
+    "id": "choosehealth",
+    "name": "ChooseHealth",
+    "category": "clinical",
+    "status": "connected",
+    "enabled": true,
+    "connectionTest": {
+      "lastTested": "2025-12-07T08:00:00Z",
+      "result": "success",
+      "message": "Lab services API connected. 3 pending lab orders in queue.",
+      "responseTime": 234
+    },
+    "usage": {
+      "requestsThisMonth": 89,
+      "errorRate": 0.0
+    }
+  },
+  {
+    "id": "smartystreets",
+    "name": "SmartyStreets",
+    "category": "utility",
+    "status": "not_tested",
+    "enabled": false,
+    "connectionTest": null
+  },
+  {
+    "id": "claude-ai",
+    "name": "Claude AI",
+    "category": "ai",
+    "status": "connected",
+    "enabled": true,
+    "connectionTest": {
+      "lastTested": "2025-12-07T11:45:00Z",
+      "result": "success",
+      "message": "Claude API responding normally. Model: claude-sonnet-4-5-20241022. Avg latency: 1.2s.",
+      "responseTime": 1245
+    },
+    "usage": {
+      "requestsThisMonth": 2847,
+      "costThisMonth": 4850,
+      "errorRate": 0.003
+    }
+  },
+  {
+    "id": "openai",
+    "name": "OpenAI",
+    "category": "ai",
+    "status": "not_connected",
+    "enabled": false,
+    "connectionTest": null
+  },
+  {
+    "id": "google-ai",
+    "name": "Google AI",
+    "category": "ai",
+    "status": "not_connected",
+    "enabled": false,
+    "connectionTest": null
+  },
+  {
+    "id": "slack",
+    "name": "Slack",
+    "category": "communication",
+    "status": "connected",
+    "enabled": true,
+    "connectionTest": {
+      "lastTested": "2025-12-07T09:30:00Z",
+      "result": "success",
+      "message": "Slack webhooks operational. 4 channels configured for notifications.",
+      "responseTime": 156
+    },
+    "usage": {
+      "requestsThisMonth": 1893,
+      "errorRate": 0.001
+    }
+  },
+  {
+    "id": "aws",
+    "name": "AWS",
+    "category": "infrastructure",
+    "status": "connected",
+    "enabled": true,
+    "connectionTest": {
+      "lastTested": "2025-12-07T06:00:00Z",
+      "result": "success",
+      "message": "AWS services operational. S3: OK, SES: OK, Pinpoint: OK.",
+      "responseTime": 89
+    },
+    "usage": {
+      "requestsThisMonth": 45621,
+      "errorRate": 0.0001
+    }
+  }
+]

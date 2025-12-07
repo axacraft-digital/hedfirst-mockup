@@ -1,0 +1,93 @@
+Your mock data layer was designed to be API-shaped — that's not an accident.
+
+  How Far Are You?
+
+  UI Layer: 80% done — screens exist, components work, data flows
+  Data Layer: Abstraction ready — your helpers already look like API calls
+  API Layer: 0% — doesn't exist yet
+  Database: 0% — doesn't exist yet
+  Auth: 0% — doesn't exist yet
+
+  The Transition Path
+
+  Phase 1: API Abstraction (days)
+
+  Create a switching layer so the UI doesn't know if it's hitting mock or real:
+
+  // @/lib/api/patients.ts
+  export async function getPatientWithDetails(id: string): Promise<PatientWithDetails> {
+    if (process.env.USE_MOCK_DATA === 'true') {
+      return mockGetPatientWithDetails(id)  // Your current helper
+    }
+    const res = await fetch(`/api/patients/${id}/details`)
+    return res.json()
+  }
+
+  UI imports from @/lib/api, not @/data. Same types, swappable backend.
+
+  Phase 2: Next.js API Routes (weeks)
+
+  Build /api routes in your existing app — no separate backend needed yet:
+
+  src/app/api/
+  ├── patients/
+  │   ├── route.ts              # GET list, POST create
+  │   └── [id]/
+  │       ├── route.ts          # GET, PATCH, DELETE
+  │       └── details/route.ts  # Your composite endpoint
+  ├── orders/
+  ├── providers/
+  └── ...
+
+  Start with one domain (patients), validate the pattern, then expand.
+
+  Phase 3: Database (weeks)
+
+  Option A: Fresh schema (recommended for V2)
+  - Define Prisma models based on YOUR types (not V1's 80+ models)
+  - Seed from your mock JSON files (you already have the data!)
+  - Clean slate, modern patterns
+
+  Option B: Connect to V1 database (if this becomes V1.5)
+  - Map your types to existing Prisma models
+  - Inherit V1's schema decisions (good and bad)
+  - Requires V1 database access
+
+  Phase 4: Authentication (weeks)
+
+  - NextAuth.js or similar
+  - Role-based routing (store admin vs provider vs patient)
+  - JWT claims with tenant context (fix V1's gap)
+
+  Phase 5: Feature-by-Feature Migration
+
+  Don't boil the ocean. Go screen by screen:
+  1. Patient list → real API
+  2. Patient detail → real API
+  3. Orders → real API
+  4. ...
+
+  Keep mock data as fallback. Feature flag each migration.
+
+  Realistic Timeline
+
+  | Milestone                                    | Solo Dev   | Small Team |
+  |----------------------------------------------|------------|------------|
+  | API abstraction layer                        | 1-2 days   | 1 day      |
+  | First domain end-to-end (patients CRUD + DB) | 1-2 weeks  | 1 week     |
+  | All domains with basic CRUD                  | 2-3 months | 1 month    |
+  | Auth + roles                                 | 2-3 weeks  | 1-2 weeks  |
+  | Production-ready (one portal)                | 3-4 months | 6-8 weeks  |
+
+  The Key Decision
+
+  Fresh schema or V1 schema?
+
+  If this mockup becomes V1.5 (B2B refactor): You might connect to V1's database, accepting its constraints.
+
+  If this becomes V2 (Shopify for EHR): Fresh schema based on your new types. V1 data migrates later.
+
+  Your mock data types are cleaner than V1's schema. That's valuable — don't throw it away by forcing compatibility too early.
+
+  ---
+  What's your intent — V1.5 evolution or V2 fresh start?

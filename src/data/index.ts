@@ -1,25 +1,26 @@
-import rawData from "../../mock-dataset/complete-mock-dataset.json"
 import type {
   ActivityEvent,
   Appointment,
   Consultation,
   Conversation,
-  AdminDiscountCode,
   DiseaseStateEntity,
-  MockDataset,
-  Notification,
+  IntegrationCategory,
+  IntegrationStatus,
+  IntegrationStatusRecord,
   Order,
   OrderStatus,
   Patient,
   PatientStatus,
   PaymentMethod,
   PaymentTransaction,
+  Pharmacy,
   Product,
   Provider,
   Questionnaire,
   SoapNote,
-  Subscription,
-  Transaction,
+  StoreUser,
+  StoreUserRole,
+  StoreUserStatus,
   Treatment,
 } from "./types"
 
@@ -30,6 +31,8 @@ import type {
 import diseaseStatesJson from "./mock/reference/disease-states.json"
 import providersJson from "./mock/reference/providers.json"
 import productsJson from "./mock/reference/products.json"
+import storeUsersJson from "./mock/reference/store-users.json"
+import pharmaciesJson from "./mock/reference/pharmacies.json"
 import patientsJson from "./mock/patients.json"
 import chartNotesJson from "./mock/clinical/chart-notes.json"
 import questionnairesJson from "./mock/clinical/questionnaires.json"
@@ -43,11 +46,14 @@ import paymentMethodsJson from "./mock/financial/payment-methods.json"
 import paymentHistoryJson from "./mock/financial/payment-history.json"
 import documentsJson from "./mock/documents/documents.json"
 import activityHistoryJson from "./mock/audit/activity-history.json"
+import integrationStatusJson from "./mock/integrations/status.json"
 
 // Typed exports from discrete files (currently empty, will be populated in Phase 2+)
 export const diseaseStateEntities = diseaseStatesJson as DiseaseStateEntity[]
 export const mockProviders = providersJson as Provider[]
 export const mockProducts = productsJson as Product[]
+export const mockStoreUsers = storeUsersJson as StoreUser[]
+export const mockPharmacies = pharmaciesJson as Pharmacy[]
 export const mockPatients = patientsJson as Patient[]
 export const mockChartNotes = chartNotesJson as SoapNote[]
 export const mockQuestionnaires = questionnairesJson as Questionnaire[]
@@ -61,41 +67,22 @@ export const mockPaymentMethods = paymentMethodsJson as PaymentMethod[]
 export const mockPaymentHistory = paymentHistoryJson as PaymentTransaction[]
 export const mockDocuments = documentsJson as unknown[] // PatientDocument - already in documents.ts
 export const mockActivityHistory = activityHistoryJson as ActivityEvent[]
-
-// Cast the imported JSON to our typed dataset
-const data = rawData as unknown as MockDataset
-
-// ============================================================================
-// Direct Exports
-// ============================================================================
-
-export const store = data.store
-export const providers = data.providers as Provider[]
-export const products = data.products as Product[]
-export const patients = data.patients as Patient[]
-export const orders = data.orders as Order[]
-export const subscriptions = data.subscriptions as Subscription[]
-export const appointments = data.appointments as Appointment[]
-export const conversations = data.conversations as Conversation[]
-export const soapNotes = data.soapNotes as SoapNote[]
-export const transactions = data.transactions as Transaction[]
-export const discountCodes = data.discountCodes as AdminDiscountCode[]
-export const notifications = data.notifications as Notification[]
+export const mockIntegrationStatus = integrationStatusJson as IntegrationStatusRecord[]
 
 // ============================================================================
 // Patient Helpers
 // ============================================================================
 
 export function getPatientById(id: string): Patient | undefined {
-  return patients.find((p) => p.id === id)
+  return mockPatients.find((p) => p.id === id)
 }
 
 export function getPatientsByStatus(status: PatientStatus): Patient[] {
-  return patients.filter((p) => p.patientStatus === status)
+  return mockPatients.filter((p) => p.patientStatus === status)
 }
 
 export function getPatientsByProvider(providerId: string): Patient[] {
-  return patients.filter((p) => p.assignedProviderId === providerId)
+  return mockPatients.filter((p) => p.assignedProviderId === providerId)
 }
 
 export function getPatientFullName(patient: Patient): string {
@@ -107,7 +94,7 @@ export function getPatientFullName(patient: Patient): string {
 // ============================================================================
 
 export function getProviderById(id: string): Provider | undefined {
-  return providers.find((p) => p.id === id)
+  return mockProviders.find((p) => p.id === id)
 }
 
 export function getProviderFullName(provider: Provider): string {
@@ -123,35 +110,23 @@ export function getProviderDisplayName(provider: Provider): string {
 // ============================================================================
 
 export function getOrderById(id: string): Order | undefined {
-  return orders.find((o) => o.id === id)
+  return mockOrders.find((o) => o.id === id)
 }
 
 export function getOrderByPublicId(publicId: string): Order | undefined {
-  return orders.find((o) => o.publicOrderId === publicId)
+  return mockOrders.find((o) => o.publicOrderId === publicId)
 }
 
 export function getOrdersByPatient(patientId: string): Order[] {
-  return orders.filter((o) => o.userId === patientId)
+  return mockOrders.filter((o) => o.userId === patientId)
 }
 
 export function getOrdersByStatus(status: OrderStatus): Order[] {
-  return orders.filter((o) => o.status === status)
+  return mockOrders.filter((o) => o.status === status)
 }
 
 export function getOrdersByProvider(providerId: string): Order[] {
-  return orders.filter((o) => o.approvalDoctorId === providerId)
-}
-
-// ============================================================================
-// Subscription Helpers
-// ============================================================================
-
-export function getSubscriptionById(id: string): Subscription | undefined {
-  return subscriptions.find((s) => s.id === id)
-}
-
-export function getSubscriptionByOrder(orderId: string): Subscription | undefined {
-  return subscriptions.find((s) => s.orderId === orderId)
+  return mockOrders.filter((o) => o.approvalDoctorId === providerId)
 }
 
 // ============================================================================
@@ -159,15 +134,15 @@ export function getSubscriptionByOrder(orderId: string): Subscription | undefine
 // ============================================================================
 
 export function getAppointmentById(id: string): Appointment | undefined {
-  return appointments.find((a) => a.id === id)
+  return mockAppointments.find((a) => a.id === id)
 }
 
 export function getAppointmentsByPatient(patientId: string): Appointment[] {
-  return appointments.filter((a) => a.patientId === patientId)
+  return mockAppointments.filter((a) => a.patientId === patientId)
 }
 
 export function getAppointmentsByProvider(providerId: string): Appointment[] {
-  return appointments.filter((a) => a.doctorId === providerId)
+  return mockAppointments.filter((a) => a.doctorId === providerId)
 }
 
 // ============================================================================
@@ -175,11 +150,11 @@ export function getAppointmentsByProvider(providerId: string): Appointment[] {
 // ============================================================================
 
 export function getConversationById(id: string): Conversation | undefined {
-  return conversations.find((c) => c.id === id)
+  return mockMessages.find((c) => c.id === id)
 }
 
 export function getConversationsByParticipant(userId: string): Conversation[] {
-  return conversations.filter((c) =>
+  return mockMessages.filter((c) =>
     c.participants.some((p) => p.userId === userId)
   )
 }
@@ -189,11 +164,11 @@ export function getConversationsByParticipant(userId: string): Conversation[] {
 // ============================================================================
 
 export function getSoapNotesByPatient(patientId: string): SoapNote[] {
-  return soapNotes.filter((s) => s.patientId === patientId)
+  return mockChartNotes.filter((s) => s.patientId === patientId)
 }
 
 export function getSoapNotesByProvider(providerId: string): SoapNote[] {
-  return soapNotes.filter((s) => s.authorId === providerId)
+  return mockChartNotes.filter((s) => s.authorId === providerId)
 }
 
 // ============================================================================
@@ -201,23 +176,15 @@ export function getSoapNotesByProvider(providerId: string): SoapNote[] {
 // ============================================================================
 
 export function getProductById(id: string): Product | undefined {
-  return products.find((p) => p.id === id)
+  return mockProducts.find((p) => p.id === id)
 }
 
 export function getProductBySlug(slug: string): Product | undefined {
-  return products.find((p) => p.slug === slug)
+  return mockProducts.find((p) => p.slug === slug)
 }
 
 export function getProductsByDiseaseState(diseaseState: string): Product[] {
-  return products.filter((p) => p.diseaseState === diseaseState)
-}
-
-// ============================================================================
-// Transaction Helpers
-// ============================================================================
-
-export function getTransactionsByOrder(orderId: string): Transaction[] {
-  return transactions.filter((t) => t.orderId === orderId)
+  return mockProducts.filter((p) => p.diseaseState === diseaseState)
 }
 
 // ============================================================================
@@ -230,6 +197,45 @@ export function getDiseaseStateById(id: string): DiseaseStateEntity | undefined 
 
 export function getDiseaseStateByCode(code: string): DiseaseStateEntity | undefined {
   return diseaseStateEntities.find((ds) => ds.code === code)
+}
+
+// ============================================================================
+// Store User Helpers
+// ============================================================================
+
+export function getStoreUserById(id: string): StoreUser | undefined {
+  return mockStoreUsers.find((u) => u.id === id)
+}
+
+export function getStoreUsersByRole(role: StoreUserRole): StoreUser[] {
+  return mockStoreUsers.filter((u) => u.role === role)
+}
+
+export function getStoreUsersByStatus(status: StoreUserStatus): StoreUser[] {
+  return mockStoreUsers.filter((u) => u.status === status)
+}
+
+export function getStoreUserFullName(user: StoreUser): string {
+  return `${user.firstName} ${user.lastName}`
+}
+
+// ============================================================================
+// Pharmacy Helpers
+// ============================================================================
+
+export function getPharmacyById(id: string): Pharmacy | undefined {
+  return mockPharmacies.find((p) => p.id === id)
+}
+
+export function getPharmaciesByState(state: string): Pharmacy[] {
+  return mockPharmacies.filter((p) => p.state === state)
+}
+
+export function getPharmacyOptions(): { label: string; value: string }[] {
+  return mockPharmacies.map((p) => ({
+    label: p.name,
+    value: p.id,
+  }))
 }
 
 // ============================================================================
@@ -324,6 +330,94 @@ export function getActivityHistoryByPatientId(patientId: string): ActivityEvent[
 
 export function getActivityEventById(id: string): ActivityEvent | undefined {
   return mockActivityHistory.find((e) => e.id === id)
+}
+
+// ============================================================================
+// Integration Helpers
+// ============================================================================
+
+export function getIntegrationStatusById(id: string): IntegrationStatusRecord | undefined {
+  return mockIntegrationStatus.find((i) => i.id === id)
+}
+
+export function getIntegrationsByStatus(status: IntegrationStatus): IntegrationStatusRecord[] {
+  return mockIntegrationStatus.filter((i) => i.status === status)
+}
+
+export function getIntegrationsByCategory(category: IntegrationCategory): IntegrationStatusRecord[] {
+  return mockIntegrationStatus.filter((i) => i.category === category)
+}
+
+export function getIntegrationsWithIssues(): IntegrationStatusRecord[] {
+  return mockIntegrationStatus.filter((i) => i.status === "issue")
+}
+
+export function getEnabledIntegrations(): IntegrationStatusRecord[] {
+  return mockIntegrationStatus.filter((i) => i.enabled)
+}
+
+/**
+ * Simulate testing an integration connection.
+ * Returns the stored connectionTest result for the integration.
+ * Used by Test Connection buttons in the UI.
+ */
+export function testIntegrationConnection(id: string): {
+  result: "success" | "failed" | "not_configured"
+  message: string
+  errorCode?: string
+  responseTime?: number
+} {
+  const integration = mockIntegrationStatus.find((i) => i.id === id)
+
+  if (!integration) {
+    return {
+      result: "failed",
+      message: `Integration "${id}" not found`,
+    }
+  }
+
+  if (!integration.connectionTest) {
+    return {
+      result: "not_configured",
+      message: `${integration.name} has not been configured. Please add credentials to enable this integration.`,
+    }
+  }
+
+  return {
+    result: integration.connectionTest.result,
+    message: integration.connectionTest.message,
+    errorCode: integration.connectionTest.errorCode,
+    responseTime: integration.connectionTest.responseTime,
+  }
+}
+
+/**
+ * Get integration dashboard summary for Store Admin
+ * Returns counts by status for dashboard widgets
+ */
+export function getIntegrationDashboardSummary(): {
+  total: number
+  connected: number
+  issues: number
+  notConfigured: number
+  issueDetails: { name: string; message: string; severity: string }[]
+} {
+  const total = mockIntegrationStatus.length
+  const connected = mockIntegrationStatus.filter((i) => i.status === "connected").length
+  const issues = mockIntegrationStatus.filter((i) => i.status === "issue").length
+  const notConfigured = mockIntegrationStatus.filter(
+    (i) => i.status === "not_connected" || i.status === "not_tested"
+  ).length
+
+  const issueDetails = mockIntegrationStatus
+    .filter((i) => i.issue)
+    .map((i) => ({
+      name: i.name,
+      message: i.issue!.message,
+      severity: i.issue!.severity,
+    }))
+
+  return { total, connected, issues, notConfigured, issueDetails }
 }
 
 // ============================================================================
