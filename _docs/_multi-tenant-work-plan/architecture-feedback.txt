@@ -1,0 +1,125 @@
+Which of the V1 architectural decisions do you dislike the most and why? 
+
+⏺ Application-level tenant isolation. No question.
+
+  Why It's the Worst
+
+  The problem:
+  Every single database query requires manual filtering:
+  SELECT * FROM patients WHERE organizationId = ? AND storeId = ?
+
+  Why this is catastrophic for B2B healthcare:
+
+  1. Security Time Bomb
+
+  One forgotten WHERE organizationId = ? and you've leaked Patient A's data to Clinic B. In healthcare, that's:
+  - HIPAA violation ($100K - $50M fine)
+  - Loss of customer trust
+  - Potential lawsuits
+  - End of B2B credibility
+
+  2. Doesn't Scale with Developers
+
+  Every developer on every feature must remember:
+  - Filter by organizationId
+  - AND filter by storeId
+  - In EVERY query
+  - Forever
+
+  New hire writes this:
+  const patients = await prisma.patient.findMany()
+
+  Result: Just exposed all patients across all tenants. Production incident.
+
+  3. Impossible to Audit
+
+  How do you verify you filtered everywhere?
+  - Grep the codebase for findMany?
+  - Code review every PR line-by-line?
+  - Hope QA catches it?
+
+  You can't prove it's secure. You can only prove it's insecure (when data leaks).
+
+  4. PostgreSQL Already Solves This
+
+  Row-Level Security (RLS) enforces isolation at the database:
+  ALTER TABLE patients ENABLE ROW LEVEL SECURITY;
+
+  CREATE POLICY tenant_isolation ON patients
+    USING (organizationId = current_setting('app.current_tenant_id')::uuid);
+
+  Now the database guarantees users only see their tenant's data. Developer can't mess it up.
+
+  5. The Compounding Effect
+
+  Because tenant isolation isn't at the DB level:
+  - JWT doesn't include tenant context (why bother?)
+  - Redis doesn't namespace keys (already leaking at app level)
+  - S3 doesn't prefix by tenant (same)
+  - Every abstraction layer needs manual filtering
+
+  It's the root cause of the other isolation issues.
+
+  ---
+  The Other Issues Are Fixable
+
+  | Issue                    | Why It's Not As Bad                    |
+  |--------------------------|----------------------------------------|
+  | Multi-repo               | Annoying, but doesn't cause data leaks |
+  | No tenant in JWT         | Fixable in a week                      |
+  | ActiveCampaign/PayTheory | Vendor issues, swap vendors            |
+  | Redis namespacing        | Add prefixes, done                     |
+  | 80+ models               | Complexity, but not unsafe             |
+  | Audit logging            | Can be added incrementally             |
+
+  But application-level tenant isolation in a B2B product is architectural malpractice.
+
+  ---
+  Why This Decision Was Made (My Guess)
+
+  V1 started as D2C (hedfirst.com — one "tenant"). Then:
+  - "Let's add support for multiple stores"
+  - "Let's make it white-label for other brands"
+  - "Just add organizationId to the queries"
+
+  No one stopped to say: "Wait, we're building multi-tenant SaaS for healthcare. We need database-enforced isolation."
+
+  ---
+  What V1.5/V2 Should Do
+
+  Option A: PostgreSQL RLS (Recommended)
+  -- Set tenant context per request
+  SET app.current_tenant_id = 'org_123';
+
+  -- RLS enforces isolation automatically
+  SELECT * FROM patients;  -- Only returns org_123's patients
+
+  Option B: Schema-per-tenant
+  org_acme.patients
+  org_beta.patients
+  Complete isolation, but more complex migrations.
+
+  Option C: Database-per-tenant
+  Extreme isolation, highest cost/complexity.
+
+  For B2B healthcare, I'd do Option A (RLS) — it's the sweet spot of security and manageability.
+
+  ---
+  The Brutal Truth
+
+  If you pitch V1.5 to a B2B healthcare buyer and they ask:
+  "How do you ensure tenant data isolation?"
+
+  And you answer:
+  "Application-level filtering in our queries."
+
+  A technical evaluator will reject you. This is a known anti-pattern in multi-tenant SaaS.
+
+  They want to hear:
+  "Database-enforced row-level security with PostgreSQL RLS."
+
+  ---
+  Verdict: Application-level tenant isolation is the worst decision because it's unfixable without a fundamental re-architecture, and it's a security liability in every
+  line of code.
+
+  This alone might justify building V1.5/V2 on a fresh foundation.
