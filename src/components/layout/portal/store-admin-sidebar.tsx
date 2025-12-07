@@ -1,6 +1,5 @@
 import {
   IconBox,
-  IconBrain,
   IconCreditCard,
   IconLayoutDashboard,
   IconMessage,
@@ -120,11 +119,6 @@ export const storeAdminSidebar: SidebarData = {
               url: "/store-admin/billing/invoices",
             },
           ],
-        },
-        {
-          title: "Teligant AI",
-          url: "/store-admin/ai",
-          icon: IconBrain,
         },
         {
           title: "Integrations",
