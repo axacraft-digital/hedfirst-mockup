@@ -10,7 +10,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { type Product, productTypeLabels, diseaseStateLabels } from "../data/products-types"
+import {
+  type Product,
+  diseaseStateLabels,
+  productTypeLabels,
+} from "../data/products-types"
 
 interface Props {
   products: Product[]
@@ -40,13 +44,11 @@ export function ProductsTable({ products }: Props) {
                 <TableCell className="text-muted-foreground">
                   {diseaseStateLabels[product.diseaseState]}
                 </TableCell>
-                <TableCell>
-                  {product.onStore ? "Yes" : "No"}
-                </TableCell>
+                <TableCell>{product.onStore ? "Yes" : "No"}</TableCell>
                 <TableCell className="text-right">
                   <Button variant="outline" size="sm" asChild>
                     <Link href={`/store-admin/products/${product.id}`}>
-                      Edit
+                      View Details
                     </Link>
                   </Button>
                 </TableCell>

@@ -1,18 +1,10 @@
 "use client"
 
-import { ColumnDef } from "@tanstack/react-table"
-import { IconDotsVertical } from "@tabler/icons-react"
 import Link from "next/link"
-import { cn } from "@/lib/utils"
+import { ColumnDef } from "@tanstack/react-table"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import { cn } from "@/lib/utils"
 import type { StoreUser } from "@/data/types"
 import { DataTableColumnHeader } from "./data-table-column-header"
 
@@ -20,7 +12,8 @@ import { DataTableColumnHeader } from "./data-table-column-header"
 const statusStyles: Record<string, { label: string; className: string }> = {
   ACTIVE: {
     label: "Active",
-    className: "bg-teal-100/30 text-teal-900 dark:text-teal-200 border-teal-200",
+    className:
+      "bg-teal-100/30 text-teal-900 dark:text-teal-200 border-teal-200",
   },
   INACTIVE: {
     label: "Inactive",
@@ -33,7 +26,12 @@ const statusStyles: Record<string, { label: string; className: string }> = {
 }
 
 function getStatusStyle(status: string) {
-  return statusStyles[status] ?? { label: status, className: "bg-neutral-300/40 border-neutral-300" }
+  return (
+    statusStyles[status] ?? {
+      label: status,
+      className: "bg-neutral-300/40 border-neutral-300",
+    }
+  )
 }
 
 export const columns: ColumnDef<StoreUser>[] = [
@@ -81,29 +79,16 @@ export const columns: ColumnDef<StoreUser>[] = [
   },
   {
     id: "actions",
-    header: "Actions",
+    header: () => <div className="text-right">Actions</div>,
     cell: ({ row }) => {
-      const user = row.original
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <IconDotsVertical className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem asChild>
-              <Link href={`/store-admin/users/${user.id}`}>
-                User Details
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-destructive">
-              Revoke Access
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="text-right">
+          <Button variant="outline" size="sm" asChild>
+            <Link href={`/store-admin/users/${row.original.id}`}>
+              View Details
+            </Link>
+          </Button>
+        </div>
       )
     },
   },
