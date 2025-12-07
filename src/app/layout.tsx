@@ -13,6 +13,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Teligant Admin",
   description: "Teligant - Enterprise Telehealth Platform",
+  robots: {
+    index: false,
+    follow: false,
+  },
 }
 
 export default function RootLayout({
