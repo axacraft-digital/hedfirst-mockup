@@ -18,33 +18,33 @@ Store admins need a dashboard to track the health and performance of their teleh
 
 ### What We CAN Track (Data Exists)
 
-| Data Point | Source Table | Notes |
-|------------|--------------|-------|
-| Revenue (gross/net) | `PayTheoryTransaction` | amount, status, moneyDirection |
-| Refunds | `PayTheoryTransaction` | WHERE moneyDirection = OUT |
-| Orders by Status | `Order` | Full status enum available |
-| Order Creation Date | `Order.createdAt` | ✅ |
-| Active Subscriptions | `PayTheorySubscription` | status field |
-| Subscription Cancellations | `PayTheorySubscription.canceledAt` | Timestamp only, no reason |
-| Questionnaire Completion | `MedicalQuestionnaire` | isCompleted, completedAt |
-| Patients Awaiting Review | `Order` | WHERE status = AWAITING_REVIEW |
-| Doctor Assignment | `Order.approvalDoctorId` | Which doctor, not when |
-| Payment Success/Failure | `PayTheoryTransaction.status` | + failureReasons array |
-| Orders Shipped | `Order.status` | ORDER_SHIPPED from ShipStation |
-| Products Sold | `OrderLineItem` | Linked to orders |
+| Data Point                 | Source Table                       | Notes                          |
+| -------------------------- | ---------------------------------- | ------------------------------ |
+| Revenue (gross/net)        | `PayTheoryTransaction`             | amount, status, moneyDirection |
+| Refunds                    | `PayTheoryTransaction`             | WHERE moneyDirection = OUT     |
+| Orders by Status           | `Order`                            | Full status enum available     |
+| Order Creation Date        | `Order.createdAt`                  | ✅                             |
+| Active Subscriptions       | `PayTheorySubscription`            | status field                   |
+| Subscription Cancellations | `PayTheorySubscription.canceledAt` | Timestamp only, no reason      |
+| Questionnaire Completion   | `MedicalQuestionnaire`             | isCompleted, completedAt       |
+| Patients Awaiting Review   | `Order`                            | WHERE status = AWAITING_REVIEW |
+| Doctor Assignment          | `Order.approvalDoctorId`           | Which doctor, not when         |
+| Payment Success/Failure    | `PayTheoryTransaction.status`      | + failureReasons array         |
+| Orders Shipped             | `Order.status`                     | ORDER_SHIPPED from ShipStation |
+| Products Sold              | `OrderLineItem`                    | Linked to orders               |
 
 ### What We CANNOT Track (Data Missing)
 
-| Metric | Why Not | Workaround |
-|--------|---------|------------|
-| Visitors / Cart Abandonment | No analytics integration | None - requires Google Analytics or similar |
-| Time to Doctor Approval | No `approvedAt` timestamp | None - would need schema change |
-| Time in Review Queue | No timestamp when entered AWAITING_REVIEW | Can only see current queue, not duration |
-| Churn Reasons | No cancellation reason field | Would need to add + collect |
-| Delivery Confirmation | ShipStation only sends SHIPPED | None - would need enhanced integration |
-| Shipping Duration | No `shippedAt` timestamp stored | None - ORDER_SHIPPED status exists but no timestamp |
-| Provider Review Duration | `Appointment.reviewedAt` exists, but not on Order | Partial - only for appointments |
-| First Purchase Date per Patient | Not a direct field | Query: MIN(Order.createdAt) per user |
+| Metric                          | Why Not                                           | Workaround                                          |
+| ------------------------------- | ------------------------------------------------- | --------------------------------------------------- |
+| Visitors / Cart Abandonment     | No analytics integration                          | None - requires Google Analytics or similar         |
+| Time to Doctor Approval         | No `approvedAt` timestamp                         | None - would need schema change                     |
+| Time in Review Queue            | No timestamp when entered AWAITING_REVIEW         | Can only see current queue, not duration            |
+| Churn Reasons                   | No cancellation reason field                      | Would need to add + collect                         |
+| Delivery Confirmation           | ShipStation only sends SHIPPED                    | None - would need enhanced integration              |
+| Shipping Duration               | No `shippedAt` timestamp stored                   | None - ORDER_SHIPPED status exists but no timestamp |
+| Provider Review Duration        | `Appointment.reviewedAt` exists, but not on Order | Partial - only for appointments                     |
+| First Purchase Date per Patient | Not a direct field                                | Query: MIN(Order.createdAt) per user                |
 
 ---
 
@@ -87,14 +87,15 @@ Store admins need a dashboard to track the health and performance of their teleh
 
 **4 key metrics at a glance:**
 
-| Metric | Calculation | Data Source |
-|--------|-------------|-------------|
-| **Total Revenue** | SUM(amount) WHERE status = SUCCEEDED, moneyDirection = IN | `PayTheoryTransaction` |
-| **Total Orders** | COUNT(*) WHERE status NOT IN (FAILED, CANCELED) | `Order` |
-| **Active Subscriptions** | COUNT(*) WHERE canceledAt IS NULL | `PayTheorySubscription` |
-| **Awaiting Review** | COUNT(*) WHERE status = AWAITING_REVIEW | `Order` |
+| Metric                   | Calculation                                               | Data Source             |
+| ------------------------ | --------------------------------------------------------- | ----------------------- |
+| **Total Revenue**        | SUM(amount) WHERE status = SUCCEEDED, moneyDirection = IN | `PayTheoryTransaction`  |
+| **Total Orders**         | COUNT(\*) WHERE status NOT IN (FAILED, CANCELED)          | `Order`                 |
+| **Active Subscriptions** | COUNT(\*) WHERE canceledAt IS NULL                        | `PayTheorySubscription` |
+| **Awaiting Review**      | COUNT(\*) WHERE status = AWAITING_REVIEW                  | `Order`                 |
 
 Each card shows:
+
 - Current period value
 - % change vs prior period (same length)
 
@@ -104,11 +105,11 @@ Each card shows:
 
 **Line chart showing daily/weekly revenue**
 
-| Metric | Calculation |
-|--------|-------------|
+| Metric            | Calculation                                               |
+| ----------------- | --------------------------------------------------------- |
 | **Gross Revenue** | SUM(amount) WHERE moneyDirection = IN, status = SUCCEEDED |
-| **Refunds** | SUM(amount) WHERE moneyDirection = OUT |
-| **Net Revenue** | Gross - Refunds |
+| **Refunds**       | SUM(amount) WHERE moneyDirection = OUT                    |
+| **Net Revenue**   | Gross - Refunds                                           |
 
 **Grouping:** By day (if < 30 days selected), by week (if > 30 days)
 
@@ -118,16 +119,16 @@ Each card shows:
 
 **Breakdown of orders in each status**
 
-| Status | What It Means |
-|--------|---------------|
-| AWAITING_REVIEW | Needs doctor approval |
-| APPROVED | Doctor approved, awaiting payment/fulfillment |
-| PAID | Payment received |
-| SENT_TO_PHARMACY | Transmitted to pharmacy |
-| ORDER_SHIPPED | ShipStation confirmed shipment |
-| FULFILLED / COMPLETED | Done |
-| DENIED | Doctor denied |
-| CANCELED | Patient/admin canceled |
+| Status                | What It Means                                 |
+| --------------------- | --------------------------------------------- |
+| AWAITING_REVIEW       | Needs doctor approval                         |
+| APPROVED              | Doctor approved, awaiting payment/fulfillment |
+| PAID                  | Payment received                              |
+| SENT_TO_PHARMACY      | Transmitted to pharmacy                       |
+| ORDER_SHIPPED         | ShipStation confirmed shipment                |
+| FULFILLED / COMPLETED | Done                                          |
+| DENIED                | Doctor denied                                 |
+| CANCELED              | Patient/admin canceled                        |
 
 **Visualization:** Horizontal bar chart or pie chart
 
@@ -135,19 +136,20 @@ Each card shows:
 
 ## Section 4: Subscription Health
 
-| Metric | Calculation | Data Source |
-|--------|-------------|-------------|
-| **Active Subscriptions** | COUNT WHERE canceledAt IS NULL | `PayTheorySubscription` |
-| **New Subscriptions** | COUNT WHERE createdAt IN period | `PayTheorySubscription` |
-| **Canceled Subscriptions** | COUNT WHERE canceledAt IN period | `PayTheorySubscription` |
-| **Churn Rate** | Canceled / (Active at period start) | Calculated |
-| **MRR** | SUM(amount) of active subscriptions | `PayTheorySubscription` |
+| Metric                     | Calculation                         | Data Source             |
+| -------------------------- | ----------------------------------- | ----------------------- |
+| **Active Subscriptions**   | COUNT WHERE canceledAt IS NULL      | `PayTheorySubscription` |
+| **New Subscriptions**      | COUNT WHERE createdAt IN period     | `PayTheorySubscription` |
+| **Canceled Subscriptions** | COUNT WHERE canceledAt IN period    | `PayTheorySubscription` |
+| **Churn Rate**             | Canceled / (Active at period start) | Calculated              |
+| **MRR**                    | SUM(amount) of active subscriptions | `PayTheorySubscription` |
 
 **Note:** We track THAT subscriptions were canceled, but NOT WHY (no reason field exists).
 
 ### Retention Tracking (Cohort-Based)
 
 We CAN calculate retention by cohort:
+
 - Group subscriptions by creation month
 - Check how many are still active after 30/60/90 days
 - This requires a scheduled job to snapshot cohort data
@@ -158,12 +160,12 @@ We CAN calculate retention by cohort:
 
 **Table showing best-selling products**
 
-| Column | Source |
-|--------|--------|
+| Column       | Source                      |
+| ------------ | --------------------------- |
 | Product Name | `OrderLineItem.productName` |
-| Units Sold | COUNT of line items |
-| Revenue | SUM of line item prices |
-| % of Total | Revenue / Total Revenue |
+| Units Sold   | COUNT of line items         |
+| Revenue      | SUM of line item prices     |
+| % of Total   | Revenue / Total Revenue     |
 
 **Sorting:** By revenue, descending
 
@@ -173,14 +175,15 @@ We CAN calculate retention by cohort:
 
 **Only alerts we can actually detect:**
 
-| Alert | Trigger | Data Source |
-|-------|---------|-------------|
-| **Patients Awaiting Review** | COUNT > 0 WHERE status = AWAITING_REVIEW | `Order` |
-| **High Payment Failure Rate** | Failure rate > 10% today | `PayTheoryTransaction` |
-| **Subscription Cancellations Spike** | > 2x normal daily cancellations | `PayTheorySubscription` |
-| **Refund Spike** | > 2x normal daily refunds | `PayTheoryTransaction` |
+| Alert                                | Trigger                                  | Data Source             |
+| ------------------------------------ | ---------------------------------------- | ----------------------- |
+| **Patients Awaiting Review**         | COUNT > 0 WHERE status = AWAITING_REVIEW | `Order`                 |
+| **High Payment Failure Rate**        | Failure rate > 10% today                 | `PayTheoryTransaction`  |
+| **Subscription Cancellations Spike** | > 2x normal daily cancellations          | `PayTheorySubscription` |
+| **Refund Spike**                     | > 2x normal daily refunds                | `PayTheoryTransaction`  |
 
 **What we CANNOT alert on:**
+
 - ❌ Patients waiting > 24 hours (no queue entry timestamp)
 - ❌ Shipping delays (no delivery data)
 - ❌ Low approval rate (no approval timestamp to calculate rate properly)
@@ -190,28 +193,37 @@ We CAN calculate retention by cohort:
 ## What's NOT Included (and Why)
 
 ### Removed: Patient Acquisition Funnel
+
 **Why:** We don't track visitors, cart starts, or checkout abandonment. We only see completed orders.
 
 ### Removed: Time-Based SLAs
+
 **Why:** No timestamps for:
+
 - When order entered AWAITING_REVIEW
 - When doctor started/completed review
 - When order was shipped (only status, not timestamp)
 
 ### Removed: Provider Performance Table
+
 **Why:** We have `approvalDoctorId` but no:
+
 - Review start/end timestamps
 - Cannot calculate average review time
 - Cannot measure individual provider efficiency
 
 ### Removed: Churn Reasons Breakdown
+
 **Why:** `PayTheorySubscription` has `canceledAt` but no reason field. We'd need to:
+
 1. Add a cancellation reason field
 2. Build a cancellation flow to collect it
 3. Then we could display it
 
 ### Removed: Delivery/Fulfillment Metrics
+
 **Why:** ShipStation integration only updates status to ORDER_SHIPPED. We don't receive:
+
 - Tracking numbers
 - Delivery confirmation
 - Delivery dates
@@ -407,14 +419,14 @@ const analyticsApi = createApi({
 
 If we want to track more in the future, we'd need:
 
-| Feature | Required Change |
-|---------|-----------------|
-| **Time to Approval** | Add `approvedAt` timestamp to Order |
-| **Queue Duration** | Add `awaitingReviewAt` timestamp to Order |
-| **Churn Reasons** | Add `cancelReason` field to PayTheorySubscription + cancellation UI |
-| **Shipping Times** | Store ShipStation webhook payload with timestamps |
-| **Provider Performance** | Add review timestamps to Order or separate ReviewLog table |
-| **Patient Funnel** | Integrate analytics (Google Analytics, Mixpanel, etc.) |
+| Feature                  | Required Change                                                     |
+| ------------------------ | ------------------------------------------------------------------- |
+| **Time to Approval**     | Add `approvedAt` timestamp to Order                                 |
+| **Queue Duration**       | Add `awaitingReviewAt` timestamp to Order                           |
+| **Churn Reasons**        | Add `cancelReason` field to PayTheorySubscription + cancellation UI |
+| **Shipping Times**       | Store ShipStation webhook payload with timestamps                   |
+| **Provider Performance** | Add review timestamps to Order or separate ReviewLog table          |
+| **Patient Funnel**       | Integrate analytics (Google Analytics, Mixpanel, etc.)              |
 
 ---
 
@@ -422,19 +434,19 @@ If we want to track more in the future, we'd need:
 
 ### Backend
 
-| File | Purpose |
-|------|---------|
-| `src/apps/store-admin/modules/analytics/analytics.module.ts` | Module |
+| File                                                             | Purpose       |
+| ---------------------------------------------------------------- | ------------- |
+| `src/apps/store-admin/modules/analytics/analytics.module.ts`     | Module        |
 | `src/apps/store-admin/modules/analytics/analytics.controller.ts` | API endpoints |
-| `src/apps/store-admin/modules/analytics/analytics.service.ts` | Calculations |
+| `src/apps/store-admin/modules/analytics/analytics.service.ts`    | Calculations  |
 
 ### Frontend
 
-| File | Purpose |
-|------|---------|
-| `src/app/(internal)/panel/dashboard/page.tsx` | Main dashboard |
-| `src/app/(internal)/panel/dashboard/_components/*.tsx` | UI components |
-| `src/providers/store/api/analytics/analytics.ts` | RTK Query |
+| File                                                   | Purpose        |
+| ------------------------------------------------------ | -------------- |
+| `src/app/(internal)/panel/dashboard/page.tsx`          | Main dashboard |
+| `src/app/(internal)/panel/dashboard/_components/*.tsx` | UI components  |
+| `src/providers/store/api/analytics/analytics.ts`       | RTK Query      |
 
 ---
 

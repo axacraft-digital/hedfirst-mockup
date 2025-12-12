@@ -3,21 +3,9 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useParams } from "next/navigation"
+import { testIntegrationConnection } from "@/data"
 import { ArrowLeft, Loader2, Lock, RefreshCw, Webhook } from "lucide-react"
-import { Header } from "@/components/layout/header"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Separator } from "@/components/ui/separator"
-import { Checkbox } from "@/components/ui/checkbox"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-import { Switch } from "@/components/ui/switch"
+import { toast } from "sonner"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -29,12 +17,24 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { toast } from "sonner"
-import { testIntegrationConnection } from "@/data"
-import { CredentialField } from "../components/credential-field"
-import { WebhookScenarios } from "../components/webhook-scenarios"
+import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Separator } from "@/components/ui/separator"
+import { Switch } from "@/components/ui/switch"
+import { Header } from "@/components/layout/header"
 import { AddWebhookDialog } from "../components/add-webhook-dialog"
 import { AIIntegrationDetailView } from "../components/ai-integration-detail-view"
+import { CredentialField } from "../components/credential-field"
+import { WebhookScenarios } from "../components/webhook-scenarios"
 import { integrationDetails } from "../data/integration-details"
 
 // Check if an integration is an AI provider
@@ -53,7 +53,9 @@ export default function IntegrationDetailPage() {
     setIsTesting(true)
 
     // Show loading toast
-    const toastId = toast.loading(`Testing connection to ${integration?.name}...`)
+    const toastId = toast.loading(
+      `Testing connection to ${integration?.name}...`
+    )
 
     // Simulate API call delay, then get result from centralized data
     setTimeout(() => {
@@ -347,7 +349,7 @@ export default function IntegrationDetailPage() {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction className="bg-destructive text-white hover:bg-destructive/90">
+                  <AlertDialogAction className="bg-destructive hover:bg-destructive/90 text-white">
                     Remove Integration
                   </AlertDialogAction>
                 </AlertDialogFooter>

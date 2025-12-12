@@ -17,7 +17,10 @@
     },
     "assessment": {
       "diagnoses": ["Symptomatic hypogonadism", "Low testosterone - secondary"],
-      "differentialDiagnoses": ["Overtraining syndrome", "Adrenal insufficiency"],
+      "differentialDiagnoses": [
+        "Overtraining syndrome",
+        "Adrenal insufficiency"
+      ],
       "clinicalImpression": "29-year-old male with symptoms consistent with low testosterone. Laboratory results confirm low-normal total testosterone with low free testosterone. Patient maintains an active lifestyle with regular exercise 4-5 times weekly, follows a balanced diet focused on whole foods, rarely consumes alcohol, and does not use tobacco or nicotine products. Given symptomatic presentation and confirmatory labs, patient is an appropriate candidate for testosterone replacement therapy."
     },
     "plan": {
@@ -44,12 +47,18 @@
       "labResults": null
     },
     "assessment": {
-      "diagnoses": ["Body composition optimization", "Hypogonadism - on treatment"],
+      "diagnoses": [
+        "Body composition optimization",
+        "Hypogonadism - on treatment"
+      ],
       "differentialDiagnoses": [],
       "clinicalImpression": "Active 29-year-old male seeking to optimize body composition. Currently responding well to TRT. Good candidate for low-dose GLP-1 therapy for fat loss while maintaining muscle mass from resistance training."
     },
     "plan": {
-      "medications": ["Semaglutide 0.25mg weekly - starting dose", "Continue Testosterone Cypionate 100mg weekly"],
+      "medications": [
+        "Semaglutide 0.25mg weekly - starting dose",
+        "Continue Testosterone Cypionate 100mg weekly"
+      ],
       "instructions": "Start Semaglutide at 0.25mg weekly. Maintain high protein intake (1g/lb body weight) to preserve muscle. Continue resistance training. Monitor for GI side effects in first 2 weeks.",
       "followUp": "Follow-up in 4 weeks for dose assessment",
       "referrals": null
@@ -133,7 +142,10 @@
       "clinicalImpression": "Sustained response to oral therapy. Good candidate for combination therapy."
     },
     "plan": {
-      "medications": ["Continue Finasteride 1mg daily", "Add Minoxidil 5% solution - apply to scalp BID"],
+      "medications": [
+        "Continue Finasteride 1mg daily",
+        "Add Minoxidil 5% solution - apply to scalp BID"
+      ],
       "instructions": "Apply Minoxidil to dry scalp morning and evening. Allow to dry before styling. May experience temporary shedding in first 2-4 weeks.",
       "followUp": "Follow-up in 3 months to assess combination therapy",
       "referrals": null

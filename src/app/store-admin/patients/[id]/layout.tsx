@@ -1,3 +1,4 @@
+import Link from "next/link"
 import {
   IconCalendar,
   IconClipboardList,
@@ -13,7 +14,6 @@ import {
   IconUserCircle,
   IconVideo,
 } from "@tabler/icons-react"
-import Link from "next/link"
 import { Header } from "@/components/layout/header"
 import PatientSidebarNav from "./components/sidebar-nav"
 import { getPatientDetailById } from "./data/patient-detail-data"

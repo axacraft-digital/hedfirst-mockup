@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { mockProviders as providers } from "@/data"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,7 +9,6 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 import { Header } from "@/components/layout/header"
-import { mockProviders as providers } from "@/data"
 import { AddProviderButton } from "./components/add-provider-button"
 import { columns } from "./components/providers-columns"
 import { ProvidersTable } from "./components/providers-table"

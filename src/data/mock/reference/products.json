@@ -287,10 +287,7 @@
     "slug": "hair-loss-bundle",
     "diseaseState": "HAIR_GROWTH",
     "requirePrescription": true,
-    "bundledProducts": [
-      "prod_001",
-      "prod_002"
-    ],
+    "bundledProducts": ["prod_001", "prod_002"],
     "variants": [
       {
         "id": "var_009a",
@@ -310,12 +307,7 @@
     "subTitle": "At-home blood test",
     "slug": "metabolic-panel",
     "diseaseState": "WEIGHT_LOSS",
-    "testedMarkers": [
-      "HbA1c",
-      "Fasting Glucose",
-      "Lipid Panel",
-      "TSH"
-    ],
+    "testedMarkers": ["HbA1c", "Fasting Glucose", "Lipid Panel", "TSH"],
     "variants": [
       {
         "id": "var_010a",

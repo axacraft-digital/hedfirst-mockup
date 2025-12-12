@@ -1,0 +1,52 @@
+{
+  "$schema": "TenantConfigMVP",
+  "version": "1.0",
+  "purpose": "Minimum viable tenant config for Store B launch",
+  "_note": "This is the MINIMUM required. Compare to hedfirst-tenant-config.json for full reference.",
+
+  "identity": {
+    "slug": "renewell",
+    "storeId": "RENEWELL_STORE_ID",
+    "organizationId": "RENEWELL_ORG_ID",
+    "name": "Renewell",
+    "legalName": "Renewell LLC"
+  },
+
+  "logos": {
+    "_comment": "Tenant must provide these files",
+    "primary": "/tenants/renewell/logo.svg",
+    "white": "/tenants/renewell/logo-white.svg",
+    "favicon": "/tenants/renewell/favicon.ico"
+  },
+
+  "colors": {
+    "_comment": "Only base colors provided. System generates full 50-900 palette from primary.",
+    "primary": "#2D5A27",
+    "primaryHover": "#1E3D1A"
+  },
+
+  "contact": {
+    "supportEmail": "support@renewell.com",
+    "supportPhone": "+1 (555) 123-4567",
+    "supportPhoneDisplay": "+1 555 123-4567"
+  },
+
+  "legal": {
+    "_comment": "External URLs - tenant hosts their own legal pages",
+    "termsOfService": "https://renewell.com/terms",
+    "privacyPolicy": "https://renewell.com/privacy",
+    "hipaaNotice": "https://renewell.com/hipaa"
+  },
+
+  "copyright": {
+    "holder": "Renewell",
+    "short": "© Renewell"
+  },
+
+  "features": {
+    "_comment": "Store B has only 5 products, so search/filters disabled",
+    "showSearch": false,
+    "showFilters": false,
+    "catalogLayout": "category-grouped"
+  }
+}

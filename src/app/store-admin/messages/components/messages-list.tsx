@@ -3,8 +3,8 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { IconPaperclip, IconSearch } from "@tabler/icons-react"
-import { cn } from "@/lib/utils"
 import { Input } from "@/components/ui/input"
+import { cn } from "@/lib/utils"
 import type { Message } from "../data/messages-data"
 
 interface Props {
@@ -47,7 +47,7 @@ export function MessagesList({ messages }: Props) {
     <div className="space-y-4">
       {/* Search */}
       <div className="relative w-full sm:w-[300px]">
-        <IconSearch className="text-muted-foreground absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2" />
+        <IconSearch className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
         <Input
           placeholder="Search messages..."
           value={searchQuery}
@@ -64,22 +64,24 @@ export function MessagesList({ messages }: Props) {
               key={message.id}
               onClick={() => router.push(`/store-admin/messages/${message.id}`)}
               className={cn(
-                "flex cursor-pointer items-center gap-4 border-b px-4 py-3 transition-colors hover:bg-muted/50 last:border-b-0",
+                "hover:bg-muted/50 flex cursor-pointer items-center gap-4 border-b px-4 py-3 transition-colors last:border-b-0",
                 !message.isRead && "bg-muted/30"
               )}
             >
               {/* Unread indicator */}
               <div className="flex w-2 shrink-0 justify-center">
                 {!message.isRead && (
-                  <div className="h-2 w-2 rounded-full bg-primary" />
+                  <div className="bg-primary h-2 w-2 rounded-full" />
                 )}
               </div>
 
               {/* Patient name */}
-              <div className={cn(
-                "w-[180px] shrink-0 truncate",
-                !message.isRead ? "font-semibold" : "font-medium"
-              )}>
+              <div
+                className={cn(
+                  "w-[180px] shrink-0 truncate",
+                  !message.isRead ? "font-semibold" : "font-medium"
+                )}
+              >
                 {message.patientName}
               </div>
 
@@ -88,25 +90,29 @@ export function MessagesList({ messages }: Props) {
                 {message.hasAttachment && (
                   <IconPaperclip className="text-muted-foreground h-4 w-4 shrink-0" />
                 )}
-                <span className={cn(
-                  "truncate",
-                  message.isRead ? "text-muted-foreground" : "text-foreground"
-                )}>
+                <span
+                  className={cn(
+                    "truncate",
+                    message.isRead ? "text-muted-foreground" : "text-foreground"
+                  )}
+                >
                   {message.preview}
                 </span>
               </div>
 
               {/* Timestamp */}
-              <div className={cn(
-                "shrink-0 text-sm",
-                message.isRead ? "text-muted-foreground" : "font-medium"
-              )}>
+              <div
+                className={cn(
+                  "shrink-0 text-sm",
+                  message.isRead ? "text-muted-foreground" : "font-medium"
+                )}
+              >
                 {formatTimestamp(message.timestamp)}
               </div>
             </div>
           ))
         ) : (
-          <div className="flex h-24 items-center justify-center text-muted-foreground">
+          <div className="text-muted-foreground flex h-24 items-center justify-center">
             No messages found.
           </div>
         )}

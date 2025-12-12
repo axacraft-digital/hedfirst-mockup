@@ -1,6 +1,6 @@
 "use client"
 
-import { use, useState, useMemo, Fragment } from "react"
+import { Fragment, use, useMemo, useState } from "react"
 import Link from "next/link"
 import {
   IconChevronDown,
@@ -10,10 +10,15 @@ import {
 } from "@tabler/icons-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
   Table,
   TableBody,
@@ -22,17 +27,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { cn } from "@/lib/utils"
 import {
-  getTreatmentsForUI,
-  filterTreatmentsByType,
   type UITreatment,
+  filterTreatmentsByType,
+  getTreatmentsForUI,
 } from "@/data/treatments"
 
 // Treatment types (derived from UI helper)
@@ -58,18 +58,24 @@ function formatDate(isoString: string): string {
 }
 
 // Status badge styles
-const statusStyles: Record<TreatmentStatus, { label: string; className: string }> = {
+const statusStyles: Record<
+  TreatmentStatus,
+  { label: string; className: string }
+> = {
   active: {
     label: "Active",
-    className: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200",
+    className:
+      "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200",
   },
   paused: {
     label: "Paused",
-    className: "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200",
+    className:
+      "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200",
   },
   canceled: {
     label: "Canceled",
-    className: "bg-neutral-100 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200",
+    className:
+      "bg-neutral-100 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200",
   },
   completed: {
     label: "Completed",
@@ -115,9 +121,13 @@ export default function PatientTreatmentsPage({ params }: Props) {
   }
 
   // Count by type for tabs
-  const subscriptionCount = allTreatments.filter((t) => t.type === "subscription").length
+  const subscriptionCount = allTreatments.filter(
+    (t) => t.type === "subscription"
+  ).length
   const oneTimeCount = allTreatments.filter((t) => t.type === "one-time").length
-  const membershipCount = allTreatments.filter((t) => t.type === "membership").length
+  const membershipCount = allTreatments.filter(
+    (t) => t.type === "membership"
+  ).length
 
   return (
     <div className="flex flex-1 flex-col">
@@ -152,7 +162,7 @@ export default function PatientTreatmentsPage({ params }: Props) {
 
       {/* Search */}
       <div className="relative mb-4 max-w-sm">
-        <IconSearch className="text-muted-foreground absolute left-3 top-1/2 size-4 -translate-y-1/2" />
+        <IconSearch className="text-muted-foreground absolute top-1/2 left-3 size-4 -translate-y-1/2" />
         <Input
           placeholder="Search by order ID, patient name or email"
           value={searchQuery}
@@ -183,14 +193,15 @@ export default function PatientTreatmentsPage({ params }: Props) {
                 {filteredTreatments.length > 0 ? (
                   filteredTreatments.map((treatment) => {
                     const isExpanded = expandedRows.has(treatment.id)
-                    const hasChildren = treatment.children && treatment.children.length > 0
+                    const hasChildren =
+                      treatment.children && treatment.children.length > 0
                     const statusStyle = statusStyles[treatment.status]
 
                     return (
                       <Fragment key={treatment.id}>
                         <TableRow
                           className={cn(
-                            "cursor-pointer transition-colors hover:bg-muted/50",
+                            "hover:bg-muted/50 cursor-pointer transition-colors",
                             isExpanded && "bg-muted/30"
                           )}
                           onClick={() => hasChildren && toggleRow(treatment.id)}
@@ -218,7 +229,8 @@ export default function PatientTreatmentsPage({ params }: Props) {
                               className="text-blue-600 hover:underline dark:text-blue-400"
                               onClick={(e) => e.stopPropagation()}
                             >
-                              {treatment.masterOrderId ?? `#${treatment.id.slice(0, 10)}`}
+                              {treatment.masterOrderId ??
+                                `#${treatment.id.slice(0, 10)}`}
                             </Link>
                           </TableCell>
                           <TableCell>{treatment.productName}</TableCell>
@@ -235,7 +247,10 @@ export default function PatientTreatmentsPage({ params }: Props) {
                           </TableCell>
                           <TableCell>
                             {treatment.status !== "active" ? (
-                              <Badge variant="outline" className={statusStyle.className}>
+                              <Badge
+                                variant="outline"
+                                className={statusStyle.className}
+                              >
                                 {statusStyle.label}
                               </Badge>
                             ) : (
@@ -260,13 +275,21 @@ export default function PatientTreatmentsPage({ params }: Props) {
                               </DropdownMenuTrigger>
                               <DropdownMenuContent align="end">
                                 <DropdownMenuItem asChild>
-                                  <Link href={`/store-admin/patients/${id}/treatments/${treatment.id}`}>
+                                  <Link
+                                    href={`/store-admin/patients/${id}/treatments/${treatment.id}`}
+                                  >
                                     View Order
                                   </Link>
                                 </DropdownMenuItem>
-                                <DropdownMenuItem>Pause Subscription</DropdownMenuItem>
-                                <DropdownMenuItem>Cancel Subscription</DropdownMenuItem>
-                                <DropdownMenuItem>Process Refill</DropdownMenuItem>
+                                <DropdownMenuItem>
+                                  Pause Subscription
+                                </DropdownMenuItem>
+                                <DropdownMenuItem>
+                                  Cancel Subscription
+                                </DropdownMenuItem>
+                                <DropdownMenuItem>
+                                  Process Refill
+                                </DropdownMenuItem>
                               </DropdownMenuContent>
                             </DropdownMenu>
                           </TableCell>
@@ -278,11 +301,12 @@ export default function PatientTreatmentsPage({ params }: Props) {
                             <TableCell colSpan={9} className="bg-muted/20 p-0">
                               <div className="divide-y">
                                 {treatment.children!.map((child) => {
-                                  const childStatusStyle = statusStyles[child.status]
+                                  const childStatusStyle =
+                                    statusStyles[child.status]
                                   return (
                                     <div
                                       key={child.id}
-                                      className="flex items-center justify-between py-3 pl-14 pr-4"
+                                      className="flex items-center justify-between py-3 pr-4 pl-14"
                                     >
                                       <div>
                                         <span className="font-medium">

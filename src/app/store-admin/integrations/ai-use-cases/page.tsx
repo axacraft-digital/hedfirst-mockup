@@ -2,7 +2,9 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Sparkles, ArrowLeft } from "lucide-react"
+import { toast } from "@/hooks/use-toast"
+import { ArrowLeft, Sparkles } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,7 +13,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { Header } from "@/components/layout/header"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -20,6 +21,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Label } from "@/components/ui/label"
 import {
   Select,
   SelectContent,
@@ -27,12 +29,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
-import { Badge } from "@/components/ui/badge"
 import { Switch } from "@/components/ui/switch"
-import { toast } from "@/hooks/use-toast"
-import { aiUseCases, type AIUseCase } from "./data/ai-use-cases"
+import { Header } from "@/components/layout/header"
+import { type AIUseCase, aiUseCases } from "./data/ai-use-cases"
 
 export default function AIUseCasesPage() {
   const [mappings, setMappings] = useState<AIUseCase[]>(aiUseCases)
@@ -138,7 +138,7 @@ export default function AIUseCasesPage() {
                     />
                     <Label
                       htmlFor={`enabled-${useCase.id}`}
-                      className="text-sm text-muted-foreground"
+                      className="text-muted-foreground text-sm"
                     >
                       {useCase.enabled ? "Enabled" : "Disabled"}
                     </Label>
@@ -148,7 +148,9 @@ export default function AIUseCasesPage() {
               <CardContent>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="space-y-2">
-                    <Label htmlFor={`provider-${useCase.id}`}>AI Provider</Label>
+                    <Label htmlFor={`provider-${useCase.id}`}>
+                      AI Provider
+                    </Label>
                     <Select
                       value={useCase.selectedProvider}
                       onValueChange={(value) =>
@@ -161,7 +163,10 @@ export default function AIUseCasesPage() {
                       </SelectTrigger>
                       <SelectContent>
                         {useCase.availableProviders.map((provider) => (
-                          <SelectItem key={provider.value} value={provider.value}>
+                          <SelectItem
+                            key={provider.value}
+                            value={provider.value}
+                          >
                             {provider.label}
                           </SelectItem>
                         ))}
@@ -170,7 +175,7 @@ export default function AIUseCasesPage() {
                   </div>
                   <div className="space-y-2">
                     <Label>Recommended Model</Label>
-                    <div className="text-muted-foreground flex h-9 items-center rounded-md border bg-muted/50 px-3 text-sm">
+                    <div className="text-muted-foreground bg-muted/50 flex h-9 items-center rounded-md border px-3 text-sm">
                       {useCase.recommendedModel}
                     </div>
                   </div>

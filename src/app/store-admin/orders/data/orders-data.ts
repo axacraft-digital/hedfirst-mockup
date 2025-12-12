@@ -400,7 +400,8 @@ export const orders: OrderWithPatient[] = [
         amount: 2900,
         billingCycle: "ONE_TIME_PAYMENT",
         paidAt: "2024-11-20T16:45:00Z",
-        _note: "Patient paid for consultation but did not proceed with treatment",
+        _note:
+          "Patient paid for consultation but did not proceed with treatment",
       },
     ],
   },
@@ -656,7 +657,8 @@ export function getTabCounts(orderList: OrderWithPatient[]) {
   return {
     all: orderList.length,
     needsReview: orderList.filter((o) => o.status === "AWAITING_REVIEW").length,
-    paymentFailed: orderList.filter((o) => o.status === "PAYMENT_FAILED").length,
+    paymentFailed: orderList.filter((o) => o.status === "PAYMENT_FAILED")
+      .length,
     labsReady: orderList.filter((o) =>
       o.children?.some(
         (c) => c.productType === "LAB_TEST" && c.labResultsReceivedAt

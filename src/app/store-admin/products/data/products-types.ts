@@ -152,10 +152,18 @@ export const treatmentUseOptions: TreatmentUse[] = [
 ]
 
 // Tab filter type
-export type ProductTabFilter = "all" | "physical" | "service" | "membership" | "lab-test"
+export type ProductTabFilter =
+  | "all"
+  | "physical"
+  | "service"
+  | "membership"
+  | "lab-test"
 
 // Map tab to product type
-export const tabToProductType: Record<Exclude<ProductTabFilter, "all">, ProductType> = {
+export const tabToProductType: Record<
+  Exclude<ProductTabFilter, "all">,
+  ProductType
+> = {
   physical: "PHYSICAL_PRODUCT",
   service: "SERVICE",
   membership: "MEMBERSHIP",
@@ -186,15 +194,7 @@ export const formFactorOptions = [
 ]
 
 // Dosage units
-export const dosageUnitOptions = [
-  "mg",
-  "mcg",
-  "g",
-  "IU",
-  "%",
-  "oz",
-  "mL",
-]
+export const dosageUnitOptions = ["mg", "mcg", "g", "IU", "%", "oz", "mL"]
 
 // Billing cycles
 export const billingCycleOptions: { label: string; value: string }[] = [

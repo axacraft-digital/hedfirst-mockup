@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { IconBrandVisa, IconCreditCard } from "@tabler/icons-react"
-import { Header } from "@/components/layout/header"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -22,6 +21,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
+import { Header } from "@/components/layout/header"
 
 // Mock data for existing payment methods
 const existingCards = [
@@ -67,7 +67,8 @@ export default function BillingPaymentPage() {
             <CardHeader>
               <CardTitle>Payment Method</CardTitle>
               <CardDescription>
-                Payments for your subscription and usage are made using the default card.
+                Payments for your subscription and usage are made using the
+                default card.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -123,9 +124,9 @@ export default function BillingPaymentPage() {
             <CardHeader>
               <CardTitle>Invoice Email Recipient</CardTitle>
               <CardDescription>
-                By default, all invoices will be sent to your account&apos;s email
-                address. If you want to use a custom email address specifically for
-                receiving invoices, enter it here.
+                By default, all invoices will be sent to your account&apos;s
+                email address. If you want to use a custom email address
+                specifically for receiving invoices, enter it here.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -155,8 +156,8 @@ export default function BillingPaymentPage() {
             <CardHeader>
               <CardTitle>Company Name</CardTitle>
               <CardDescription>
-                By default, your account name is shown on your invoice. If you want
-                to show a custom name instead, please enter it here.
+                By default, your account name is shown on your invoice. If you
+                want to show a custom name instead, please enter it here.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -196,7 +197,9 @@ export default function BillingPaymentPage() {
                   <SelectContent>
                     <SelectItem value="United States">United States</SelectItem>
                     <SelectItem value="Canada">Canada</SelectItem>
-                    <SelectItem value="United Kingdom">United Kingdom</SelectItem>
+                    <SelectItem value="United Kingdom">
+                      United Kingdom
+                    </SelectItem>
                     <SelectItem value="Australia">Australia</SelectItem>
                     <SelectItem value="Germany">Germany</SelectItem>
                   </SelectContent>

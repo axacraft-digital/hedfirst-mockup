@@ -1,5 +1,6 @@
 "use client"
 
+import { IconChevronDown } from "@tabler/icons-react"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
@@ -14,12 +15,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { IconChevronDown } from "@tabler/icons-react"
 import { cn } from "@/lib/utils"
 
 export type DateFilter = "7d" | "today" | "yesterday" | "30d" | "all"
 export type SortOption = "newest" | "oldest" | "amount-high" | "waiting-longest"
-export type ContainsFilter = "prescription" | "membership" | "lab-kit" | "appointment"
+export type ContainsFilter =
+  | "prescription"
+  | "membership"
+  | "lab-kit"
+  | "appointment"
 
 interface Props {
   dateFilter: DateFilter
@@ -93,14 +97,14 @@ export function OrdersFilters({
         </PopoverTrigger>
         <PopoverContent className="w-[200px] p-3" align="end">
           <div className="space-y-3">
-            <p className="text-sm font-medium text-muted-foreground">
+            <p className="text-muted-foreground text-sm font-medium">
               Order contains
             </p>
             <div className="space-y-2">
               {containsOptions.map((option) => (
                 <label
                   key={option.value}
-                  className="flex items-center gap-2 cursor-pointer"
+                  className="flex cursor-pointer items-center gap-2"
                 >
                   <Checkbox
                     checked={containsFilters.includes(option.value)}
@@ -114,7 +118,7 @@ export function OrdersFilters({
               <Button
                 variant="ghost"
                 size="sm"
-                className="w-full text-muted-foreground"
+                className="text-muted-foreground w-full"
                 onClick={() => onContainsChange([])}
               >
                 Clear

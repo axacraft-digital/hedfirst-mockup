@@ -60,11 +60,11 @@ Providers (doctors) need a simple dashboard focused on their clinical workflow -
 
 **3 cards showing key numbers:**
 
-| Metric | Calculation | Data Source |
-|--------|-------------|-------------|
-| **Awaiting Review** | COUNT WHERE status = AWAITING_REVIEW | `Order` |
-| **Reviewed Today** | COUNT WHERE approvalDoctorId = me AND status IN (APPROVED, DENIED) AND updatedAt = today | `Order` |
-| **My Patients** | COUNT DISTINCT patientId WHERE approvalDoctorId = me | `Order` |
+| Metric              | Calculation                                                                              | Data Source |
+| ------------------- | ---------------------------------------------------------------------------------------- | ----------- |
+| **Awaiting Review** | COUNT WHERE status = AWAITING_REVIEW                                                     | `Order`     |
+| **Reviewed Today**  | COUNT WHERE approvalDoctorId = me AND status IN (APPROVED, DENIED) AND updatedAt = today | `Order`     |
+| **My Patients**     | COUNT DISTINCT patientId WHERE approvalDoctorId = me                                     | `Order`     |
 
 ---
 
@@ -72,14 +72,15 @@ Providers (doctors) need a simple dashboard focused on their clinical workflow -
 
 **Queue of patients needing review (5 most recent):**
 
-| Column | Source | Notes |
-|--------|--------|-------|
-| Patient Name | `User.firstName`, `User.lastName` | Masked for privacy if needed |
-| Disease State | `OrderLineItem` → disease state | Weight Loss, Hair Growth, etc. |
-| Product | `OrderLineItem.productName` | Semaglutide, Finasteride, etc. |
-| Waiting Since | `Order.createdAt` | Relative time (2 hours ago) |
+| Column        | Source                            | Notes                          |
+| ------------- | --------------------------------- | ------------------------------ |
+| Patient Name  | `User.firstName`, `User.lastName` | Masked for privacy if needed   |
+| Disease State | `OrderLineItem` → disease state   | Weight Loss, Hair Growth, etc. |
+| Product       | `OrderLineItem.productName`       | Semaglutide, Finasteride, etc. |
+| Waiting Since | `Order.createdAt`                 | Relative time (2 hours ago)    |
 
 **Interaction:**
+
 - Click row → Navigate to patient review page
 - "View All" → Navigate to full awaiting review list
 
@@ -91,10 +92,10 @@ Providers (doctors) need a simple dashboard focused on their clinical workflow -
 
 **Simple feed of provider's recent actions (last 5):**
 
-| Activity | Source |
-|----------|--------|
-| Approved [Patient] for [Product] | `Order` WHERE status = APPROVED, approvalDoctorId = me |
-| Denied [Patient] - [reason if available] | `Order` WHERE status = DENIED, approvalDoctorId = me |
+| Activity                                 | Source                                                 |
+| ---------------------------------------- | ------------------------------------------------------ |
+| Approved [Patient] for [Product]         | `Order` WHERE status = APPROVED, approvalDoctorId = me |
+| Denied [Patient] - [reason if available] | `Order` WHERE status = DENIED, approvalDoctorId = me   |
 
 **Sorting:** Most recent first
 
@@ -102,28 +103,28 @@ Providers (doctors) need a simple dashboard focused on their clinical workflow -
 
 ## What's NOT Included
 
-| Excluded | Reason |
-|----------|--------|
-| Revenue metrics | Not provider's concern |
-| Subscription data | Admin metric |
-| Product performance | Admin metric |
-| Other providers' stats | Not relevant, could feel competitive |
-| Complex patient health trends | Available in patient detail view |
-| Performance metrics | Could feel like surveillance |
+| Excluded                      | Reason                               |
+| ----------------------------- | ------------------------------------ |
+| Revenue metrics               | Not provider's concern               |
+| Subscription data             | Admin metric                         |
+| Product performance           | Admin metric                         |
+| Other providers' stats        | Not relevant, could feel competitive |
+| Complex patient health trends | Available in patient detail view     |
+| Performance metrics           | Could feel like surveillance         |
 
 ---
 
 ## Data Availability
 
-| Metric | Available? | Source |
-|--------|------------|--------|
-| Awaiting review count | ✅ Yes | `Order.status = AWAITING_REVIEW` |
-| Reviewed today count | ✅ Yes | `Order.approvalDoctorId` + `Order.updatedAt` |
-| My patients count | ✅ Yes | `Order.approvalDoctorId` DISTINCT patientId |
-| Queue list | ✅ Yes | `Order` + `User` + `OrderLineItem` |
-| Time waiting | ✅ Yes | `Order.createdAt` |
-| Recent approvals | ✅ Yes | `Order` WHERE approvalDoctorId = me |
-| Recent denials | ✅ Yes | `Order` WHERE approvalDoctorId = me |
+| Metric                | Available? | Source                                       |
+| --------------------- | ---------- | -------------------------------------------- |
+| Awaiting review count | ✅ Yes     | `Order.status = AWAITING_REVIEW`             |
+| Reviewed today count  | ✅ Yes     | `Order.approvalDoctorId` + `Order.updatedAt` |
+| My patients count     | ✅ Yes     | `Order.approvalDoctorId` DISTINCT patientId  |
+| Queue list            | ✅ Yes     | `Order` + `User` + `OrderLineItem`           |
+| Time waiting          | ✅ Yes     | `Order.createdAt`                            |
+| Recent approvals      | ✅ Yes     | `Order` WHERE approvalDoctorId = me          |
+| Recent denials        | ✅ Yes     | `Order` WHERE approvalDoctorId = me          |
 
 ---
 
@@ -250,10 +251,10 @@ dashboard/
 const providerDashboardApi = createApi({
   endpoints: (builder) => ({
     getProviderDashboard: builder.query<ProviderDashboard, void>({
-      query: () => '/dashboard',
+      query: () => "/dashboard",
     }),
   }),
-});
+})
 ```
 
 ---
@@ -262,20 +263,20 @@ const providerDashboardApi = createApi({
 
 ### Backend
 
-| File | Purpose |
-|------|---------|
-| `src/apps/store-doctor/modules/dashboard/dashboard.module.ts` | Module |
+| File                                                              | Purpose  |
+| ----------------------------------------------------------------- | -------- |
+| `src/apps/store-doctor/modules/dashboard/dashboard.module.ts`     | Module   |
 | `src/apps/store-doctor/modules/dashboard/dashboard.controller.ts` | Endpoint |
-| `src/apps/store-doctor/modules/dashboard/dashboard.service.ts` | Logic |
+| `src/apps/store-doctor/modules/dashboard/dashboard.service.ts`    | Logic    |
 
 ### Frontend
 
-| File | Purpose |
-|------|---------|
-| `src/app/(internal)/panel/dashboard/page.tsx` | Dashboard page |
-| `src/app/(internal)/panel/dashboard/_components/summary-cards.tsx` | 3 cards |
-| `src/app/(internal)/panel/dashboard/_components/review-queue.tsx` | Queue list |
-| `src/app/(internal)/panel/dashboard/_components/recent-activity.tsx` | Activity feed |
+| File                                                                 | Purpose        |
+| -------------------------------------------------------------------- | -------------- |
+| `src/app/(internal)/panel/dashboard/page.tsx`                        | Dashboard page |
+| `src/app/(internal)/panel/dashboard/_components/summary-cards.tsx`   | 3 cards        |
+| `src/app/(internal)/panel/dashboard/_components/review-queue.tsx`    | Queue list     |
+| `src/app/(internal)/panel/dashboard/_components/recent-activity.tsx` | Activity feed  |
 
 ---
 

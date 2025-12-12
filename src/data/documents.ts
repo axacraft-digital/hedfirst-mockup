@@ -1,5 +1,5 @@
-import type { PatientDocument } from "./types"
 import documentsJson from "./mock/documents/documents.json"
+import type { PatientDocument } from "./types"
 
 /**
  * Patient documents data - now using centralized mock data
@@ -12,7 +12,10 @@ export const patientDocuments = documentsJson as PatientDocument[]
 export function getDocumentsByPatientId(patientId: string): PatientDocument[] {
   return patientDocuments
     .filter((doc) => doc.patientId === patientId)
-    .sort((a, b) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime())
+    .sort(
+      (a, b) =>
+        new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime()
+    )
 }
 
 // Get document by ID

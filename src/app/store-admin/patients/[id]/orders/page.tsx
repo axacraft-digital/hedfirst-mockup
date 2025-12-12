@@ -1,7 +1,8 @@
 "use client"
 
-import { use, useState, Fragment } from "react"
+import { Fragment, use, useState } from "react"
 import Link from "next/link"
+import { mockOrders } from "@/data"
 import {
   IconChevronDown,
   IconChevronRight,
@@ -10,6 +11,12 @@ import {
 } from "@tabler/icons-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 import {
@@ -20,21 +27,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import { cn } from "@/lib/utils"
-import { mockOrders } from "@/data"
 import type { Order, OrderStatus } from "@/data/types"
 
 // Get orders by patient ID
 function getOrdersByPatientId(patientId: string): Order[] {
   return mockOrders
     .filter((o) => o.userId === patientId)
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    )
 }
 
 // Format currency
@@ -55,59 +58,65 @@ function formatDate(isoString: string): string {
 }
 
 // Status badge styles (maps to centralized OrderStatus type)
-const statusStyles: Record<
-  OrderStatus,
-  { label: string; className: string }
-> = {
-  NEW: {
-    label: "New",
-    className: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200",
-  },
-  AWAITING_REVIEW: {
-    label: "Awaiting Review",
-    className: "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200",
-  },
-  APPROVED: {
-    label: "Approved",
-    className: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200",
-  },
-  PAID: {
-    label: "Paid",
-    className: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
-  },
-  SENT_TO_PHARMACY: {
-    label: "Sent to Pharmacy",
-    className: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
-  },
-  ORDER_SHIPPED: {
-    label: "Shipped",
-    className: "bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-200",
-  },
-  COMPLETED: {
-    label: "Completed",
-    className: "bg-neutral-100 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200",
-  },
-  DENIED: {
-    label: "Denied",
-    className: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
-  },
-  CANCELED: {
-    label: "Canceled",
-    className: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
-  },
-  PAUSED: {
-    label: "Paused",
-    className: "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
-  },
-  ACTIVE: {
-    label: "Active",
-    className: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
-  },
-  FAILED: {
-    label: "Failed",
-    className: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
-  },
-}
+const statusStyles: Record<OrderStatus, { label: string; className: string }> =
+  {
+    NEW: {
+      label: "New",
+      className:
+        "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200",
+    },
+    AWAITING_REVIEW: {
+      label: "Awaiting Review",
+      className:
+        "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200",
+    },
+    APPROVED: {
+      label: "Approved",
+      className:
+        "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200",
+    },
+    PAID: {
+      label: "Paid",
+      className:
+        "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
+    },
+    SENT_TO_PHARMACY: {
+      label: "Sent to Pharmacy",
+      className:
+        "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
+    },
+    ORDER_SHIPPED: {
+      label: "Shipped",
+      className: "bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-200",
+    },
+    COMPLETED: {
+      label: "Completed",
+      className:
+        "bg-neutral-100 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200",
+    },
+    DENIED: {
+      label: "Denied",
+      className: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
+    },
+    CANCELED: {
+      label: "Canceled",
+      className: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
+    },
+    PAUSED: {
+      label: "Paused",
+      className:
+        "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
+    },
+    ACTIVE: {
+      label: "Active",
+      className:
+        "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
+    },
+    FAILED: {
+      label: "Failed",
+      className: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
+    },
+  }
 
 interface Props {
   params: Promise<{ id: string }>
@@ -169,7 +178,7 @@ export default function PatientOrdersPage({ params }: Props) {
                       <Fragment key={order.id}>
                         <TableRow
                           className={cn(
-                            "cursor-pointer transition-colors hover:bg-muted/50",
+                            "hover:bg-muted/50 cursor-pointer transition-colors",
                             isExpanded && "bg-muted/30"
                           )}
                           onClick={() => toggleRow(order.id)}
@@ -196,7 +205,10 @@ export default function PatientOrdersPage({ params }: Props) {
                               </span>
                               <span className="text-muted-foreground ml-2 text-sm">
                                 ({order.lineItems?.length ?? 0} item
-                                {(order.lineItems?.length ?? 0) !== 1 ? "s" : ""})
+                                {(order.lineItems?.length ?? 0) !== 1
+                                  ? "s"
+                                  : ""}
+                                )
                               </span>
                             </div>
                           </TableCell>
@@ -254,7 +266,7 @@ export default function PatientOrdersPage({ params }: Props) {
                                 {order.lineItems?.map((item, idx) => (
                                   <div
                                     key={`${order.id}-item-${idx}`}
-                                    className="flex items-center justify-between py-3 pl-14 pr-4"
+                                    className="flex items-center justify-between py-3 pr-4 pl-14"
                                   >
                                     <div className="flex items-center gap-2">
                                       <span className="font-medium">

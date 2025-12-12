@@ -2,24 +2,25 @@
 
 import { use } from "react"
 import Link from "next/link"
-import { format } from "date-fns"
+import { getChartNoteProviderName, getChartNotesByPatientId } from "@/data"
 import {
-  IconPlus,
-  IconNotes,
-  IconFileText,
-  IconProgress,
-  IconPhone,
   IconChevronDown,
+  IconFileText,
+  IconNotes,
+  IconPhone,
+  IconPlus,
+  IconProgress,
 } from "@tabler/icons-react"
+import { format } from "date-fns"
 import { Button } from "@/components/ui/button"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Separator } from "@/components/ui/separator"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Separator } from "@/components/ui/separator"
 import {
   Table,
   TableBody,
@@ -28,7 +29,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { getChartNotesByPatientId, getChartNoteProviderName } from "@/data"
 
 const chartNoteTypes = [
   {
@@ -117,7 +117,10 @@ export default function PatientChartNotesPage({ params }: Props) {
               <TableBody>
                 {chartNotes.length > 0 ? (
                   chartNotes.map((note) => (
-                    <TableRow key={note.id} className="cursor-pointer hover:bg-muted/50">
+                    <TableRow
+                      key={note.id}
+                      className="hover:bg-muted/50 cursor-pointer"
+                    >
                       <TableCell>
                         <Link
                           href={`/store-admin/patients/${id}/chart-notes/${note.id}`}

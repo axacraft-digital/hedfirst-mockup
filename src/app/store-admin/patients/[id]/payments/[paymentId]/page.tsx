@@ -3,9 +3,6 @@
 import { use } from "react"
 import Link from "next/link"
 import { IconArrowLeft, IconEdit, IconTrash } from "@tabler/icons-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,6 +14,9 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 // Payment method detail type
 interface PaymentMethodDetail {
@@ -153,10 +153,7 @@ export default function PaymentMethodDetailPage({ params }: Props) {
               <CardContent>
                 <ul className="space-y-1">
                   {paymentMethod.linkedItems.map((item) => (
-                    <li
-                      key={item.id}
-                      className="text-muted-foreground text-sm"
-                    >
+                    <li key={item.id} className="text-muted-foreground text-sm">
                       {item.label}
                     </li>
                   ))}
@@ -204,8 +201,14 @@ export default function PaymentMethodDetailPage({ params }: Props) {
                   label="Apartment, suite, etc. (optional)"
                   value={paymentMethod.billingAddress.apartment || "—"}
                 />
-                <DetailRow label="City" value={paymentMethod.billingAddress.city} />
-                <DetailRow label="State" value={paymentMethod.billingAddress.state} />
+                <DetailRow
+                  label="City"
+                  value={paymentMethod.billingAddress.city}
+                />
+                <DetailRow
+                  label="State"
+                  value={paymentMethod.billingAddress.state}
+                />
                 <DetailRow
                   label="ZIP code"
                   value={paymentMethod.billingAddress.zipCode}

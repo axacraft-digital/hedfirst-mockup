@@ -1,21 +1,21 @@
 "use client"
 
 import Link from "next/link"
+import { toast } from "@/hooks/use-toast"
 import {
-  Shield,
+  CheckCircle2,
+  Clock,
   DollarSign,
   FileText,
-  CheckCircle2,
+  Shield,
   XCircle,
-  Clock,
 } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Checkbox } from "@/components/ui/checkbox"
-import { toast } from "@/hooks/use-toast"
 import type { IntegrationDetail } from "../data/integration-details"
 
 interface AISafetyTabProps {
@@ -142,7 +142,7 @@ export function AISafetyTab({ integration }: AISafetyTabProps) {
         <div className="grid gap-2">
           <Label htmlFor="dailyLimit">Daily Spending Limit</Label>
           <div className="relative">
-            <span className="text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2">
+            <span className="text-muted-foreground absolute top-1/2 left-3 -translate-y-1/2">
               $
             </span>
             <Input
@@ -161,7 +161,7 @@ export function AISafetyTab({ integration }: AISafetyTabProps) {
         <div className="grid gap-2">
           <Label htmlFor="monthlyLimit">Monthly Spending Limit</Label>
           <div className="relative">
-            <span className="text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2">
+            <span className="text-muted-foreground absolute top-1/2 left-3 -translate-y-1/2">
               $
             </span>
             <Input
@@ -188,7 +188,7 @@ export function AISafetyTab({ integration }: AISafetyTabProps) {
               min="0"
               max="100"
             />
-            <span className="text-muted-foreground absolute right-3 top-1/2 -translate-y-1/2">
+            <span className="text-muted-foreground absolute top-1/2 right-3 -translate-y-1/2">
               %
             </span>
           </div>
@@ -220,7 +220,8 @@ export function AISafetyTab({ integration }: AISafetyTabProps) {
           Approved Clinical Use Cases
         </h3>
         <p className="text-muted-foreground text-sm">
-          Select which clinical workflows are authorized to use this AI provider.
+          Select which clinical workflows are authorized to use this AI
+          provider.
         </p>
       </div>
       <Separator />
@@ -233,11 +234,15 @@ export function AISafetyTab({ integration }: AISafetyTabProps) {
               key={key}
               className="flex items-start space-x-3 rounded-lg border p-3"
             >
-              <Checkbox id={key} defaultChecked={isChecked} className="mt-0.5" />
+              <Checkbox
+                id={key}
+                defaultChecked={isChecked}
+                className="mt-0.5"
+              />
               <div className="grid gap-1 leading-none">
                 <label
                   htmlFor={key}
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
                   {label}
                 </label>
@@ -257,7 +262,8 @@ export function AISafetyTab({ integration }: AISafetyTabProps) {
           onClick={() => {
             toast({
               title: "Safety settings saved",
-              description: "Cost controls and compliance settings have been updated.",
+              description:
+                "Cost controls and compliance settings have been updated.",
             })
           }}
         >

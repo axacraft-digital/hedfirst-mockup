@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { mockStoreUsers } from "@/data"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,7 +12,6 @@ import { Header } from "@/components/layout/header"
 import { AddUserButton } from "./components/add-user-button"
 import { columns } from "./components/users-columns"
 import { UsersTable } from "./components/users-table"
-import { mockStoreUsers } from "@/data"
 
 export default function StoreUsersPage() {
   return (

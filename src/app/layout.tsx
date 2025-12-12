@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
-import { Toaster } from "@/components/ui/toaster"
 import { SonnerToaster } from "@/components/ui/sonner"
+import { Toaster } from "@/components/ui/toaster"
 import "./globals.css"
 import { Providers } from "./providers"
 

@@ -1,6 +1,6 @@
-import type { SoapNote } from "./types"
-import chartNotesJson from "./mock/clinical/chart-notes.json"
 import { mockProviders } from "./index"
+import chartNotesJson from "./mock/clinical/chart-notes.json"
+import type { SoapNote } from "./types"
 
 /**
  * Chart Notes (SOAP Notes) - now using centralized mock data
@@ -18,7 +18,10 @@ export function getAllChartNotes(): SoapNote[] {
 export function getChartNotesByPatientId(patientId: string): SoapNote[] {
   return chartNotes
     .filter((note) => note.patientId === patientId)
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    )
 }
 
 // Get chart note by ID

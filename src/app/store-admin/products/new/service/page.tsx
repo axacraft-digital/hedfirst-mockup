@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { toast } from "@/hooks/use-toast"
 import { IconArrowLeft } from "@tabler/icons-react"
 import {
   Breadcrumb,
@@ -25,11 +26,10 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
-import { toast } from "@/hooks/use-toast"
 import { Header } from "@/components/layout/header"
 import {
-  diseaseStateLabels,
   type DiseaseState,
+  diseaseStateLabels,
 } from "../../data/products-types"
 
 export default function NewServicePage() {
@@ -210,7 +210,7 @@ export default function NewServicePage() {
             <div className="space-y-2">
               <Label htmlFor="price">Price</Label>
               <div className="relative w-[200px]">
-                <span className="text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 text-sm">
+                <span className="text-muted-foreground absolute top-1/2 left-3 -translate-y-1/2 text-sm">
                   $
                 </span>
                 <Input

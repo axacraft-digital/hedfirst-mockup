@@ -87,7 +87,13 @@ export function RevenueChart() {
                   stopOpacity={0.1}
                 />
               </linearGradient>
-              <linearGradient id="fillSubscriptions" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient
+                id="fillSubscriptions"
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="1"
+              >
                 <stop
                   offset="5%"
                   stopColor="var(--color-subscriptions)"

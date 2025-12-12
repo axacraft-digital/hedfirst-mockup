@@ -1,6 +1,6 @@
 "use client"
 
-import { Header } from "@/components/layout/header"
+import { getStoreUserFullName, mockStoreUsers } from "@/data"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -15,10 +15,11 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
-import { mockStoreUsers, getStoreUserFullName } from "@/data"
+import { Header } from "@/components/layout/header"
 
 // Get the current logged-in admin user (same as sidebar)
-const currentUser = mockStoreUsers.find((u) => u.role === "admin") ?? mockStoreUsers[0]
+const currentUser =
+  mockStoreUsers.find((u) => u.role === "admin") ?? mockStoreUsers[0]
 
 const roleLabels: Record<string, string> = {
   admin: "Administrator",
@@ -26,7 +27,13 @@ const roleLabels: Record<string, string> = {
   support: "Support",
 }
 
-const statusConfig: Record<string, { label: string; variant: "default" | "secondary" | "destructive" | "outline" }> = {
+const statusConfig: Record<
+  string,
+  {
+    label: string
+    variant: "default" | "secondary" | "destructive" | "outline"
+  }
+> = {
   ACTIVE: { label: "Active", variant: "default" },
   INACTIVE: { label: "Inactive", variant: "destructive" },
   INVITED: { label: "Invited", variant: "secondary" },
@@ -72,15 +79,25 @@ export default function StoreAdminProfilePage() {
             <CardContent className="pt-6">
               <div className="flex items-center gap-4">
                 <Avatar className="h-20 w-20">
-                  <AvatarImage src="/avatars/avatar-3.png" alt={getStoreUserFullName(currentUser)} />
+                  <AvatarImage
+                    src="/avatars/avatar-3.png"
+                    alt={getStoreUserFullName(currentUser)}
+                  />
                   <AvatarFallback className="text-lg">
-                    {currentUser.firstName[0]}{currentUser.lastName[0]}
+                    {currentUser.firstName[0]}
+                    {currentUser.lastName[0]}
                   </AvatarFallback>
                 </Avatar>
                 <div className="space-y-1">
-                  <h3 className="text-xl font-semibold">{getStoreUserFullName(currentUser)}</h3>
-                  <p className="text-muted-foreground text-sm">{currentUser.email}</p>
-                  <Badge variant="secondary">{roleLabels[currentUser.role]}</Badge>
+                  <h3 className="text-xl font-semibold">
+                    {getStoreUserFullName(currentUser)}
+                  </h3>
+                  <p className="text-muted-foreground text-sm">
+                    {currentUser.email}
+                  </p>
+                  <Badge variant="secondary">
+                    {roleLabels[currentUser.role]}
+                  </Badge>
                 </div>
               </div>
             </CardContent>
@@ -98,17 +115,11 @@ export default function StoreAdminProfilePage() {
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="firstName">First Name</Label>
-                  <Input
-                    id="firstName"
-                    defaultValue={currentUser.firstName}
-                  />
+                  <Input id="firstName" defaultValue={currentUser.firstName} />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="lastName">Last Name</Label>
-                  <Input
-                    id="lastName"
-                    defaultValue={currentUser.lastName}
-                  />
+                  <Input id="lastName" defaultValue={currentUser.lastName} />
                 </div>
               </div>
               <div className="space-y-2">

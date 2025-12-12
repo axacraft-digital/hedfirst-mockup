@@ -3,7 +3,6 @@
 import { JSX, useState } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import {
@@ -13,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { cn } from "@/lib/utils"
 
 interface Props extends React.HTMLAttributes<HTMLElement> {
   items: {
@@ -22,7 +22,11 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
   }[]
 }
 
-export default function PatientSidebarNav({ className, items, ...props }: Props) {
+export default function PatientSidebarNav({
+  className,
+  items,
+  ...props
+}: Props) {
   const router = useRouter()
   const pathname = usePathname()
   const [val, setVal] = useState(pathname ?? items[0]?.href)

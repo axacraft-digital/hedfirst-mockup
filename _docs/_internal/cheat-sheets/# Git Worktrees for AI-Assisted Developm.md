@@ -7,10 +7,10 @@ Each worktree can track a different branch and can be opened at the same time as
 
 You can think of worktrees as parallel sandboxes.
 
-* One repo
-* Multiple active checkouts
-* Fully isolated working folders
-* No need for stashing or constant switching
+- One repo
+- Multiple active checkouts
+- Fully isolated working folders
+- No need for stashing or constant switching
 
 ---
 
@@ -21,20 +21,20 @@ Worktrees let you explore bold changes without impacting your stable branch.
 
 ### Key Benefits
 
-* Safe experimentation without touching main
-* Multiple feature directions can exist in parallel
-* Easier comparison of AI-generated implementations
-* Disposable branches that don't pollute history
-* No overwriting or stashing required
-* Ideal for analyzing, benchmarking, and selecting best output
+- Safe experimentation without touching main
+- Multiple feature directions can exist in parallel
+- Easier comparison of AI-generated implementations
+- Disposable branches that don't pollute history
+- No overwriting or stashing required
+- Ideal for analyzing, benchmarking, and selecting best output
 
 ### Perfect Fit When Using AI
 
-* Large refactors with uncertain outcomes
-* "Try version A vs version B" workflows
-* Allow AI agents to operate freely and aggressively
-* Long-running improvements without risk
-* Compare architecture styles before committing
+- Large refactors with uncertain outcomes
+- "Try version A vs version B" workflows
+- Allow AI agents to operate freely and aggressively
+- Long-running improvements without risk
+- Compare architecture styles before committing
 
 ---
 

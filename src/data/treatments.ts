@@ -1,6 +1,6 @@
-import type { Treatment, TreatmentStatus, TreatmentType } from "./types"
 import treatmentsJson from "./mock/clinical/treatments.json"
 import productsJson from "./mock/reference/products.json"
+import type { Treatment, TreatmentStatus, TreatmentType } from "./types"
 
 /**
  * Treatments data - using centralized mock data with UI-shaped helpers
@@ -86,7 +86,10 @@ function mapType(type: TreatmentType): UITreatment["type"] {
 }
 
 // Get product and variant info
-function getProductInfo(productId: string, variantId?: string): {
+function getProductInfo(
+  productId: string,
+  variantId?: string
+): {
   name: string
   price: number
   billingCycle: string | null
@@ -164,7 +167,10 @@ export function getTreatmentsForUI(patientId: string): UITreatment[] {
   return treatments
     .filter((t) => t.patientId === patientId)
     .map(toUITreatment)
-    .sort((a, b) => new Date(b.orderDate).getTime() - new Date(a.orderDate).getTime())
+    .sort(
+      (a, b) =>
+        new Date(b.orderDate).getTime() - new Date(a.orderDate).getTime()
+    )
 }
 
 // Filter treatments by type

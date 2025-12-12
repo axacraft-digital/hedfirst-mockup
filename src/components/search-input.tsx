@@ -2,8 +2,8 @@
 
 import { ComponentProps } from "react"
 import { Search } from "lucide-react"
-import { cn } from "@/lib/utils"
 import { Input } from "@/components/ui/input"
+import { cn } from "@/lib/utils"
 
 interface SearchInputProps extends Omit<ComponentProps<"input">, "onChange"> {
   placeholder?: string

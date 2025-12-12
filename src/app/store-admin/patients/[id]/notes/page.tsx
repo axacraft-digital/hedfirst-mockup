@@ -2,23 +2,11 @@
 
 import { use, useState } from "react"
 import Link from "next/link"
-import { format } from "date-fns"
+import { getNotePreview, getNotesByPatientId } from "@/data"
 import { IconPlus } from "@tabler/icons-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Separator } from "@/components/ui/separator"
+import { format } from "date-fns"
 import { Badge } from "@/components/ui/badge"
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
+import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
@@ -28,7 +16,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { getNotesByPatientId, getNotePreview } from "@/data"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Separator } from "@/components/ui/separator"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { Textarea } from "@/components/ui/textarea"
 
 interface Props {
   params: Promise<{ id: string }>
@@ -74,10 +74,13 @@ export default function PatientNotesPage({ params }: Props) {
             Quick notes and observations about this patient.
           </p>
         </div>
-        <Dialog open={dialogOpen} onOpenChange={(open) => {
-          setDialogOpen(open)
-          if (!open) resetForm()
-        }}>
+        <Dialog
+          open={dialogOpen}
+          onOpenChange={(open) => {
+            setDialogOpen(open)
+            if (!open) resetForm()
+          }}
+        >
           <DialogTrigger asChild>
             <Button>
               <IconPlus className="mr-2 size-4" />
@@ -116,7 +119,10 @@ export default function PatientNotesPage({ params }: Props) {
               <Button variant="outline" onClick={() => setDialogOpen(false)}>
                 Cancel
               </Button>
-              <Button onClick={handleSaveNote} disabled={!noteTitle || !noteContent}>
+              <Button
+                onClick={handleSaveNote}
+                disabled={!noteTitle || !noteContent}
+              >
                 Save Note
               </Button>
             </DialogFooter>
@@ -138,7 +144,10 @@ export default function PatientNotesPage({ params }: Props) {
               <TableBody>
                 {notes.length > 0 ? (
                   notes.map((note) => (
-                    <TableRow key={note.id} className="cursor-pointer hover:bg-muted/50">
+                    <TableRow
+                      key={note.id}
+                      className="hover:bg-muted/50 cursor-pointer"
+                    >
                       <TableCell>
                         <Link
                           href={`/store-admin/patients/${id}/notes/${note.id}`}

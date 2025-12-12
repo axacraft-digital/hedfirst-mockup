@@ -5,8 +5,16 @@
     "storeId": "store_hedfirst",
     "createdAt": "2025-11-18T10:00:00Z",
     "participants": [
-      { "userId": "usr_pat_jacob", "role": "PATIENT", "assignedAt": "2025-11-18T10:00:00Z" },
-      { "userId": "usr_doc002", "role": "PROVIDER", "assignedAt": "2025-11-18T10:05:00Z" }
+      {
+        "userId": "usr_pat_jacob",
+        "role": "PATIENT",
+        "assignedAt": "2025-11-18T10:00:00Z"
+      },
+      {
+        "userId": "usr_doc002",
+        "role": "PROVIDER",
+        "assignedAt": "2025-11-18T10:05:00Z"
+      }
     ],
     "messages": [
       {
@@ -41,8 +49,16 @@
     "storeId": "store_hedfirst",
     "createdAt": "2025-12-04T08:30:00Z",
     "participants": [
-      { "userId": "usr_pat_jacob", "role": "PATIENT", "assignedAt": "2025-12-04T08:30:00Z" },
-      { "userId": "usr_doc002", "role": "PROVIDER", "assignedAt": "2025-12-04T09:00:00Z" }
+      {
+        "userId": "usr_pat_jacob",
+        "role": "PATIENT",
+        "assignedAt": "2025-12-04T08:30:00Z"
+      },
+      {
+        "userId": "usr_doc002",
+        "role": "PROVIDER",
+        "assignedAt": "2025-12-04T09:00:00Z"
+      }
     ],
     "messages": [
       {
@@ -85,8 +101,16 @@
     "storeId": "store_hedfirst",
     "createdAt": "2024-08-20T14:00:00Z",
     "participants": [
-      { "userId": "usr_pat001", "role": "PATIENT", "assignedAt": "2024-08-20T14:00:00Z" },
-      { "userId": "admin_001", "role": "ADMIN", "assignedAt": "2024-08-20T14:05:00Z" }
+      {
+        "userId": "usr_pat001",
+        "role": "PATIENT",
+        "assignedAt": "2024-08-20T14:00:00Z"
+      },
+      {
+        "userId": "admin_001",
+        "role": "ADMIN",
+        "assignedAt": "2024-08-20T14:05:00Z"
+      }
     ],
     "messages": [
       {
@@ -121,8 +145,16 @@
     "storeId": "store_hedfirst",
     "createdAt": "2025-12-03T11:00:00Z",
     "participants": [
-      { "userId": "usr_pat001", "role": "PATIENT", "assignedAt": "2025-12-03T11:00:00Z" },
-      { "userId": "usr_doc001", "role": "PROVIDER", "assignedAt": "2025-12-03T11:30:00Z" }
+      {
+        "userId": "usr_pat001",
+        "role": "PATIENT",
+        "assignedAt": "2025-12-03T11:00:00Z"
+      },
+      {
+        "userId": "usr_doc001",
+        "role": "PROVIDER",
+        "assignedAt": "2025-12-03T11:30:00Z"
+      }
     ],
     "messages": [
       {
@@ -149,8 +181,16 @@
     "storeId": "store_hedfirst",
     "createdAt": "2025-12-01T09:25:00Z",
     "participants": [
-      { "userId": "usr_pat002", "role": "PATIENT", "assignedAt": "2025-12-01T09:25:00Z" },
-      { "userId": "admin_001", "role": "ADMIN", "assignedAt": "2025-12-01T09:30:00Z" }
+      {
+        "userId": "usr_pat002",
+        "role": "PATIENT",
+        "assignedAt": "2025-12-01T09:25:00Z"
+      },
+      {
+        "userId": "admin_001",
+        "role": "ADMIN",
+        "assignedAt": "2025-12-01T09:30:00Z"
+      }
     ],
     "messages": [
       {

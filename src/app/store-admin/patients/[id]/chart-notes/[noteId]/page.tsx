@@ -2,21 +2,17 @@
 
 import { use } from "react"
 import Link from "next/link"
-import { format } from "date-fns"
+import { getChartNoteById, getChartNoteProviderName } from "@/data"
 import {
   IconArrowLeft,
+  IconClipboardCheck,
   IconEdit,
+  IconPrescription,
+  IconStethoscope,
   IconTrash,
   IconUser,
-  IconStethoscope,
-  IconClipboardCheck,
-  IconPrescription,
 } from "@tabler/icons-react"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Separator } from "@/components/ui/separator"
+import { format } from "date-fns"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -28,7 +24,11 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { getChartNoteById, getChartNoteProviderName } from "@/data"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Separator } from "@/components/ui/separator"
 
 interface Props {
   params: Promise<{ id: string; noteId: string }>
@@ -95,7 +95,7 @@ export default function ChartNoteDetailPage({ params }: Props) {
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <p className="text-muted-foreground mb-1 text-xs font-medium uppercase tracking-wide">
+                <p className="text-muted-foreground mb-1 text-xs font-medium tracking-wide uppercase">
                   Chief Complaint
                 </p>
                 <p className="text-sm font-medium">
@@ -103,7 +103,7 @@ export default function ChartNoteDetailPage({ params }: Props) {
                 </p>
               </div>
               <div>
-                <p className="text-muted-foreground mb-1 text-xs font-medium uppercase tracking-wide">
+                <p className="text-muted-foreground mb-1 text-xs font-medium tracking-wide uppercase">
                   History of Present Illness
                 </p>
                 <p className="text-sm whitespace-pre-wrap">
@@ -112,7 +112,7 @@ export default function ChartNoteDetailPage({ params }: Props) {
               </div>
               {note.subjective.reviewOfSystems && (
                 <div>
-                  <p className="text-muted-foreground mb-1 text-xs font-medium uppercase tracking-wide">
+                  <p className="text-muted-foreground mb-1 text-xs font-medium tracking-wide uppercase">
                     Review of Systems
                   </p>
                   <p className="text-sm whitespace-pre-wrap">
@@ -134,7 +134,7 @@ export default function ChartNoteDetailPage({ params }: Props) {
             <CardContent className="space-y-4">
               {note.objective.vitalSigns && (
                 <div>
-                  <p className="text-muted-foreground mb-1 text-xs font-medium uppercase tracking-wide">
+                  <p className="text-muted-foreground mb-1 text-xs font-medium tracking-wide uppercase">
                     Vital Signs
                   </p>
                   <p className="text-sm whitespace-pre-wrap">
@@ -143,7 +143,7 @@ export default function ChartNoteDetailPage({ params }: Props) {
                 </div>
               )}
               <div>
-                <p className="text-muted-foreground mb-1 text-xs font-medium uppercase tracking-wide">
+                <p className="text-muted-foreground mb-1 text-xs font-medium tracking-wide uppercase">
                   Physical Exam / Observations
                 </p>
                 <p className="text-sm whitespace-pre-wrap">
@@ -152,7 +152,7 @@ export default function ChartNoteDetailPage({ params }: Props) {
               </div>
               {note.objective.labResults && (
                 <div>
-                  <p className="text-muted-foreground mb-1 text-xs font-medium uppercase tracking-wide">
+                  <p className="text-muted-foreground mb-1 text-xs font-medium tracking-wide uppercase">
                     Lab Results
                   </p>
                   <p className="text-sm whitespace-pre-wrap">
@@ -174,7 +174,7 @@ export default function ChartNoteDetailPage({ params }: Props) {
             <CardContent className="space-y-4">
               {note.assessment.diagnoses.length > 0 && (
                 <div>
-                  <p className="text-muted-foreground mb-2 text-xs font-medium uppercase tracking-wide">
+                  <p className="text-muted-foreground mb-2 text-xs font-medium tracking-wide uppercase">
                     Diagnoses
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -188,20 +188,22 @@ export default function ChartNoteDetailPage({ params }: Props) {
               )}
               {note.assessment.differentialDiagnoses.length > 0 && (
                 <div>
-                  <p className="text-muted-foreground mb-2 text-xs font-medium uppercase tracking-wide">
+                  <p className="text-muted-foreground mb-2 text-xs font-medium tracking-wide uppercase">
                     Differential Diagnoses
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {note.assessment.differentialDiagnoses.map((diagnosis, index) => (
-                      <Badge key={index} variant="outline">
-                        {diagnosis}
-                      </Badge>
-                    ))}
+                    {note.assessment.differentialDiagnoses.map(
+                      (diagnosis, index) => (
+                        <Badge key={index} variant="outline">
+                          {diagnosis}
+                        </Badge>
+                      )
+                    )}
                   </div>
                 </div>
               )}
               <div>
-                <p className="text-muted-foreground mb-1 text-xs font-medium uppercase tracking-wide">
+                <p className="text-muted-foreground mb-1 text-xs font-medium tracking-wide uppercase">
                   Clinical Impression
                 </p>
                 <p className="text-sm whitespace-pre-wrap">
@@ -222,7 +224,7 @@ export default function ChartNoteDetailPage({ params }: Props) {
             <CardContent className="space-y-4">
               {note.plan.medications.length > 0 && (
                 <div>
-                  <p className="text-muted-foreground mb-2 text-xs font-medium uppercase tracking-wide">
+                  <p className="text-muted-foreground mb-2 text-xs font-medium tracking-wide uppercase">
                     Medications
                   </p>
                   <ul className="list-inside list-disc space-y-1 text-sm">
@@ -233,7 +235,7 @@ export default function ChartNoteDetailPage({ params }: Props) {
                 </div>
               )}
               <div>
-                <p className="text-muted-foreground mb-1 text-xs font-medium uppercase tracking-wide">
+                <p className="text-muted-foreground mb-1 text-xs font-medium tracking-wide uppercase">
                   Instructions
                 </p>
                 <p className="text-sm whitespace-pre-wrap">
@@ -241,14 +243,14 @@ export default function ChartNoteDetailPage({ params }: Props) {
                 </p>
               </div>
               <div>
-                <p className="text-muted-foreground mb-1 text-xs font-medium uppercase tracking-wide">
+                <p className="text-muted-foreground mb-1 text-xs font-medium tracking-wide uppercase">
                   Follow-Up
                 </p>
                 <p className="text-sm">{note.plan.followUp}</p>
               </div>
               {note.plan.referrals && (
                 <div>
-                  <p className="text-muted-foreground mb-1 text-xs font-medium uppercase tracking-wide">
+                  <p className="text-muted-foreground mb-1 text-xs font-medium tracking-wide uppercase">
                     Referrals
                   </p>
                   <p className="text-sm">{note.plan.referrals}</p>
@@ -260,7 +262,9 @@ export default function ChartNoteDetailPage({ params }: Props) {
           {/* Actions */}
           <div className="flex items-center justify-end gap-3 pb-8">
             <Button variant="outline" asChild>
-              <Link href={`/store-admin/patients/${id}/chart-notes/${noteId}/edit`}>
+              <Link
+                href={`/store-admin/patients/${id}/chart-notes/${noteId}/edit`}
+              >
                 <IconEdit className="mr-2 size-4" />
                 Edit Note
               </Link>

@@ -17,15 +17,15 @@ Currently, Teligant uses **Pay Theory** as the sole payment processor with tight
 
 ### Pay Theory Integration Points
 
-| Component | Location | Coupling Level |
-|-----------|----------|----------------|
-| API Client | `src/shared/providers/pay-theory/pay-theory-api.client.ts` | High |
-| GraphQL Mutations | `src/shared/providers/pay-theory/graphql/mutations.ts` | High |
-| Webhook Handler | `src/apps/patient/core/modules/webhook-scope/pay-theory-webhook/` | High |
-| Subscription Service | `src/shared/modules/purchase-scope/purchase-subscription/` | High |
-| Payment Method Service | `src/apps/patient/core/modules/payment-scope/modules/payment-method/` | High |
-| Frontend SDK | `node-hedfirst-patient/src/providers/paytheory/paytheory.ts` | High |
-| Checkout Components | `node-hedfirst-patient/src/app/.../checkout/_components/` | High |
+| Component              | Location                                                              | Coupling Level |
+| ---------------------- | --------------------------------------------------------------------- | -------------- |
+| API Client             | `src/shared/providers/pay-theory/pay-theory-api.client.ts`            | High           |
+| GraphQL Mutations      | `src/shared/providers/pay-theory/graphql/mutations.ts`                | High           |
+| Webhook Handler        | `src/apps/patient/core/modules/webhook-scope/pay-theory-webhook/`     | High           |
+| Subscription Service   | `src/shared/modules/purchase-scope/purchase-subscription/`            | High           |
+| Payment Method Service | `src/apps/patient/core/modules/payment-scope/modules/payment-method/` | High           |
+| Frontend SDK           | `node-hedfirst-patient/src/providers/paytheory/paytheory.ts`          | High           |
+| Checkout Components    | `node-hedfirst-patient/src/app/.../checkout/_components/`             | High           |
 
 ### Database Models (Pay Theory Specific)
 
@@ -56,20 +56,21 @@ model PayTheoryTransaction {
 
 ### Pay Theory-Specific Concepts
 
-| Pay Theory | Stripe Equivalent | Notes |
-|------------|-------------------|-------|
-| `payment_method_id` (token) | `pm_xxx` (PaymentMethod) | Different tokenization flow |
-| `recurring_id` | `sub_xxx` (Subscription) | Different subscription model |
-| `transaction_id` | `pi_xxx` (PaymentIntent) or `ch_xxx` (Charge) | Different payment flow |
-| `merchant_uid` | Not needed (account-level) | Stripe uses API key scoping |
-| GraphQL API | REST API | Completely different protocols |
-| `FeeMode` (SERVICE_FEE/MERCHANT_FEE) | Application fees (Connect) | Different fee handling |
-| `account_code` | `metadata` | Tracking/reconciliation |
-| `RecurringInterval` enum | `interval` + `interval_count` | Different interval format |
+| Pay Theory                           | Stripe Equivalent                             | Notes                          |
+| ------------------------------------ | --------------------------------------------- | ------------------------------ |
+| `payment_method_id` (token)          | `pm_xxx` (PaymentMethod)                      | Different tokenization flow    |
+| `recurring_id`                       | `sub_xxx` (Subscription)                      | Different subscription model   |
+| `transaction_id`                     | `pi_xxx` (PaymentIntent) or `ch_xxx` (Charge) | Different payment flow         |
+| `merchant_uid`                       | Not needed (account-level)                    | Stripe uses API key scoping    |
+| GraphQL API                          | REST API                                      | Completely different protocols |
+| `FeeMode` (SERVICE_FEE/MERCHANT_FEE) | Application fees (Connect)                    | Different fee handling         |
+| `account_code`                       | `metadata`                                    | Tracking/reconciliation        |
+| `RecurringInterval` enum             | `interval` + `interval_count`                 | Different interval format      |
 
 ### Current Payment Flows
 
 **One-Time Payment (Pay Theory):**
+
 ```
 1. Frontend tokenizes card via Pay Theory SDK
 2. Token sent to backend
@@ -80,6 +81,7 @@ model PayTheoryTransaction {
 ```
 
 **Subscription (Pay Theory):**
+
 ```
 1. Frontend tokenizes card
 2. Backend calls GraphQL createRecurringPayment mutation
@@ -122,33 +124,39 @@ Create an abstraction layer where each payment processor implements a common int
 ```typescript
 interface IPaymentProcessor {
   // Identity
-  readonly processorType: PaymentProcessorType; // 'PAY_THEORY' | 'STRIPE'
+  readonly processorType: PaymentProcessorType // 'PAY_THEORY' | 'STRIPE'
 
   // One-time Payments
-  createPayment(data: CreatePaymentData): Promise<PaymentResult>;
-  capturePayment(paymentId: string): Promise<PaymentResult>;
-  refundPayment(paymentId: string, amount?: number): Promise<RefundResult>;
+  createPayment(data: CreatePaymentData): Promise<PaymentResult>
+  capturePayment(paymentId: string): Promise<PaymentResult>
+  refundPayment(paymentId: string, amount?: number): Promise<RefundResult>
 
   // Subscriptions
-  createSubscription(data: CreateSubscriptionData): Promise<SubscriptionResult>;
-  updateSubscription(subscriptionId: string, data: UpdateSubscriptionData): Promise<SubscriptionResult>;
-  cancelSubscription(subscriptionId: string): Promise<void>;
-  pauseSubscription(subscriptionId: string): Promise<void>;
-  resumeSubscription(subscriptionId: string): Promise<void>;
+  createSubscription(data: CreateSubscriptionData): Promise<SubscriptionResult>
+  updateSubscription(
+    subscriptionId: string,
+    data: UpdateSubscriptionData
+  ): Promise<SubscriptionResult>
+  cancelSubscription(subscriptionId: string): Promise<void>
+  pauseSubscription(subscriptionId: string): Promise<void>
+  resumeSubscription(subscriptionId: string): Promise<void>
 
   // Payment Methods
-  savePaymentMethod(tokenData: TokenData): Promise<PaymentMethodResult>;
-  getPaymentMethod(paymentMethodId: string): Promise<PaymentMethodResult>;
-  deletePaymentMethod(paymentMethodId: string): Promise<void>;
-  listPaymentMethods(customerId: string): Promise<PaymentMethodResult[]>;
+  savePaymentMethod(tokenData: TokenData): Promise<PaymentMethodResult>
+  getPaymentMethod(paymentMethodId: string): Promise<PaymentMethodResult>
+  deletePaymentMethod(paymentMethodId: string): Promise<void>
+  listPaymentMethods(customerId: string): Promise<PaymentMethodResult[]>
 
   // Webhooks
-  verifyWebhookSignature(payload: string, signature: string): boolean;
-  parseWebhookEvent(payload: unknown): WebhookEvent;
+  verifyWebhookSignature(payload: string, signature: string): boolean
+  parseWebhookEvent(payload: unknown): WebhookEvent
 
   // Customer Management (Stripe-specific but abstracted)
-  createCustomer(data: CustomerData): Promise<CustomerResult>;
-  updateCustomer(customerId: string, data: CustomerData): Promise<CustomerResult>;
+  createCustomer(data: CustomerData): Promise<CustomerResult>
+  updateCustomer(
+    customerId: string,
+    data: CustomerData
+  ): Promise<CustomerResult>
 }
 ```
 
@@ -157,63 +165,63 @@ interface IPaymentProcessor {
 ```typescript
 // Processor-agnostic payment data
 interface CreatePaymentData {
-  amount: number;              // In cents
-  currency: string;            // 'usd'
-  paymentMethodId: string;     // Generic token/ID
-  customerId?: string;         // Customer reference
-  description?: string;
-  metadata?: Record<string, string>;
-  captureMethod?: 'automatic' | 'manual';
+  amount: number // In cents
+  currency: string // 'usd'
+  paymentMethodId: string // Generic token/ID
+  customerId?: string // Customer reference
+  description?: string
+  metadata?: Record<string, string>
+  captureMethod?: "automatic" | "manual"
 }
 
 interface PaymentResult {
-  id: string;                  // Processor-specific ID
-  processorType: PaymentProcessorType;
-  status: PaymentStatus;       // 'succeeded' | 'failed' | 'pending' | 'requires_action'
-  amount: number;
-  currency: string;
-  failureReason?: string;
-  metadata?: Record<string, string>;
-  raw?: unknown;               // Original processor response
+  id: string // Processor-specific ID
+  processorType: PaymentProcessorType
+  status: PaymentStatus // 'succeeded' | 'failed' | 'pending' | 'requires_action'
+  amount: number
+  currency: string
+  failureReason?: string
+  metadata?: Record<string, string>
+  raw?: unknown // Original processor response
 }
 
 interface CreateSubscriptionData {
-  customerId: string;
-  paymentMethodId: string;
-  priceAmount: number;         // Amount per interval
-  currency: string;
-  interval: SubscriptionInterval; // 'day' | 'week' | 'month' | 'year'
-  intervalCount: number;       // e.g., 1 for monthly, 3 for quarterly
-  totalPayments?: number;      // null = infinite
-  startDate?: Date;            // Defaults to now
-  metadata?: Record<string, string>;
+  customerId: string
+  paymentMethodId: string
+  priceAmount: number // Amount per interval
+  currency: string
+  interval: SubscriptionInterval // 'day' | 'week' | 'month' | 'year'
+  intervalCount: number // e.g., 1 for monthly, 3 for quarterly
+  totalPayments?: number // null = infinite
+  startDate?: Date // Defaults to now
+  metadata?: Record<string, string>
 }
 
 interface SubscriptionResult {
-  id: string;
-  processorType: PaymentProcessorType;
-  status: SubscriptionStatus;  // 'active' | 'paused' | 'canceled' | 'past_due'
-  currentPeriodStart: Date;
-  currentPeriodEnd: Date;
-  cancelAtPeriodEnd: boolean;
-  metadata?: Record<string, string>;
-  raw?: unknown;
+  id: string
+  processorType: PaymentProcessorType
+  status: SubscriptionStatus // 'active' | 'paused' | 'canceled' | 'past_due'
+  currentPeriodStart: Date
+  currentPeriodEnd: Date
+  cancelAtPeriodEnd: boolean
+  metadata?: Record<string, string>
+  raw?: unknown
 }
 
 // Unified webhook event
 interface WebhookEvent {
-  id: string;
-  type: WebhookEventType;      // 'payment.succeeded' | 'subscription.updated' | etc.
-  processorType: PaymentProcessorType;
+  id: string
+  type: WebhookEventType // 'payment.succeeded' | 'subscription.updated' | etc.
+  processorType: PaymentProcessorType
   data: {
-    paymentId?: string;
-    subscriptionId?: string;
-    customerId?: string;
-    amount?: number;
-    status?: string;
-    failureReason?: string;
-  };
-  raw: unknown;
+    paymentId?: string
+    subscriptionId?: string
+    customerId?: string
+    amount?: number
+    status?: string
+    failureReason?: string
+  }
+  raw: unknown
 }
 ```
 
@@ -436,11 +444,13 @@ npm install @types/stripe --save-dev
 **File:** `src/shared/modules/payment-processor/adapters/stripe.adapter.ts`
 
 **Payments:**
+
 - [ ] `createPayment()` → Stripe PaymentIntent
 - [ ] `capturePayment()` → Stripe capture
 - [ ] `refundPayment()` → Stripe Refund
 
 **Subscriptions:**
+
 - [ ] `createSubscription()` → Stripe Subscription
 - [ ] `updateSubscription()` → Stripe subscription update
 - [ ] `cancelSubscription()` → Stripe cancel
@@ -448,12 +458,14 @@ npm install @types/stripe --save-dev
 - [ ] `resumeSubscription()` → Stripe resume
 
 **Payment Methods:**
+
 - [ ] `savePaymentMethod()` → Stripe SetupIntent + attach
 - [ ] `getPaymentMethod()` → Stripe retrieve
 - [ ] `deletePaymentMethod()` → Stripe detach
 - [ ] `listPaymentMethods()` → Stripe list
 
 **Customers:**
+
 - [ ] `createCustomer()` → Stripe Customer create
 - [ ] `updateCustomer()` → Stripe Customer update
 
@@ -586,31 +598,31 @@ npm install @types/stripe --save-dev
 
 ### Subscription Model
 
-| Aspect | Pay Theory | Stripe |
-|--------|-----------|--------|
-| Creation | GraphQL mutation | REST API |
-| Billing | `payment_count` (finite) or infinite | Always infinite (cancel to end) |
-| Interval | Enum: DAILY, WEEKLY, MONTHLY, QUARTERLY, ANNUALLY | interval + interval_count |
-| First Payment | `first_payment_date` param | Immediate or `billing_cycle_anchor` |
-| Prorations | Manual handling | Automatic with proration_behavior |
+| Aspect        | Pay Theory                                        | Stripe                              |
+| ------------- | ------------------------------------------------- | ----------------------------------- |
+| Creation      | GraphQL mutation                                  | REST API                            |
+| Billing       | `payment_count` (finite) or infinite              | Always infinite (cancel to end)     |
+| Interval      | Enum: DAILY, WEEKLY, MONTHLY, QUARTERLY, ANNUALLY | interval + interval_count           |
+| First Payment | `first_payment_date` param                        | Immediate or `billing_cycle_anchor` |
+| Prorations    | Manual handling                                   | Automatic with proration_behavior   |
 
 ### Payment Flow
 
-| Aspect | Pay Theory | Stripe |
-|--------|-----------|--------|
-| Tokenization | Client SDK → token | Stripe.js → PaymentMethod |
-| Auth + Capture | Single mutation | PaymentIntent (can separate) |
-| 3D Secure | Handled in SDK | Requires client-side confirmation |
-| Saved Cards | Token storage | Attach to Customer |
+| Aspect         | Pay Theory         | Stripe                            |
+| -------------- | ------------------ | --------------------------------- |
+| Tokenization   | Client SDK → token | Stripe.js → PaymentMethod         |
+| Auth + Capture | Single mutation    | PaymentIntent (can separate)      |
+| 3D Secure      | Handled in SDK     | Requires client-side confirmation |
+| Saved Cards    | Token storage      | Attach to Customer                |
 
 ### Webhooks
 
-| Aspect | Pay Theory | Stripe |
-|--------|-----------|--------|
-| Protocol | POST with JSON | POST with JSON + signature |
-| Verification | None visible | Webhook secret required |
-| Event Types | Custom enum | Standard Stripe events |
-| Retry | Pull-based recovery | Automatic retries |
+| Aspect       | Pay Theory          | Stripe                     |
+| ------------ | ------------------- | -------------------------- |
+| Protocol     | POST with JSON      | POST with JSON + signature |
+| Verification | None visible        | Webhook secret required    |
+| Event Types  | Custom enum         | Standard Stripe events     |
+| Retry        | Pull-based recovery | Automatic retries          |
 
 ---
 
@@ -633,6 +645,7 @@ npm install @types/stripe --save-dev
 ### For Tenant Migration (Pay Theory → Stripe)
 
 **Not recommended for active subscriptions.** If needed:
+
 1. Cancel Pay Theory subscriptions
 2. Collect new payment methods via Stripe
 3. Create new Stripe subscriptions
@@ -643,6 +656,7 @@ npm install @types/stripe --save-dev
 ## Environment Variables
 
 ### Pay Theory (Existing)
+
 ```env
 PAY_THEORY_API_URL=https://api.start.paytheory.com/graphql
 PAY_THEORY_SECRET_KEY=pt_live_xxx
@@ -651,6 +665,7 @@ PAY_THEORY_WEBHOOK_URL=https://api.example.com/webhooks/paytheory
 ```
 
 ### Stripe (New)
+
 ```env
 # Global Stripe config (for platform)
 STRIPE_SECRET_KEY=sk_live_xxx           # Platform secret key
@@ -694,52 +709,52 @@ STRIPE_WEBHOOK_SECRET=whsec_xxx         # Webhook signing secret
 
 ### New Backend Files
 
-| File | Purpose |
-|------|---------|
-| `src/shared/modules/payment-processor/interfaces/*.ts` | Interface definitions |
-| `src/shared/modules/payment-processor/payment-processor.factory.ts` | Adapter factory |
-| `src/shared/modules/payment-processor/adapters/pay-theory.adapter.ts` | Pay Theory implementation |
-| `src/shared/modules/payment-processor/adapters/stripe.adapter.ts` | Stripe implementation |
-| `src/shared/modules/payment-processor/webhook-processor.service.ts` | Unified webhook handler |
-| `src/shared/config/stripe.config.ts` | Stripe configuration |
-| `src/apps/patient/core/modules/webhook-scope/stripe-webhook/` | Stripe webhook controller |
-| `src/apps/store-admin/modules/payment-config/` | Store payment config module |
+| File                                                                  | Purpose                     |
+| --------------------------------------------------------------------- | --------------------------- |
+| `src/shared/modules/payment-processor/interfaces/*.ts`                | Interface definitions       |
+| `src/shared/modules/payment-processor/payment-processor.factory.ts`   | Adapter factory             |
+| `src/shared/modules/payment-processor/adapters/pay-theory.adapter.ts` | Pay Theory implementation   |
+| `src/shared/modules/payment-processor/adapters/stripe.adapter.ts`     | Stripe implementation       |
+| `src/shared/modules/payment-processor/webhook-processor.service.ts`   | Unified webhook handler     |
+| `src/shared/config/stripe.config.ts`                                  | Stripe configuration        |
+| `src/apps/patient/core/modules/webhook-scope/stripe-webhook/`         | Stripe webhook controller   |
+| `src/apps/store-admin/modules/payment-config/`                        | Store payment config module |
 
 ### Modified Backend Files
 
-| File | Changes |
-|------|---------|
-| `prisma/schema.prisma` | New models, rename tables, add processor type |
-| `src/shared/modules/purchase-scope/purchase-subscription/` | Use processor interface |
-| `src/apps/patient/core/modules/order-scope/order/` | Use processor interface |
-| `src/apps/patient/core/modules/payment-scope/` | Use processor interface |
+| File                                                       | Changes                                       |
+| ---------------------------------------------------------- | --------------------------------------------- |
+| `prisma/schema.prisma`                                     | New models, rename tables, add processor type |
+| `src/shared/modules/purchase-scope/purchase-subscription/` | Use processor interface                       |
+| `src/apps/patient/core/modules/order-scope/order/`         | Use processor interface                       |
+| `src/apps/patient/core/modules/payment-scope/`             | Use processor interface                       |
 
 ### New Frontend Files
 
-| File | Purpose |
-|------|---------|
-| `node-hedfirst-patient/src/providers/stripe/` | Stripe SDK integration |
-| `node-hedfirst-patient/src/components/payment/` | Abstracted payment form |
-| `node-hedfirst-frontend/src/app/.../settings/payments/` | Payment config UI |
+| File                                                    | Purpose                 |
+| ------------------------------------------------------- | ----------------------- |
+| `node-hedfirst-patient/src/providers/stripe/`           | Stripe SDK integration  |
+| `node-hedfirst-patient/src/components/payment/`         | Abstracted payment form |
+| `node-hedfirst-frontend/src/app/.../settings/payments/` | Payment config UI       |
 
 ### Modified Frontend Files
 
-| File | Changes |
-|------|---------|
-| `node-hedfirst-patient/src/app/.../checkout/` | Use abstracted payment form |
-| `node-hedfirst-patient/src/app/.../account/payment/` | Support both processors |
+| File                                                 | Changes                     |
+| ---------------------------------------------------- | --------------------------- |
+| `node-hedfirst-patient/src/app/.../checkout/`        | Use abstracted payment form |
+| `node-hedfirst-patient/src/app/.../account/payment/` | Support both processors     |
 
 ---
 
 ## Risks & Mitigations
 
-| Risk | Mitigation |
-|------|------------|
-| Breaking existing Pay Theory integration | Thorough testing, gradual rollout |
-| Data migration issues | Keep Pay Theory tables, add new columns |
-| Stripe API rate limits | Implement proper error handling and retries |
-| PCI compliance differences | Document requirements per processor |
-| Subscription behavior differences | Clear documentation for tenants |
+| Risk                                     | Mitigation                                  |
+| ---------------------------------------- | ------------------------------------------- |
+| Breaking existing Pay Theory integration | Thorough testing, gradual rollout           |
+| Data migration issues                    | Keep Pay Theory tables, add new columns     |
+| Stripe API rate limits                   | Implement proper error handling and retries |
+| PCI compliance differences               | Document requirements per processor         |
+| Subscription behavior differences        | Clear documentation for tenants             |
 
 ---
 

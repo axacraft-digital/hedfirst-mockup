@@ -6,11 +6,16 @@ import { IconArrowLeft } from "@tabler/icons-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { Separator } from "@/components/ui/separator"
 
 // Consultation detail type
-type ConsultationStatus = "processed" | "pending" | "scheduled" | "completed" | "canceled"
+type ConsultationStatus =
+  | "processed"
+  | "pending"
+  | "scheduled"
+  | "completed"
+  | "canceled"
 
 interface ConsultationDetail {
   id: string
@@ -164,7 +169,9 @@ const mockConsultationDetails: ConsultationDetail[] = [
 ]
 
 // Get consultation by ID
-function getConsultationById(consultationId: string): ConsultationDetail | undefined {
+function getConsultationById(
+  consultationId: string
+): ConsultationDetail | undefined {
   return mockConsultationDetails.find((c) => c.id === consultationId)
 }
 
@@ -285,7 +292,9 @@ export default function ConsultationDetailPage({ params }: Props) {
             <CardContent className="space-y-4">
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
-                  <p className="text-muted-foreground text-sm">Consultation ID</p>
+                  <p className="text-muted-foreground text-sm">
+                    Consultation ID
+                  </p>
                   <p className="font-mono font-medium">
                     {consultation.consultationOrderId}
                   </p>
@@ -307,7 +316,9 @@ export default function ConsultationDetailPage({ params }: Props) {
                 <div className="grid gap-3">
                   <div>
                     <p className="text-muted-foreground text-sm">Type</p>
-                    <p className="font-medium">{consultation.consultation.type}</p>
+                    <p className="font-medium">
+                      {consultation.consultation.type}
+                    </p>
                   </div>
                   <div className="grid gap-3 sm:grid-cols-2">
                     <div>

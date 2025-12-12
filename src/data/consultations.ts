@@ -1,7 +1,7 @@
-import type { Consultation, ConsultationStatus } from "./types"
+import { getProviderDisplayName, mockProviders } from "./index"
 import consultationsJson from "./mock/clinical/consultations.json"
 import diseaseStatesJson from "./mock/reference/disease-states.json"
-import { mockProviders, getProviderDisplayName } from "./index"
+import type { Consultation, ConsultationStatus } from "./types"
 
 /**
  * Consultations data - using centralized mock data with UI-shaped helpers
@@ -71,7 +71,10 @@ function toUIConsultation(consultation: Consultation): UIConsultation {
     id: consultation.id,
     patientId: consultation.patientId,
     masterOrderId: null, // Not available in centralized data
-    date: consultation.completedAt ?? consultation.scheduledAt ?? consultation.createdAt,
+    date:
+      consultation.completedAt ??
+      consultation.scheduledAt ??
+      consultation.createdAt,
     diseaseState: getDiseaseStateName(consultation.diseaseStateId),
     doctor: getProviderName(consultation.providerId),
     value: null, // Consultation fee not tracked in centralized data

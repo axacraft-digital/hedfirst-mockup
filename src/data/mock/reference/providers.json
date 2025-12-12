@@ -4,6 +4,14 @@
     "email": "dr.chen@hedfirst.com",
     "firstName": "Michelle",
     "lastName": "Chen",
+    "phone": "+1 512-555-0147",
+    "address": {
+      "streetAddress": "4521 Medical Parkway",
+      "apartment": "Suite 200",
+      "city": "Austin",
+      "state": "TX",
+      "zipCode": "78756"
+    },
     "status": "ACTIVE",
     "roles": ["DOCTOR"],
     "avatarUrl": "/avatars/dr-chen.jpg",
@@ -15,17 +23,36 @@
     "degree": { "name": "MD" },
     "speciality": { "name": "Internal Medicine" },
     "licenses": [
-      { "state": "TX", "licenseNumber": "TX-12345", "expiryDate": "2026-12-31" },
-      { "state": "CA", "licenseNumber": "CA-67890", "expiryDate": "2025-08-15" },
+      {
+        "state": "TX",
+        "licenseNumber": "TX-12345",
+        "expiryDate": "2026-12-31"
+      },
+      {
+        "state": "CA",
+        "licenseNumber": "CA-67890",
+        "expiryDate": "2025-08-15"
+      },
       { "state": "FL", "licenseNumber": "FL-11111", "expiryDate": "2026-03-01" }
     ],
-    "stats": { "patientsReviewed": 1247, "avgResponseTime": "2.4 hrs" }
+    "stats": { "patientsReviewed": 1247, "avgResponseTime": "2.4 hrs" },
+    "additionalQualifications": "Fellowship in Telemedicine, HIPAA Certified",
+    "createdAt": "2024-03-15T09:00:00Z",
+    "lastLoginAt": "2025-12-06T14:23:00Z"
   },
   {
     "id": "usr_doc002",
     "email": "dr.baldwin@hedfirst.com",
     "firstName": "Nicole",
     "lastName": "Baldwin",
+    "phone": "+1 214-555-0198",
+    "address": {
+      "streetAddress": "2800 North Central Expressway",
+      "apartment": null,
+      "city": "Dallas",
+      "state": "TX",
+      "zipCode": "75204"
+    },
     "status": "ACTIVE",
     "roles": ["DOCTOR"],
     "avatarUrl": "/avatars/dr-baldwin.jpg",
@@ -37,16 +64,25 @@
     "degree": { "name": "MD" },
     "speciality": { "name": "Anti-Aging & Regenerative Medicine" },
     "licenses": [
-      { "state": "TX", "licenseNumber": "TX-24680", "expiryDate": "2026-08-15" },
+      {
+        "state": "TX",
+        "licenseNumber": "TX-24680",
+        "expiryDate": "2026-08-15"
+      },
       { "state": "FL", "licenseNumber": "FL-13579", "expiryDate": "2026-05-30" }
     ],
-    "stats": { "patientsReviewed": 856, "avgResponseTime": "1.9 hrs" }
+    "stats": { "patientsReviewed": 856, "avgResponseTime": "1.9 hrs" },
+    "additionalQualifications": null,
+    "createdAt": "2024-06-01T10:30:00Z",
+    "lastLoginAt": "2025-12-05T09:15:00Z"
   },
   {
     "id": "usr_doc003",
     "email": "dr.patel@hedfirst.com",
     "firstName": "Priya",
     "lastName": "Patel",
+    "phone": "+1 415-555-0234",
+    "address": null,
     "status": "ACTIVE",
     "roles": ["DOCTOR"],
     "avatarUrl": "/avatars/dr-patel.jpg",
@@ -58,9 +94,45 @@
     "degree": { "name": "MD" },
     "speciality": { "name": "Obesity Medicine" },
     "licenses": [
-      { "state": "CA", "licenseNumber": "CA-44444", "expiryDate": "2026-06-30" },
+      {
+        "state": "CA",
+        "licenseNumber": "CA-44444",
+        "expiryDate": "2026-06-30"
+      },
       { "state": "NY", "licenseNumber": "NY-55555", "expiryDate": "2025-12-31" }
     ],
-    "stats": { "patientsReviewed": 634, "avgResponseTime": "3.1 hrs" }
+    "stats": { "patientsReviewed": 634, "avgResponseTime": "3.1 hrs" },
+    "additionalQualifications": "Weight Management Specialist Certification",
+    "createdAt": "2024-09-20T14:00:00Z",
+    "lastLoginAt": null
+  },
+  {
+    "id": "usr_np001",
+    "email": "kelli.white@hedfirst.com",
+    "firstName": "Kelli",
+    "lastName": "White",
+    "phone": "+1 888-427-1796",
+    "address": null,
+    "status": "ACTIVE",
+    "roles": ["NURSE_PRACTITIONER"],
+    "avatarUrl": null,
+    "doctorCredential": {
+      "deaNumber": "MD1908548",
+      "npiNumber": "1538304266",
+      "boardCertification": "ANCC"
+    },
+    "degree": { "name": "Nurse Practitioner" },
+    "speciality": { "name": "Family medicine" },
+    "licenses": [
+      {
+        "state": "TX",
+        "licenseNumber": "NP-TX-88421",
+        "expiryDate": "2026-07-15"
+      }
+    ],
+    "stats": { "patientsReviewed": 423, "avgResponseTime": "1.5 hrs" },
+    "additionalQualifications": null,
+    "createdAt": "2025-07-17T00:00:00Z",
+    "lastLoginAt": null
   }
 ]

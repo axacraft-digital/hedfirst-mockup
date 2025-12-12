@@ -1,6 +1,6 @@
 "use client"
 
-import { use, useState, useEffect } from "react"
+import { use, useEffect, useState } from "react"
 import {
   IconChevronLeft,
   IconCode,
@@ -9,13 +9,13 @@ import {
   IconSend,
 } from "@tabler/icons-react"
 import { Button } from "@/components/ui/button"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import {
   PromptInput,
-  PromptInputTextarea,
-  PromptInputActions,
   PromptInputAction,
+  PromptInputActions,
+  PromptInputTextarea,
 } from "@/components/ui/prompt-input"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import { cn } from "@/lib/utils"
 
 // Mock chat history
@@ -121,12 +121,12 @@ export default function AIAssistantPage({ params }: Props) {
                     key={chat.id}
                     onClick={() => setSelectedChat(chat.id)}
                     className={cn(
-                      "w-full rounded-lg p-3 text-left transition-colors hover:bg-muted",
+                      "hover:bg-muted w-full rounded-lg p-3 text-left transition-colors",
                       selectedChat === chat.id && "bg-muted"
                     )}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium truncate">
+                      <span className="truncate text-sm font-medium">
                         {chat.title}
                       </span>
                       <span className="text-muted-foreground text-xs">

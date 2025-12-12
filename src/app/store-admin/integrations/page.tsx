@@ -1,11 +1,11 @@
 "use client"
 
 import Link from "next/link"
-import { Header } from "@/components/layout/header"
 import { Separator } from "@/components/ui/separator"
+import { Header } from "@/components/layout/header"
 import { IntegrationsPrimaryButtons } from "./components/integrations-primary-buttons"
-import { integrations } from "./data/integrations"
 import type { ValidationStatus } from "./data/integration-details"
+import { integrations } from "./data/integrations"
 
 const statusBadgeConfig: Record<
   ValidationStatus,
@@ -61,7 +61,7 @@ export default function IntegrationsPage() {
                       {integration.logo}
                     </div>
                     <span
-                      className={`inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium h-8 px-3 border ${badge.className}`}
+                      className={`inline-flex h-8 items-center justify-center rounded-md border px-3 text-sm font-medium whitespace-nowrap ${badge.className}`}
                     >
                       {badge.label}
                     </span>
@@ -78,9 +78,7 @@ export default function IntegrationsPage() {
                       >
                         <span
                           className={`h-1.5 w-1.5 rounded-full ${
-                            integration.enabled
-                              ? "bg-green-500"
-                              : "bg-gray-400"
+                            integration.enabled ? "bg-green-500" : "bg-gray-400"
                           }`}
                         />
                         {integration.enabled ? "Enabled" : "Disabled"}

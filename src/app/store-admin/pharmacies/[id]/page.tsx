@@ -3,6 +3,8 @@
 import { use, useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { mockPharmacies as pharmacies } from "@/data"
+import { toast } from "@/hooks/use-toast"
 import { IconAlertTriangle } from "@tabler/icons-react"
 import {
   Breadcrumb,
@@ -17,9 +19,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { ConfirmDialog } from "@/components/confirm-dialog"
-import { toast } from "@/hooks/use-toast"
 import { Header } from "@/components/layout/header"
-import { mockPharmacies as pharmacies } from "@/data"
 
 interface Props {
   params: Promise<{ id: string }>
@@ -37,7 +37,9 @@ export default function PharmacyDetailPage({ params }: Props) {
   const [address, setAddress] = useState(pharmacy?.address ?? "")
   const [phone, setPhone] = useState(pharmacy?.phone ?? "")
   const [pic, setPic] = useState(pharmacy?.pic ?? "")
-  const [externalId, setExternalId] = useState(pharmacy?.externalPharmacyId ?? "")
+  const [externalId, setExternalId] = useState(
+    pharmacy?.externalPharmacyId ?? ""
+  )
 
   if (!pharmacy) {
     return (
@@ -172,7 +174,9 @@ export default function PharmacyDetailPage({ params }: Props) {
             {/* External ID */}
             <div className="flex flex-col items-start justify-between gap-2 md:flex-row md:items-center">
               <div>
-                <Label className="text-sm font-medium">External Pharmacy ID</Label>
+                <Label className="text-sm font-medium">
+                  External Pharmacy ID
+                </Label>
                 <p className="text-muted-foreground text-sm">
                   DoseSpot or integration identifier
                 </p>

@@ -18,16 +18,16 @@ Teligant currently supports **static dosing only** - the dosage is fixed at the 
 
 ### What Exists Today
 
-| Capability | Status | Notes |
-|------------|--------|-------|
-| Static dosage per variant | ✅ Yes | 0.25mg, 0.5mg, 1.0mg as separate SKUs |
-| Multiple dosages per variant | ✅ Yes | Combo therapies (Semaglutide + B12) |
-| Doctor prescription approval | ✅ Yes | Approve/deny workflow |
-| Doctor can switch variants | ✅ Yes | Manual dose change post-approval |
-| Automatic refill scheduling | ✅ Yes | -7 day offset for shipping |
-| Progressive dose escalation | ❌ No | Not implemented |
-| Treatment protocols | ❌ No | Not implemented |
-| Dose adjustment during approval | ❌ No | Locked to variant |
+| Capability                      | Status | Notes                                 |
+| ------------------------------- | ------ | ------------------------------------- |
+| Static dosage per variant       | ✅ Yes | 0.25mg, 0.5mg, 1.0mg as separate SKUs |
+| Multiple dosages per variant    | ✅ Yes | Combo therapies (Semaglutide + B12)   |
+| Doctor prescription approval    | ✅ Yes | Approve/deny workflow                 |
+| Doctor can switch variants      | ✅ Yes | Manual dose change post-approval      |
+| Automatic refill scheduling     | ✅ Yes | -7 day offset for shipping            |
+| Progressive dose escalation     | ❌ No  | Not implemented                       |
+| Treatment protocols             | ❌ No  | Not implemented                       |
+| Dose adjustment during approval | ❌ No  | Locked to variant                     |
 
 ### Current Workflow Limitations
 
@@ -43,10 +43,9 @@ Patient Orders → Doctor Approves (fixed dose) → Refills (same dose forever)
 ### Database Models (Current)
 
 **OrderLineItem.dosages** (JSON array):
+
 ```json
-[
-  {"name": "Semaglutide", "dosage": 0.25, "unit": "mg"}
-]
+[{ "name": "Semaglutide", "dosage": 0.25, "unit": "mg" }]
 ```
 
 **StoreProductPhysicalVariant.dosages** - Same structure, defines available dosages per SKU.
@@ -57,24 +56,24 @@ Patient Orders → Doctor Approves (fixed dose) → Refills (same dose forever)
 
 ### Standard Semaglutide Protocol (16-20 weeks)
 
-| Week | Dose | Duration | Purpose |
-|------|------|----------|---------|
-| 1-4 | 0.25 mg | 4 weeks | Initial titration |
-| 5-8 | 0.5 mg | 4 weeks | Dose escalation |
-| 9-12 | 1.0 mg | 4 weeks | Therapeutic dose |
-| 13-16 | 1.7 mg | 4 weeks | Higher therapeutic |
-| 17+ | 2.4 mg | Maintenance | Target dose |
+| Week  | Dose    | Duration    | Purpose            |
+| ----- | ------- | ----------- | ------------------ |
+| 1-4   | 0.25 mg | 4 weeks     | Initial titration  |
+| 5-8   | 0.5 mg  | 4 weeks     | Dose escalation    |
+| 9-12  | 1.0 mg  | 4 weeks     | Therapeutic dose   |
+| 13-16 | 1.7 mg  | 4 weeks     | Higher therapeutic |
+| 17+   | 2.4 mg  | Maintenance | Target dose        |
 
 ### Standard Tirzepatide Protocol (20+ weeks)
 
-| Week | Dose | Duration | Purpose |
-|------|------|----------|---------|
-| 1-4 | 2.5 mg | 4 weeks | Initial titration |
-| 5-8 | 5 mg | 4 weeks | Dose escalation |
-| 9-12 | 7.5 mg | 4 weeks | Dose escalation |
-| 13-16 | 10 mg | 4 weeks | Therapeutic dose |
-| 17-20 | 12.5 mg | 4 weeks | Higher therapeutic |
-| 21+ | 15 mg | Maintenance | Maximum dose |
+| Week  | Dose    | Duration    | Purpose            |
+| ----- | ------- | ----------- | ------------------ |
+| 1-4   | 2.5 mg  | 4 weeks     | Initial titration  |
+| 5-8   | 5 mg    | 4 weeks     | Dose escalation    |
+| 9-12  | 7.5 mg  | 4 weeks     | Dose escalation    |
+| 13-16 | 10 mg   | 4 weeks     | Therapeutic dose   |
+| 17-20 | 12.5 mg | 4 weeks     | Higher therapeutic |
+| 21+   | 15 mg   | Maintenance | Maximum dose       |
 
 ### Key Clinical Principles
 
@@ -91,18 +90,21 @@ Patient Orders → Doctor Approves (fixed dose) → Refills (same dose forever)
 ### How Competitors Handle This
 
 **Hims/Hers Approach:**
+
 - Provider reviews at each dose level
 - Compounded medications allow flexible dosing
 - App-based check-ins between doses
 - Anti-nausea medication offered proactively
 
 **Ro Body Program:**
+
 - Metabolic testing before prescription
 - Clinical assistance through app
 - Lifestyle tracking integration
 - Provider adjusts dose based on progress
 
 **Calibrate:**
+
 - One-on-one coaching alongside medication
 - Emphasizes medication as "tool, not entire treatment"
 - Structured program with milestones
@@ -139,14 +141,14 @@ Sub 5: Phase 5 (2.4mg)  | $399 | paymentCount: null | firstPaymentDate: Apr 24 �
 
 ### Why This Works
 
-| Benefit | Explanation |
-|---------|-------------|
-| Pay Theory handles timing | Uses `firstPaymentDate` parameter (already supported) |
-| No internal scheduler needed | Pay Theory charges on scheduled dates automatically |
-| Predictable billing | Patient knows exactly when each charge happens |
-| Payment method locked in | Same `paymentMethodId` for all subscriptions |
-| Variable pricing per phase | Each subscription has its own amount |
-| Clean audit trail | Each phase = distinct subscription record |
+| Benefit                      | Explanation                                           |
+| ---------------------------- | ----------------------------------------------------- |
+| Pay Theory handles timing    | Uses `firstPaymentDate` parameter (already supported) |
+| No internal scheduler needed | Pay Theory charges on scheduled dates automatically   |
+| Predictable billing          | Patient knows exactly when each charge happens        |
+| Payment method locked in     | Same `paymentMethodId` for all subscriptions          |
+| Variable pricing per phase   | Each subscription has its own amount                  |
+| Clean audit trail            | Each phase = distinct subscription record             |
 
 ### Timing Logic
 
@@ -182,23 +184,23 @@ The -7 day offset ensures medication ships before current supply runs out.
 
 ### Core Concepts
 
-| Concept | Description |
-|---------|-------------|
-| **Protocol Template** | Reusable titration schedule (admin-configured) |
-| **Protocol Phase** | Single dose level with duration, variant, and pricing |
-| **Patient Enrollment** | Patient's active instance of a protocol |
-| **Phase Subscription** | Pay Theory subscription for each phase |
-| **Check-in** | Advisory patient self-report (does not block progression) |
-| **Admin Override** | Provider/admin can modify protocol at any time |
+| Concept                | Description                                               |
+| ---------------------- | --------------------------------------------------------- |
+| **Protocol Template**  | Reusable titration schedule (admin-configured)            |
+| **Protocol Phase**     | Single dose level with duration, variant, and pricing     |
+| **Patient Enrollment** | Patient's active instance of a protocol                   |
+| **Phase Subscription** | Pay Theory subscription for each phase                    |
+| **Check-in**           | Advisory patient self-report (does not block progression) |
+| **Admin Override**     | Provider/admin can modify protocol at any time            |
 
 ### Key Design Decisions
 
-| Decision | Rationale |
-|----------|-----------|
-| **Check-ins are advisory** | Most patients don't follow up; plan proceeds unless provider intervenes |
-| **All subscriptions created upfront** | Reduces operational complexity, Pay Theory handles timing |
-| **Provider can override anytime** | Clinical flexibility for tolerance issues |
-| **5 subscriptions per enrollment** | Necessary given Pay Theory constraints |
+| Decision                              | Rationale                                                               |
+| ------------------------------------- | ----------------------------------------------------------------------- |
+| **Check-ins are advisory**            | Most patients don't follow up; plan proceeds unless provider intervenes |
+| **All subscriptions created upfront** | Reduces operational complexity, Pay Theory handles timing               |
+| **Provider can override anytime**     | Clinical flexibility for tolerance issues                               |
+| **5 subscriptions per enrollment**    | Necessary given Pay Theory constraints                                  |
 
 ---
 
@@ -438,6 +440,7 @@ enum OverrideType {
 - [ ] DTOs for create/update operations
 
 **Endpoints:**
+
 ```
 GET    /treatment-protocols              - List protocols
 POST   /treatment-protocols              - Create protocol
@@ -458,6 +461,7 @@ DELETE /treatment-protocols/:id/phases/:phaseId - Remove phase
 - [ ] `check-in.service.ts` - Process patient check-ins (advisory)
 
 **Key Methods:**
+
 ```typescript
 // Enroll patient in protocol - creates ALL phase subscriptions upfront
 async enrollPatient(
@@ -487,6 +491,7 @@ async createAllPhaseSubscriptions(
 - [ ] `override.service.ts` - Handle all override scenarios
 
 **Endpoints:**
+
 ```
 POST /enrollments/:id/pause           - Pause protocol
 POST /enrollments/:id/resume          - Resume protocol
@@ -505,6 +510,7 @@ POST /enrollments/:id/credit          - Apply account credit
 **File:** `src/apps/patient/modules/protocol-check-in/` (new)
 
 **Endpoints:**
+
 ```
 GET  /my-protocols                       - List my active protocols
 GET  /my-protocols/:enrollmentId         - Get protocol detail with timeline
@@ -928,99 +934,99 @@ async applyCreditsToSubscription(subscriptionId: string) {
 
 ### 1. Patient Wants to PAUSE Treatment
 
-| Trigger | System Response |
-|---------|-----------------|
-| Provider clicks "Pause" | Cancel all SCHEDULED subscriptions |
-| | Mark enrollment PAUSED |
-| | Log override with reason |
-| Provider clicks "Resume" | Calculate new dates from resume date |
-| | Create new subscriptions for remaining phases |
-| | Mark enrollment ACTIVE |
+| Trigger                  | System Response                               |
+| ------------------------ | --------------------------------------------- |
+| Provider clicks "Pause"  | Cancel all SCHEDULED subscriptions            |
+|                          | Mark enrollment PAUSED                        |
+|                          | Log override with reason                      |
+| Provider clicks "Resume" | Calculate new dates from resume date          |
+|                          | Create new subscriptions for remaining phases |
+|                          | Mark enrollment ACTIVE                        |
 
 ### 2. Patient Wants to DISCONTINUE
 
-| Trigger | System Response |
-|---------|-----------------|
-| Provider clicks "Discontinue" | Cancel all SCHEDULED subscriptions |
-| | Mark enrollment DISCONTINUED |
-| | No restart (would need new enrollment) |
+| Trigger                       | System Response                        |
+| ----------------------------- | -------------------------------------- |
+| Provider clicks "Discontinue" | Cancel all SCHEDULED subscriptions     |
+|                               | Mark enrollment DISCONTINUED           |
+|                               | No restart (would need new enrollment) |
 
 ### 3. Patient TOLERATING WELL (Extend Phase)
 
-| Trigger | System Response |
-|---------|-----------------|
-| Provider clicks "Extend Phase" | Cancel future subscriptions |
-| | Create new subscription for same phase |
-| | Shift all future phase dates |
-| | Log override |
+| Trigger                        | System Response                        |
+| ------------------------------ | -------------------------------------- |
+| Provider clicks "Extend Phase" | Cancel future subscriptions            |
+|                                | Create new subscription for same phase |
+|                                | Shift all future phase dates           |
+|                                | Log override                           |
 
 ### 4. Patient TOLERATING POORLY (Reduce Dose)
 
-| Trigger | System Response |
-|---------|-----------------|
-| Provider selects lower phase | Cancel future subscriptions |
-| | Create subscription for lower dose phase |
-| | Recalculate remaining phases from there |
-| | Optionally issue refund/credit |
-| | Log override |
+| Trigger                      | System Response                          |
+| ---------------------------- | ---------------------------------------- |
+| Provider selects lower phase | Cancel future subscriptions              |
+|                              | Create subscription for lower dose phase |
+|                              | Recalculate remaining phases from there  |
+|                              | Optionally issue refund/credit           |
+|                              | Log override                             |
 
 ### 5. Patient READY FOR FASTER ESCALATION (Skip Phase)
 
-| Trigger | System Response |
-|---------|-----------------|
-| Provider selects higher phase | Cancel future subscriptions |
-| | Create subscription for higher dose phase |
-| | Continue with remaining phases |
-| | Log override |
+| Trigger                       | System Response                           |
+| ----------------------------- | ----------------------------------------- |
+| Provider selects higher phase | Cancel future subscriptions               |
+|                               | Create subscription for higher dose phase |
+|                               | Continue with remaining phases            |
+|                               | Log override                              |
 
 ### 6. Payment Method CHANGES
 
-| Trigger | System Response |
-|---------|-----------------|
+| Trigger                      | System Response                  |
+| ---------------------------- | -------------------------------- |
 | Patient updates default card | Find all SCHEDULED subscriptions |
-| | Update each in Pay Theory |
-| | Update our records |
-| | Log the change |
+|                              | Update each in Pay Theory        |
+|                              | Update our records               |
+|                              | Log the change                   |
 
 ### 7. Payment FAILS
 
-| Trigger | System Response |
-|---------|-----------------|
-| Charge fails | Mark phase subscription FAILED |
-| | Notify patient (update payment) |
-| | Pay Theory retries automatically |
-| After 7 days, still failed | Cancel all future subscriptions |
-| | Mark enrollment PAYMENT_FAILED |
-| | Notify patient and provider |
-| If patient updates card within 7 days | Update all subscriptions |
-| | Retry charge |
+| Trigger                               | System Response                  |
+| ------------------------------------- | -------------------------------- |
+| Charge fails                          | Mark phase subscription FAILED   |
+|                                       | Notify patient (update payment)  |
+|                                       | Pay Theory retries automatically |
+| After 7 days, still failed            | Cancel all future subscriptions  |
+|                                       | Mark enrollment PAYMENT_FAILED   |
+|                                       | Notify patient and provider      |
+| If patient updates card within 7 days | Update all subscriptions         |
+|                                       | Retry charge                     |
 
 ### 8. PARTIAL REFUND Needed
 
-| Trigger | System Response |
-|---------|-----------------|
+| Trigger                | System Response                 |
+| ---------------------- | ------------------------------- |
 | Provider issues refund | Verify subscription was charged |
-| | Process refund via Pay Theory |
-| | Log override with amount |
-| | Notify patient |
+|                        | Process refund via Pay Theory   |
+|                        | Log override with amount        |
+|                        | Notify patient                  |
 
 ### 9. ACCOUNT CREDIT Needed
 
-| Trigger | System Response |
-|---------|-----------------|
-| Provider applies credit | Add to patient account balance |
-| | Log override with amount |
-| | Apply to next charge (if applicable) |
-| | Notify patient |
+| Trigger                 | System Response                      |
+| ----------------------- | ------------------------------------ |
+| Provider applies credit | Add to patient account balance       |
+|                         | Log override with amount             |
+|                         | Apply to next charge (if applicable) |
+|                         | Notify patient                       |
 
 ### 10. Patient RESTARTS After Discontinuation
 
-| Trigger | System Response |
-|---------|-----------------|
-| Provider enrolls again | Create NEW enrollment |
-| | Provider selects starting phase |
-| | Create fresh set of subscriptions |
-| | Old enrollment stays DISCONTINUED |
+| Trigger                | System Response                   |
+| ---------------------- | --------------------------------- |
+| Provider enrolls again | Create NEW enrollment             |
+|                        | Provider selects starting phase   |
+|                        | Create fresh set of subscriptions |
+|                        | Old enrollment stays DISCONTINUED |
 
 ---
 
@@ -1068,33 +1074,34 @@ async handleSubscriptionCancelled(webhookData: PayTheoryWebhook) {
 
 ### Backend (New)
 
-| File | Purpose |
-|------|---------|
-| `prisma/schema.prisma` | New models for protocols |
-| `src/apps/store-admin/modules/treatment-protocols/` | Admin CRUD |
-| `src/apps/store-doctor/modules/protocol-enrollment/` | Enrollment, subscriptions |
-| `src/apps/store-doctor/modules/protocol-override/` | Override actions |
-| `src/apps/patient/modules/protocol-check-in/` | Patient check-ins |
-| `src/shared/modules/protocol/payment-failure.service.ts` | Handle failed payments |
-| `src/shared/modules/protocol/refund.service.ts` | Refund processing |
-| `src/shared/modules/protocol/credit.service.ts` | Credit management |
+| File                                                     | Purpose                   |
+| -------------------------------------------------------- | ------------------------- |
+| `prisma/schema.prisma`                                   | New models for protocols  |
+| `src/apps/store-admin/modules/treatment-protocols/`      | Admin CRUD                |
+| `src/apps/store-doctor/modules/protocol-enrollment/`     | Enrollment, subscriptions |
+| `src/apps/store-doctor/modules/protocol-override/`       | Override actions          |
+| `src/apps/patient/modules/protocol-check-in/`            | Patient check-ins         |
+| `src/shared/modules/protocol/payment-failure.service.ts` | Handle failed payments    |
+| `src/shared/modules/protocol/refund.service.ts`          | Refund processing         |
+| `src/shared/modules/protocol/credit.service.ts`          | Credit management         |
 
 ### Frontend (New)
 
-| File | Purpose |
-|------|---------|
-| `node-hedfirst-doctor/.../protocols/` | Doctor protocol management |
-| `node-hedfirst-doctor/.../protocols/actions/` | Override actions UI |
-| `node-hedfirst-doctor/.../protocol-dashboard/` | Protocol overview |
-| `node-hedfirst-patient/.../my-treatment/` | Patient protocol view |
-| `node-hedfirst-patient/.../my-treatment/check-in/` | Advisory check-in flow |
-| `node-hedfirst-frontend/.../treatment-protocols/` | Admin protocol builder |
+| File                                               | Purpose                    |
+| -------------------------------------------------- | -------------------------- |
+| `node-hedfirst-doctor/.../protocols/`              | Doctor protocol management |
+| `node-hedfirst-doctor/.../protocols/actions/`      | Override actions UI        |
+| `node-hedfirst-doctor/.../protocol-dashboard/`     | Protocol overview          |
+| `node-hedfirst-patient/.../my-treatment/`          | Patient protocol view      |
+| `node-hedfirst-patient/.../my-treatment/check-in/` | Advisory check-in flow     |
+| `node-hedfirst-frontend/.../treatment-protocols/`  | Admin protocol builder     |
 
 ---
 
 ## Verification Checklist
 
 ### Core Functionality
+
 - [ ] Admin can create treatment protocols with phases
 - [ ] Each phase links to product variant with price
 - [ ] Doctor can enroll patient in protocol
@@ -1103,12 +1110,14 @@ async handleSubscriptionCancelled(webhookData: PayTheoryWebhook) {
 - [ ] Patient sees protocol progress and upcoming charges
 
 ### Payment Handling
+
 - [ ] Payment method change updates all SCHEDULED subscriptions
 - [ ] Failed payment triggers patient notification
 - [ ] 7-day grace period before cancellation
 - [ ] Payment method update within grace period continues protocol
 
 ### Override Actions
+
 - [ ] Pause cancels future subscriptions, marks PAUSED
 - [ ] Resume creates new subscriptions with fresh dates
 - [ ] Extend phase shifts all future dates
@@ -1117,11 +1126,13 @@ async handleSubscriptionCancelled(webhookData: PayTheoryWebhook) {
 - [ ] Discontinue ends protocol permanently
 
 ### Financial
+
 - [ ] Partial refunds can be issued
 - [ ] Account credits can be applied
 - [ ] Override history tracks all financial adjustments
 
 ### Advisory Check-ins
+
 - [ ] Check-in reminders sent (but don't block progression)
 - [ ] Check-in data visible to providers
 - [ ] High side effect scores flagged for provider attention

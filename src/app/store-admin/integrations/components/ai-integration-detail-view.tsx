@@ -2,16 +2,16 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { testIntegrationConnection } from "@/data"
 import { ArrowLeft, Loader2, RefreshCw } from "lucide-react"
+import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { toast } from "sonner"
-import { testIntegrationConnection } from "@/data"
-import { AIConfigurationTab } from "./ai-configuration-tab"
-import { AISafetyTab } from "./ai-safety-tab"
-import { AIMonitoringTab } from "./ai-monitoring-tab"
 import type { IntegrationDetail } from "../data/integration-details"
+import { AIConfigurationTab } from "./ai-configuration-tab"
+import { AIMonitoringTab } from "./ai-monitoring-tab"
+import { AISafetyTab } from "./ai-safety-tab"
 
 interface AIIntegrationDetailViewProps {
   integration: IntegrationDetail
@@ -28,7 +28,9 @@ export function AIIntegrationDetailView({
     setIsTesting(true)
 
     // Show loading toast
-    const toastId = toast.loading(`Testing connection to ${integration.name}...`)
+    const toastId = toast.loading(
+      `Testing connection to ${integration.name}...`
+    )
 
     // Simulate API call delay, then get result from centralized data
     setTimeout(() => {
@@ -83,7 +85,9 @@ export function AIIntegrationDetailView({
 
       {/* Page Title */}
       <div>
-        <h1 className="text-2xl font-bold tracking-tight">{integration.name}</h1>
+        <h1 className="text-2xl font-bold tracking-tight">
+          {integration.name}
+        </h1>
         <p className="text-muted-foreground">{integration.description}</p>
       </div>
 

@@ -4,9 +4,6 @@ import { use } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { IconCheck, IconX } from "@tabler/icons-react"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Separator } from "@/components/ui/separator"
-import { Button } from "@/components/ui/button"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -18,6 +15,9 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Separator } from "@/components/ui/separator"
 import { getPatientDetailById } from "./data/patient-detail-data"
 import { formatHeight, formatWeight } from "./data/patient-detail-types"
 
@@ -26,7 +26,13 @@ interface Props {
 }
 
 // Reusable field display component
-function Field({ label, value }: { label: string; value: string | null | undefined }) {
+function Field({
+  label,
+  value,
+}: {
+  label: string
+  value: string | null | undefined
+}) {
   return (
     <div className="py-2">
       <dt className="text-muted-foreground text-sm">{label}</dt>
@@ -36,7 +42,13 @@ function Field({ label, value }: { label: string; value: string | null | undefin
 }
 
 // Section wrapper component
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({
+  title,
+  children,
+}: {
+  title: string
+  children: React.ReactNode
+}) {
   return (
     <section className="space-y-4">
       <h3 className="text-lg font-semibold">{title}</h3>
@@ -61,7 +73,16 @@ export default function PatientOverviewPage({ params }: Props) {
     )
   }
 
-  const { generalInfo, healthInfo, demographicInfo, healthRiskFactors, healthcareInfo, emergencyContact, shippingAddress, idVerification } = patient
+  const {
+    generalInfo,
+    healthInfo,
+    demographicInfo,
+    healthRiskFactors,
+    healthcareInfo,
+    emergencyContact,
+    shippingAddress,
+    idVerification,
+  } = patient
 
   return (
     <div className="flex flex-1 flex-col">
@@ -73,20 +94,35 @@ export default function PatientOverviewPage({ params }: Props) {
             <Field label="Last Name" value={generalInfo.lastName} />
             <Field
               label="Date of Birth"
-              value={new Date(generalInfo.dateOfBirth).toLocaleDateString("en-US", {
-                month: "2-digit",
-                day: "2-digit",
-                year: "numeric",
-              })}
+              value={new Date(generalInfo.dateOfBirth).toLocaleDateString(
+                "en-US",
+                {
+                  month: "2-digit",
+                  day: "2-digit",
+                  year: "numeric",
+                }
+              )}
             />
             <Field label="Email" value={generalInfo.email} />
             <Field label="Phone Number" value={generalInfo.phone} />
             <Field label="Sex at Birth" value={generalInfo.sexAtBirth} />
             <Field label="Race/Ethnicity" value={generalInfo.raceEthnicity} />
-            <Field label="Primary language spoken" value={generalInfo.primaryLanguage} />
-            <Field label="Preferred language for medical communication" value={generalInfo.preferredMedicalLanguage} />
-            <Field label="Preferred contact method" value={generalInfo.preferredContactMethod} />
-            <Field label="Assigned Provider" value={generalInfo.assignedProviderName} />
+            <Field
+              label="Primary language spoken"
+              value={generalInfo.primaryLanguage}
+            />
+            <Field
+              label="Preferred language for medical communication"
+              value={generalInfo.preferredMedicalLanguage}
+            />
+            <Field
+              label="Preferred contact method"
+              value={generalInfo.preferredContactMethod}
+            />
+            <Field
+              label="Assigned Provider"
+              value={generalInfo.assignedProviderName}
+            />
 
             {/* Subscription status */}
             <div className="flex items-center gap-4 py-2">
@@ -96,8 +132,17 @@ export default function PatientOverviewPage({ params }: Props) {
                 ) : (
                   <IconX className="text-muted-foreground size-4" />
                 )}
-                <span className={generalInfo.emailSubscribed ? "text-green-600" : "text-muted-foreground"}>
-                  Email {generalInfo.emailSubscribed ? "subscribed" : "not subscribed"}
+                <span
+                  className={
+                    generalInfo.emailSubscribed
+                      ? "text-green-600"
+                      : "text-muted-foreground"
+                  }
+                >
+                  Email{" "}
+                  {generalInfo.emailSubscribed
+                    ? "subscribed"
+                    : "not subscribed"}
                 </span>
               </div>
               <div className="flex items-center gap-1.5">
@@ -106,8 +151,15 @@ export default function PatientOverviewPage({ params }: Props) {
                 ) : (
                   <IconX className="text-muted-foreground size-4" />
                 )}
-                <span className={generalInfo.smsSubscribed ? "text-green-600" : "text-muted-foreground"}>
-                  SMS {generalInfo.smsSubscribed ? "subscribed" : "not subscribed"}
+                <span
+                  className={
+                    generalInfo.smsSubscribed
+                      ? "text-green-600"
+                      : "text-muted-foreground"
+                  }
+                >
+                  SMS{" "}
+                  {generalInfo.smsSubscribed ? "subscribed" : "not subscribed"}
                 </span>
               </div>
             </div>
@@ -115,51 +167,111 @@ export default function PatientOverviewPage({ params }: Props) {
 
           {/* Health Information */}
           <Section title="Health Information">
-            <Field label="Height" value={formatHeight(healthInfo.heightFeet, healthInfo.heightInches)} />
+            <Field
+              label="Height"
+              value={formatHeight(
+                healthInfo.heightFeet,
+                healthInfo.heightInches
+              )}
+            />
             <Field label="Weight" value={formatWeight(healthInfo.weightLbs)} />
             <Field label="BMI" value={healthInfo.bmi.toString()} />
           </Section>
 
           {/* Social & Demographic Information */}
           <Section title="Social & Demographic Information">
-            <Field label="Education Level" value={demographicInfo.educationLevel} />
-            <Field label="Employment Status" value={demographicInfo.employmentStatus} />
-            <Field label="Marital Status" value={demographicInfo.maritalStatus} />
-            <Field label="Household Size" value={`${demographicInfo.householdSize} person(s)`} />
-            <Field label="Primary Occupation" value={demographicInfo.primaryOccupation} />
+            <Field
+              label="Education Level"
+              value={demographicInfo.educationLevel}
+            />
+            <Field
+              label="Employment Status"
+              value={demographicInfo.employmentStatus}
+            />
+            <Field
+              label="Marital Status"
+              value={demographicInfo.maritalStatus}
+            />
+            <Field
+              label="Household Size"
+              value={`${demographicInfo.householdSize} person(s)`}
+            />
+            <Field
+              label="Primary Occupation"
+              value={demographicInfo.primaryOccupation}
+            />
           </Section>
 
           {/* Health Risk Factors */}
           <Section title="Health Risk Factors">
-            <Field label="Nicotine Usage" value={healthRiskFactors.nicotineUsage} />
-            <Field label="Nicotine Frequency" value={healthRiskFactors.nicotineFrequency} />
-            <Field label="Nicotine Type" value={healthRiskFactors.nicotineType} />
+            <Field
+              label="Nicotine Usage"
+              value={healthRiskFactors.nicotineUsage}
+            />
+            <Field
+              label="Nicotine Frequency"
+              value={healthRiskFactors.nicotineFrequency}
+            />
+            <Field
+              label="Nicotine Type"
+              value={healthRiskFactors.nicotineType}
+            />
             <Field label="Alcohol Use" value={healthRiskFactors.alcoholUse} />
-            <Field label="Alcohol Frequency" value={healthRiskFactors.alcoholFrequency} />
+            <Field
+              label="Alcohol Frequency"
+              value={healthRiskFactors.alcoholFrequency}
+            />
           </Section>
 
           {/* Healthcare Information */}
           <Section title="Healthcare Information">
-            <Field label="Most Recent Primary Care Provider" value={healthcareInfo.mostRecentPrimaryCareProvider} />
+            <Field
+              label="Most Recent Primary Care Provider"
+              value={healthcareInfo.mostRecentPrimaryCareProvider}
+            />
             <Field label="Provider Name" value={healthcareInfo.providerName} />
-            <Field label="Provider Email" value={healthcareInfo.providerEmail} />
-            <Field label="Provider Phone" value={healthcareInfo.providerPhone} />
-            <Field label="Preferred Local Pharmacy" value={healthcareInfo.preferredLocalPharmacy} />
-            <Field label="Pharmacy Address" value={healthcareInfo.pharmacyAddress} />
-            <Field label="Allergies or Substances" value={healthcareInfo.allergiesOrSubstances} />
+            <Field
+              label="Provider Email"
+              value={healthcareInfo.providerEmail}
+            />
+            <Field
+              label="Provider Phone"
+              value={healthcareInfo.providerPhone}
+            />
+            <Field
+              label="Preferred Local Pharmacy"
+              value={healthcareInfo.preferredLocalPharmacy}
+            />
+            <Field
+              label="Pharmacy Address"
+              value={healthcareInfo.pharmacyAddress}
+            />
+            <Field
+              label="Allergies or Substances"
+              value={healthcareInfo.allergiesOrSubstances}
+            />
           </Section>
 
           {/* Emergency Contact */}
           <Section title="Emergency Contact">
             <Field label="Name" value={emergencyContact?.name} />
-            <Field label="Relationship" value={emergencyContact?.relationship} />
+            <Field
+              label="Relationship"
+              value={emergencyContact?.relationship}
+            />
             <Field label="Phone Number" value={emergencyContact?.phone} />
           </Section>
 
           {/* Shipping Address */}
           <Section title="Shipping Address">
-            <Field label="Street address" value={shippingAddress.streetAddress} />
-            <Field label="Apartment, suite, etc." value={shippingAddress.apartment} />
+            <Field
+              label="Street address"
+              value={shippingAddress.streetAddress}
+            />
+            <Field
+              label="Apartment, suite, etc."
+              value={shippingAddress.apartment}
+            />
             <Field label="City" value={shippingAddress.city} />
             <Field label="State" value={shippingAddress.state} />
             <Field label="Zip Code" value={shippingAddress.zipCode} />
@@ -202,9 +314,13 @@ export default function PatientOverviewPage({ params }: Props) {
                   />
                 </div>
               )}
-              {!idVerification.selfiePhoto && !idVerification.idFrontPhoto && !idVerification.idBackPhoto && (
-                <p className="text-muted-foreground">No ID verification documents uploaded</p>
-              )}
+              {!idVerification.selfiePhoto &&
+                !idVerification.idFrontPhoto &&
+                !idVerification.idBackPhoto && (
+                  <p className="text-muted-foreground">
+                    No ID verification documents uploaded
+                  </p>
+                )}
             </div>
           </Section>
 
@@ -212,9 +328,12 @@ export default function PatientOverviewPage({ params }: Props) {
           <section className="space-y-4 rounded-lg border border-red-200 bg-red-50 p-4 dark:border-red-900 dark:bg-red-950/20">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-semibold text-red-700 dark:text-red-400">Deactivate Account</h3>
+                <h3 className="font-semibold text-red-700 dark:text-red-400">
+                  Deactivate Account
+                </h3>
                 <p className="text-muted-foreground text-sm">
-                  This will deactivate the patient&apos;s account and cancel all active subscriptions.
+                  This will deactivate the patient&apos;s account and cancel all
+                  active subscriptions.
                 </p>
               </div>
               <AlertDialog>
@@ -225,8 +344,10 @@ export default function PatientOverviewPage({ params }: Props) {
                   <AlertDialogHeader>
                     <AlertDialogTitle>Are you sure?</AlertDialogTitle>
                     <AlertDialogDescription>
-                      This will deactivate {generalInfo.firstName} {generalInfo.lastName}&apos;s account.
-                      All active subscriptions will be canceled. This action can be reversed by reactivating the account.
+                      This will deactivate {generalInfo.firstName}{" "}
+                      {generalInfo.lastName}&apos;s account. All active
+                      subscriptions will be canceled. This action can be
+                      reversed by reactivating the account.
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>

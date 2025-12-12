@@ -12,7 +12,6 @@ import {
   IconUsers,
 } from "@tabler/icons-react"
 import { Line, LineChart } from "recharts"
-import { cn } from "@/lib/utils"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ChartConfig, ChartContainer } from "@/components/ui/chart"
 import {
@@ -21,6 +20,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { cn } from "@/lib/utils"
 import { StatCardData, StatIconName } from "../data/dashboard-data"
 
 const iconMap: Record<StatIconName, typeof IconCurrencyDollar> = {
@@ -57,7 +57,7 @@ export function StatCard({
 
   return (
     <Card className={cn("h-full", className)}>
-      <CardHeader className="flex flex-row items-center justify-between gap-5 space-y-0 pb-2 pt-4">
+      <CardHeader className="flex flex-row items-center justify-between gap-5 space-y-0 pt-4 pb-2">
         <CardTitle className="flex items-center gap-2 truncate text-sm font-medium">
           <Icon size={16} />
           {label}
@@ -102,7 +102,7 @@ export function StatCard({
               "text-muted-foreground": type === "neutral",
             })}
           >
-            <p className="text-[13px] font-medium leading-none">
+            <p className="text-[13px] leading-none font-medium">
               {type === "up" ? "+" : type === "down" ? "-" : ""}
               {percentage}%
             </p>

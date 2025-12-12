@@ -1,6 +1,6 @@
-import { Check, X } from 'lucide-react'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { Check, X } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 interface CredentialFieldProps {
   label: string
@@ -12,10 +12,10 @@ interface CredentialFieldProps {
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString)
-  return date.toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
+  return date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
   })
 }
 
@@ -23,28 +23,28 @@ export function CredentialField({
   label,
   configured,
   lastUpdated,
-  placeholder = 'Enter new value to update',
+  placeholder = "Enter new value to update",
 }: CredentialFieldProps) {
   return (
-    <div className='grid gap-2'>
+    <div className="grid gap-2">
       <Label>{label}</Label>
       <Input
-        type='password'
-        placeholder={configured ? '••••••••••••••••••••••' : placeholder}
+        type="password"
+        placeholder={configured ? "••••••••••••••••••••••" : placeholder}
       />
-      <div className='flex items-center gap-2 text-sm'>
+      <div className="flex items-center gap-2 text-sm">
         {configured ? (
           <>
-            <Check className='h-3 w-3 text-green-600' />
-            <span className='text-muted-foreground'>
+            <Check className="h-3 w-3 text-green-600" />
+            <span className="text-muted-foreground">
               Configured
               {lastUpdated && ` • Last updated ${formatDate(lastUpdated)}`}
             </span>
           </>
         ) : (
           <>
-            <X className='h-3 w-3 text-gray-400' />
-            <span className='text-muted-foreground'>Not configured</span>
+            <X className="h-3 w-3 text-gray-400" />
+            <span className="text-muted-foreground">Not configured</span>
           </>
         )}
       </div>

@@ -223,11 +223,7 @@ export default function SubscriptionDetailPage({ params }: Props) {
                   label="Subscription ID"
                   value={subscription.subscriptionId}
                 />
-                <DetailRow
-                  label="Status"
-                  value=""
-                  badge={statusStyle}
-                />
+                <DetailRow label="Status" value="" badge={statusStyle} />
                 <DetailRow label="Product" value={subscription.product} />
                 <DetailRow label="Dosage" value={subscription.dosage} />
                 <DetailRow label="Refills" value={subscription.refills} />

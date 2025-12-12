@@ -1,10 +1,18 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useMemo, useState } from "react"
+import type {
+  ChildOrderProductType,
+  OrderWithPatient,
+} from "../data/orders-types"
+import {
+  type ContainsFilter,
+  type DateFilter,
+  OrdersFilters,
+  type SortOption,
+} from "./orders-filters"
 import { OrdersTable } from "./orders-table"
-import { OrdersTabs, filterOrdersByTab, type OrderTab } from "./orders-tabs"
-import { OrdersFilters, type DateFilter, type SortOption, type ContainsFilter } from "./orders-filters"
-import type { OrderWithPatient, ChildOrderProductType } from "../data/orders-types"
+import { type OrderTab, OrdersTabs, filterOrdersByTab } from "./orders-tabs"
 
 interface Props {
   orders: OrderWithPatient[]
@@ -12,14 +20,17 @@ interface Props {
 
 // Map contains filter values to product types
 const containsToProductType: Record<ContainsFilter, ChildOrderProductType> = {
-  "prescription": "PHYSICAL_PRODUCT",
-  "membership": "MEMBERSHIP",
+  prescription: "PHYSICAL_PRODUCT",
+  membership: "MEMBERSHIP",
   "lab-kit": "LAB_TEST",
-  "appointment": "APPOINTMENT",
+  appointment: "APPOINTMENT",
 }
 
 // Apply date filter to orders
-function filterByDate(orders: OrderWithPatient[], dateFilter: DateFilter): OrderWithPatient[] {
+function filterByDate(
+  orders: OrderWithPatient[],
+  dateFilter: DateFilter
+): OrderWithPatient[] {
   if (dateFilter === "all") return orders
 
   const now = new Date()
@@ -47,7 +58,10 @@ function filterByDate(orders: OrderWithPatient[], dateFilter: DateFilter): Order
 }
 
 // Apply contains filter to orders
-function filterByContains(orders: OrderWithPatient[], containsFilters: ContainsFilter[]): OrderWithPatient[] {
+function filterByContains(
+  orders: OrderWithPatient[],
+  containsFilters: ContainsFilter[]
+): OrderWithPatient[] {
   if (containsFilters.length === 0) return orders
 
   const productTypes = containsFilters.map((f) => containsToProductType[f])
@@ -71,18 +85,30 @@ function filterByContains(orders: OrderWithPatient[], containsFilters: ContainsF
 }
 
 // Sort orders
-function sortOrders(orders: OrderWithPatient[], sortOption: SortOption): OrderWithPatient[] {
+function sortOrders(
+  orders: OrderWithPatient[],
+  sortOption: SortOption
+): OrderWithPatient[] {
   const sorted = [...orders]
 
   switch (sortOption) {
     case "newest":
-      return sorted.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      return sorted.sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      )
     case "oldest":
-      return sorted.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+      return sorted.sort(
+        (a, b) =>
+          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      )
     case "amount-high":
       return sorted.sort((a, b) => b.amount - a.amount)
     case "waiting-longest":
-      return sorted.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+      return sorted.sort(
+        (a, b) =>
+          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      )
     default:
       return sorted
   }

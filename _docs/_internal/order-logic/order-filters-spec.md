@@ -39,6 +39,7 @@ That tells us what filters matter. Filters should map to real workflows, not jus
 ```
 
 **Key principles:**
+
 - Quick-access tabs for most common workflows (one-click, not dropdown → scan → select)
 - Filter dropdowns for secondary criteria
 - Applied filters shown as removable tags
@@ -52,13 +53,13 @@ Tabs are the **primary** filter — representing the most common operational wor
 
 ### Tab Definitions
 
-| Tab            | Shows Orders Where...                                        | Use Case                                  |
-|----------------|--------------------------------------------------------------|-------------------------------------------|
-| All            | No action-needed filter applied                              | General browsing                          |
-| Needs Review   | Any child has status `AWAITING_REVIEW` and is a prescription | Provider assignment, clinical workflow    |
-| Payment Failed | Any child has status `PAYMENT_FAILED` or subscription in retry | Customer outreach, card updates         |
-| Labs Ready     | Lab results received, prescription pending those results     | Clinical workflow continuation            |
-| Denied         | Any prescription child was denied                            | Customer follow-up, refunds, alternatives |
+| Tab            | Shows Orders Where...                                          | Use Case                                  |
+| -------------- | -------------------------------------------------------------- | ----------------------------------------- |
+| All            | No action-needed filter applied                                | General browsing                          |
+| Needs Review   | Any child has status `AWAITING_REVIEW` and is a prescription   | Provider assignment, clinical workflow    |
+| Payment Failed | Any child has status `PAYMENT_FAILED` or subscription in retry | Customer outreach, card updates           |
+| Labs Ready     | Lab results received, prescription pending those results       | Clinical workflow continuation            |
+| Denied         | Any prescription child was denied                              | Customer follow-up, refunds, alternatives |
 
 ### Tab Behavior
 
@@ -119,6 +120,7 @@ Tabs are the **primary** filter — representing the most common operational wor
 ```
 
 **Notes:**
+
 - Only visible for stores with multiple providers
 - For single-provider stores, hide this filter entirely
 - "Unassigned" is critical for workflow — shows prescriptions waiting for provider pickup
@@ -141,6 +143,7 @@ Tabs are the **primary** filter — representing the most common operational wor
 ```
 
 **Notes:**
+
 - Multi-select checkboxes
 - "Consultation Only" is **exclusive** — selecting it clears other selections
 - Use case for "Consultation Only": Identify patients who paid for consult but didn't convert (price sensitivity, denial, abandonment)
@@ -164,6 +167,7 @@ Tabs are the **primary** filter — representing the most common operational wor
 ```
 
 **Notes:**
+
 - Default to **Last 7 Days** for faster load and operational relevance
 - "All Time" should warn if dataset is large (>1000 orders)
 
@@ -183,13 +187,13 @@ Tabs are the **primary** filter — representing the most common operational wor
 └─────────────────────────────────────────────┘
 ```
 
-| Sort Option                  | When It's Useful                          |
-|------------------------------|-------------------------------------------|
-| Newest first (default)       | General browsing, recent activity         |
-| Oldest first                 | Working through a backlog                 |
-| Waiting Longest              | Clearing stuck reviews, finding blockers  |
-| Total Amount (high→low)      | Prioritizing high-value orders            |
-| Next Renewal Date            | Subscription management, proactive support|
+| Sort Option             | When It's Useful                           |
+| ----------------------- | ------------------------------------------ |
+| Newest first (default)  | General browsing, recent activity          |
+| Oldest first            | Working through a backlog                  |
+| Waiting Longest         | Clearing stuck reviews, finding blockers   |
+| Total Amount (high→low) | Prioritizing high-value orders             |
+| Next Renewal Date       | Subscription management, proactive support |
 
 ---
 
@@ -217,15 +221,18 @@ Tabs are the **primary** filter — representing the most common operational wor
 ```
 
 **Subscription Status Notes:**
+
 - "No Subscriptions" = orders with only one-time items
 - "Paused (winback candidates)" = subscriptions temporarily suspended, opportunity for outreach
 - "Canceled (churned)" = terminated subscriptions, historical/reporting use
 
 **Renewal Count Note:**
+
 - Show both order count AND item count: "47 orders (52 subscription items)"
 - One parent order can have multiple subscriptions with different renewal dates
 
 **Product Filter Use Case:**
+
 - "Show me everyone on Semaglutide with an active subscription"
 - Useful for: recalls, pricing changes, targeted outreach, clinical updates
 
@@ -236,7 +243,7 @@ Tabs are the **primary** filter — representing the most common operational wor
 Not every action-needed state deserves a tab. These are available in the "More" dropdown:
 
 | State                | Why Not a Tab                                                 |
-|----------------------|---------------------------------------------------------------|
+| -------------------- | ------------------------------------------------------------- |
 | Paused Subscriptions | Important but not urgent. Winback is proactive, not reactive. |
 | Renewal in 7 Days    | High volume, not "action needed" — more like "heads up."      |
 | Shipment Delayed     | Depends on carrier integration. May be low volume.            |
@@ -246,6 +253,7 @@ Not every action-needed state deserves a tab. These are available in the "More" 
 ## Default Page State
 
 On initial load:
+
 - **Tab**: All
 - **Date**: Last 7 Days
 - **Sort**: Newest First
@@ -270,6 +278,7 @@ This gives a fast, relevant view without requiring any clicks.
 ```
 
 **Notes:**
+
 - Saved views persist filter + tab + sort combinations
 - Views are per-user (staff member)
 - Consider team-shared views for common workflows
@@ -278,27 +287,30 @@ This gives a fast, relevant view without requiring any clicks.
 
 ## Filters Intentionally Omitted
 
-| Filter                       | Why Not                                    |
-|------------------------------|--------------------------------------------|
-| Payment method (Visa/MC)     | Rarely useful for workflow                 |
-| Exact dollar amount          | Search handles this better                 |
-| Created by (staff member)    | Edge case, not worth prominent placement   |
-| Billing cycle (30/60/90 day) | Too granular for most workflows            |
+| Filter                       | Why Not                                  |
+| ---------------------------- | ---------------------------------------- |
+| Payment method (Visa/MC)     | Rarely useful for workflow               |
+| Exact dollar amount          | Search handles this better               |
+| Created by (staff member)    | Edge case, not worth prominent placement |
+| Billing cycle (30/60/90 day) | Too granular for most workflows          |
 
 ---
 
 ## Implementation Notes
 
 ### Filter State Management
+
 - Filters should be reflected in URL params for shareability
 - Example: `/orders?tab=needs-review&date=7d&provider=unassigned`
 
 ### Performance
+
 - Tab counts should be fetched efficiently (consider caching for counts)
 - "All Time" queries should be paginated or lazy-loaded
 - Consider skeleton loading for filter dropdowns with counts
 
 ### Accessibility
+
 - All filter controls must be keyboard navigable
 - Tab badges should have aria-labels: "Needs Review, 12 orders"
 - Applied filter tags should announce when added/removed
@@ -307,6 +319,6 @@ This gives a fast, relevant view without requiring any clicks.
 
 ## Changelog
 
-| Version | Date       | Changes                                    |
-|---------|------------|--------------------------------------------|
-| 1.0     | Dec 2024   | Initial specification                      |
+| Version | Date     | Changes               |
+| ------- | -------- | --------------------- |
+| 1.0     | Dec 2024 | Initial specification |

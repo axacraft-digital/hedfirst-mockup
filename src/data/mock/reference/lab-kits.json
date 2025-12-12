@@ -77,11 +77,7 @@
       "description": "Measures 3 biomarkers related to methylation health.",
       "focus": "methylation",
       "biomarkerCount": 3,
-      "biomarkers": [
-        "Homocysteine",
-        "Folate (Vitamin B9)",
-        "Vitamin B12"
-      ],
+      "biomarkers": ["Homocysteine", "Folate (Vitamin B9)", "Vitamin B12"],
       "price": 7900,
       "sku": "LAB-METHYL",
       "onStore": true
@@ -112,10 +108,7 @@
       "description": "Measures 2 biomarkers reflecting pancreatic function.",
       "focus": "pancreatic",
       "biomarkerCount": 2,
-      "biomarkers": [
-        "Lipase",
-        "Amylase"
-      ],
+      "biomarkers": ["Lipase", "Amylase"],
       "price": 5900,
       "sku": "LAB-PANCREAS",
       "onStore": true

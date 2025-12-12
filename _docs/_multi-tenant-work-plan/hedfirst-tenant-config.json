@@ -1,0 +1,428 @@
+{
+  "_documentation": {
+    "purpose": "Complete tenant configuration for Hedfirst (Store A), extracted from production codebase",
+    "created": "2025-12-11",
+    "source": "discovery/raw-repos/ audit",
+    "relatedDocs": [
+      "TENANT-BRANDING-INVENTORY.md - Summary with actionable items",
+      "COLOR-INVENTORY.md - Detailed color audit",
+      "TENANT-INTAKE-QUESTIONNAIRE.md - PM form for new tenants",
+      "store-b-mvp-config.json - Minimal config example"
+    ],
+    "usage": "This is a REFERENCE document showing everything Hedfirst has configured. New tenants will not need all of these fields - see store-b-mvp-config.json for minimum required fields."
+  },
+
+  "_colorSystemNotes": {
+    "criticalFinding": "Patient Portal uses Flowbite blue palette. Admin portals (Store Admin, Doctor, Super Admin) use standard Tailwind blue. These are DIFFERENT hex values for the same shade names.",
+    "recommendation": "Unify all portals to use the same palette before implementing tenant-specific colors.",
+    "mobileApp": "Mobile app (hedfirst-app) uses Shopify Restyle theming, completely separate from Tailwind. Not included in this config - requires separate discussion."
+  },
+
+  "identity": {
+    "_comment": "Core business identity - every tenant needs these fields",
+    "slug": "hedfirst",
+    "storeId": "HEDFIRST_STORE_ID",
+    "organizationId": "HEDFIRST_ORG_ID",
+    "name": "Hedfirst",
+    "legalName": "Hedfirst LLC",
+    "tagline": "Your Health, Your Way",
+    "jurisdiction": "Delaware Limited Liability Company"
+  },
+
+  "branding": {
+    "logos": {
+      "_comment": "Logo files stored in public/img/ - tenant must provide SVG versions for crisp rendering",
+      "primary": "/tenants/hedfirst/hedfirst-logo.svg",
+      "white": "/tenants/hedfirst/hedfirst-logo-white.svg",
+      "favicon": "/tenants/hedfirst/favicon.ico",
+      "ogImage": "/tenants/hedfirst/hedfirst-membership-lander.png"
+    },
+
+    "colors": {
+      "_comment": "Patient Portal uses Flowbite blue palette - NOT standard Tailwind. All 10 shades needed for hover states, backgrounds, borders, etc.",
+      "_source": "flowbite",
+      "_location": "node-hedfirst-patient/tailwind.config.ts",
+
+      "primary": {
+        "_comment": "Primary brand color palette. primary-700 (#1A56DB) is the main brand blue used for buttons and links.",
+        "50": "#EBF5FF",
+        "100": "#E1EFFE",
+        "200": "#C3DDFD",
+        "300": "#A4CAFE",
+        "400": "#76A9FA",
+        "500": "#3F83F8",
+        "600": "#1C64F2",
+        "700": "#1A56DB",
+        "800": "#1E429F",
+        "900": "#233876"
+      }
+    },
+
+    "customColors": {
+      "_comment": "Additional colors defined in Patient Portal only. Admin portals do NOT have these - they use Tailwind defaults.",
+      "_location": "node-hedfirst-patient/tailwind.config.ts",
+
+      "accent": {
+        "_usage": "Light purple accent color used sparingly for highlights",
+        "value": "#dcd7fe"
+      },
+      "graphite": {
+        "_usage": "Dark text color, alternative to black",
+        "value": "#222222"
+      },
+      "plum": {
+        "_usage": "Purple highlight color",
+        "value": "#7e22ce"
+      },
+      "darkPlum": {
+        "_usage": "Darker purple for hover states",
+        "value": "#530e8f"
+      },
+      "neutralDark": {
+        "_usage": "Secondary text color",
+        "value": "#444444"
+      },
+      "deepBlack": {
+        "_usage": "Near-black for maximum contrast",
+        "value": "#010101"
+      },
+      "eerieBlack": {
+        "_usage": "Dark backgrounds",
+        "value": "#1F1F1F"
+      }
+    },
+
+    "opacityColors": {
+      "_comment": "Semi-transparent overlays used for modals, backdrops, and layered UI. The hex includes alpha channel.",
+      "_location": "node-hedfirst-patient/tailwind.config.ts",
+
+      "dark16": {
+        "_usage": "16% dark overlay",
+        "value": "#181e2529"
+      },
+      "dark32": {
+        "_usage": "32% dark overlay",
+        "value": "#181e2552"
+      },
+      "dark48": {
+        "_usage": "48% dark overlay",
+        "value": "#181e257a"
+      },
+      "dark64": {
+        "_usage": "64% dark overlay",
+        "value": "#181e25a3"
+      },
+      "light48": {
+        "_usage": "48% white overlay",
+        "value": "#ffffff7a"
+      },
+      "light64": {
+        "_usage": "64% white overlay",
+        "value": "#ffffffa3"
+      }
+    }
+  },
+
+  "emailColors": {
+    "_comment": "Email templates have HARDCODED hex values that don't come from Tailwind config. These need variable injection to be tenant-configurable.",
+    "_location": "public/templates/*.html (5 files across Patient Portal and Store Admin)",
+    "_issue": "Currently inline in HTML - requires backend templating system to make dynamic",
+
+    "primary": {
+      "_usage": "Buttons, links in all email templates",
+      "value": "#1A56DB"
+    },
+    "successDark": {
+      "_usage": "Dark green for success states (order confirmation)",
+      "value": "#057A55"
+    },
+    "success": {
+      "_usage": "Green for success states",
+      "value": "#0E9F6E"
+    },
+    "successBackground": {
+      "_usage": "Light green background for success sections",
+      "value": "#F3FAF7"
+    },
+    "successBorder": {
+      "_usage": "Green border for success sections",
+      "value": "#BCF0DA"
+    },
+    "textPrimary": {
+      "_usage": "Primary text color (near black)",
+      "value": "#111928"
+    },
+    "textSecondary": {
+      "_usage": "Secondary text color (dark gray)",
+      "value": "#1F2A37"
+    },
+    "textMuted": {
+      "_usage": "Muted text color (medium gray)",
+      "value": "#6B7280"
+    },
+    "border": {
+      "_usage": "Border color (light gray)",
+      "value": "#E5E7EB"
+    },
+    "background": {
+      "_usage": "Background color (off-white)",
+      "value": "#F9FAFB"
+    }
+  },
+
+  "adminPortalColors": {
+    "_comment": "IMPORTANT: Admin portals (Store Admin, Doctor Portal, Super Admin) use DIFFERENT primary colors than Patient Portal. This is a known inconsistency in the codebase.",
+    "_location": "node-hedfirst-frontend/tailwind.config.ts, node-hedfirst-doctor/tailwind.config.ts, node-hedfirst-super-admin/tailwind.config.ts",
+    "_source": "tailwind-default-blue",
+    "_recommendation": "Consider unifying with Patient Portal palette before implementing tenant theming",
+
+    "primary": {
+      "50": "#eff6ff",
+      "100": "#dbeafe",
+      "200": "#bfdbfe",
+      "300": "#93c5fd",
+      "400": "#60a5fa",
+      "500": "#3b82f6",
+      "600": "#2563eb",
+      "700": "#1d4ed8",
+      "800": "#1e40af",
+      "900": "#1e3a8a"
+    }
+  },
+
+  "mobileApp": {
+    "_comment": "Mobile app uses Shopify Restyle theming system, NOT Tailwind. Completely separate color management.",
+    "_location": "hedfirst-app/src/providers/theme/theme.ts",
+    "_status": "excluded",
+    "_reason": "Requires separate discussion - different tech stack (React Native vs Next.js)",
+
+    "referenceColors": {
+      "primary": "#007AFF",
+      "primaryDark": "#0A84FF",
+      "stone800": "#282524",
+      "stone900": "#1B1917",
+      "stone400": "#77716C",
+      "red": "#C0392B"
+    }
+  },
+
+  "contact": {
+    "_comment": "Customer support contact information. Phone appears in multiple formats across codebase.",
+    "_locations": [
+      "src/shared/constants/support-contacts.ts",
+      "src/dictionaries/dictionary.ts",
+      "src/app/layout.tsx (JSON-LD schema)"
+    ],
+
+    "supportEmail": "support@hedfirst.com",
+    "securityEmail": "security@hedfirst.com",
+    "supportPhone": "+1 888-427-1796",
+    "supportPhoneDisplay": "+1 888 427-1796",
+    "supportPhoneTel": "+18884271796",
+    "businessHours": "Monday–Friday, 8 am–5 pm MTN",
+    "bugReportUrl": "https://docs.google.com/forms/d/1JZj63aatNiVZRvqddv7e0tYvfW_JMIVJNfRvffDp8jA/edit"
+  },
+
+  "social": {
+    "_comment": "Social media links displayed in footer. Null values mean tenant doesn't have that platform.",
+    "_location": "src/shared/constants/footer.constants.ts",
+
+    "facebook": "https://www.facebook.com/profile.php?id=61574217832791",
+    "instagram": "https://www.instagram.com/hedfirst.health",
+    "linkedin": "https://www.linkedin.com/company/hedfirst",
+    "twitter": null
+  },
+
+  "legal": {
+    "_comment": "Legal page URLs. These are EXTERNAL links to pages hosted on tenant's marketing site (Webflow for Hedfirst). Tenant must host their own legal pages.",
+    "_location": "src/shared/constants/footer.constants.ts",
+
+    "termsOfService": "/terms-of-service",
+    "privacyPolicy": "/privacy-policy",
+    "smsTerms": "/sms-terms-conditions",
+    "consentToTreatment": "/consent-to-treatment",
+    "consentSensitiveData": "/consent-for-sensitive-data-processing",
+    "hipaaNotice": "/notice-of-privacy-practices",
+    "pharmacyDisclaimer": "/pharmacy-disclaimer",
+    "stateLicensure": "/ca-ma-rh-vt-licensure"
+  },
+
+  "copyright": {
+    "_comment": "Copyright text displayed in footer. 'short' is for minimal footers, 'full' includes legal disclaimers.",
+    "_location": "src/dictionaries/dictionary.ts lines 255-257",
+
+    "holder": "Hedfirst",
+    "short": "© Hedfirst.com",
+    "full": "Hedfirst LLC is a registered Delaware Limited Liability Company, operating in the United States. Our mission is to innovate in patient-focused healthcare solutions, with an emphasis on addressing migraine and related health challenges. We are committed to adhering to all applicable state and federal regulations while maintaining the highest standards of ethical business practices and patient care. Service not currently available in Mississippi, Alaska and New Jersey. © Hedfirst™, All Rights Reserved"
+  },
+
+  "verification": {
+    "_comment": "Third-party verification badges and compliance indicators shown in footer.",
+    "_location": "src/layouts/buttons/legit-script-button.tsx",
+
+    "legitScriptDomain": "www.hedfirst.com",
+    "legitScriptUrl": "https://legitscript.com/verify/hedfirst.com",
+    "showHipaaCompliance": true,
+    "showFdaRegulated": true
+  },
+
+  "content": {
+    "_comment": "Text strings that mention the brand name. These appear throughout the app and need string replacement for multi-tenancy.",
+    "_location": "src/dictionaries/dictionary.ts (99 mentions of 'Hedfirst')",
+    "_issue": "Many are embedded in longer sentences, making simple find-replace risky",
+
+    "welcomeMessage": "Welcome to the chat with a Hedfirst provider and a patient care concierge.",
+    "subscriptionTermsHint": "Your Hedfirst subscription will continue until you cancel it or your prescription expires. You can modify or cancel your subscription(s) at any point by logging into your Hedfirst account, calling us at +1 888–427–1796 from Monday–Friday, 8 am–5 pm MTN, or emailing us at support@hedfirst.com. To avoid being charged for the next installment, you must cancel 48 hours before your billing date.",
+    "chiefMedicalAdvisorTitle": "Hedfirst Chief Medical Advisor",
+    "providerReference": "Hedfirst provider",
+    "mobileAppComingSoon": {
+      "title": "Hedfirst mobile app is coming soon!",
+      "description": "Use the Hedfirst Mobile App to chat with Patient Care or to submit daily text and photos which can be used for updating your Medical Assessment."
+    }
+  },
+
+  "navigation": {
+    "_comment": "Main navigation structure. This is HEDFIRST-SPECIFIC with medical categories. Store B will have completely different navigation.",
+    "_location": "src/dictionaries/nav-Item-config.ts",
+    "_complexity": "Hierarchical mega-menus with nested columns - not a flat array",
+
+    "main": [
+      {
+        "key": "ai-care-membership",
+        "label": "AI Care Membership",
+        "menuType": "content",
+        "_note": "Full column structure omitted for brevity - see nav-Item-config.ts"
+      },
+      {
+        "key": "womens-health",
+        "label": "Women's Health",
+        "menuType": "content"
+      },
+      {
+        "key": "mens-health",
+        "label": "Men's Health",
+        "menuType": "content"
+      },
+      {
+        "key": "lab-kits",
+        "label": "Lab Kits",
+        "menuType": "content"
+      },
+      {
+        "key": "more-treatments",
+        "label": "More Treatments",
+        "menuType": "grid"
+      }
+    ],
+
+    "panel": {
+      "_comment": "Navigation shown when user is logged in (patient dashboard)",
+      "items": [
+        { "key": "shop-medications", "label": "Shop Medications", "href": "/catalog" },
+        { "key": "shop-lab-tests", "label": "Shop Lab Tests", "href": "/catalog/lab-tests" },
+        { "key": "primary-care", "label": "Primary Care", "href": "/what-we-treat-overview" }
+      ]
+    }
+  },
+
+  "footer": {
+    "_comment": "Footer structure with link columns. Store B will likely have minimal footer - see 'shortBlocks' for minimal version.",
+    "_location": "src/shared/constants/footer.constants.ts",
+
+    "blocks": [
+      {
+        "title": "Popular care areas",
+        "mobileTitle": "Popular Care & Medication areas",
+        "_note": "10 links omitted for brevity - Hedfirst-specific categories"
+      },
+      {
+        "title": "AI Care Membership",
+        "mobileTitle": "AI Care Membership",
+        "_note": "4 links"
+      },
+      {
+        "title": "Company",
+        "mobileTitle": "Company",
+        "_note": "4 links"
+      },
+      {
+        "title": "LEGAL",
+        "mobileTitle": "LEGAL",
+        "_note": "8 links to legal pages"
+      }
+    ],
+
+    "shortBlocks": {
+      "_comment": "Minimal footer for simpler pages or new tenants who don't need full footer",
+      "items": [
+        { "label": "About Us", "href": "/about-us" },
+        { "label": "Contact", "href": "/contact-us" },
+        { "label": "Partner", "href": "/partners" }
+      ]
+    },
+
+    "shortLegalLinks": [
+      { "text": "Terms & Conditions", "href": "/terms-of-service" },
+      { "text": "Privacy Policy", "href": "/privacy-policy" }
+    ]
+  },
+
+  "features": {
+    "_comment": "Feature flags controlling UI behavior. Store B has only 5 products so showSearch and showFilters would be false.",
+
+    "showSearch": true,
+    "showFilters": true,
+    "showCategories": true,
+    "catalogLayout": "flat-grid",
+    "hasMobileApp": false,
+    "hasAiChat": true,
+    "hasLabKits": true,
+    "hasMembership": true
+  },
+
+  "externalLinks": {
+    "_comment": "Links to external marketing site (Webflow). These open in new tab or navigate away from app.",
+
+    "website": "https://www.hedfirst.com",
+    "blog": "https://www.hedfirst.com/blog",
+    "about": "https://www.hedfirst.com/about-us",
+    "howItWorks": "https://www.hedfirst.com/how-hedfirst-works",
+    "contact": "https://www.hedfirst.com/contact-us"
+  },
+
+  "partnerLinks": {
+    "_comment": "Partner/affiliate links shown in footer",
+    "_location": "src/shared/constants/footer.constants.ts",
+
+    "items": [
+      {
+        "text": "Curious Office",
+        "href": "https://www.curiousoffice.com/"
+      }
+    ]
+  },
+
+  "knownIssues": {
+    "_comment": "Known problems discovered during audit that should be fixed during multi-tenant implementation",
+
+    "colorPaletteInconsistency": {
+      "description": "Patient Portal uses Flowbite blue, Admin portals use Tailwind blue",
+      "recommendation": "Unify before implementing tenant colors"
+    },
+    "buttonThemeBypassesPrimary": {
+      "description": "button.theme.ts uses 'blue-700' directly instead of 'primary-700'",
+      "location": "src/components/buttons/button/button.theme.ts",
+      "recommendation": "Change to use primary-* classes"
+    },
+    "emailTemplatesHardcoded": {
+      "description": "5 email templates have inline hex colors",
+      "location": "public/templates/*.html",
+      "recommendation": "Implement variable injection system"
+    },
+    "metTechBugInTemplates": {
+      "description": "Two Store Admin email templates say 'Met-Tech' instead of 'Hedfirst'",
+      "location": "node-hedfirst-frontend/public/templates/reset-password.html, store-admin.html",
+      "recommendation": "Fix immediately - wrong brand name in production"
+    }
+  }
+}

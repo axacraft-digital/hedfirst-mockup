@@ -2,12 +2,8 @@
 
 import { use } from "react"
 import Link from "next/link"
+import { IconMail, IconMailOpened, IconPlus } from "@tabler/icons-react"
 import { format } from "date-fns"
-import {
-  IconMail,
-  IconMailOpened,
-  IconPlus,
-} from "@tabler/icons-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -20,7 +16,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { getMessageThreadsForUI, type UIMessageThread } from "@/data/messages"
+import { type UIMessageThread, getMessageThreadsForUI } from "@/data/messages"
 
 // Message types (derived from UI helper)
 type MessageStatus = UIMessageThread["status"]
@@ -33,8 +29,7 @@ const statusStyles: Record<
 > = {
   unread: {
     label: "Unread",
-    className:
-      "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
+    className: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
   },
   open: {
     label: "Open",
@@ -109,7 +104,7 @@ export default function PatientMessagesPage({ params }: Props) {
                     return (
                       <TableRow
                         key={thread.id}
-                        className="cursor-pointer hover:bg-muted/50"
+                        className="hover:bg-muted/50 cursor-pointer"
                       >
                         <TableCell className="pl-4">
                           {isUnread ? (

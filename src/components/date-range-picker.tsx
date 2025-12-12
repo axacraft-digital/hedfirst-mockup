@@ -2,16 +2,16 @@
 
 import React, {
   type FC,
-  useState,
+  JSX,
+  useCallback,
   useEffect,
   useRef,
-  useCallback,
-  JSX,
+  useState,
 } from "react"
 import {
-  ChevronUpIcon,
-  ChevronDownIcon,
   CheckIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
 } from "@radix-ui/react-icons"
 import { IconCalendar } from "@tabler/icons-react"
 import { cn } from "@/lib/utils"

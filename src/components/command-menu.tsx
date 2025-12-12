@@ -1,14 +1,14 @@
 "use client"
 
 import * as React from "react"
+import { useTheme } from "next-themes"
+import { useRouter } from "next/navigation"
 import {
   IconArrowRightDashed,
   IconDeviceLaptop,
   IconMoon,
   IconSun,
 } from "@tabler/icons-react"
-import { useTheme } from "next-themes"
-import { useRouter } from "next/navigation"
 import {
   CommandDialog,
   CommandEmpty,

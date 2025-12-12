@@ -261,11 +261,12 @@ export function filterProductsByType(
 }
 
 // Search products by name
-export function searchProducts(productList: Product[], query: string): Product[] {
+export function searchProducts(
+  productList: Product[],
+  query: string
+): Product[] {
   if (!query.trim()) return productList
 
   const lowerQuery = query.toLowerCase()
-  return productList.filter((p) =>
-    p.name.toLowerCase().includes(lowerQuery)
-  )
+  return productList.filter((p) => p.name.toLowerCase().includes(lowerQuery))
 }

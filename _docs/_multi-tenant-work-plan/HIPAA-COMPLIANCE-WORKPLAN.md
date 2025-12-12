@@ -10,9 +10,9 @@
 
 This document outlines the **minimum required work** to achieve HIPAA compliance for B2B launch. These are launch blockers - no B2B client can be onboarded until all P0 items are complete.
 
-| Priority | Gap Count |
-|----------|-----------|
-| P0 - Critical (Launch Blockers) | 4 |
+| Priority                        | Gap Count |
+| ------------------------------- | --------- |
+| P0 - Critical (Launch Blockers) | 4         |
 
 ---
 
@@ -23,6 +23,7 @@ This document outlines the **minimum required work** to achieve HIPAA compliance
 **Risk:** Cross-tenant PHI access possible via URL manipulation
 
 ### Step 1.1: Create TenantMembershipGuard
+
 **File:** `src/shared/guards/tenant-membership.guard.ts` (new)
 
 - [ ] Create guard class implementing `CanActivate`
@@ -33,6 +34,7 @@ This document outlines the **minimum required work** to achieve HIPAA compliance
 - [ ] Write unit tests (100% coverage)
 
 ### Step 1.2: Create @SkipTenantCheck Decorator
+
 **File:** `src/shared/decorators/skip-tenant-check.decorator.ts` (new)
 
 - [ ] Create decorator using `SetMetadata`
@@ -40,7 +42,9 @@ This document outlines the **minimum required work** to achieve HIPAA compliance
 - [ ] Skip validation if decorator present
 
 ### Step 1.3: Register Guard Globally
+
 **Files:**
+
 - `src/apps/store-admin/app.module.ts`
 - `src/apps/store-doctor/app.module.ts`
 - `src/apps/super-admin/app.module.ts`
@@ -62,6 +66,7 @@ This document outlines the **minimum required work** to achieve HIPAA compliance
 ### Step 1.5: Update Controllers to Use Validated Tenant
 
 **Pattern Change:**
+
 ```typescript
 // BEFORE (vulnerable)
 @Get()
@@ -78,6 +83,7 @@ async getPatients(@Req() request: Request) {
 ```
 
 **Affected Modules (~185 endpoints):**
+
 - [ ] `src/apps/store-admin/core/modules/patient-scope/` (~50 endpoints)
 - [ ] `src/apps/store-admin/core/modules/order-scope/` (~30 endpoints)
 - [ ] `src/apps/store-admin/core/modules/chat-scope/` (~15 endpoints)
@@ -85,6 +91,7 @@ async getPatients(@Req() request: Request) {
 - [ ] `src/apps/super-admin/core/modules/` (~30 endpoints)
 
 ### Step 1.6: Write E2E Tenant Isolation Tests
+
 **File:** `test/e2e/tenant-isolation.e2e-spec.ts` (new)
 
 - [ ] Test: User A cannot access Store B's patients
@@ -106,9 +113,11 @@ async getPatients(@Req() request: Request) {
 **Risk:** Cannot determine who accessed/modified PHI
 
 ### Step 2.1: Enhance UserActionLog Schema
+
 **File:** `prisma/schema.prisma`
 
 Add fields to `UserActionLog` model:
+
 - [ ] `actorId` (String?) - WHO performed the action
 - [ ] `actorRole` (String?) - Role of actor
 - [ ] `resourceType` (String?) - 'Patient', 'Order', 'Prescription', etc.
@@ -122,6 +131,7 @@ Add fields to `UserActionLog` model:
 - [ ] Run migration
 
 ### Step 2.2: Update UserActionLogsService Interface
+
 **File:** `src/shared/modules/user-action-logs/user-action-logs.service.ts`
 
 - [ ] Update `EmitLogActionParams` interface to require new fields
@@ -132,12 +142,13 @@ Add fields to `UserActionLog` model:
 ### Step 2.3: Update All Emit Calls (~40 locations)
 
 **Pattern Change:**
+
 ```typescript
 // BEFORE
 this.userActionLogService.emitLogAction({
   userId: patientId,
-  actionType: UserLogActionsEnum.PATIENT_ACCEPTED_BY_DOCTOR
-});
+  actionType: UserLogActionsEnum.PATIENT_ACCEPTED_BY_DOCTOR,
+})
 
 // AFTER
 this.userActionLogService.emitLogAction({
@@ -145,15 +156,16 @@ this.userActionLogService.emitLogAction({
   actorId: request.user.id,
   actorRole: request.user.roles[0],
   actionType: UserLogActionsEnum.PATIENT_ACCEPTED_BY_DOCTOR,
-  resourceType: 'Patient',
+  resourceType: "Patient",
   resourceId: patientId,
   storeId: request.validatedTenant.storeId,
   organizationId: request.validatedTenant.organizationId,
   ipAddress: request.ip,
-});
+})
 ```
 
 **Files to Update:**
+
 - [ ] `src/apps/store-doctor/core/modules/patient-scope/modules/accept-patient-scope/`
 - [ ] `src/apps/store-admin/core/modules/patient-scope/`
 - [ ] `src/apps/store-admin/core/modules/order-scope/`
@@ -179,20 +191,24 @@ this.userActionLogService.emitLogAction({
 ### Step 3.1: Make Business Decision
 
 Choose ONE option:
+
 - [ ] **Option A:** Obtain BAA from ActiveCampaign (contact enterprise sales)
 - [ ] **Option B:** Stop sending PHI (remove health data from sync, keep only email/name)
 - [ ] **Option C:** Disable integration until BAA obtained
 
 ### Step 3.2: Implement Technical Solution
+
 **File:** `src/shared/providers/active-campaign/`
 
 **If Option B (Stop PHI):**
+
 - [ ] Audit what data is currently sent to ActiveCampaign
 - [ ] Remove patient health data from sync payload
 - [ ] Keep only non-PHI: email, name, consent status
 - [ ] Test integration still works for marketing purposes
 
 **If Option C (Kill Switch):**
+
 - [ ] Add environment variable `ACTIVECAMPAIGN_BAA_VERIFIED`
 - [ ] Add check at integration entry point:
   ```typescript
@@ -219,6 +235,7 @@ Choose ONE option:
 **Risk:** PHI exposure if database compromised
 
 ### Step 4.1: Create Encryption Service
+
 **File:** `src/shared/providers/encryption/encryption.service.ts` (new)
 
 - [ ] Implement AES-256-GCM encryption
@@ -233,21 +250,22 @@ Choose ONE option:
 
 Document and configure fields requiring encryption:
 
-| Model | Fields |
-|-------|--------|
-| User | `dateOfBirth`, `phone` |
-| Patient | `ssn`, `insuranceNumber` |
-| MedicalQuestionnaireAnswer | `selectedOptions`, `userInputs` |
-| SoapNote | `subjective`, `objective`, `assessment`, `plan` |
-| Prescription | `dosage`, `instructions` |
-| LabTestResult | `results`, `notes` |
-| ChatMessage | `content` (if contains PHI) |
+| Model                      | Fields                                          |
+| -------------------------- | ----------------------------------------------- |
+| User                       | `dateOfBirth`, `phone`                          |
+| Patient                    | `ssn`, `insuranceNumber`                        |
+| MedicalQuestionnaireAnswer | `selectedOptions`, `userInputs`                 |
+| SoapNote                   | `subjective`, `objective`, `assessment`, `plan` |
+| Prescription               | `dosage`, `instructions`                        |
+| LabTestResult              | `results`, `notes`                              |
+| ChatMessage                | `content` (if contains PHI)                     |
 
 - [ ] Create configuration file listing all PHI fields
 - [ ] Review with compliance team
 - [ ] Document encryption scope
 
 ### Step 4.3: Create Prisma Middleware for Auto-Encryption
+
 **File:** `src/shared/providers/prisma/middlewares/encrypt-phi.middleware.ts` (new)
 
 - [ ] Create middleware that intercepts Prisma operations
@@ -259,6 +277,7 @@ Document and configure fields requiring encryption:
 - [ ] Write integration tests
 
 ### Step 4.4: Data Migration Script
+
 **File:** `prisma/migrations/encrypt-existing-phi.ts` (new)
 
 - [ ] Create migration script to encrypt existing data
@@ -308,12 +327,12 @@ Document and configure fields requiring encryption:
 
 ### Compliance Sign-Off
 
-| Requirement | HIPAA Section | Status |
-|-------------|---------------|--------|
-| Access Control | § 164.312(a)(1) | ⬜ Pending |
-| Audit Controls | § 164.312(b) | ⬜ Pending |
-| Person Authentication | § 164.312(d) | ⬜ Pending |
-| Transmission Security | § 164.312(e)(1) | ⬜ Pending |
+| Requirement                  | HIPAA Section   | Status     |
+| ---------------------------- | --------------- | ---------- |
+| Access Control               | § 164.312(a)(1) | ⬜ Pending |
+| Audit Controls               | § 164.312(b)    | ⬜ Pending |
+| Person Authentication        | § 164.312(d)    | ⬜ Pending |
+| Transmission Security        | § 164.312(e)(1) | ⬜ Pending |
 | Business Associate Contracts | § 164.308(b)(1) | ⬜ Pending |
 
 ---
@@ -334,18 +353,19 @@ P0-3 (ActiveCampaign) - No dependencies, can run in parallel
 
 ## Risk Mitigation
 
-| Risk | Mitigation |
-|------|------------|
-| Guard breaks existing functionality | Comprehensive E2E tests before deployment |
-| Encryption migration corrupts data | Backup before migration, verify after |
-| Performance degradation | Load testing, caching for membership checks |
-| Key loss | Secure backup, documented recovery procedure |
+| Risk                                | Mitigation                                   |
+| ----------------------------------- | -------------------------------------------- |
+| Guard breaks existing functionality | Comprehensive E2E tests before deployment    |
+| Encryption migration corrupts data  | Backup before migration, verify after        |
+| Performance degradation             | Load testing, caching for membership checks  |
+| Key loss                            | Secure backup, documented recovery procedure |
 
 ---
 
 ## Definition of Done
 
 Each P0 item is complete when:
+
 - [ ] Code implemented and reviewed
 - [ ] Unit tests passing (>80% coverage)
 - [ ] E2E tests passing

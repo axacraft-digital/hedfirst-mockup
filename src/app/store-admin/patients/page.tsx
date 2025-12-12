@@ -1,8 +1,9 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { IconUserPlus } from "@tabler/icons-react"
 import Link from "next/link"
+import { getProviderDisplayName, mockPatients, mockProviders } from "@/data"
+import { IconUserPlus } from "@tabler/icons-react"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -23,14 +24,9 @@ import {
 } from "@/components/ui/select"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Header } from "@/components/layout/header"
-import {
-  mockPatients,
-  mockProviders,
-  getProviderDisplayName,
-} from "@/data"
 import type { Patient, PatientStatus } from "@/data/types"
-import { columns } from "./components/patients-columns"
 import { CreatePatientDrawer } from "./components/create-patient-drawer"
+import { columns } from "./components/patients-columns"
 import { PatientsTable } from "./components/patients-table"
 
 type TabValue = "all" | PatientStatus
@@ -50,17 +46,20 @@ const tabs: TabConfig[] = [
   {
     value: "AWAITING_REVIEW",
     label: "Awaiting Review",
-    getCount: (data) => data.filter((p) => p.patientStatus === "AWAITING_REVIEW").length,
+    getCount: (data) =>
+      data.filter((p) => p.patientStatus === "AWAITING_REVIEW").length,
   },
   {
     value: "NEEDS_ATTENTION",
     label: "Needs Attention",
-    getCount: (data) => data.filter((p) => p.patientStatus === "NEEDS_ATTENTION").length,
+    getCount: (data) =>
+      data.filter((p) => p.patientStatus === "NEEDS_ATTENTION").length,
   },
   {
     value: "IN_PROGRESS",
     label: "In Progress",
-    getCount: (data) => data.filter((p) => p.patientStatus === "IN_PROGRESS").length,
+    getCount: (data) =>
+      data.filter((p) => p.patientStatus === "IN_PROGRESS").length,
   },
   {
     value: "ACTIVE",
@@ -114,7 +113,10 @@ export default function PatientsPage() {
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <Select value={selectedProvider} onValueChange={setSelectedProvider}>
+              <Select
+                value={selectedProvider}
+                onValueChange={setSelectedProvider}
+              >
                 <SelectTrigger className="w-[200px] gap-2 text-sm">
                   <SelectValue placeholder="All Providers" />
                 </SelectTrigger>
@@ -130,7 +132,10 @@ export default function PatientsPage() {
                   </SelectGroup>
                 </SelectContent>
               </Select>
-              <Button className="space-x-1" onClick={() => setCreateDrawerOpen(true)}>
+              <Button
+                className="space-x-1"
+                onClick={() => setCreateDrawerOpen(true)}
+              >
                 <span>Create Patient</span>
                 <IconUserPlus size={18} />
               </Button>
@@ -139,7 +144,10 @@ export default function PatientsPage() {
         </div>
 
         {/* Tabs */}
-        <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as TabValue)}>
+        <Tabs
+          value={activeTab}
+          onValueChange={(v) => setActiveTab(v as TabValue)}
+        >
           <TabsList className="border-muted flex h-auto w-full items-center justify-start rounded-none border-b bg-transparent p-0">
             {tabs.map((tab) => (
               <TabsTrigger
@@ -163,7 +171,10 @@ export default function PatientsPage() {
         </Tabs>
       </div>
 
-      <CreatePatientDrawer open={createDrawerOpen} setOpen={setCreateDrawerOpen} />
+      <CreatePatientDrawer
+        open={createDrawerOpen}
+        setOpen={setCreateDrawerOpen}
+      />
     </>
   )
 }

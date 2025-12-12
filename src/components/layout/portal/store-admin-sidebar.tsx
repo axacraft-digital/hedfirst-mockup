@@ -1,3 +1,4 @@
+import { getStoreUserFullName, mockStoreUsers } from "@/data"
 import {
   IconBox,
   IconCreditCard,
@@ -8,15 +9,15 @@ import {
   IconReceipt,
   IconSettings,
   IconStethoscope,
-  IconUsers,
   IconUserShield,
+  IconUsers,
 } from "@tabler/icons-react"
 import { Building2 } from "lucide-react"
-import { mockStoreUsers, getStoreUserFullName } from "@/data"
 import { type SidebarData } from "../types"
 
 // Get the current logged-in admin user from shared data
-const currentUser = mockStoreUsers.find((u) => u.role === "admin") ?? mockStoreUsers[0]
+const currentUser =
+  mockStoreUsers.find((u) => u.role === "admin") ?? mockStoreUsers[0]
 
 export const storeAdminSidebar: SidebarData = {
   user: {

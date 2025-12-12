@@ -8,11 +8,29 @@
   "definitions": {
     "purchaseType": {
       "type": "string",
-      "enum": ["ONE_TIME_PURCHASE", "SUBSCRIPTION", "MEMBERSHIP", "CONSULTATION", "SUBSCRIPTION_ACTION", "SUBSCRIPTION_REFILL", "PAYMENT_METHOD"]
+      "enum": [
+        "ONE_TIME_PURCHASE",
+        "SUBSCRIPTION",
+        "MEMBERSHIP",
+        "CONSULTATION",
+        "SUBSCRIPTION_ACTION",
+        "SUBSCRIPTION_REFILL",
+        "PAYMENT_METHOD"
+      ]
     },
     "billingCycle": {
       "type": "string",
-      "enum": ["ONE_TIME_PAYMENT", "CHARGE_UPFRONT", "EVERY_DAY_30", "EVERY_DAY_60", "EVERY_DAY_90", "EVERY_DAY_120", "EVERY_DAY_180", "ANNUAL", "MONTHLY"]
+      "enum": [
+        "ONE_TIME_PAYMENT",
+        "CHARGE_UPFRONT",
+        "EVERY_DAY_30",
+        "EVERY_DAY_60",
+        "EVERY_DAY_90",
+        "EVERY_DAY_120",
+        "EVERY_DAY_180",
+        "ANNUAL",
+        "MONTHLY"
+      ]
     },
     "supplyVariant": {
       "type": "string",
@@ -20,15 +38,40 @@
     },
     "orderStatus": {
       "type": "string",
-      "enum": ["PENDING", "AWAITING_REVIEW", "APPROVED", "DENIED", "ACTIVE", "PAUSED", "CANCELED", "SENT_TO_PHARMACY", "ORDER_SHIPPED", "READY_TO_SEND"]
+      "enum": [
+        "PENDING",
+        "AWAITING_REVIEW",
+        "APPROVED",
+        "DENIED",
+        "ACTIVE",
+        "PAUSED",
+        "CANCELED",
+        "SENT_TO_PHARMACY",
+        "ORDER_SHIPPED",
+        "READY_TO_SEND"
+      ]
     },
     "consultationStatus": {
       "type": "string",
-      "enum": ["PENDING", "IN_PROGRESS", "PROCESSED", "REFUNDED", "EXPIRED", "SENT_TO_PHARMACY"]
+      "enum": [
+        "PENDING",
+        "IN_PROGRESS",
+        "PROCESSED",
+        "REFUNDED",
+        "EXPIRED",
+        "SENT_TO_PHARMACY"
+      ]
     },
     "transactionStatus": {
       "type": "string",
-      "enum": ["PENDING", "AUTHORIZED", "CAPTURED", "FAILED", "REFUNDED", "DISPUTED"]
+      "enum": [
+        "PENDING",
+        "AUTHORIZED",
+        "CAPTURED",
+        "FAILED",
+        "REFUNDED",
+        "DISPUTED"
+      ]
     },
     "refillStatus": {
       "type": "string",
@@ -69,7 +112,12 @@
       "requires_prescription": false,
       "payment_timing": "IMMEDIATE",
       "product_type": "PHYSICAL",
-      "status_flow": ["PENDING", "APPROVED", "SENT_TO_PHARMACY", "ORDER_SHIPPED"],
+      "status_flow": [
+        "PENDING",
+        "APPROVED",
+        "SENT_TO_PHARMACY",
+        "ORDER_SHIPPED"
+      ],
       "test_assertions": {
         "initial_status": "PENDING",
         "payment_charged_at": "checkout",
@@ -91,7 +139,12 @@
       "payment_timing": "ON_APPROVAL",
       "product_type": "PHYSICAL",
       "status_flow": {
-        "approved": ["AWAITING_REVIEW", "APPROVED", "SENT_TO_PHARMACY", "ORDER_SHIPPED"],
+        "approved": [
+          "AWAITING_REVIEW",
+          "APPROVED",
+          "SENT_TO_PHARMACY",
+          "ORDER_SHIPPED"
+        ],
         "denied": ["AWAITING_REVIEW", "DENIED"]
       },
       "test_assertions": {
@@ -208,7 +261,9 @@
         "paytheory_status": "CANCELED",
         "original_refills_preserved": true
       },
-      "known_issues": ["Uses cancel+recreate workaround - PayTheory has no native pause"]
+      "known_issues": [
+        "Uses cancel+recreate workaround - PayTheory has no native pause"
+      ]
     },
     {
       "id": "SC-007",
@@ -582,8 +637,26 @@
       "test_ids": ["OTP-001", "OTP-002", "OTP-003", "OTP-004", "OTP-005"]
     },
     "subscription": {
-      "scenarios": ["SC-004", "SC-005", "SC-006", "SC-007", "SC-008", "SC-009", "SC-013", "SC-014"],
-      "test_ids": ["SUB-001", "SUB-002", "SUB-003", "SUB-004", "SUB-005", "SUB-006", "SUB-007", "SUB-008"]
+      "scenarios": [
+        "SC-004",
+        "SC-005",
+        "SC-006",
+        "SC-007",
+        "SC-008",
+        "SC-009",
+        "SC-013",
+        "SC-014"
+      ],
+      "test_ids": [
+        "SUB-001",
+        "SUB-002",
+        "SUB-003",
+        "SUB-004",
+        "SUB-005",
+        "SUB-006",
+        "SUB-007",
+        "SUB-008"
+      ]
     },
     "membership": {
       "scenarios": ["SC-010", "SC-011"],
@@ -618,7 +691,14 @@
     },
     "database": {
       "schema": "prisma/schema.prisma",
-      "models": ["Order", "OrderLineItem", "OrderRefill", "PayTheoryTransaction", "PayTheorySubscription", "PayTheoryPaymentMethod"]
+      "models": [
+        "Order",
+        "OrderLineItem",
+        "OrderRefill",
+        "PayTheoryTransaction",
+        "PayTheorySubscription",
+        "PayTheoryPaymentMethod"
+      ]
     }
   }
 }

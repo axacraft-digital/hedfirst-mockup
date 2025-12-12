@@ -1,14 +1,14 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useMemo, useState } from "react"
 import Link from "next/link"
 import {
-  IconPlus,
-  IconPill,
   IconMessageCircle,
-  IconUser,
-  IconTestPipe,
+  IconPill,
+  IconPlus,
   IconSearch,
+  IconTestPipe,
+  IconUser,
 } from "@tabler/icons-react"
 import {
   Breadcrumb,
@@ -29,7 +29,11 @@ import { Input } from "@/components/ui/input"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Header } from "@/components/layout/header"
 import { ProductsTable } from "./components/products-table"
-import { products, filterProductsByType, searchProducts } from "./data/products-data"
+import {
+  filterProductsByType,
+  products,
+  searchProducts,
+} from "./data/products-data"
 import type { ProductTabFilter } from "./data/products-types"
 
 export default function ProductsPage() {
@@ -73,7 +77,7 @@ export default function ProductsPage() {
           <div className="flex flex-wrap items-center justify-end gap-3">
             {/* Search input */}
             <div className="relative">
-              <IconSearch className="text-muted-foreground absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2" />
+              <IconSearch className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
               <Input
                 placeholder="Search by name"
                 value={searchQuery}
@@ -128,31 +132,31 @@ export default function ProductsPage() {
           <TabsList className="border-muted flex h-auto w-full items-center justify-start rounded-none border-b bg-transparent p-0">
             <TabsTrigger
               value="all"
-              className="rounded-none border-primary py-2 shadow-none data-[state=active]:border-b-2 data-[state=active]:shadow-none"
+              className="border-primary rounded-none py-2 shadow-none data-[state=active]:border-b-2 data-[state=active]:shadow-none"
             >
               All Products
             </TabsTrigger>
             <TabsTrigger
               value="physical"
-              className="rounded-none border-primary py-2 shadow-none data-[state=active]:border-b-2 data-[state=active]:shadow-none"
+              className="border-primary rounded-none py-2 shadow-none data-[state=active]:border-b-2 data-[state=active]:shadow-none"
             >
               Physical Products
             </TabsTrigger>
             <TabsTrigger
               value="service"
-              className="rounded-none border-primary py-2 shadow-none data-[state=active]:border-b-2 data-[state=active]:shadow-none"
+              className="border-primary rounded-none py-2 shadow-none data-[state=active]:border-b-2 data-[state=active]:shadow-none"
             >
               Services
             </TabsTrigger>
             <TabsTrigger
               value="membership"
-              className="rounded-none border-primary py-2 shadow-none data-[state=active]:border-b-2 data-[state=active]:shadow-none"
+              className="border-primary rounded-none py-2 shadow-none data-[state=active]:border-b-2 data-[state=active]:shadow-none"
             >
               Memberships
             </TabsTrigger>
             <TabsTrigger
               value="lab-test"
-              className="rounded-none border-primary py-2 shadow-none data-[state=active]:border-b-2 data-[state=active]:shadow-none"
+              className="border-primary rounded-none py-2 shadow-none data-[state=active]:border-b-2 data-[state=active]:shadow-none"
             >
               Lab Tests
             </TabsTrigger>

@@ -13,11 +13,13 @@ Read this, then we will begin with Phase 1: types.ts
 ### Why Centralize Mock Data?
 
 The project evolved from simple mockups to a strategic tool for:
+
 - Conveying future product direction
 - Demonstrating feature enhancements
 - Serving as a reference implementation
 
 With three portals viewing the same underlying data (patients, orders, messages, etc.), inline mock data in each page component creates problems:
+
 - Same data duplicated 3 times
 - Changes need to be made in 3 places
 - Data drifts out of sync between portals
@@ -25,13 +27,13 @@ With three portals viewing the same underlying data (patients, orders, messages,
 
 ### Why This Architecture?
 
-| Principle | Rationale |
-|-----------|-----------|
-| **Discrete JSON files** | Each file is single-purpose, LLM-generatable, and under 500 lines |
-| **Foreign key relationships** | Mimics real API/database design; `patientId` links everything |
+| Principle                     | Rationale                                                               |
+| ----------------------------- | ----------------------------------------------------------------------- |
+| **Discrete JSON files**       | Each file is single-purpose, LLM-generatable, and under 500 lines       |
+| **Foreign key relationships** | Mimics real API/database design; `patientId` links everything           |
 | **Reference data separation** | Providers, products, disease states are shared lookups (no duplication) |
-| **Types-first approach** | Catches design issues early, enables IDE autocomplete |
-| **Helper functions** | Abstract joins, prevent each page from doing manual lookups |
+| **Types-first approach**      | Catches design issues early, enables IDE autocomplete                   |
+| **Helper functions**          | Abstract joins, prevent each page from doing manual lookups             |
 
 ### Current Project Structure
 
@@ -56,24 +58,24 @@ All three portals import from `@/data/...` - no special configuration needed.
 
 Complete list of data types built in the patient detail area:
 
-| Category | Data Type | Description | JSON File |
-|----------|-----------|-------------|-----------|
-| **Core** | Patients | Demographics, status, contact info | `patients.json` |
-| **Clinical** | Chart Notes | SOAP, quick, progress, telehealth notes | `clinical/chart-notes.json` |
-| | Questionnaires | Intake responses, versions, uploads, Q&A | `clinical/questionnaires.json` |
-| | Treatments | Subscriptions, one-time products, memberships | `clinical/treatments.json` |
-| | Consultations | Provider visits, disease state, status | `clinical/consultations.json` |
-| **Communication** | Messages | Threads + individual messages | `communication/messages.json` |
-| | Appointments | Scheduled visits | `communication/appointments.json` |
-| | Notes | Internal staff notes | `communication/notes.json` |
-| **Financial** | Orders | Order history with line items | `financial/orders.json` |
-| | Payment Methods | Cards on file | `financial/payment-methods.json` |
-| | Payment History | Transaction ledger | `financial/payment-history.json` |
-| **Documents** | Documents | ID, consent, uploaded files | `documents/documents.json` |
-| **Audit** | Activity History | Event log / audit trail | `audit/activity-history.json` |
-| **Reference** | Providers | Dr. Nicole Baldwin, etc. | `reference/providers.json` |
-| | Products | Product catalog | `reference/products.json` |
-| | Disease States | Peptide Therapy, Weight Management, etc. | `reference/disease-states.json` |
+| Category          | Data Type        | Description                                   | JSON File                         |
+| ----------------- | ---------------- | --------------------------------------------- | --------------------------------- |
+| **Core**          | Patients         | Demographics, status, contact info            | `patients.json`                   |
+| **Clinical**      | Chart Notes      | SOAP, quick, progress, telehealth notes       | `clinical/chart-notes.json`       |
+|                   | Questionnaires   | Intake responses, versions, uploads, Q&A      | `clinical/questionnaires.json`    |
+|                   | Treatments       | Subscriptions, one-time products, memberships | `clinical/treatments.json`        |
+|                   | Consultations    | Provider visits, disease state, status        | `clinical/consultations.json`     |
+| **Communication** | Messages         | Threads + individual messages                 | `communication/messages.json`     |
+|                   | Appointments     | Scheduled visits                              | `communication/appointments.json` |
+|                   | Notes            | Internal staff notes                          | `communication/notes.json`        |
+| **Financial**     | Orders           | Order history with line items                 | `financial/orders.json`           |
+|                   | Payment Methods  | Cards on file                                 | `financial/payment-methods.json`  |
+|                   | Payment History  | Transaction ledger                            | `financial/payment-history.json`  |
+| **Documents**     | Documents        | ID, consent, uploaded files                   | `documents/documents.json`        |
+| **Audit**         | Activity History | Event log / audit trail                       | `audit/activity-history.json`     |
+| **Reference**     | Providers        | Dr. Nicole Baldwin, etc.                      | `reference/providers.json`        |
+|                   | Products         | Product catalog                               | `reference/products.json`         |
+|                   | Disease States   | Peptide Therapy, Weight Management, etc.      | `reference/disease-states.json`   |
 
 **Total: 16 discrete JSON files**
 
@@ -238,21 +240,26 @@ getPatientPortalData(patientId: string): {
 ## Implementation Order
 
 ### Phase 1: Foundation
+
 1. **`types.ts`** - All interfaces first (80% complete, refine as needed)
 2. **Folder structure** - Create directories with empty JSON files
 3. **`index.ts`** - Basic structure and exports
 
 ### Phase 2: Reference Data
+
 4. **`reference/providers.json`**
 5. **`reference/products.json`**
 6. **`reference/disease-states.json`**
 
 ### Phase 3: Core + Basic Helpers
+
 7. **`patients.json`** - Start with 3 fully-populated patients
 8. **Basic helpers** - `getPatientById`, `getProviderById`, etc.
 
 ### Phase 4: Domain Data (iterative)
+
 For each domain:
+
 - Create JSON with mock data
 - Add helper function
 - Update page component to import from `@/data`
@@ -260,6 +267,7 @@ For each domain:
 - Repeat
 
 Order of domains:
+
 1. `financial/orders.json`
 2. `financial/payment-methods.json`
 3. `financial/payment-history.json`
@@ -274,6 +282,7 @@ Order of domains:
 12. `audit/activity-history.json`
 
 ### Phase 5: Composite Helpers
+
 - `getPatientWithDetails()`
 - `getProviderDashboard()`
 - Portal-specific composites as needed
@@ -283,16 +292,20 @@ Order of domains:
 ## Key Design Decisions
 
 ### Types-First Approach
+
 - Data inventory is already defined (no unknown unknowns)
 - IDE autocomplete while building JSON files prevents typos
 - Catches relational design issues before writing 14 JSON files
 
 ### Types Will Evolve
+
 Don't perfect `types.ts` on first pass. Build in the expectation that types will evolve through Phase 4 as you discover:
+
 - "Orders need a status field I forgot"
 - "Consultations should reference disease state, not just patient"
 
 ### ID Conventions
+
 ```
 Patients:       pat_001, pat_002, ...
 Providers:      prov_001, prov_002, ...
@@ -304,6 +317,7 @@ Messages:       thread_001, msg_001, ...
 ```
 
 ### Target: 20 Patients
+
 Start with 3 fully-populated patients, expand to 20 for comprehensive demos. Each patient should have realistic data across all domains.
 
 ---
@@ -317,6 +331,7 @@ When migrating existing page components:
 3. **Delete inline data last** - Only after centralized data is verified
 
 Example migration for Orders page:
+
 ```typescript
 // Before
 const mockOrders = [...] // inline data
@@ -331,19 +346,23 @@ const orders = getOrdersByPatientId(patientId)
 ## Files to Create
 
 ### Immediate (Phase 1)
+
 - [ ] `src/data/types.ts`
 - [ ] `src/data/index.ts`
 - [ ] `src/data/mock/` folder structure
 
 ### Phase 2
+
 - [ ] `src/data/mock/reference/providers.json`
 - [ ] `src/data/mock/reference/products.json`
 - [ ] `src/data/mock/reference/disease-states.json`
 
 ### Phase 3
+
 - [ ] `src/data/mock/patients.json`
 
 ### Phase 4 (14 files)
+
 - [ ] All domain JSON files
 
 ---
@@ -367,5 +386,5 @@ const orders = getOrdersByPatientId(patientId)
 
 ---
 
-*Document created: Session building patient detail area for Store Admin portal*
-*Next step: Execute Phase 1 - Create `types.ts`*
+_Document created: Session building patient detail area for Store Admin portal_
+_Next step: Execute Phase 1 - Create `types.ts`_

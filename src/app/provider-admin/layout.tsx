@@ -1,7 +1,7 @@
 import { cookies } from "next/headers"
-import { cn } from "@/lib/utils"
 import { SidebarProvider } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/layout/app-sidebar"
+import { cn } from "@/lib/utils"
 
 interface Props {
   children: React.ReactNode

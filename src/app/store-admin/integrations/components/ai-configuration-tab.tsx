@@ -1,7 +1,9 @@
 "use client"
 
 import Link from "next/link"
+import { toast } from "@/hooks/use-toast"
 import { Lock } from "lucide-react"
+import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
@@ -11,13 +13,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Switch } from "@/components/ui/switch"
 import { Separator } from "@/components/ui/separator"
-import { Button } from "@/components/ui/button"
+import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
-import { toast } from "@/hooks/use-toast"
-import { CredentialField } from "./credential-field"
 import type { IntegrationDetail } from "../data/integration-details"
+import { CredentialField } from "./credential-field"
 
 interface AIConfigurationTabProps {
   integration: IntegrationDetail
@@ -90,7 +90,9 @@ export function AIConfigurationTab({ integration }: AIConfigurationTabProps) {
               </Select>
             )}
             {field.description && (
-              <p className="text-muted-foreground text-xs">{field.description}</p>
+              <p className="text-muted-foreground text-xs">
+                {field.description}
+              </p>
             )}
           </div>
         ))}
@@ -159,7 +161,9 @@ export function AIConfigurationTab({ integration }: AIConfigurationTabProps) {
               </Select>
             )}
             {field.description && (
-              <p className="text-muted-foreground text-xs">{field.description}</p>
+              <p className="text-muted-foreground text-xs">
+                {field.description}
+              </p>
             )}
           </div>
         ))}
@@ -187,7 +191,9 @@ export function AIConfigurationTab({ integration }: AIConfigurationTabProps) {
               rows={4}
             />
             {field.description && (
-              <p className="text-muted-foreground text-xs">{field.description}</p>
+              <p className="text-muted-foreground text-xs">
+                {field.description}
+              </p>
             )}
           </div>
         ))}

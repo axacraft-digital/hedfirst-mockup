@@ -1,9 +1,30 @@
 "use client"
 
 import { use, useState } from "react"
-import { format } from "date-fns"
+import { getDocumentsByPatientId } from "@/data"
 import { IconDownload, IconTrash, IconUpload } from "@tabler/icons-react"
+import { format } from "date-fns"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -16,27 +37,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import { getDocumentsByPatientId } from "@/data"
 
 interface Props {
   params: Promise<{ id: string }>
@@ -83,10 +83,13 @@ export default function PatientDocumentsPage({ params }: Props) {
             Questionnaire responses and uploaded files for this patient.
           </p>
         </div>
-        <Dialog open={uploadDialogOpen} onOpenChange={(open) => {
-          setUploadDialogOpen(open)
-          if (!open) resetForm()
-        }}>
+        <Dialog
+          open={uploadDialogOpen}
+          onOpenChange={(open) => {
+            setUploadDialogOpen(open)
+            if (!open) resetForm()
+          }}
+        >
           <DialogTrigger asChild>
             <Button>
               <IconUpload className="mr-2 size-4" />
@@ -97,7 +100,8 @@ export default function PatientDocumentsPage({ params }: Props) {
             <DialogHeader>
               <DialogTitle>Upload Document</DialogTitle>
               <DialogDescription>
-                Upload a document to this patient&apos;s file. Supported formats: PDF, DOC, DOCX, JPG, PNG.
+                Upload a document to this patient&apos;s file. Supported
+                formats: PDF, DOC, DOCX, JPG, PNG.
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
@@ -111,7 +115,8 @@ export default function PatientDocumentsPage({ params }: Props) {
                 />
                 {selectedFile && (
                   <p className="text-muted-foreground text-sm">
-                    Selected: {selectedFile.name} ({(selectedFile.size / 1024).toFixed(1)} KB)
+                    Selected: {selectedFile.name} (
+                    {(selectedFile.size / 1024).toFixed(1)} KB)
                   </p>
                 )}
               </div>
@@ -126,10 +131,16 @@ export default function PatientDocumentsPage({ params }: Props) {
               </div>
             </div>
             <DialogFooter>
-              <Button variant="outline" onClick={() => setUploadDialogOpen(false)}>
+              <Button
+                variant="outline"
+                onClick={() => setUploadDialogOpen(false)}
+              >
                 Cancel
               </Button>
-              <Button onClick={handleUpload} disabled={!selectedFile || !documentName}>
+              <Button
+                onClick={handleUpload}
+                disabled={!selectedFile || !documentName}
+              >
                 Upload
               </Button>
             </DialogFooter>
@@ -146,7 +157,9 @@ export default function PatientDocumentsPage({ params }: Props) {
                   <TableHead>Document Name</TableHead>
                   <TableHead className="w-[140px]">Upload Date</TableHead>
                   <TableHead className="w-[180px]">Source</TableHead>
-                  <TableHead className="w-[100px] text-right">Actions</TableHead>
+                  <TableHead className="w-[100px] text-right">
+                    Actions
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -162,7 +175,11 @@ export default function PatientDocumentsPage({ params }: Props) {
                       </TableCell>
                       <TableCell className="text-right">
                         <div className="flex items-center justify-end gap-1">
-                          <Button variant="ghost" size="icon" className="size-8">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="size-8"
+                          >
                             <IconDownload className="size-4" />
                             <span className="sr-only">Download</span>
                           </Button>
@@ -179,10 +196,13 @@ export default function PatientDocumentsPage({ params }: Props) {
                             </AlertDialogTrigger>
                             <AlertDialogContent>
                               <AlertDialogHeader>
-                                <AlertDialogTitle>Delete document?</AlertDialogTitle>
+                                <AlertDialogTitle>
+                                  Delete document?
+                                </AlertDialogTitle>
                                 <AlertDialogDescription>
-                                  Are you sure you want to delete &quot;{doc.name}&quot;?
-                                  This action cannot be undone.
+                                  Are you sure you want to delete &quot;
+                                  {doc.name}&quot;? This action cannot be
+                                  undone.
                                 </AlertDialogDescription>
                               </AlertDialogHeader>
                               <AlertDialogFooter>

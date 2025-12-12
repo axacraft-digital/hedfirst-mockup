@@ -12,8 +12,8 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
 
 // Types
@@ -113,8 +113,7 @@ const mockQuestionnaireDetails: QuestionnaireDetail[] = [
         answer: "No experience with injections",
       },
       {
-        question:
-          "Are you currently taking any medications or supplements?",
+        question: "Are you currently taking any medications or supplements?",
         answer: "Yes: Multivitamin (one a day), creatine (5g a day)",
       },
       {
@@ -326,9 +325,7 @@ export default function QuestionnaireDetailPage({ params }: Props) {
           {/* Primary Goals */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">
-                Primary Health Goals
-              </CardTitle>
+              <CardTitle className="text-base">Primary Health Goals</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="bg-muted/50 rounded-lg border p-4">
@@ -343,9 +340,7 @@ export default function QuestionnaireDetailPage({ params }: Props) {
           {questionnaire.uploads.length > 0 && (
             <Card>
               <CardHeader>
-                <CardTitle className="text-base">
-                  Uploaded Documents
-                </CardTitle>
+                <CardTitle className="text-base">Uploaded Documents</CardTitle>
                 <p className="text-muted-foreground text-sm">
                   Medical records, lab results, or previous therapy records
                 </p>
@@ -364,7 +359,8 @@ export default function QuestionnaireDetailPage({ params }: Props) {
                         <div>
                           <p className="text-sm font-medium">{file.name}</p>
                           <p className="text-muted-foreground text-xs">
-                            {file.size} • Uploaded {formatDate(file.uploadedDate)}
+                            {file.size} • Uploaded{" "}
+                            {formatDate(file.uploadedDate)}
                           </p>
                         </div>
                       </div>

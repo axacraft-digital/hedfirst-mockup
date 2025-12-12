@@ -1,7 +1,6 @@
 "use client"
 
 import { IconCaretDownFilled, IconCaretUpFilled } from "@tabler/icons-react"
-import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import {
   Card,
@@ -18,6 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { cn } from "@/lib/utils"
 import { topProducts } from "../data/dashboard-data"
 
 function formatCurrency(cents: number): string {
@@ -65,7 +65,8 @@ export function TopProducts() {
                     className={cn("flex items-center justify-end gap-1", {
                       "text-emerald-500 dark:text-emerald-400":
                         product.trend === "up",
-                      "text-red-500 dark:text-red-400": product.trend === "down",
+                      "text-red-500 dark:text-red-400":
+                        product.trend === "down",
                       "text-muted-foreground": product.trend === "neutral",
                     })}
                   >

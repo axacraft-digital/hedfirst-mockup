@@ -2,14 +2,14 @@
 
 import { Fragment, useState } from "react"
 import {
+  IconCalendar,
   IconChevronDown,
   IconChevronRight,
   IconMessageCircle,
-  IconUser,
-  IconTestPipe,
   IconPill,
-  IconCalendar,
   IconRefresh,
+  IconTestPipe,
+  IconUser,
 } from "@tabler/icons-react"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -22,13 +22,13 @@ import {
 } from "@/components/ui/table"
 import { cn } from "@/lib/utils"
 import {
-  type OrderWithPatient,
   type ChildOrder,
   type ChildOrderProductType,
-  getItemCount,
-  formatCurrency,
-  parentStatusInfo,
+  type OrderWithPatient,
   childStatusInfo,
+  formatCurrency,
+  getItemCount,
+  parentStatusInfo,
 } from "../data/orders-types"
 
 interface Props {
@@ -70,9 +70,9 @@ function ChildOrderRow({ child }: { child: ChildOrder }) {
   const isRecurring = child.billingCycle !== "ONE_TIME_PAYMENT"
 
   return (
-    <div className="flex items-center justify-between py-2 pl-8 pr-4">
+    <div className="flex items-center justify-between py-2 pr-4 pl-8">
       <div className="flex items-center gap-3">
-        <Icon className="h-4 w-4 text-muted-foreground" />
+        <Icon className="text-muted-foreground h-4 w-4" />
         <div>
           <div className="flex items-center gap-2">
             <span className="font-medium">{child.productName}</span>
@@ -109,12 +109,17 @@ function ChildOrderRow({ child }: { child: ChildOrder }) {
           {formatCurrency(child.amount - (child.discount || 0))}
           {isRecurring && (
             <span className="text-muted-foreground text-sm font-normal">
-              /{child.billingCycle === "MONTHLY" ? "mo" : child.billingCycle === "ANNUAL" ? "yr" : "cycle"}
+              /
+              {child.billingCycle === "MONTHLY"
+                ? "mo"
+                : child.billingCycle === "ANNUAL"
+                  ? "yr"
+                  : "cycle"}
             </span>
           )}
         </div>
         {child.discount && child.discount > 0 && (
-          <div className="text-sm text-muted-foreground line-through">
+          <div className="text-muted-foreground text-sm line-through">
             {formatCurrency(child.amount)}
           </div>
         )}
@@ -162,7 +167,7 @@ export function OrdersTable({ orders }: Props) {
                 <Fragment key={order.id}>
                   <TableRow
                     className={cn(
-                      "cursor-pointer transition-colors hover:bg-muted/50",
+                      "hover:bg-muted/50 cursor-pointer transition-colors",
                       isExpanded && "bg-muted/30"
                     )}
                     onClick={() => hasChildren && toggleRow(order.id)}
@@ -170,7 +175,7 @@ export function OrdersTable({ orders }: Props) {
                     <TableCell className="pl-4">
                       {hasChildren && (
                         <button
-                          className="p-1 hover:bg-muted rounded"
+                          className="hover:bg-muted rounded p-1"
                           onClick={(e) => {
                             e.stopPropagation()
                             toggleRow(order.id)
@@ -188,7 +193,7 @@ export function OrdersTable({ orders }: Props) {
                       {order.publicOrderId}
                     </TableCell>
                     <TableCell className="text-center">
-                      <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-muted text-sm">
+                      <span className="bg-muted inline-flex h-6 w-6 items-center justify-center rounded-full text-sm">
                         {itemCount}
                       </span>
                     </TableCell>
@@ -203,7 +208,10 @@ export function OrdersTable({ orders }: Props) {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <Badge variant={statusStyle.variant} className={statusStyle.className}>
+                      <Badge
+                        variant={statusStyle.variant}
+                        className={statusStyle.className}
+                      >
                         {statusStyle.label}
                       </Badge>
                     </TableCell>

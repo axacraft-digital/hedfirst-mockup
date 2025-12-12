@@ -1,5 +1,4 @@
 import { IconDownload } from "@tabler/icons-react"
-import { Header } from "@/components/layout/header"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -18,6 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { Header } from "@/components/layout/header"
 
 // Mock invoice data
 const invoices = [
@@ -118,7 +118,9 @@ export default function BillingInvoicesPage() {
                   const status = statusConfig[invoice.status]
                   return (
                     <TableRow key={invoice.id}>
-                      <TableCell className="font-medium">{invoice.id}</TableCell>
+                      <TableCell className="font-medium">
+                        {invoice.id}
+                      </TableCell>
                       <TableCell>{invoice.date}</TableCell>
                       <TableCell>${invoice.amount.toFixed(2)}</TableCell>
                       <TableCell>

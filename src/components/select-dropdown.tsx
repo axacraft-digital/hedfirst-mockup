@@ -1,7 +1,6 @@
 "use client"
 
 import { IconLoader } from "@tabler/icons-react"
-import { cn } from "@/lib/utils"
 import { FormControl } from "@/components/ui/form"
 import {
   Select,
@@ -10,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { cn } from "@/lib/utils"
 
 interface SelectDropdownProps {
   onValueChange?: (value: string) => void

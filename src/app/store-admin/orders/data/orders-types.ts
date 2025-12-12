@@ -195,7 +195,11 @@ export function deriveParentStatus(children: ChildOrder[]): ParentOrderStatus {
   if (statuses.some((s) => s === "PAUSED")) return "PAUSED"
   if (statuses.every((s) => s === "COMPLETED" || s === "PROCESSED"))
     return "COMPLETED"
-  if (statuses.every((s) => s === "ACTIVE" || s === "COMPLETED" || s === "PROCESSED"))
+  if (
+    statuses.every(
+      (s) => s === "ACTIVE" || s === "COMPLETED" || s === "PROCESSED"
+    )
+  )
     return "ACTIVE"
 
   return "PARTIALLY_COMPLETED"
@@ -216,14 +220,19 @@ export const productTypeInfo: Record<
 // Status display info
 export const parentStatusInfo: Record<
   ParentOrderStatus,
-  { label: string; variant: "default" | "secondary" | "destructive" | "outline"; className?: string }
+  {
+    label: string
+    variant: "default" | "secondary" | "destructive" | "outline"
+    className?: string
+  }
 > = {
   NEW: { label: "New", variant: "secondary" },
   PROCESSING: { label: "Processing", variant: "secondary" },
   AWAITING_REVIEW: {
     label: "Needs Review",
     variant: "outline",
-    className: "bg-amber-100/30 text-amber-900 dark:text-amber-200 border-amber-200",
+    className:
+      "bg-amber-100/30 text-amber-900 dark:text-amber-200 border-amber-200",
   },
   APPROVED: { label: "Approved", variant: "default" },
   ACTIVE: {
@@ -234,7 +243,8 @@ export const parentStatusInfo: Record<
   COMPLETED: {
     label: "Complete",
     variant: "outline",
-    className: "bg-teal-100/30 text-teal-900 dark:text-teal-200 border-teal-200",
+    className:
+      "bg-teal-100/30 text-teal-900 dark:text-teal-200 border-teal-200",
   },
   PARTIALLY_COMPLETED: {
     label: "Partial",
@@ -254,12 +264,14 @@ export const parentStatusInfo: Record<
   DENIED: {
     label: "Denied",
     variant: "outline",
-    className: "bg-destructive/10 dark:bg-destructive/50 text-destructive dark:text-primary border-destructive/10",
+    className:
+      "bg-destructive/10 dark:bg-destructive/50 text-destructive dark:text-primary border-destructive/10",
   },
   PAYMENT_FAILED: {
     label: "Payment Failed",
     variant: "outline",
-    className: "bg-destructive/10 dark:bg-destructive/50 text-destructive dark:text-primary border-destructive/10",
+    className:
+      "bg-destructive/10 dark:bg-destructive/50 text-destructive dark:text-primary border-destructive/10",
   },
 }
 
@@ -269,15 +281,33 @@ export const childStatusInfo: Record<
 > = {
   PENDING: { label: "Pending", className: "text-muted-foreground" },
   PAID: { label: "Paid", className: "text-teal-600 dark:text-teal-400" },
-  PROCESSED: { label: "Processed", className: "text-teal-600 dark:text-teal-400" },
-  AWAITING_REVIEW: { label: "Awaiting Review", className: "text-amber-600 dark:text-amber-400" },
-  APPROVED: { label: "Approved", className: "text-teal-600 dark:text-teal-400" },
+  PROCESSED: {
+    label: "Processed",
+    className: "text-teal-600 dark:text-teal-400",
+  },
+  AWAITING_REVIEW: {
+    label: "Awaiting Review",
+    className: "text-amber-600 dark:text-amber-400",
+  },
+  APPROVED: {
+    label: "Approved",
+    className: "text-teal-600 dark:text-teal-400",
+  },
   DENIED: { label: "Denied", className: "text-destructive" },
   ACTIVE: { label: "Active", className: "text-teal-600 dark:text-teal-400" },
   PAUSED: { label: "Paused", className: "text-muted-foreground" },
   CANCELED: { label: "Canceled", className: "text-muted-foreground" },
-  SENT_TO_PHARMACY: { label: "Sent to Pharmacy", className: "text-sky-600 dark:text-sky-400" },
-  ORDER_SHIPPED: { label: "Shipped", className: "text-sky-600 dark:text-sky-400" },
-  COMPLETED: { label: "Complete", className: "text-teal-600 dark:text-teal-400" },
+  SENT_TO_PHARMACY: {
+    label: "Sent to Pharmacy",
+    className: "text-sky-600 dark:text-sky-400",
+  },
+  ORDER_SHIPPED: {
+    label: "Shipped",
+    className: "text-sky-600 dark:text-sky-400",
+  },
+  COMPLETED: {
+    label: "Complete",
+    className: "text-teal-600 dark:text-teal-400",
+  },
   PAYMENT_FAILED: { label: "Payment Failed", className: "text-destructive" },
 }

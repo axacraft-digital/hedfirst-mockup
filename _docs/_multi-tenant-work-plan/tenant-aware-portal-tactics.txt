@@ -1,0 +1,95 @@
+  The Three Patterns You'll Use
+
+  1. Client Components (Interactive UI)
+
+  'use client'
+  import { useTenant } from '@/lib/tenant-context'
+
+  export function ConsultationFilters() {
+    const { organizationId, organizationName } = useTenant()
+
+    return (
+      <Select>
+        <SelectTrigger>Viewing: {organizationName}</SelectTrigger>
+        {/* Interactive filtering */}
+      </Select>
+    )
+  }
+
+  When: Forms, interactive dashboards, real-time updates
+
+  ---
+  2. Server Components (Data Fetching)
+
+  import { headers } from 'next/headers'
+
+  export async function ConsultationsPage() {
+    const headersList = await headers()
+    const organizationId = headersList.get('x-organization-id') || 'org_acme'
+
+    // Now: Fake data
+    const consultations = getConsultationsByOrganization(organizationId)
+
+    // Later: Real API/database call
+    // const consultations = await prisma.consultation.findMany({
+    //   where: { organizationId }
+    // })
+
+    return <ConsultationTable data={consultations} />
+  }
+
+  When: Initial page loads, SEO-critical pages, data-heavy lists
+
+  ---
+  3. Middleware (Set Tenant Context)
+
+  // middleware.ts
+  import { NextRequest, NextResponse } from 'next/server'
+
+  export function middleware(request: NextRequest) {
+    // Now: Hardcoded
+    const organizationId = 'org_acme'
+
+    // Later: Extract from subdomain, JWT, etc.
+    // const subdomain = request.headers.get('host')?.split('.')[0]
+    // const organizationId = await getOrgIdFromSubdomain(subdomain)
+
+    const response = NextResponse.next()
+    response.headers.set('x-organization-id', organizationId)
+
+    return response
+  }
+
+  When: Setting tenant context once per request (runs before all pages)
+
+  ---
+  The Swap Points (When You Connect Real Backend)
+
+  | Layer          | Now (Fake)         | Later (Real)                | Effort              |
+  |----------------|--------------------|-----------------------------|---------------------|
+  | Middleware     | Hardcoded org ID   | Extract from subdomain/JWT  | 1 day               |
+  | Data functions | Filter JSON arrays | Prisma queries or API calls | 1-2 days per domain |
+  | Components     | No change          | No change                   | 0 days ✅            |
+
+  ---
+  One Additional Refinement
+
+  Add an environment flag for easier testing:
+
+  // lib/tenant-context.tsx
+  const MOCK_TENANT = process.env.NEXT_PUBLIC_MOCK_TENANT === 'true'
+
+  export function TenantProvider({ children }) {
+    const tenantData = MOCK_TENANT
+      ? { organizationId: 'org_acme', ... }  // Fake
+      : useTenantFromAuth()                   // Real (from JWT/session)
+
+    return <TenantContext.Provider value={tenantData}>{children}</TenantContext.Provider>
+  }
+
+  Benefit: One environment variable toggles fake vs. real across the entire app.
+
+  ---
+  You've identified the right abstraction. Components are tenant-aware from day 1, but source is swappable.
+
+  This is how you build V1.5 incrementally without throwing away work.

@@ -22,81 +22,81 @@ interface TenantBrandingConfig {
   // IDENTITY
   // ═══════════════════════════════════════════════════════════
 
-  storeName: string;                    // Required - Display name
-  tagline?: string;                     // Optional - Shown in header/footer
+  storeName: string // Required - Display name
+  tagline?: string // Optional - Shown in header/footer
 
   // Logos
-  logoUrl: string;                      // Required - Primary logo
-  logoWhiteUrl: string;                 // Required - White/light variant for dark backgrounds
-  faviconUrl: string;                   // Required - Browser favicon
-  ogImageUrl?: string;                  // Optional - Social sharing image
+  logoUrl: string // Required - Primary logo
+  logoWhiteUrl: string // Required - White/light variant for dark backgrounds
+  faviconUrl: string // Required - Browser favicon
+  ogImageUrl?: string // Optional - Social sharing image
 
   // Colors
-  primaryColor: string;                 // Required - Main brand color (buttons, links)
-  secondaryColor: string;               // Required - Secondary brand color
-  accentColor: string;                  // Required - Accent/highlight color
+  primaryColor: string // Required - Main brand color (buttons, links)
+  secondaryColor: string // Required - Secondary brand color
+  accentColor: string // Required - Accent/highlight color
 
   // ═══════════════════════════════════════════════════════════
   // CONTACT INFORMATION
   // ═══════════════════════════════════════════════════════════
 
-  supportEmail: string;                 // Required - Primary support email
-  supportPhone: string;                 // Required - Support phone number
-  supportPhoneDisplay: string;          // Required - Formatted display version
-  businessHours: string;                // Required - e.g., "Monday–Friday, 9am–5pm EST"
+  supportEmail: string // Required - Primary support email
+  supportPhone: string // Required - Support phone number
+  supportPhoneDisplay: string // Required - Formatted display version
+  businessHours: string // Required - e.g., "Monday–Friday, 9am–5pm EST"
 
   // Optional additional contacts
-  securityEmail?: string;               // For security inquiries
-  billingEmail?: string;                // For billing inquiries
+  securityEmail?: string // For security inquiries
+  billingEmail?: string // For billing inquiries
 
   // ═══════════════════════════════════════════════════════════
   // SOCIAL MEDIA
   // ═══════════════════════════════════════════════════════════
 
-  facebookUrl?: string;                 // Optional - hide if not set
-  instagramUrl?: string;                // Optional - hide if not set
-  linkedinUrl?: string;                 // Optional - hide if not set
-  twitterUrl?: string;                  // Optional - hide if not set
-  youtubeUrl?: string;                  // Optional - hide if not set
+  facebookUrl?: string // Optional - hide if not set
+  instagramUrl?: string // Optional - hide if not set
+  linkedinUrl?: string // Optional - hide if not set
+  twitterUrl?: string // Optional - hide if not set
+  youtubeUrl?: string // Optional - hide if not set
 
   // ═══════════════════════════════════════════════════════════
   // LEGAL & COMPLIANCE
   // ═══════════════════════════════════════════════════════════
 
-  privacyPolicyUrl: string;             // Required
-  termsOfServiceUrl: string;            // Required
-  hipaaNoticeUrl: string;               // Required - Notice of Privacy Practices
-  consentToTreatmentUrl: string;        // Required
-  consentForSensitiveDataUrl?: string;  // Optional
-  smsTermsUrl?: string;                 // Optional - if SMS features used
-  pharmacyDisclaimerUrl?: string;       // Optional - if pharmacy services used
+  privacyPolicyUrl: string // Required
+  termsOfServiceUrl: string // Required
+  hipaaNoticeUrl: string // Required - Notice of Privacy Practices
+  consentToTreatmentUrl: string // Required
+  consentForSensitiveDataUrl?: string // Optional
+  smsTermsUrl?: string // Optional - if SMS features used
+  pharmacyDisclaimerUrl?: string // Optional - if pharmacy services used
 
   // ═══════════════════════════════════════════════════════════
   // COMPANY INFORMATION
   // ═══════════════════════════════════════════════════════════
 
-  companyLegalName: string;             // Required - e.g., "Acme Health LLC"
-  companyJurisdiction?: string;         // Optional - e.g., "Delaware Corporation"
-  copyrightName: string;                // Required - Used in footer "© 2025 {copyrightName}"
+  companyLegalName: string // Required - e.g., "Acme Health LLC"
+  companyJurisdiction?: string // Optional - e.g., "Delaware Corporation"
+  copyrightName: string // Required - Used in footer "© 2025 {copyrightName}"
 
   // ═══════════════════════════════════════════════════════════
   // EXTERNAL LINKS
   // ═══════════════════════════════════════════════════════════
 
-  websiteUrl?: string;                  // Main marketing site (if separate)
-  blogUrl?: string;                     // Blog/resources
-  aboutUrl?: string;                    // About page
-  contactPageUrl?: string;              // External contact page
-  howItWorksUrl?: string;               // How it works page
-  faqUrl?: string;                      // FAQ page
+  websiteUrl?: string // Main marketing site (if separate)
+  blogUrl?: string // Blog/resources
+  aboutUrl?: string // About page
+  contactPageUrl?: string // External contact page
+  howItWorksUrl?: string // How it works page
+  faqUrl?: string // FAQ page
 
   // ═══════════════════════════════════════════════════════════
   // COMPLIANCE BADGES
   // ═══════════════════════════════════════════════════════════
 
-  showHipaaCompliant: boolean;          // Show HIPAA badge
-  showFdaRegulated: boolean;            // Show FDA badge
-  legitScriptId?: string;               // LegitScript verification ID
+  showHipaaCompliant: boolean // Show HIPAA badge
+  showFdaRegulated: boolean // Show FDA badge
+  legitScriptId?: string // LegitScript verification ID
 }
 ```
 
@@ -108,43 +108,43 @@ interface TenantNavigationConfig {
   // MAIN NAVIGATION (Header)
   // ═══════════════════════════════════════════════════════════
 
-  mainNav: NavCategory[];
+  mainNav: NavCategory[]
 
   // ═══════════════════════════════════════════════════════════
   // FOOTER NAVIGATION
   // ═══════════════════════════════════════════════════════════
 
-  footerSections: FooterSection[];
+  footerSections: FooterSection[]
 }
 
 interface NavCategory {
-  id: string;
-  label: string;                        // Display text
-  href?: string;                        // Direct link (if no children)
-  children?: NavItem[];                 // Dropdown items
-  highlight?: boolean;                  // Featured/highlighted style
+  id: string
+  label: string // Display text
+  href?: string // Direct link (if no children)
+  children?: NavItem[] // Dropdown items
+  highlight?: boolean // Featured/highlighted style
 }
 
 interface NavItem {
-  id: string;
-  label: string;
-  href: string;
-  description?: string;                 // Shown in mega menu
-  icon?: string;                        // Icon identifier
-  badge?: string;                       // e.g., "New", "Popular"
-  external?: boolean;                   // Opens in new tab
+  id: string
+  label: string
+  href: string
+  description?: string // Shown in mega menu
+  icon?: string // Icon identifier
+  badge?: string // e.g., "New", "Popular"
+  external?: boolean // Opens in new tab
 }
 
 interface FooterSection {
-  id: string;
-  title: string;                        // Section header
-  links: FooterLink[];
+  id: string
+  title: string // Section header
+  links: FooterLink[]
 }
 
 interface FooterLink {
-  label: string;
-  href: string;
-  external?: boolean;
+  label: string
+  href: string
+  external?: boolean
 }
 ```
 
@@ -380,9 +380,9 @@ model Store {
 // src/providers/branding/TenantBrandingProvider.tsx
 
 interface TenantBrandingContextValue {
-  branding: TenantBrandingConfig;
-  navigation: TenantNavigationConfig;
-  isLoaded: boolean;
+  branding: TenantBrandingConfig
+  navigation: TenantNavigationConfig
+  isLoaded: boolean
 }
 
 // Loaded once at app initialization from API
@@ -391,25 +391,25 @@ interface TenantBrandingContextValue {
 
 ### Component Updates Required
 
-| Component | Current State | New State |
-|-----------|---------------|-----------|
-| `CompanyLogo` | Imports hardcoded SVG | Uses `branding.logoUrl` |
-| `Footer` | Hardcoded links & contact | Uses `branding` + `navigation.footerSections` |
-| `Header/Nav` | Hardcoded nav items | Uses `navigation.mainNav` |
-| `EmptyResults` | Hardcoded contact info | Uses `branding.supportEmail/Phone` or hides |
-| `LegalLinks` | Hardcoded URLs | Uses `branding.*Url` fields |
-| `SocialLinks` | Hardcoded URLs | Uses `branding.*Url` fields, hide if empty |
-| `ContactSupport` | Hardcoded email/phone | Uses `branding` fields |
-| Email Templates | Hardcoded brand | Template variables injected |
+| Component        | Current State             | New State                                     |
+| ---------------- | ------------------------- | --------------------------------------------- |
+| `CompanyLogo`    | Imports hardcoded SVG     | Uses `branding.logoUrl`                       |
+| `Footer`         | Hardcoded links & contact | Uses `branding` + `navigation.footerSections` |
+| `Header/Nav`     | Hardcoded nav items       | Uses `navigation.mainNav`                     |
+| `EmptyResults`   | Hardcoded contact info    | Uses `branding.supportEmail/Phone` or hides   |
+| `LegalLinks`     | Hardcoded URLs            | Uses `branding.*Url` fields                   |
+| `SocialLinks`    | Hardcoded URLs            | Uses `branding.*Url` fields, hide if empty    |
+| `ContactSupport` | Hardcoded email/phone     | Uses `branding` fields                        |
+| Email Templates  | Hardcoded brand           | Template variables injected                   |
 
 ### CSS Variables for Colors
 
 ```css
 /* Generated dynamically from branding config */
 :root {
-  --color-primary: var(--tenant-primary, #1A56DB);
-  --color-secondary: var(--tenant-secondary, #6B7280);
-  --color-accent: var(--tenant-accent, #10B981);
+  --color-primary: var(--tenant-primary, #1a56db);
+  --color-secondary: var(--tenant-secondary, #6b7280);
+  --color-accent: var(--tenant-accent, #10b981);
 }
 ```
 
@@ -431,6 +431,7 @@ interface TenantBrandingContextValue {
 ### Validation: Required Fields
 
 Before a store can be activated, these fields MUST be configured:
+
 - Store Name
 - Primary Logo
 - White Logo
@@ -448,15 +449,15 @@ Before a store can be activated, these fields MUST be configured:
 
 ### Fallback Behavior for Optional Fields
 
-| Field | If Not Configured |
-|-------|-------------------|
-| Social media URLs | Hide social icons section entirely |
-| Security/Billing email | Hide from contact page |
-| SMS Terms URL | Hide from footer |
-| Pharmacy Disclaimer | Hide from footer |
-| Tagline | Don't show tagline area |
-| OG Image | Use logo as fallback |
-| External links (blog, about, etc.) | Hide those nav/footer items |
+| Field                              | If Not Configured                  |
+| ---------------------------------- | ---------------------------------- |
+| Social media URLs                  | Hide social icons section entirely |
+| Security/Billing email             | Hide from contact page             |
+| SMS Terms URL                      | Hide from footer                   |
+| Pharmacy Disclaimer                | Hide from footer                   |
+| Tagline                            | Don't show tagline area            |
+| OG Image                           | Use logo as fallback               |
+| External links (blog, about, etc.) | Hide those nav/footer items        |
 
 ### Onboarding Gate
 
@@ -475,6 +476,7 @@ if (!store.brandingConfig || !isValidBrandingConfig(store.brandingConfig)) {
 ### Step 1: Database & API
 
 **Backend Files:**
+
 - [ ] Add `brandingConfig Json?` to Store model in `prisma/schema.prisma`
 - [ ] Add `navigationConfig Json?` to Store model
 - [ ] Run migration
@@ -490,6 +492,7 @@ if (!store.brandingConfig || !isValidBrandingConfig(store.brandingConfig)) {
 ### Step 2: Store Admin UI
 
 **Admin Portal Files:**
+
 - [ ] Create `src/app/panel/store-settings/branding/page.tsx`
 - [ ] Create `src/app/panel/store-settings/branding/_components/`
   - [ ] `BrandIdentityTab.tsx`
@@ -507,6 +510,7 @@ if (!store.brandingConfig || !isValidBrandingConfig(store.brandingConfig)) {
 ### Step 3: Patient Portal - Branding Context
 
 **Patient Portal Files:**
+
 - [ ] Create `src/providers/branding/TenantBrandingProvider.tsx`
 - [ ] Create `src/providers/branding/useTenantBranding.ts` hook
 - [ ] Create `src/providers/branding/types.ts`
@@ -517,6 +521,7 @@ if (!store.brandingConfig || !isValidBrandingConfig(store.brandingConfig)) {
 ### Step 4: Component Refactoring
 
 **Patient Portal Components:**
+
 - [ ] Refactor `src/components/company-logo/company-logo.tsx`
 - [ ] Refactor `src/layouts/footer.tsx`
 - [ ] Refactor `src/layouts/header/` (navigation)
@@ -530,6 +535,7 @@ if (!store.brandingConfig || !isValidBrandingConfig(store.brandingConfig)) {
 ### Step 5: Email Templates
 
 **Template Files:**
+
 - [ ] Update `public/templates/order-summary.html` - add template variables
 - [ ] Update `public/templates/reset-password.html` - add template variables
 - [ ] Backend: Inject branding values when sending emails
@@ -538,6 +544,7 @@ if (!store.brandingConfig || !isValidBrandingConfig(store.brandingConfig)) {
 ### Step 6: Admin Portal Branding (Lower Priority)
 
 **Admin Portal Components:**
+
 - [ ] Update `src/layouts/footer.tsx` to use store branding
 - [ ] Update `src/app/layout.tsx` metadata
 - [ ] Update email templates in admin portal
@@ -557,28 +564,28 @@ if (!store.brandingConfig || !isValidBrandingConfig(store.brandingConfig)) {
 
 ### High Priority - Patient Portal
 
-| File | Changes Needed |
-|------|----------------|
-| `src/shared/constants/support-contacts.ts` | Replace with branding context |
-| `src/shared/constants/footer.constants.ts` | Replace with navigation context |
-| `src/components/company-logo/company-logo.tsx` | Use branding.logoUrl |
-| `src/dictionaries/dictionary.ts` | Remove brand references, use context |
-| `src/dictionaries/nav-Item-config.ts` | Replace with navigation context |
-| `src/providers/navigation/index.ts` | Update to use navigation config |
-| `src/layouts/footer.tsx` | Use branding + navigation context |
-| `src/app/catalog/_components/empty-results.tsx` | Use branding contact info |
-| `src/app/(internal)/.../disclaimers.constants.ts` | Use branding legal URLs |
-| `src/layouts/buttons/legit-script-button.tsx` | Use branding.legitScriptId |
-| `public/templates/*.html` | Add template variables |
+| File                                              | Changes Needed                       |
+| ------------------------------------------------- | ------------------------------------ |
+| `src/shared/constants/support-contacts.ts`        | Replace with branding context        |
+| `src/shared/constants/footer.constants.ts`        | Replace with navigation context      |
+| `src/components/company-logo/company-logo.tsx`    | Use branding.logoUrl                 |
+| `src/dictionaries/dictionary.ts`                  | Remove brand references, use context |
+| `src/dictionaries/nav-Item-config.ts`             | Replace with navigation context      |
+| `src/providers/navigation/index.ts`               | Update to use navigation config      |
+| `src/layouts/footer.tsx`                          | Use branding + navigation context    |
+| `src/app/catalog/_components/empty-results.tsx`   | Use branding contact info            |
+| `src/app/(internal)/.../disclaimers.constants.ts` | Use branding legal URLs              |
+| `src/layouts/buttons/legit-script-button.tsx`     | Use branding.legitScriptId           |
+| `public/templates/*.html`                         | Add template variables               |
 
 ### High Priority - Admin Portal
 
-| File | Changes Needed |
-|------|----------------|
-| `src/dictionaries/content.ts` | Remove "Hedfirst" references |
-| `src/layouts/footer.tsx` | Use store branding |
-| `src/app/layout.tsx` | Dynamic metadata from branding |
-| `public/templates/*.html` | Fix Met-Tech references, add variables |
+| File                          | Changes Needed                         |
+| ----------------------------- | -------------------------------------- |
+| `src/dictionaries/content.ts` | Remove "Hedfirst" references           |
+| `src/layouts/footer.tsx`      | Use store branding                     |
+| `src/app/layout.tsx`          | Dynamic metadata from branding         |
+| `public/templates/*.html`     | Fix Met-Tech references, add variables |
 
 ---
 

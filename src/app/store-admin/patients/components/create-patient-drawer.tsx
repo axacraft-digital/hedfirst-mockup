@@ -1,10 +1,10 @@
 "use client"
 
 import { Dispatch, SetStateAction } from "react"
-import { z } from "zod"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
 import { toast } from "@/hooks/use-toast"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -217,7 +217,7 @@ export function CreatePatientDrawer({ open, setOpen }: Props) {
 
             {/* Address Section */}
             <div className="border-t pt-4">
-              <h4 className="text-sm font-medium mb-3">Address</h4>
+              <h4 className="mb-3 text-sm font-medium">Address</h4>
 
               <div className="space-y-4">
                 <FormField
@@ -298,7 +298,11 @@ export function CreatePatientDrawer({ open, setOpen }: Props) {
                       <FormItem className="space-y-1">
                         <FormLabel>ZIP Code</FormLabel>
                         <FormControl>
-                          <Input {...field} placeholder="78701" maxLength={10} />
+                          <Input
+                            {...field}
+                            placeholder="78701"
+                            maxLength={10}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>

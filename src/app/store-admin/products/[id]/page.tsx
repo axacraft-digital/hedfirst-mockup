@@ -4,7 +4,14 @@ import { use, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { IconAlertTriangle, IconArrowLeft, IconPlus, IconTrash } from "@tabler/icons-react"
+import { mockPharmacies as pharmacies } from "@/data"
+import { toast } from "@/hooks/use-toast"
+import {
+  IconAlertTriangle,
+  IconArrowLeft,
+  IconPlus,
+  IconTrash,
+} from "@tabler/icons-react"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -27,24 +34,22 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
-import { toast } from "@/hooks/use-toast"
 import { ConfirmDialog } from "@/components/confirm-dialog"
 import { Header } from "@/components/layout/header"
 import { getProductDetailById } from "../data/product-details-data"
-import { mockPharmacies as pharmacies } from "@/data"
 import {
-  diseaseStateLabels,
-  treatmentTypeLabels,
-  treatmentUseOptions,
-  formFactorOptions,
-  dosageUnitOptions,
-  billingCycleOptions,
-  supplyDurationOptions,
   type DiseaseState,
   type PhysicalTreatmentType,
-  type TreatmentUse,
   type ProductIngredient,
   type ProductVariant,
+  type TreatmentUse,
+  billingCycleOptions,
+  diseaseStateLabels,
+  dosageUnitOptions,
+  formFactorOptions,
+  supplyDurationOptions,
+  treatmentTypeLabels,
+  treatmentUseOptions,
 } from "../data/products-types"
 
 interface Props {
@@ -71,9 +76,9 @@ export default function ProductDetailPage({ params }: Props) {
   const [diseaseState, setDiseaseState] = useState<DiseaseState | "">(
     product?.diseaseState ?? ""
   )
-  const [treatmentType, setTreatmentType] = useState<PhysicalTreatmentType | "">(
-    product?.treatmentType ?? ""
-  )
+  const [treatmentType, setTreatmentType] = useState<
+    PhysicalTreatmentType | ""
+  >(product?.treatmentType ?? "")
   const [treatmentUse, setTreatmentUse] = useState<TreatmentUse | "">(
     product?.treatmentUse ?? ""
   )
@@ -103,9 +108,7 @@ export default function ProductDetailPage({ params }: Props) {
 
   // Variant handlers
   const updateVariant = (id: string, updates: Partial<ProductVariant>) => {
-    setVariants(
-      variants.map((v) => (v.id === id ? { ...v, ...updates } : v))
-    )
+    setVariants(variants.map((v) => (v.id === id ? { ...v, ...updates } : v)))
   }
 
   const addVariant = () => {
@@ -339,7 +342,9 @@ export default function ProductDetailPage({ params }: Props) {
               <Label>Treatment Type</Label>
               <Select
                 value={treatmentType}
-                onValueChange={(v) => setTreatmentType(v as PhysicalTreatmentType)}
+                onValueChange={(v) =>
+                  setTreatmentType(v as PhysicalTreatmentType)
+                }
               >
                 <SelectTrigger className="w-full md:w-[300px]">
                   <SelectValue placeholder="Select treatment type" />
@@ -382,7 +387,8 @@ export default function ProductDetailPage({ params }: Props) {
             <div>
               <h2 className="text-lg font-semibold">Pharmacy Partner</h2>
               <p className="text-muted-foreground text-sm">
-                Select the pharmacy partner responsible for fulfilling this product
+                Select the pharmacy partner responsible for fulfilling this
+                product
               </p>
             </div>
 
@@ -417,7 +423,7 @@ export default function ProductDetailPage({ params }: Props) {
                 />
                 <Label
                   htmlFor="allow-multiple"
-                  className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  className="text-sm leading-none font-normal peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
                   Allow purchasing more than one item per order
                 </Label>
@@ -433,7 +439,7 @@ export default function ProductDetailPage({ params }: Props) {
                 />
                 <Label
                   htmlFor="requires-prescription"
-                  className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  className="text-sm leading-none font-normal peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
                   This product requires a prescription
                 </Label>
@@ -441,9 +447,9 @@ export default function ProductDetailPage({ params }: Props) {
 
               {requiresPrescription && pharmacyId && (
                 <p className="text-muted-foreground ml-7 text-sm">
-                  <span className="font-medium">Prescription Required:</span> This
-                  product will require provider approval and will be fulfilled
-                  through the selected pharmacy partner.
+                  <span className="font-medium">Prescription Required:</span>{" "}
+                  This product will require provider approval and will be
+                  fulfilled through the selected pharmacy partner.
                 </p>
               )}
             </div>
@@ -485,18 +491,18 @@ export default function ProductDetailPage({ params }: Props) {
               ))}
 
               {/* Empty placeholder slots */}
-              {Array.from({ length: Math.max(0, 4 - product.images.length) }).map(
-                (_, index) => (
-                  <div
-                    key={`empty-${index}`}
-                    className="bg-muted/50 flex aspect-square items-center justify-center rounded-lg border border-dashed"
-                  >
-                    <span className="text-muted-foreground text-xs">
-                      No image
-                    </span>
-                  </div>
-                )
-              )}
+              {Array.from({
+                length: Math.max(0, 4 - product.images.length),
+              }).map((_, index) => (
+                <div
+                  key={`empty-${index}`}
+                  className="bg-muted/50 flex aspect-square items-center justify-center rounded-lg border border-dashed"
+                >
+                  <span className="text-muted-foreground text-xs">
+                    No image
+                  </span>
+                </div>
+              ))}
             </div>
 
             {/* Upload area */}
@@ -518,7 +524,9 @@ export default function ProductDetailPage({ params }: Props) {
               ======================================== */}
           <section className="space-y-6">
             <div>
-              <h2 className="text-lg font-semibold">Primary Product Ingredients</h2>
+              <h2 className="text-lg font-semibold">
+                Primary Product Ingredients
+              </h2>
               <p className="text-muted-foreground text-sm">
                 List the active ingredients in this product
               </p>
@@ -787,7 +795,7 @@ export default function ProductDetailPage({ params }: Props) {
                         Price (cents)
                       </Label>
                       <div className="relative">
-                        <span className="text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 text-sm">
+                        <span className="text-muted-foreground absolute top-1/2 left-3 -translate-y-1/2 text-sm">
                           $
                         </span>
                         <Input
@@ -795,7 +803,9 @@ export default function ProductDetailPage({ params }: Props) {
                           value={(variant.price / 100).toFixed(2)}
                           onChange={(e) =>
                             updateVariant(variant.id, {
-                              price: Math.round(parseFloat(e.target.value) * 100) || 0,
+                              price:
+                                Math.round(parseFloat(e.target.value) * 100) ||
+                                0,
                             })
                           }
                           className="pl-7"
@@ -809,7 +819,7 @@ export default function ProductDetailPage({ params }: Props) {
                       </Label>
                       <div className="flex items-center gap-2">
                         <div className="relative flex-1">
-                          <span className="text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 text-sm">
+                          <span className="text-muted-foreground absolute top-1/2 left-3 -translate-y-1/2 text-sm">
                             $
                           </span>
                           <Input
@@ -940,7 +950,9 @@ export default function ProductDetailPage({ params }: Props) {
               ======================================== */}
           <section className="space-y-6">
             <div>
-              <h2 className="text-lg font-semibold">Optional Product Details</h2>
+              <h2 className="text-lg font-semibold">
+                Optional Product Details
+              </h2>
               <p className="text-muted-foreground text-sm">
                 Add structured content blocks to the product page
               </p>

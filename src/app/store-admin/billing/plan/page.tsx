@@ -1,10 +1,10 @@
 import Link from "next/link"
 import { IconArrowUpRight, IconCheck } from "@tabler/icons-react"
-import { Header } from "@/components/layout/header"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
+import { Header } from "@/components/layout/header"
 
 // Mock data for the current subscription plan
 const currentPlan = {
@@ -101,7 +101,10 @@ export default function BillingPlanPage() {
             </div>
             <div className="border-muted-foreground grid grid-cols-6 gap-4 rounded-md border p-4">
               {currentPlan.features.map((feature) => (
-                <div key={feature} className="col-span-3 flex items-center gap-2">
+                <div
+                  key={feature}
+                  className="col-span-3 flex items-center gap-2"
+                >
                   <IconCheck size={18} strokeWidth={1.5} />
                   <p className="text-sm">{feature}</p>
                 </div>
@@ -130,7 +133,10 @@ export default function BillingPlanPage() {
             </div>
             <div className="border-muted-foreground grid grid-cols-6 gap-4 rounded-md border p-4">
               {currentPlan.additionalResources.map((resource) => (
-                <div key={resource} className="col-span-3 flex items-center gap-2">
+                <div
+                  key={resource}
+                  className="col-span-3 flex items-center gap-2"
+                >
                   <IconCheck size={18} strokeWidth={1.5} />
                   <p className="text-sm">{resource}</p>
                 </div>

@@ -2,12 +2,9 @@
 
 import { use } from "react"
 import Link from "next/link"
-import { format } from "date-fns"
+import { getNoteById } from "@/data"
 import { IconArrowLeft, IconTrash } from "@tabler/icons-react"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Separator } from "@/components/ui/separator"
+import { format } from "date-fns"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -19,7 +16,10 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { getNoteById } from "@/data"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Separator } from "@/components/ui/separator"
 
 interface Props {
   params: Promise<{ id: string; noteId: string }>
@@ -64,7 +64,9 @@ export default function NoteDetailPage({ params }: Props) {
           <div>
             <h3 className="text-lg font-medium">{note.title}</h3>
             <div className="text-muted-foreground flex items-center gap-2 text-sm">
-              <span>{format(new Date(note.createdAt), "MMMM dd, yyyy 'at' h:mm a")}</span>
+              <span>
+                {format(new Date(note.createdAt), "MMMM dd, yyyy 'at' h:mm a")}
+              </span>
               <span>•</span>
               <span>{note.createdBy}</span>
               <Badge
@@ -78,7 +80,10 @@ export default function NoteDetailPage({ params }: Props) {
         </div>
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button variant="outline" className="text-destructive hover:text-destructive">
+            <Button
+              variant="outline"
+              className="text-destructive hover:text-destructive"
+            >
               <IconTrash className="mr-2 size-4" />
               Delete
             </Button>
@@ -87,8 +92,8 @@ export default function NoteDetailPage({ params }: Props) {
             <AlertDialogHeader>
               <AlertDialogTitle>Delete note?</AlertDialogTitle>
               <AlertDialogDescription>
-                Are you sure you want to delete &quot;{note.title}&quot;?
-                This action cannot be undone.
+                Are you sure you want to delete &quot;{note.title}&quot;? This
+                action cannot be undone.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>

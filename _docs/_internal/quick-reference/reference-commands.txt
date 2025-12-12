@@ -1,0 +1,9 @@
+Quick Reference
+
+  | You Want To...                  | Say...                                                                      |
+  |---------------------------------|-----------------------------------------------------------------------------|
+  | Generate handoff for production | "Generate a handoff document for the production project. Focus on [topic]." |
+  | Summarize session               | "Summarize this session for future reference."                              |
+  | Switch to production thinking   | "Pause on the UI. Let's discuss how [X] would work in production."          |
+  | Switch back to building         | "Back to building — let's implement [next feature]."                        |
+  | Start new session with context  | "Read _docs/session-notes/[file] to get up to speed."                       |

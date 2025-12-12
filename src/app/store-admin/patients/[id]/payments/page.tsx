@@ -3,14 +3,21 @@
 import { use } from "react"
 import Link from "next/link"
 import {
-  IconBrandVisa,
   IconBrandMastercard,
+  IconBrandVisa,
   IconCreditCard,
   IconDotsVertical,
   IconPlus,
 } from "@tabler/icons-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 import {
@@ -22,16 +29,9 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {
-  getPaymentMethodsByPatientId,
-  getPaymentHistoryByPatientId,
   paymentMethods as allPaymentMethods,
+  getPaymentHistoryByPatientId,
+  getPaymentMethodsByPatientId,
 } from "@/data/payments"
 import type { CardBrand, PaymentTransactionStatus } from "@/data/types"
 
@@ -176,7 +176,9 @@ export default function PatientPaymentsPage({ params }: Props) {
                 <TableBody>
                   {paymentMethods.length > 0 ? (
                     paymentMethods.map((method) => {
-                      const brandInfo = method.cardBrand ? cardBrandInfo[method.cardBrand] : null
+                      const brandInfo = method.cardBrand
+                        ? cardBrandInfo[method.cardBrand]
+                        : null
                       const BrandIcon = brandInfo?.icon ?? IconCreditCard
                       const expStatus = getExpirationStatus(
                         method.expiryMonth ?? 0,
@@ -208,7 +210,10 @@ export default function PatientPaymentsPage({ params }: Props) {
                                     : "text-muted-foreground"
                               }
                             >
-                              {formatExpiration(method.expiryMonth ?? 0, method.expiryYear ?? 0)}
+                              {formatExpiration(
+                                method.expiryMonth ?? 0,
+                                method.expiryYear ?? 0
+                              )}
                             </span>
                           </TableCell>
                           <TableCell>
@@ -293,7 +298,9 @@ export default function PatientPaymentsPage({ params }: Props) {
                   <TableRow>
                     <TableHead>Payment ID</TableHead>
                     <TableHead className="w-[110px]">Date</TableHead>
-                    <TableHead className="w-[100px] text-right">Amount</TableHead>
+                    <TableHead className="w-[100px] text-right">
+                      Amount
+                    </TableHead>
                     <TableHead className="w-[160px]">Method</TableHead>
                     <TableHead className="w-[130px]">Order</TableHead>
                     <TableHead className="w-[100px]">Status</TableHead>
@@ -303,8 +310,12 @@ export default function PatientPaymentsPage({ params }: Props) {
                   {paymentHistory.length > 0 ? (
                     paymentHistory.map((txn) => {
                       // Look up payment method for card details
-                      const paymentMethod = allPaymentMethods.find((pm) => pm.id === txn.paymentMethodId)
-                      const brandInfo = paymentMethod?.cardBrand ? cardBrandInfo[paymentMethod.cardBrand] : null
+                      const paymentMethod = allPaymentMethods.find(
+                        (pm) => pm.id === txn.paymentMethodId
+                      )
+                      const brandInfo = paymentMethod?.cardBrand
+                        ? cardBrandInfo[paymentMethod.cardBrand]
+                        : null
                       const BrandIcon = brandInfo?.icon ?? IconCreditCard
                       const statusStyle = paymentStatusStyles[txn.status]
 
@@ -338,7 +349,9 @@ export default function PatientPaymentsPage({ params }: Props) {
                                 {txn.orderId}
                               </Link>
                             ) : (
-                              <span className="text-muted-foreground text-sm">—</span>
+                              <span className="text-muted-foreground text-sm">
+                                —
+                              </span>
                             )}
                           </TableCell>
                           <TableCell>

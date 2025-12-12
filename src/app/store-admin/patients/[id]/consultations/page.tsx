@@ -5,6 +5,12 @@ import Link from "next/link"
 import { IconDotsVertical } from "@tabler/icons-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 import {
@@ -16,12 +22,9 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { getConsultationsForUI, type UIConsultation } from "@/data/consultations"
+  type UIConsultation,
+  getConsultationsForUI,
+} from "@/data/consultations"
 
 // Consultation status type (matches UI helper output)
 type ConsultationStatus = UIConsultation["status"]

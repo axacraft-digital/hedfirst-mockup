@@ -24,26 +24,32 @@ Currently, the catalog displays **all 40 disease state categories** regardless o
 
 ```typescript
 // CURRENT: Shows ALL categories from enum, regardless of product availability
-const categories: Category[] = useMemo(() =>
-  Object.entries(diseaseStateNames)
-    .filter(([key]) => key !== StoreProductDiseaseStateEnum.NONE
-        && key !== StoreProductDiseaseStateEnum.MULTIPLE)
-    .map(([key, label]) => ({
-      key: key as StoreProductDiseaseStateEnum,
-      label,
-    })), []);
+const categories: Category[] = useMemo(
+  () =>
+    Object.entries(diseaseStateNames)
+      .filter(
+        ([key]) =>
+          key !== StoreProductDiseaseStateEnum.NONE &&
+          key !== StoreProductDiseaseStateEnum.MULTIPLE
+      )
+      .map(([key, label]) => ({
+        key: key as StoreProductDiseaseStateEnum,
+        label,
+      })),
+  []
+)
 ```
 
 **Result:** 38 categories always displayed (40 minus NONE and MULTIPLE)
 
 ### Where Categories Appear
 
-| Location | File | Issue |
-|----------|------|-------|
-| Catalog sidebar filter | `src/app/catalog/_components/category-filter.tsx` | Shows all 38 categories |
-| Header mega menu | `src/dictionaries/nav-Item-config.ts` | Hardcoded category links |
-| Footer links | `src/shared/constants/footer.constants.ts` | Hardcoded category links |
-| Sidebar nav | `src/layouts/sidebar.tsx` | Uses nav-Item-config |
+| Location               | File                                              | Issue                    |
+| ---------------------- | ------------------------------------------------- | ------------------------ |
+| Catalog sidebar filter | `src/app/catalog/_components/category-filter.tsx` | Shows all 38 categories  |
+| Header mega menu       | `src/dictionaries/nav-Item-config.ts`             | Hardcoded category links |
+| Footer links           | `src/shared/constants/footer.constants.ts`        | Hardcoded category links |
+| Sidebar nav            | `src/layouts/sidebar.tsx`                         | Uses nav-Item-config     |
 
 ### Current API
 
@@ -75,6 +81,7 @@ Instead of hardcoding all categories, fetch only categories that have active pro
 **Endpoint:** `GET /organizations/:orgId/stores/:storeId/products/categories`
 
 **Response:**
+
 ```typescript
 interface CategoryWithCount {
   diseaseState: StoreProductDiseaseStateEnum;
@@ -91,18 +98,35 @@ interface CategoryWithCount {
 ```
 
 **Example Response:**
+
 ```json
 {
   "categories": [
-    { "diseaseState": "DERMATOLOGY", "name": "Dermatology", "slug": "dermatology", "productCount": 12 },
-    { "diseaseState": "WEIGHT_MANAGEMENT", "name": "Weight Management", "slug": "weight-management", "productCount": 8 },
-    { "diseaseState": "HAIR_SCALP", "name": "Hair & Scalp", "slug": "hair-scalp", "productCount": 5 }
+    {
+      "diseaseState": "DERMATOLOGY",
+      "name": "Dermatology",
+      "slug": "dermatology",
+      "productCount": 12
+    },
+    {
+      "diseaseState": "WEIGHT_MANAGEMENT",
+      "name": "Weight Management",
+      "slug": "weight-management",
+      "productCount": 8
+    },
+    {
+      "diseaseState": "HAIR_SCALP",
+      "name": "Hair & Scalp",
+      "slug": "hair-scalp",
+      "productCount": 5
+    }
   ],
   "totalProducts": 25
 }
 ```
 
 **Query Logic:**
+
 ```sql
 SELECT
   disease_state,
@@ -176,15 +200,18 @@ getCategories: builder.query<CategoriesResponse, void>({
 
 ```typescript
 // NEW: Fetch categories with product counts
-const { data: categoriesData, isLoading: categoriesLoading } = useGetCategoriesQuery();
+const { data: categoriesData, isLoading: categoriesLoading } =
+  useGetCategoriesQuery()
 
-const categories: Category[] = useMemo(() =>
-  categoriesData?.categories.map(cat => ({
-    key: cat.diseaseState,
-    label: cat.name,
-    count: cat.productCount,
-  })) ?? [],
-[categoriesData]);
+const categories: Category[] = useMemo(
+  () =>
+    categoriesData?.categories.map((cat) => ({
+      key: cat.diseaseState,
+      label: cat.name,
+      count: cat.productCount,
+    })) ?? [],
+  [categoriesData]
+)
 ```
 
 - [ ] Show loading state while categories load
@@ -225,6 +252,7 @@ However, as an interim improvement:
 Current empty state shows when a category has no products. With the new logic, users should never see empty category pages because empty categories won't appear in the filter.
 
 However, empty state can still occur from:
+
 - Search with no results
 - Products removed after page load
 
@@ -240,6 +268,7 @@ However, empty state can still occur from:
 **Scenario:** Admin removes last product from a category while user is browsing.
 
 **Solution:**
+
 - API returns empty results
 - Show search empty state
 - Categories refresh on next page load
@@ -249,6 +278,7 @@ However, empty state can still occur from:
 **Scenario:** Admin adds first product in a new disease state.
 
 **Solution:**
+
 - Invalidate categories cache when product is created/updated
 - New category appears after cache refresh
 
@@ -257,6 +287,7 @@ However, empty state can still occur from:
 **Scenario:** New tenant with no products configured.
 
 **Solution:**
+
 - Categories API returns empty array
 - Hide category filter entirely
 - Show friendly "Coming soon" or setup message
@@ -267,20 +298,20 @@ However, empty state can still occur from:
 
 ### Backend Changes
 
-| File | Action |
-|------|--------|
-| `src/apps/store-admin/modules/products/products.controller.ts` | Add categories endpoint |
-| `src/apps/store-admin/modules/products/products.service.ts` | Add getCategoriesWithCounts method |
-| `src/apps/patient/modules/products/products.controller.ts` | Add categories endpoint (patient API) |
+| File                                                           | Action                                |
+| -------------------------------------------------------------- | ------------------------------------- |
+| `src/apps/store-admin/modules/products/products.controller.ts` | Add categories endpoint               |
+| `src/apps/store-admin/modules/products/products.service.ts`    | Add getCategoriesWithCounts method    |
+| `src/apps/patient/modules/products/products.controller.ts`     | Add categories endpoint (patient API) |
 
 ### Frontend Changes
 
-| File | Action |
-|------|--------|
-| `src/providers/store/api/products/products.ts` | Add getCategories RTK Query endpoint |
-| `src/app/catalog/catalog.client.tsx` | Use API categories instead of hardcoded |
-| `src/app/catalog/_components/category-filter.tsx` | Handle empty state, optional counts |
-| `src/app/catalog/_components/empty-results.tsx` | Simplify messaging |
+| File                                              | Action                                  |
+| ------------------------------------------------- | --------------------------------------- |
+| `src/providers/store/api/products/products.ts`    | Add getCategories RTK Query endpoint    |
+| `src/app/catalog/catalog.client.tsx`              | Use API categories instead of hardcoded |
+| `src/app/catalog/_components/category-filter.tsx` | Handle empty state, optional counts     |
+| `src/app/catalog/_components/empty-results.tsx`   | Simplify messaging                      |
 
 ---
 
@@ -291,10 +322,12 @@ However, empty state can still occur from:
 Categories don't change frequently, so aggressive caching is appropriate:
 
 **Backend:**
+
 - Cache categories response for 5 minutes
 - Invalidate cache on product create/update/delete
 
 **Frontend (RTK Query):**
+
 - `keepUnusedDataFor: 300` (5 minutes)
 - Invalidate on `ApiTags.Products` mutations
 

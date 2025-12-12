@@ -157,7 +157,9 @@ export function getOrderStatusConfig(status: string): StatusConfig {
 }
 
 export function getAppointmentStatusConfig(status: string): StatusConfig {
-  return appointmentStatusConfig[status] ?? { label: status, variant: "outline" }
+  return (
+    appointmentStatusConfig[status] ?? { label: status, variant: "outline" }
+  )
 }
 
 // ============================================================================

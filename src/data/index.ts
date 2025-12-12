@@ -1,3 +1,27 @@
+import activityHistoryJson from "./mock/audit/activity-history.json"
+import chartNotesJson from "./mock/clinical/chart-notes.json"
+import consultationsJson from "./mock/clinical/consultations.json"
+import questionnairesJson from "./mock/clinical/questionnaires.json"
+import treatmentsJson from "./mock/clinical/treatments.json"
+import appointmentsJson from "./mock/communication/appointments.json"
+import messagesJson from "./mock/communication/messages.json"
+import notesJson from "./mock/communication/notes.json"
+import documentsJson from "./mock/documents/documents.json"
+import ordersJson from "./mock/financial/orders.json"
+import paymentHistoryJson from "./mock/financial/payment-history.json"
+import paymentMethodsJson from "./mock/financial/payment-methods.json"
+import integrationStatusJson from "./mock/integrations/status.json"
+import patientsJson from "./mock/patients.json"
+// ============================================================================
+// New Discrete JSON Imports (Phase 2+)
+// ============================================================================
+
+import diseaseStatesJson from "./mock/reference/disease-states.json"
+import labKitsJson from "./mock/reference/lab-kits.json"
+import pharmaciesJson from "./mock/reference/pharmacies.json"
+import productsJson from "./mock/reference/products.json"
+import providersJson from "./mock/reference/providers.json"
+import storeUsersJson from "./mock/reference/store-users.json"
 import type {
   ActivityEvent,
   Appointment,
@@ -26,31 +50,6 @@ import type {
   Treatment,
 } from "./types"
 
-// ============================================================================
-// New Discrete JSON Imports (Phase 2+)
-// ============================================================================
-
-import diseaseStatesJson from "./mock/reference/disease-states.json"
-import providersJson from "./mock/reference/providers.json"
-import productsJson from "./mock/reference/products.json"
-import storeUsersJson from "./mock/reference/store-users.json"
-import pharmaciesJson from "./mock/reference/pharmacies.json"
-import patientsJson from "./mock/patients.json"
-import chartNotesJson from "./mock/clinical/chart-notes.json"
-import questionnairesJson from "./mock/clinical/questionnaires.json"
-import treatmentsJson from "./mock/clinical/treatments.json"
-import consultationsJson from "./mock/clinical/consultations.json"
-import messagesJson from "./mock/communication/messages.json"
-import appointmentsJson from "./mock/communication/appointments.json"
-import notesJson from "./mock/communication/notes.json"
-import ordersJson from "./mock/financial/orders.json"
-import paymentMethodsJson from "./mock/financial/payment-methods.json"
-import paymentHistoryJson from "./mock/financial/payment-history.json"
-import documentsJson from "./mock/documents/documents.json"
-import activityHistoryJson from "./mock/audit/activity-history.json"
-import integrationStatusJson from "./mock/integrations/status.json"
-import labKitsJson from "./mock/reference/lab-kits.json"
-
 // Typed exports from discrete files (currently empty, will be populated in Phase 2+)
 export const diseaseStateEntities = diseaseStatesJson as DiseaseStateEntity[]
 export const mockProviders = providersJson as Provider[]
@@ -70,7 +69,8 @@ export const mockPaymentMethods = paymentMethodsJson as PaymentMethod[]
 export const mockPaymentHistory = paymentHistoryJson as PaymentTransaction[]
 export const mockDocuments = documentsJson as unknown[] // PatientDocument - already in documents.ts
 export const mockActivityHistory = activityHistoryJson as ActivityEvent[]
-export const mockIntegrationStatus = integrationStatusJson as IntegrationStatusRecord[]
+export const mockIntegrationStatus =
+  integrationStatusJson as IntegrationStatusRecord[]
 export const labKitCatalog = labKitsJson.catalog as LabKitCatalog
 export const mockLabKits = labKitsJson.labKits as LabKit[]
 
@@ -196,11 +196,15 @@ export function getProductsByDiseaseState(diseaseState: string): Product[] {
 // Disease State Helpers (New)
 // ============================================================================
 
-export function getDiseaseStateById(id: string): DiseaseStateEntity | undefined {
+export function getDiseaseStateById(
+  id: string
+): DiseaseStateEntity | undefined {
   return diseaseStateEntities.find((ds) => ds.id === id)
 }
 
-export function getDiseaseStateByCode(code: string): DiseaseStateEntity | undefined {
+export function getDiseaseStateByCode(
+  code: string
+): DiseaseStateEntity | undefined {
   return diseaseStateEntities.find((ds) => ds.code === code)
 }
 
@@ -247,7 +251,9 @@ export function getPharmacyOptions(): { label: string; value: string }[] {
 // Questionnaire Helpers (New)
 // ============================================================================
 
-export function getQuestionnairesByPatientId(patientId: string): Questionnaire[] {
+export function getQuestionnairesByPatientId(
+  patientId: string
+): Questionnaire[] {
   return mockQuestionnaires.filter((q) => q.patientId === patientId)
 }
 
@@ -268,7 +274,9 @@ export function getTreatmentById(id: string): Treatment | undefined {
 }
 
 export function getActiveTreatmentsByPatientId(patientId: string): Treatment[] {
-  return mockTreatments.filter((t) => t.patientId === patientId && t.status === "ACTIVE")
+  return mockTreatments.filter(
+    (t) => t.patientId === patientId && t.status === "ACTIVE"
+  )
 }
 
 // ============================================================================
@@ -283,7 +291,9 @@ export function getConsultationById(id: string): Consultation | undefined {
   return mockConsultations.find((c) => c.id === id)
 }
 
-export function getConsultationsByProviderId(providerId: string): Consultation[] {
+export function getConsultationsByProviderId(
+  providerId: string
+): Consultation[] {
   return mockConsultations.filter((c) => c.providerId === providerId)
 }
 
@@ -295,7 +305,9 @@ export function getPendingConsultations(): Consultation[] {
 // Payment Method Helpers (New)
 // ============================================================================
 
-export function getPaymentMethodsByPatientId(patientId: string): PaymentMethod[] {
+export function getPaymentMethodsByPatientId(
+  patientId: string
+): PaymentMethod[] {
   return mockPaymentMethods.filter((pm) => pm.patientId === patientId)
 }
 
@@ -303,23 +315,33 @@ export function getPaymentMethodById(id: string): PaymentMethod | undefined {
   return mockPaymentMethods.find((pm) => pm.id === id)
 }
 
-export function getDefaultPaymentMethod(patientId: string): PaymentMethod | undefined {
-  return mockPaymentMethods.find((pm) => pm.patientId === patientId && pm.isDefault)
+export function getDefaultPaymentMethod(
+  patientId: string
+): PaymentMethod | undefined {
+  return mockPaymentMethods.find(
+    (pm) => pm.patientId === patientId && pm.isDefault
+  )
 }
 
 // ============================================================================
 // Payment Transaction Helpers (New)
 // ============================================================================
 
-export function getPaymentHistoryByPatientId(patientId: string): PaymentTransaction[] {
+export function getPaymentHistoryByPatientId(
+  patientId: string
+): PaymentTransaction[] {
   return mockPaymentHistory.filter((pt) => pt.patientId === patientId)
 }
 
-export function getPaymentTransactionById(id: string): PaymentTransaction | undefined {
+export function getPaymentTransactionById(
+  id: string
+): PaymentTransaction | undefined {
   return mockPaymentHistory.find((pt) => pt.id === id)
 }
 
-export function getPaymentTransactionsByOrderId(orderId: string): PaymentTransaction[] {
+export function getPaymentTransactionsByOrderId(
+  orderId: string
+): PaymentTransaction[] {
   return mockPaymentHistory.filter((pt) => pt.orderId === orderId)
 }
 
@@ -327,10 +349,15 @@ export function getPaymentTransactionsByOrderId(orderId: string): PaymentTransac
 // Activity History Helpers (New)
 // ============================================================================
 
-export function getActivityHistoryByPatientId(patientId: string): ActivityEvent[] {
+export function getActivityHistoryByPatientId(
+  patientId: string
+): ActivityEvent[] {
   return mockActivityHistory
     .filter((e) => e.patientId === patientId)
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    )
 }
 
 export function getActivityEventById(id: string): ActivityEvent | undefined {
@@ -341,15 +368,21 @@ export function getActivityEventById(id: string): ActivityEvent | undefined {
 // Integration Helpers
 // ============================================================================
 
-export function getIntegrationStatusById(id: string): IntegrationStatusRecord | undefined {
+export function getIntegrationStatusById(
+  id: string
+): IntegrationStatusRecord | undefined {
   return mockIntegrationStatus.find((i) => i.id === id)
 }
 
-export function getIntegrationsByStatus(status: IntegrationStatus): IntegrationStatusRecord[] {
+export function getIntegrationsByStatus(
+  status: IntegrationStatus
+): IntegrationStatusRecord[] {
   return mockIntegrationStatus.filter((i) => i.status === status)
 }
 
-export function getIntegrationsByCategory(category: IntegrationCategory): IntegrationStatusRecord[] {
+export function getIntegrationsByCategory(
+  category: IntegrationCategory
+): IntegrationStatusRecord[] {
   return mockIntegrationStatus.filter((i) => i.category === category)
 }
 
@@ -408,8 +441,12 @@ export function getIntegrationDashboardSummary(): {
   issueDetails: { name: string; message: string; severity: string }[]
 } {
   const total = mockIntegrationStatus.length
-  const connected = mockIntegrationStatus.filter((i) => i.status === "connected").length
-  const issues = mockIntegrationStatus.filter((i) => i.status === "issue").length
+  const connected = mockIntegrationStatus.filter(
+    (i) => i.status === "connected"
+  ).length
+  const issues = mockIntegrationStatus.filter(
+    (i) => i.status === "issue"
+  ).length
   const notConfigured = mockIntegrationStatus.filter(
     (i) => i.status === "not_connected" || i.status === "not_tested"
   ).length
@@ -480,7 +517,9 @@ export interface PatientPortalData {
  * Get patient with all related details for patient detail views
  * Used by: Store Admin, Provider Portal, Patient Portal
  */
-export function getPatientWithDetails(patientId: string): PatientWithDetails | null {
+export function getPatientWithDetails(
+  patientId: string
+): PatientWithDetails | null {
   const patient = mockPatients.find((p) => p.id === patientId)
   if (!patient) return null
 
@@ -497,14 +536,19 @@ export function getPatientWithDetails(patientId: string): PatientWithDetails | n
   // Get recent orders (last 5, sorted by date)
   const recentOrders = mockOrders
     .filter((o) => o.userId === patientId)
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    )
     .slice(0, 5)
 
   // Get active consultation (in progress or pending)
-  const activeConsultation = mockConsultations.find(
-    (c) => c.patientId === patientId &&
-    (c.status === "PENDING_REVIEW" || c.status === "IN_PROGRESS")
-  ) ?? null
+  const activeConsultation =
+    mockConsultations.find(
+      (c) =>
+        c.patientId === patientId &&
+        (c.status === "PENDING_REVIEW" || c.status === "IN_PROGRESS")
+    ) ?? null
 
   return {
     patient,
@@ -519,12 +563,16 @@ export function getPatientWithDetails(patientId: string): PatientWithDetails | n
  * Get provider dashboard data for provider portal home
  * Used by: Provider Portal
  */
-export function getProviderDashboard(providerId: string): ProviderDashboardData | null {
+export function getProviderDashboard(
+  providerId: string
+): ProviderDashboardData | null {
   const provider = mockProviders.find((p) => p.id === providerId)
   if (!provider) return null
 
   // Get all patients assigned to this provider
-  const patients = mockPatients.filter((p) => p.assignedProviderId === providerId)
+  const patients = mockPatients.filter(
+    (p) => p.assignedProviderId === providerId
+  )
 
   // Get pending consultations for this provider
   const pendingConsultations = mockConsultations.filter(
@@ -533,7 +581,11 @@ export function getProviderDashboard(providerId: string): ProviderDashboardData 
 
   // Get today's appointments
   const today = new Date()
-  const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+  const todayStart = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate()
+  )
   const todayEnd = new Date(todayStart.getTime() + 24 * 60 * 60 * 1000)
 
   const todayAppointments = mockAppointments.filter((a) => {
@@ -555,7 +607,9 @@ export function getProviderDashboard(providerId: string): ProviderDashboardData 
  * Get patient portal home data
  * Used by: Patient Portal
  */
-export function getPatientPortalData(patientId: string): PatientPortalData | null {
+export function getPatientPortalData(
+  patientId: string
+): PatientPortalData | null {
   const patient = mockPatients.find((p) => p.id === patientId)
   if (!patient) return null
 
@@ -573,7 +627,10 @@ export function getPatientPortalData(patientId: string): PatientPortalData | nul
       if (!a.startAtLocal) return false
       return new Date(a.startAtLocal) > now
     })
-    .sort((a, b) => new Date(a.startAtLocal).getTime() - new Date(b.startAtLocal).getTime())
+    .sort(
+      (a, b) =>
+        new Date(a.startAtLocal).getTime() - new Date(b.startAtLocal).getTime()
+    )
 
   // Count unread messages
   const unreadMessages = mockMessages
@@ -588,7 +645,10 @@ export function getPatientPortalData(patientId: string): PatientPortalData | nul
   // Get recent orders (last 5)
   const recentOrders = mockOrders
     .filter((o) => o.userId === patientId)
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    )
     .slice(0, 5)
 
   return {

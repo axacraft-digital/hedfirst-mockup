@@ -99,7 +99,11 @@ export interface PatientDetail {
 }
 
 // Helper to calculate BMI
-export function calculateBmi(heightFeet: number, heightInches: number, weightLbs: number): number {
+export function calculateBmi(
+  heightFeet: number,
+  heightInches: number,
+  weightLbs: number
+): number {
   const totalInches = heightFeet * 12 + heightInches
   const heightMeters = totalInches * 0.0254
   const weightKg = weightLbs * 0.453592

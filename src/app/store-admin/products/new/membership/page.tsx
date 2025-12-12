@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { toast } from "@/hooks/use-toast"
 import { IconArrowLeft, IconPlus, IconTrash } from "@tabler/icons-react"
 import {
   Breadcrumb,
@@ -25,7 +26,6 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
-import { toast } from "@/hooks/use-toast"
 import { Header } from "@/components/layout/header"
 
 // Billing cycle options for memberships
@@ -54,10 +54,7 @@ export default function NewMembershipPage() {
 
   // Feature handlers
   const addFeature = () => {
-    setFeatures([
-      ...features,
-      { id: `feat_${Date.now()}`, text: "" },
-    ])
+    setFeatures([...features, { id: `feat_${Date.now()}`, text: "" }])
   }
 
   const updateFeature = (id: string, text: string) => {
@@ -109,7 +106,9 @@ export default function NewMembershipPage() {
 
         {/* Header row: Title on left, On Store toggle on right */}
         <div className="flex items-center justify-between gap-4">
-          <h1 className="text-2xl font-bold tracking-tight">Create Membership</h1>
+          <h1 className="text-2xl font-bold tracking-tight">
+            Create Membership
+          </h1>
           <div className="flex items-center gap-2">
             <Label htmlFor="on-store" className="text-sm font-medium">
               On store
@@ -232,7 +231,7 @@ export default function NewMembershipPage() {
             <div className="space-y-2">
               <Label htmlFor="price">Price</Label>
               <div className="relative w-[200px]">
-                <span className="text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 text-sm">
+                <span className="text-muted-foreground absolute top-1/2 left-3 -translate-y-1/2 text-sm">
                   $
                 </span>
                 <Input
@@ -295,7 +294,8 @@ export default function NewMembershipPage() {
 
               {features.length === 0 && (
                 <p className="text-muted-foreground text-sm">
-                  No features added yet. Add benefits to show customers what&apos;s included.
+                  No features added yet. Add benefits to show customers
+                  what&apos;s included.
                 </p>
               )}
 

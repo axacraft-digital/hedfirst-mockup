@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import { ChevronsUpDown, Plus } from "lucide-react"
-import { cn } from "@/lib/utils"
 // import Image from "next/image"
 import {
   DropdownMenu,
@@ -19,6 +18,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { cn } from "@/lib/utils"
 
 interface Props {
   teams: {

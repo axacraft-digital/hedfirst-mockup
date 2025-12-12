@@ -14,8 +14,12 @@ import { orders } from "./data/orders-data"
 export default function OrdersPage() {
   // Calculate counts for display
   const totalOrders = orders.length
-  const needsReviewCount = orders.filter((o) => o.status === "AWAITING_REVIEW").length
-  const paymentFailedCount = orders.filter((o) => o.status === "PAYMENT_FAILED").length
+  const needsReviewCount = orders.filter(
+    (o) => o.status === "AWAITING_REVIEW"
+  ).length
+  const paymentFailedCount = orders.filter(
+    (o) => o.status === "PAYMENT_FAILED"
+  ).length
 
   return (
     <>
@@ -44,12 +48,14 @@ export default function OrdersPage() {
                 {totalOrders} orders
                 {needsReviewCount > 0 && (
                   <span className="text-amber-600 dark:text-amber-400">
-                    {" "}• {needsReviewCount} awaiting review
+                    {" "}
+                    • {needsReviewCount} awaiting review
                   </span>
                 )}
                 {paymentFailedCount > 0 && (
                   <span className="text-destructive">
-                    {" "}• {paymentFailedCount} payment failed
+                    {" "}
+                    • {paymentFailedCount} payment failed
                   </span>
                 )}
               </p>

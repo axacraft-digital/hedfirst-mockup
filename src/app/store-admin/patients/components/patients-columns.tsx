@@ -1,13 +1,13 @@
 "use client"
 
-import { format } from "date-fns"
-import { ColumnDef } from "@tanstack/react-table"
 import Link from "next/link"
-import { cn } from "@/lib/utils"
+import { getProviderDisplayName, mockOrders, mockProviders } from "@/data"
+import { ColumnDef } from "@tanstack/react-table"
+import { format } from "date-fns"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import LongText from "@/components/long-text"
-import { mockOrders, mockProviders, getProviderDisplayName } from "@/data"
+import { cn } from "@/lib/utils"
 import type { Patient } from "@/data/types"
 import { DataTableColumnHeader } from "./data-table-column-header"
 
@@ -25,7 +25,8 @@ function getLastOrderDate(patientId: string): Date | null {
 const statusStyles = {
   ACTIVE: {
     label: "Active",
-    className: "bg-teal-100/30 text-teal-900 dark:text-teal-200 border-teal-200",
+    className:
+      "bg-teal-100/30 text-teal-900 dark:text-teal-200 border-teal-200",
   },
   AWAITING_REVIEW: {
     label: "Awaiting Review",
@@ -33,11 +34,13 @@ const statusStyles = {
   },
   IN_PROGRESS: {
     label: "In Progress",
-    className: "bg-amber-100/30 text-amber-900 dark:text-amber-200 border-amber-200",
+    className:
+      "bg-amber-100/30 text-amber-900 dark:text-amber-200 border-amber-200",
   },
   NEEDS_ATTENTION: {
     label: "Needs Attention",
-    className: "bg-destructive/10 dark:bg-destructive/50 text-destructive dark:text-primary border-destructive/10",
+    className:
+      "bg-destructive/10 dark:bg-destructive/50 text-destructive dark:text-primary border-destructive/10",
   },
   DEACTIVATED: {
     label: "Deactivated",
@@ -46,7 +49,12 @@ const statusStyles = {
 } as const
 
 function getStatusStyle(status: Patient["patientStatus"]) {
-  return statusStyles[status] ?? { label: status, className: "bg-neutral-300/40 border-neutral-300" }
+  return (
+    statusStyles[status] ?? {
+      label: status,
+      className: "bg-neutral-300/40 border-neutral-300",
+    }
+  )
 }
 
 export const columns: ColumnDef<Patient>[] = [
@@ -59,9 +67,7 @@ export const columns: ColumnDef<Patient>[] = [
     cell: ({ row }) => {
       const { firstName, lastName } = row.original
       const fullName = `${firstName} ${lastName}`
-      return (
-        <LongText className="max-w-36 font-medium">{fullName}</LongText>
-      )
+      return <LongText className="max-w-36 font-medium">{fullName}</LongText>
     },
     meta: { className: "w-40" },
   },
@@ -113,10 +119,16 @@ export const columns: ColumnDef<Patient>[] = [
     ),
     cell: ({ row }) => {
       const providerId = row.original.assignedProviderId
-      if (!providerId) return <span className="text-muted-foreground">Unassigned</span>
+      if (!providerId)
+        return <span className="text-muted-foreground">Unassigned</span>
       const provider = mockProviders.find((p) => p.id === providerId)
-      if (!provider) return <span className="text-muted-foreground">Unknown</span>
-      return <div className="w-fit text-nowrap">{getProviderDisplayName(provider)}</div>
+      if (!provider)
+        return <span className="text-muted-foreground">Unknown</span>
+      return (
+        <div className="w-fit text-nowrap">
+          {getProviderDisplayName(provider)}
+        </div>
+      )
     },
     enableSorting: false,
   },

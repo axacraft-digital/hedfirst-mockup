@@ -2,7 +2,6 @@
 
 import { use, useState } from "react"
 import Link from "next/link"
-import { format } from "date-fns"
 import {
   IconArrowLeft,
   IconCheck,
@@ -10,6 +9,7 @@ import {
   IconPaperclip,
   IconSend,
 } from "@tabler/icons-react"
+import { format } from "date-fns"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -173,7 +173,8 @@ Let me know if you have any other questions!`,
         id: "msg_004c",
         senderType: "patient",
         senderName: "Jacob Henderson",
-        content: "Any time after November 20th would work. Preferably afternoon.",
+        content:
+          "Any time after November 20th would work. Preferably afternoon.",
         date: "2024-10-13T09:00:00Z",
       },
       {
@@ -205,7 +206,8 @@ const statusStyles: Record<ThreadStatus, { label: string; className: string }> =
   {
     unread: {
       label: "Unread",
-      className: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
+      className:
+        "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
     },
     open: {
       label: "Open",
@@ -329,7 +331,7 @@ export default function MessageThreadPage({ params }: Props) {
                     {format(new Date(message.date), "MMM d, yyyy 'at' h:mm a")}
                   </span>
                 </div>
-                <div className="mt-2 whitespace-pre-wrap text-sm">
+                <div className="mt-2 text-sm whitespace-pre-wrap">
                   {message.content}
                 </div>
               </div>

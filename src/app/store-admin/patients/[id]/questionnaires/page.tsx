@@ -54,7 +54,8 @@ function generateQuestionnaires(patientId: string): Questionnaire[] {
     // Make Hormone Optimization and Weight Management completed for our demo patient
     const isCompleted =
       patientId === "usr_pat001" &&
-      (diseaseState === "Hormone Optimization" || diseaseState === "Weight Management")
+      (diseaseState === "Hormone Optimization" ||
+        diseaseState === "Weight Management")
 
     const isHormone = diseaseState === "Hormone Optimization"
     const isWeight = diseaseState === "Weight Management"
@@ -94,8 +95,7 @@ const statusStyles: Record<
   },
   in_progress: {
     label: "In Progress",
-    className:
-      "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
+    className: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
   },
   no_purchase: {
     label: "No purchase",
@@ -123,7 +123,9 @@ export default function PatientQuestionnairesPage({ params }: Props) {
     }
   }
 
-  const completedCount = questionnaires.filter(q => q.status === "completed").length
+  const completedCount = questionnaires.filter(
+    (q) => q.status === "completed"
+  ).length
 
   return (
     <div className="flex flex-1 flex-col">
@@ -132,9 +134,7 @@ export default function PatientQuestionnairesPage({ params }: Props) {
         <p className="text-muted-foreground text-sm">
           Medical intake questionnaires by disease state.
           {completedCount > 0 && (
-            <span className="ml-1">
-              {completedCount} completed.
-            </span>
+            <span className="ml-1">{completedCount} completed.</span>
           )}
         </p>
       </div>

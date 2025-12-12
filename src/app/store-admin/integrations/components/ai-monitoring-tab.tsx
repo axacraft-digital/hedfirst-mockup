@@ -1,7 +1,14 @@
 "use client"
 
-import { Activity, Clock, DollarSign, AlertCircle, CheckCircle } from "lucide-react"
+import {
+  Activity,
+  AlertCircle,
+  CheckCircle,
+  Clock,
+  DollarSign,
+} from "lucide-react"
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts"
+import { Badge } from "@/components/ui/badge"
 import {
   Card,
   CardContent,
@@ -15,6 +22,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
+import { Progress } from "@/components/ui/progress"
 import {
   Table,
   TableBody,
@@ -23,8 +31,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
 import type { IntegrationDetail } from "../data/integration-details"
 
 interface AIMonitoringTabProps {
@@ -114,7 +120,9 @@ export function AIMonitoringTab({ integration }: AIMonitoringTabProps) {
         {/* Requests Today */}
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Requests Today</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Requests Today
+            </CardTitle>
             <Activity className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
@@ -217,7 +225,10 @@ export function AIMonitoringTab({ integration }: AIMonitoringTabProps) {
                 cursor={false}
                 content={
                   <ChartTooltipContent
-                    formatter={(value) => [`$${Number(value).toFixed(2)}`, "Cost"]}
+                    formatter={(value) => [
+                      `$${Number(value).toFixed(2)}`,
+                      "Cost",
+                    ]}
                   />
                 }
               />

@@ -1,12 +1,10 @@
 "use client"
 
 import { HTMLAttributes, useState } from "react"
-import { z } from "zod"
-import { useForm } from "react-hook-form"
-import { IconBrandFacebook, IconBrandGithub } from "@tabler/icons-react"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { nofitySubmittedValues } from "@/lib/notify-submitted-values"
-import { cn } from "@/lib/utils"
+import { IconBrandFacebook, IconBrandGithub } from "@tabler/icons-react"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -18,6 +16,8 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { PasswordInput } from "@/components/password-input"
+import { nofitySubmittedValues } from "@/lib/notify-submitted-values"
+import { cn } from "@/lib/utils"
 
 const formSchema = z
   .object({

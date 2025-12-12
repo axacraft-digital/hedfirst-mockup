@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { mockPharmacies as pharmacies } from "@/data"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -10,7 +11,6 @@ import {
 import { Header } from "@/components/layout/header"
 import { AddPharmacyButton } from "./components/add-pharmacy-button"
 import { PharmaciesTable } from "./components/pharmacies-table"
-import { mockPharmacies as pharmacies } from "@/data"
 
 export default function PharmaciesPage() {
   return (

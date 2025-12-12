@@ -1,6 +1,6 @@
-import type { Conversation, Message, ChatParticipant } from "./types"
-import messagesJson from "./mock/communication/messages.json"
 import { mockPatients, mockProviders } from "./index"
+import messagesJson from "./mock/communication/messages.json"
+import type { ChatParticipant, Conversation, Message } from "./types"
 
 /**
  * Messages data - using centralized mock data with UI-shaped helpers
@@ -42,7 +42,10 @@ function getSenderType(role: string): SenderType {
 }
 
 // Get sender name from user ID
-function getSenderName(senderId: string, participants: ChatParticipant[]): {
+function getSenderName(
+  senderId: string,
+  participants: ChatParticipant[]
+): {
   name: string
   type: SenderType
 } {
@@ -59,7 +62,10 @@ function getSenderName(senderId: string, participants: ChatParticipant[]): {
   // Look up in providers
   const provider = mockProviders.find((p) => p.id === senderId)
   if (provider) {
-    return { name: `Dr. ${provider.firstName} ${provider.lastName}`, type: "provider" }
+    return {
+      name: `Dr. ${provider.firstName} ${provider.lastName}`,
+      type: "provider",
+    }
   }
 
   // Default for admin/system
@@ -120,16 +126,20 @@ function toUIMessageThread(conversation: Conversation): UIMessageThread | null {
     return null
   }
 
-  const senderInfo = getSenderName(lastMessage.senderId, conversation.participants)
+  const senderInfo = getSenderName(
+    lastMessage.senderId,
+    conversation.participants
+  )
 
   return {
     id: conversation.id,
     patientId,
     subject: generateSubject(messages),
     lastMessage: {
-      preview: lastMessage.text.length > 150
-        ? lastMessage.text.slice(0, 147) + "..."
-        : lastMessage.text,
+      preview:
+        lastMessage.text.length > 150
+          ? lastMessage.text.slice(0, 147) + "..."
+          : lastMessage.text,
       senderType: senderInfo.type,
       senderName: senderInfo.name,
       date: lastMessage.createdAt,
@@ -144,11 +154,14 @@ function toUIMessageThread(conversation: Conversation): UIMessageThread | null {
 export function getMessageThreadsForUI(patientId: string): UIMessageThread[] {
   return conversations
     .map(toUIMessageThread)
-    .filter((thread): thread is UIMessageThread =>
-      thread !== null && thread.patientId === patientId
+    .filter(
+      (thread): thread is UIMessageThread =>
+        thread !== null && thread.patientId === patientId
     )
-    .sort((a, b) =>
-      new Date(b.lastMessage.date).getTime() - new Date(a.lastMessage.date).getTime()
+    .sort(
+      (a, b) =>
+        new Date(b.lastMessage.date).getTime() -
+        new Date(a.lastMessage.date).getTime()
     )
 }
 
@@ -164,5 +177,6 @@ export function getAllConversations(): Conversation[] {
 
 // Get unread count for a patient
 export function getUnreadCountForPatient(patientId: string): number {
-  return getMessageThreadsForUI(patientId).filter((t) => t.status === "unread").length
+  return getMessageThreadsForUI(patientId).filter((t) => t.status === "unread")
+    .length
 }

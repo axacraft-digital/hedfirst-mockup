@@ -98,8 +98,10 @@ export function UsersTable({ columns, data }: Props) {
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  className="cursor-pointer transition-colors hover:bg-muted/50"
-                  onClick={() => router.push(`/store-admin/users/${row.original.id}`)}
+                  className="hover:bg-muted/50 cursor-pointer transition-colors"
+                  onClick={() =>
+                    router.push(`/store-admin/users/${row.original.id}`)
+                  }
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell

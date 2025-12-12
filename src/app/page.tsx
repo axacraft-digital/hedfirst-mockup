@@ -2,13 +2,13 @@
 
 import Link from "next/link"
 import { Building2, Heart, Stethoscope } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 
 const portals = [
   {
@@ -22,7 +22,8 @@ const portals = [
   },
   {
     title: "Provider Portal",
-    description: "Review patients, write prescriptions, and manage consultations",
+    description:
+      "Review patients, write prescriptions, and manage consultations",
     href: "/provider-admin/dashboard",
     icon: Stethoscope,
     gradient: "from-blue-500/10 to-blue-500/5",
@@ -46,7 +47,7 @@ function PortalCard({ portal }: { portal: (typeof portals)[number] }) {
       className={`group relative h-full overflow-hidden transition-all ${
         portal.disabled
           ? "cursor-not-allowed opacity-50"
-          : "hover:shadow-lg hover:shadow-primary/5"
+          : "hover:shadow-primary/5 hover:shadow-lg"
       }`}
     >
       <div
@@ -88,7 +89,7 @@ function PortalCard({ portal }: { portal: (typeof portals)[number] }) {
 
 export default function PortalPickerPage() {
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center bg-gradient-to-b from-background to-muted/20 p-4">
+    <div className="from-background to-muted/20 flex min-h-svh flex-col items-center justify-center bg-gradient-to-b p-4">
       <div className="mb-12 text-center">
         <h1 className="mb-2 text-4xl font-bold tracking-tight">Teligant</h1>
         <p className="text-muted-foreground">
@@ -102,7 +103,7 @@ export default function PortalPickerPage() {
         ))}
       </div>
 
-      <p className="mt-12 text-sm text-muted-foreground">
+      <p className="text-muted-foreground mt-12 text-sm">
         These are UI mockups for marketing purposes. No real patient data is
         displayed.
       </p>

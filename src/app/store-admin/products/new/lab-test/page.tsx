@@ -3,6 +3,8 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { labKitCatalog } from "@/data"
+import { toast } from "@/hooks/use-toast"
 import { IconArrowLeft, IconPlus, IconTrash } from "@tabler/icons-react"
 import {
   Breadcrumb,
@@ -25,9 +27,7 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
-import { toast } from "@/hooks/use-toast"
 import { Header } from "@/components/layout/header"
-import { labKitCatalog } from "@/data"
 import type { LabKitCategory } from "@/data/types"
 
 // Lab kit categories from Choose Health
@@ -69,10 +69,7 @@ export default function NewLabTestPage() {
 
   // Biomarker handlers
   const addBiomarker = () => {
-    setBiomarkers([
-      ...biomarkers,
-      { id: `bio_${Date.now()}`, name: "" },
-    ])
+    setBiomarkers([...biomarkers, { id: `bio_${Date.now()}`, name: "" }])
   }
 
   const updateBiomarker = (id: string, name: string) => {
@@ -277,7 +274,10 @@ export default function NewLabTestPage() {
             {/* Collection Method */}
             <div className="space-y-2">
               <Label>Collection Method</Label>
-              <Select value={collectionMethod} onValueChange={setCollectionMethod}>
+              <Select
+                value={collectionMethod}
+                onValueChange={setCollectionMethod}
+              >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select collection method" />
                 </SelectTrigger>
@@ -299,7 +299,8 @@ export default function NewLabTestPage() {
             <div>
               <h2 className="text-lg font-semibold">Biomarkers Tested</h2>
               <p className="text-muted-foreground text-sm">
-                List all biomarkers included in this panel ({biomarkers.length} total)
+                List all biomarkers included in this panel ({biomarkers.length}{" "}
+                total)
               </p>
             </div>
 
@@ -314,7 +315,9 @@ export default function NewLabTestPage() {
                   </span>
                   <Input
                     value={biomarker.name}
-                    onChange={(e) => updateBiomarker(biomarker.id, e.target.value)}
+                    onChange={(e) =>
+                      updateBiomarker(biomarker.id, e.target.value)
+                    }
                     placeholder="e.g., TSH (Thyroid Stimulating Hormone)"
                     className="flex-1"
                   />
@@ -365,7 +368,7 @@ export default function NewLabTestPage() {
             <div className="space-y-2">
               <Label htmlFor="price">Price</Label>
               <div className="relative w-[200px]">
-                <span className="text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 text-sm">
+                <span className="text-muted-foreground absolute top-1/2 left-3 -translate-y-1/2 text-sm">
                   $
                 </span>
                 <Input

@@ -139,11 +139,21 @@ export interface ProviderStats {
   avgResponseTime: string
 }
 
+export interface ProviderAddress {
+  streetAddress?: string
+  apartment?: string
+  city?: string
+  state?: string
+  zipCode?: string
+}
+
 export interface Provider {
   id: string
   email: string
   firstName: string
   lastName: string
+  phone?: string
+  address?: ProviderAddress
   status: string
   roles: string[]
   avatarUrl?: string
@@ -152,6 +162,9 @@ export interface Provider {
   speciality: { name: string }
   licenses: License[]
   stats: ProviderStats
+  additionalQualifications?: string
+  createdAt: string
+  lastLoginAt?: string
 }
 
 // ============================================================================
@@ -673,8 +686,20 @@ export interface Pharmacy {
 // Integration Status (System Integrations)
 // ============================================================================
 
-export type IntegrationStatus = "connected" | "issue" | "not_connected" | "not_tested"
-export type IntegrationCategory = "clinical" | "payment" | "fulfillment" | "communication" | "marketing" | "utility" | "ai" | "infrastructure"
+export type IntegrationStatus =
+  | "connected"
+  | "issue"
+  | "not_connected"
+  | "not_tested"
+export type IntegrationCategory =
+  | "clinical"
+  | "payment"
+  | "fulfillment"
+  | "communication"
+  | "marketing"
+  | "utility"
+  | "ai"
+  | "infrastructure"
 export type ConnectionTestResult = "success" | "failed"
 export type IssueSeverity = "warning" | "critical"
 

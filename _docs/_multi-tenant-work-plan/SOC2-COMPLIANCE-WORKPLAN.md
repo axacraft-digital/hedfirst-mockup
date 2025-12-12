@@ -10,11 +10,11 @@
 
 This document outlines the **minimum required work** for SOC 2 Type II readiness beyond HIPAA compliance. Items marked with "HIPAA Overlap" are already covered by HIPAA remediation.
 
-| Priority | Items | HIPAA Overlap |
-|----------|-------|---------------|
-| P0 - Critical | 4 | ✅ Full overlap |
-| P1 - High | 6 | ❌ New work |
-| **Total Must-Have** | **10** | - |
+| Priority            | Items  | HIPAA Overlap   |
+| ------------------- | ------ | --------------- |
+| P0 - Critical       | 4      | ✅ Full overlap |
+| P1 - High           | 6      | ❌ New work     |
+| **Total Must-Have** | **10** | -               |
 
 ---
 
@@ -22,12 +22,12 @@ This document outlines the **minimum required work** for SOC 2 Type II readiness
 
 These SOC 2 critical items are **fully addressed by HIPAA P0 work**:
 
-| SOC 2 ID | Control | HIPAA ID | Status |
-|----------|---------|----------|--------|
-| S0-1 | CC6.1 Tenant Isolation | P0-1 | ✅ Covered |
-| S0-2 | CC7.2 Audit Logging | P0-2 | ✅ Covered |
-| S0-3 | C1.2 PHI Encryption | P0-4 | ✅ Covered |
-| S0-4 | CC9.1 Vendor BAAs | P0-3 | ✅ Covered |
+| SOC 2 ID | Control                | HIPAA ID | Status     |
+| -------- | ---------------------- | -------- | ---------- |
+| S0-1     | CC6.1 Tenant Isolation | P0-1     | ✅ Covered |
+| S0-2     | CC7.2 Audit Logging    | P0-2     | ✅ Covered |
+| S0-3     | C1.2 PHI Encryption    | P0-4     | ✅ Covered |
+| S0-4     | CC9.1 Vendor BAAs      | P0-3     | ✅ Covered |
 
 **No additional work required for SOC 2 P0.**
 
@@ -39,6 +39,7 @@ These SOC 2 critical items are **fully addressed by HIPAA P0 work**:
 **Current State:** No complexity enforcement, no expiration
 
 ### Step 1.1: Create Password Validator
+
 **File:** `src/shared/validators/password.validator.ts` (new)
 
 - [ ] Define password policy constants:
@@ -50,6 +51,7 @@ These SOC 2 critical items are **fully addressed by HIPAA P0 work**:
 - [ ] Write unit tests for all rules
 
 ### Step 1.2: Create Password History Model
+
 **File:** `prisma/schema.prisma`
 
 - [ ] Add `PasswordHistory` model
@@ -57,6 +59,7 @@ These SOC 2 critical items are **fully addressed by HIPAA P0 work**:
 - [ ] Run migration
 
 ### Step 1.3: Implement Password History Check
+
 **File:** `src/shared/services/password-policy.service.ts` (new)
 
 - [ ] Query last 5 password hashes
@@ -65,6 +68,7 @@ These SOC 2 critical items are **fully addressed by HIPAA P0 work**:
 - [ ] Write unit tests
 
 ### Step 1.4: Add Expiration Tracking
+
 **File:** `prisma/schema.prisma` (modify User model)
 
 - [ ] Add `passwordChangedAt` field to User
@@ -88,6 +92,7 @@ These SOC 2 critical items are **fully addressed by HIPAA P0 work**:
 **Current State:** Manual process, no immediate session invalidation
 
 ### Step 2.1: Create Token Blacklist Service
+
 **File:** `src/shared/services/token-blacklist.service.ts` (new)
 
 - [ ] Redis-based token blacklist
@@ -98,6 +103,7 @@ These SOC 2 critical items are **fully addressed by HIPAA P0 work**:
 - [ ] Write unit tests
 
 ### Step 2.2: Create Access Termination Service
+
 **File:** `src/shared/services/access-termination.service.ts` (new)
 
 - [ ] Method: `terminateUserAccess(userId, actorId, reason, options)`
@@ -109,6 +115,7 @@ These SOC 2 critical items are **fully addressed by HIPAA P0 work**:
 - [ ] Write unit tests
 
 ### Step 2.3: Create Termination API Endpoint
+
 **File:** `src/apps/super-admin/modules/users/user-termination.controller.ts` (new)
 
 - [ ] Endpoint: `POST /users/:userId/terminate`
@@ -125,6 +132,7 @@ These SOC 2 critical items are **fully addressed by HIPAA P0 work**:
 **Current State:** No periodic review process
 
 ### Step 3.1: Create Access Review Schema
+
 **File:** `prisma/schema.prisma`
 
 - [ ] Add `AccessReview` model:
@@ -139,6 +147,7 @@ These SOC 2 critical items are **fully addressed by HIPAA P0 work**:
 - [ ] Run migration
 
 ### Step 3.2: Create Access Review Service
+
 **File:** `src/apps/super-admin/modules/access-review/access-review.service.ts` (new)
 
 - [ ] Method: `generateReview(orgId, storeId, period)`
@@ -154,6 +163,7 @@ These SOC 2 critical items are **fully addressed by HIPAA P0 work**:
 - [ ] Write unit tests
 
 ### Step 3.3: Create Access Review Controller
+
 **File:** `src/apps/super-admin/modules/access-review/access-review.controller.ts` (new)
 
 - [ ] Endpoint: `POST /access-reviews/generate`
@@ -178,6 +188,7 @@ These SOC 2 critical items are **fully addressed by HIPAA P0 work**:
 **Current State:** No incident tracking or procedures
 
 ### Step 4.1: Create Incident Schema
+
 **File:** `prisma/schema.prisma`
 
 - [ ] Add `SecurityIncident` model:
@@ -192,6 +203,7 @@ These SOC 2 critical items are **fully addressed by HIPAA P0 work**:
 - [ ] Run migration
 
 ### Step 4.2: Create Incident Service
+
 **File:** `src/apps/super-admin/modules/incidents/incidents.service.ts` (new)
 
 - [ ] Method: `createIncident(data, reporterId)`
@@ -203,6 +215,7 @@ These SOC 2 critical items are **fully addressed by HIPAA P0 work**:
 - [ ] Write unit tests
 
 ### Step 4.3: Create Incident Controller
+
 **File:** `src/apps/super-admin/modules/incidents/incidents.controller.ts` (new)
 
 - [ ] Endpoint: `POST /incidents` - create incident
@@ -227,6 +240,7 @@ These SOC 2 critical items are **fully addressed by HIPAA P0 work**:
 **Current State:** No automated alerts
 
 ### Step 5.1: Create Alert Rules Engine
+
 **File:** `src/shared/modules/alerting/alert-engine.service.ts` (new)
 
 - [ ] Define `AlertRule` interface:
@@ -238,6 +252,7 @@ These SOC 2 critical items are **fully addressed by HIPAA P0 work**:
 - [ ] Write unit tests
 
 ### Step 5.2: Define Security Alert Rules
+
 **File:** `src/shared/modules/alerting/rules/security-rules.ts` (new)
 
 - [ ] Cross-tenant access attempt (immediate, high)
@@ -261,6 +276,7 @@ These SOC 2 critical items are **fully addressed by HIPAA P0 work**:
 **Current State:** BAA status unknown for several vendors
 
 ### Step 6.1: Create Vendor Schema
+
 **File:** `prisma/schema.prisma`
 
 - [ ] Add `Vendor` model:
@@ -297,6 +313,7 @@ These SOC 2 critical items are **fully addressed by HIPAA P0 work**:
 - [ ] Set review reminders for expiring BAAs
 
 ### Step 6.4: Create Vendor Management Controller
+
 **File:** `src/apps/super-admin/modules/vendors/vendors.controller.ts` (new)
 
 - [ ] Endpoint: `GET /vendors` - list all vendors
@@ -313,12 +330,14 @@ These SOC 2 critical items are **fully addressed by HIPAA P0 work**:
 ### Before B2B Launch (HIPAA P0 + SOC 2 P1)
 
 **HIPAA P0 (Covered):**
+
 - [ ] Tenant isolation guard deployed
 - [ ] Audit logging includes actor ID
 - [ ] PHI encrypted at rest
 - [ ] ActiveCampaign BAA resolved
 
 **SOC 2 P1 (New Work):**
+
 - [ ] S1-1: Password policy enforced
 - [ ] S1-2: User termination API operational
 - [ ] S1-3: Access review system ready
@@ -359,20 +378,21 @@ HIPAA P0 Complete
 
 Each control requires evidence of operation over 6+ months:
 
-| Control | Evidence Required |
-|---------|-------------------|
-| Password Policy | Failed password change logs, policy document |
-| Access Termination | Termination records, session invalidation logs |
-| Access Review | Quarterly review records, remediation actions |
-| Incident Response | Incident records (or statement of none), procedure docs |
-| Security Alerting | Alert logs, alert response records |
-| Vendor Management | Vendor inventory, BAA copies, assessment records |
+| Control            | Evidence Required                                       |
+| ------------------ | ------------------------------------------------------- |
+| Password Policy    | Failed password change logs, policy document            |
+| Access Termination | Termination records, session invalidation logs          |
+| Access Review      | Quarterly review records, remediation actions           |
+| Incident Response  | Incident records (or statement of none), procedure docs |
+| Security Alerting  | Alert logs, alert response records                      |
+| Vendor Management  | Vendor inventory, BAA copies, assessment records        |
 
 ---
 
 ## Definition of Done
 
 Each item is complete when:
+
 - [ ] Code implemented and reviewed
 - [ ] Unit tests passing (>80% coverage)
 - [ ] E2E tests passing

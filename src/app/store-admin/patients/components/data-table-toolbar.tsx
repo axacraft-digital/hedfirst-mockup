@@ -17,10 +17,12 @@ export function DataTableToolbar<TData>({ table }: Props<TData>) {
     <div className="flex items-center justify-between">
       <div className="flex flex-1 flex-col-reverse items-start gap-y-2 sm:flex-row sm:items-center sm:space-x-2">
         <div className="relative w-full sm:w-[300px]">
-          <IconSearch className="text-muted-foreground absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2" />
+          <IconSearch className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
           <Input
             placeholder="Search by name or email..."
-            value={(table.getColumn("fullName")?.getFilterValue() as string) ?? ""}
+            value={
+              (table.getColumn("fullName")?.getFilterValue() as string) ?? ""
+            }
             onChange={(event) =>
               table.getColumn("fullName")?.setFilterValue(event.target.value)
             }

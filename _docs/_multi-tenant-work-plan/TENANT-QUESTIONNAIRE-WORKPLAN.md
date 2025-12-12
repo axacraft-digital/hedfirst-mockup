@@ -9,6 +9,7 @@
 ## Executive Summary
 
 Tenants need the ability to configure their own medical questionnaires for each disease state/product category. Currently, questionnaires are:
+
 - **Hardcoded via database migrations** - No UI for management
 - **Store-scoped** - Architecture already supports multi-tenant, but no admin interface
 - **Developer-managed** - Any change requires code deployment
@@ -21,13 +22,14 @@ Tenants need the ability to configure their own medical questionnaires for each 
 
 The questionnaire system uses a **three-layer model**:
 
-| Layer | Model | Purpose |
-|-------|-------|---------|
-| Template | `QuizData` | Question definitions (JSON), store-scoped |
-| Instance | `MedicalQuestionnaire` | Patient's questionnaire session |
-| Answers | `MedicalQuestionnaireAnswer` | Individual question responses |
+| Layer    | Model                        | Purpose                                   |
+| -------- | ---------------------------- | ----------------------------------------- |
+| Template | `QuizData`                   | Question definitions (JSON), store-scoped |
+| Instance | `MedicalQuestionnaire`       | Patient's questionnaire session           |
+| Answers  | `MedicalQuestionnaireAnswer` | Individual question responses             |
 
 **Key Schema:**
+
 ```prisma
 model QuizData {
   id           String                       @id
@@ -45,14 +47,14 @@ model QuizData {
 
 ### Question Types Supported
 
-| Type | Description | Example |
-|------|-------------|---------|
-| `OPTIONS` | Single/multi-select | "Have you been diagnosed with..." |
-| `INPUTS` | Numeric/text fields | "What is your height?" |
-| `DIRECT_ANSWER` | Free text | "Anything else to share?" |
-| `FILES` | File upload | "Upload prescription label" |
-| `CONSENT` | Checkbox consents | "I agree to..." |
-| `WIDGET` | Custom component | BMI calculator |
+| Type            | Description         | Example                           |
+| --------------- | ------------------- | --------------------------------- |
+| `OPTIONS`       | Single/multi-select | "Have you been diagnosed with..." |
+| `INPUTS`        | Numeric/text fields | "What is your height?"            |
+| `DIRECT_ANSWER` | Free text           | "Anything else to share?"         |
+| `FILES`         | File upload         | "Upload prescription label"       |
+| `CONSENT`       | Checkbox consents   | "I agree to..."                   |
+| `WIDGET`        | Custom component    | BMI calculator                    |
 
 ### How Questionnaires Are Created Today
 
@@ -74,6 +76,7 @@ VALUES (
 ```
 
 **Problems:**
+
 1. No UI - requires developer intervention
 2. Hardcoded to single store ID
 3. No version management UI
@@ -83,11 +86,13 @@ VALUES (
 ### Store Admin Current Capabilities
 
 **Questionnaire viewing:** YES (patient questionnaires)
+
 - View patient answers
 - See completion status
 - No edit/create capabilities
 
 **Questionnaire configuration:** NO
+
 - No questionnaire builder
 - No question editor
 - No disease state mapping
@@ -110,16 +115,16 @@ VALUES (
 
 For each question type, tenants should be able to:
 
-| Field | Editable |
-|-------|----------|
-| Question label/text | ✅ Yes |
-| Description/hint | ✅ Yes |
-| Options (add/edit/remove) | ✅ Yes |
-| Required/optional | ✅ Yes |
-| Order in questionnaire | ✅ Yes |
-| Conditional logic | 🟡 Phase 2 |
-| Question type | ❌ No (complex) |
-| Widget type | ❌ No (requires dev) |
+| Field                     | Editable             |
+| ------------------------- | -------------------- |
+| Question label/text       | ✅ Yes               |
+| Description/hint          | ✅ Yes               |
+| Options (add/edit/remove) | ✅ Yes               |
+| Required/optional         | ✅ Yes               |
+| Order in questionnaire    | ✅ Yes               |
+| Conditional logic         | 🟡 Phase 2           |
+| Question type             | ❌ No (complex)      |
+| Widget type               | ❌ No (requires dev) |
 
 ---
 
@@ -128,6 +133,7 @@ For each question type, tenants should be able to:
 ### Strategy: Template-Based Configuration
 
 Instead of building a full questionnaire designer, provide:
+
 1. **System templates** - Default questionnaires per disease state
 2. **Tenant customization** - Clone and modify templates
 3. **Version control** - Draft/published workflow
@@ -239,6 +245,7 @@ model QuestionnaireTemplate {
 #### 3.1 Create Navigation & Routes
 
 **Files to modify:**
+
 - `src/dictionaries/nav-Item-config.ts` - Add "Questionnaires" nav item
 - `src/app/(internal)/panel/questionnaires/` - New route folder
 
@@ -280,6 +287,7 @@ model QuestionnaireTemplate {
 **File:** `src/app/(internal)/panel/questionnaires/[id]/page.tsx`
 
 Layout:
+
 ```
 ┌─────────────────────────────────────────────────┐
 │ [← Back] Weight Loss Questionnaire        [Publish] │
@@ -313,11 +321,13 @@ Layout:
 **Files:** `src/app/(internal)/panel/questionnaires/_components/`
 
 **Common Fields:**
+
 - [ ] `question-label-editor.tsx` - Edit question text
 - [ ] `question-description-editor.tsx` - Edit hint/description
 - [ ] `question-required-toggle.tsx` - Required checkbox
 
 **Type-Specific Editors:**
+
 - [ ] `options-editor.tsx` - Add/edit/remove options
 - [ ] `inputs-editor.tsx` - Configure input fields
 - [ ] `consent-editor.tsx` - Edit consent statements
@@ -325,6 +335,7 @@ Layout:
 - [ ] `files-editor.tsx` - Configure upload settings
 
 **Add Question Modal:**
+
 - [ ] `add-question-modal.tsx` - Select type, enter details
 - [ ] Template questions to choose from
 - [ ] Custom question creation
@@ -372,6 +383,7 @@ When a new tenant is created:
 **Scenario:** Tenant publishes new version while patient is mid-questionnaire
 
 **Solution:**
+
 - Patient completes on their original version
 - New questionnaire applies only to new sessions
 - Track `quizDataVersion` on `MedicalQuestionnaire` (already exists)
@@ -381,6 +393,7 @@ When a new tenant is created:
 **Scenario:** Tenant wants to remove a disease state questionnaire
 
 **Solution:**
+
 - Soft delete (mark inactive)
 - Historical patient data preserved
 - New patients cannot start that questionnaire
@@ -391,6 +404,7 @@ When a new tenant is created:
 **Scenario:** Tenant removes a question, but patients already answered it
 
 **Solution:**
+
 - Existing answers preserved (denormalized in answer record)
 - Doctor view still shows historical answers
 - New patients don't see removed question
@@ -400,6 +414,7 @@ When a new tenant is created:
 **Scenario:** Tenant creates question with no options
 
 **Solution:**
+
 - Frontend validation before save
 - Backend validation on publish
 - Cannot publish invalid questionnaire
@@ -411,25 +426,25 @@ When a new tenant is created:
 
 ### Backend Changes
 
-| File | Action |
-|------|--------|
-| `prisma/schema.prisma` | Add QuestionnaireTemplate model |
-| `src/apps/store-admin/modules/questionnaire-config/` | New module |
-| `questionnaire-config.controller.ts` | CRUD endpoints |
-| `questionnaire-config.service.ts` | Business logic |
-| `dto/*.dto.ts` | DTOs for questionnaire operations |
-| `prisma/seeds/questionnaire-templates.seed.ts` | System templates |
+| File                                                 | Action                            |
+| ---------------------------------------------------- | --------------------------------- |
+| `prisma/schema.prisma`                               | Add QuestionnaireTemplate model   |
+| `src/apps/store-admin/modules/questionnaire-config/` | New module                        |
+| `questionnaire-config.controller.ts`                 | CRUD endpoints                    |
+| `questionnaire-config.service.ts`                    | Business logic                    |
+| `dto/*.dto.ts`                                       | DTOs for questionnaire operations |
+| `prisma/seeds/questionnaire-templates.seed.ts`       | System templates                  |
 
 ### Frontend Changes
 
-| File | Action |
-|------|--------|
-| `src/dictionaries/nav-Item-config.ts` | Add Questionnaires nav |
-| `src/app/(internal)/panel/questionnaires/page.tsx` | List page |
-| `src/app/(internal)/panel/questionnaires/[id]/page.tsx` | Editor page |
-| `src/app/(internal)/panel/questionnaires/[id]/preview/page.tsx` | Preview |
-| `src/app/(internal)/panel/questionnaires/_components/` | Editor components |
-| `src/providers/store/api/questionnaire-config/` | RTK Query endpoints |
+| File                                                            | Action                 |
+| --------------------------------------------------------------- | ---------------------- |
+| `src/dictionaries/nav-Item-config.ts`                           | Add Questionnaires nav |
+| `src/app/(internal)/panel/questionnaires/page.tsx`              | List page              |
+| `src/app/(internal)/panel/questionnaires/[id]/page.tsx`         | Editor page            |
+| `src/app/(internal)/panel/questionnaires/[id]/preview/page.tsx` | Preview                |
+| `src/app/(internal)/panel/questionnaires/_components/`          | Editor components      |
+| `src/providers/store/api/questionnaire-config/`                 | RTK Query endpoints    |
 
 ---
 
@@ -440,10 +455,12 @@ When a new tenant is created:
 Build a complete drag-and-drop form builder like Typeform.
 
 **Pros:**
+
 - Maximum flexibility
 - No templates needed
 
 **Cons:**
+
 - Significant development effort
 - Easy to create poor questionnaires
 - Medical questionnaires need structure
@@ -454,10 +471,12 @@ Build a complete drag-and-drop form builder like Typeform.
 Only allow tenants to choose from fixed templates, no editing.
 
 **Pros:**
+
 - Simplest implementation
 - Consistent quality
 
 **Cons:**
+
 - No differentiation for tenants
 - Can't add business-specific questions
 - Poor B2B value proposition
@@ -467,6 +486,7 @@ Only allow tenants to choose from fixed templates, no editing.
 Clone templates and allow editing within guardrails.
 
 **Pros:**
+
 - Fast time to value (templates work immediately)
 - Tenants can customize for their practice
 - Guardrails prevent invalid configurations

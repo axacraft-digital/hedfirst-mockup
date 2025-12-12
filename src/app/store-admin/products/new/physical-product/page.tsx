@@ -3,6 +3,8 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { mockPharmacies as pharmacies } from "@/data"
+import { toast } from "@/hooks/use-toast"
 import { IconArrowLeft, IconPlus, IconTrash } from "@tabler/icons-react"
 import {
   Breadcrumb,
@@ -26,22 +28,20 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
-import { toast } from "@/hooks/use-toast"
 import { Header } from "@/components/layout/header"
-import { mockPharmacies as pharmacies } from "@/data"
 import {
-  diseaseStateLabels,
-  treatmentTypeLabels,
-  treatmentUseOptions,
-  formFactorOptions,
-  dosageUnitOptions,
-  billingCycleOptions,
-  supplyDurationOptions,
   type DiseaseState,
   type PhysicalTreatmentType,
-  type TreatmentUse,
   type ProductIngredient,
   type ProductVariant,
+  type TreatmentUse,
+  billingCycleOptions,
+  diseaseStateLabels,
+  dosageUnitOptions,
+  formFactorOptions,
+  supplyDurationOptions,
+  treatmentTypeLabels,
+  treatmentUseOptions,
 } from "../../data/products-types"
 
 export default function NewPhysicalProductPage() {
@@ -55,7 +55,9 @@ export default function NewPhysicalProductPage() {
   const [slug, setSlug] = useState("")
   const [marketingDescription, setMarketingDescription] = useState("")
   const [diseaseState, setDiseaseState] = useState<DiseaseState | "">("")
-  const [treatmentType, setTreatmentType] = useState<PhysicalTreatmentType | "">("")
+  const [treatmentType, setTreatmentType] = useState<
+    PhysicalTreatmentType | ""
+  >("")
   const [treatmentUse, setTreatmentUse] = useState<TreatmentUse | "">("")
 
   // Pharmacy Partner state
@@ -75,9 +77,7 @@ export default function NewPhysicalProductPage() {
 
   // Variant handlers
   const updateVariant = (id: string, updates: Partial<ProductVariant>) => {
-    setVariants(
-      variants.map((v) => (v.id === id ? { ...v, ...updates } : v))
-    )
+    setVariants(variants.map((v) => (v.id === id ? { ...v, ...updates } : v)))
   }
 
   const addVariant = () => {
@@ -114,7 +114,9 @@ export default function NewPhysicalProductPage() {
 
   const updateIngredient = (id: string, ingredientName: string) => {
     setIngredients(
-      ingredients.map((ing) => (ing.id === id ? { ...ing, name: ingredientName } : ing))
+      ingredients.map((ing) =>
+        ing.id === id ? { ...ing, name: ingredientName } : ing
+      )
     )
   }
 
@@ -157,7 +159,9 @@ export default function NewPhysicalProductPage() {
 
         {/* Header row: Title on left, On Store toggle on right */}
         <div className="flex items-center justify-between gap-4">
-          <h1 className="text-2xl font-bold tracking-tight">Create Physical Product</h1>
+          <h1 className="text-2xl font-bold tracking-tight">
+            Create Physical Product
+          </h1>
           <div className="flex items-center gap-2">
             <Label htmlFor="on-store" className="text-sm font-medium">
               On store
@@ -296,7 +300,9 @@ export default function NewPhysicalProductPage() {
               <Label>Treatment Type</Label>
               <Select
                 value={treatmentType}
-                onValueChange={(v) => setTreatmentType(v as PhysicalTreatmentType)}
+                onValueChange={(v) =>
+                  setTreatmentType(v as PhysicalTreatmentType)
+                }
               >
                 <SelectTrigger className="w-full md:w-[300px]">
                   <SelectValue placeholder="Select treatment type" />
@@ -339,7 +345,8 @@ export default function NewPhysicalProductPage() {
             <div>
               <h2 className="text-lg font-semibold">Pharmacy Partner</h2>
               <p className="text-muted-foreground text-sm">
-                Select the pharmacy partner responsible for fulfilling this product
+                Select the pharmacy partner responsible for fulfilling this
+                product
               </p>
             </div>
 
@@ -374,7 +381,7 @@ export default function NewPhysicalProductPage() {
                 />
                 <Label
                   htmlFor="allow-multiple"
-                  className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  className="text-sm leading-none font-normal peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
                   Allow purchasing more than one item per order
                 </Label>
@@ -390,7 +397,7 @@ export default function NewPhysicalProductPage() {
                 />
                 <Label
                   htmlFor="requires-prescription"
-                  className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  className="text-sm leading-none font-normal peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
                   This product requires a prescription
                 </Label>
@@ -398,9 +405,9 @@ export default function NewPhysicalProductPage() {
 
               {requiresPrescription && pharmacyId && (
                 <p className="text-muted-foreground ml-7 text-sm">
-                  <span className="font-medium">Prescription Required:</span> This
-                  product will require provider approval and will be fulfilled
-                  through the selected pharmacy partner.
+                  <span className="font-medium">Prescription Required:</span>{" "}
+                  This product will require provider approval and will be
+                  fulfilled through the selected pharmacy partner.
                 </p>
               )}
             </div>
@@ -412,9 +419,7 @@ export default function NewPhysicalProductPage() {
           <section className="space-y-6">
             <div>
               <h2 className="text-lg font-semibold">Product Images</h2>
-              <p className="text-muted-foreground text-sm">
-                0/7 images
-              </p>
+              <p className="text-muted-foreground text-sm">0/7 images</p>
             </div>
 
             <Separator />
@@ -452,7 +457,9 @@ export default function NewPhysicalProductPage() {
               ======================================== */}
           <section className="space-y-6">
             <div>
-              <h2 className="text-lg font-semibold">Primary Product Ingredients</h2>
+              <h2 className="text-lg font-semibold">
+                Primary Product Ingredients
+              </h2>
               <p className="text-muted-foreground text-sm">
                 List the active ingredients in this product
               </p>
@@ -721,7 +728,7 @@ export default function NewPhysicalProductPage() {
                         Price
                       </Label>
                       <div className="relative">
-                        <span className="text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 text-sm">
+                        <span className="text-muted-foreground absolute top-1/2 left-3 -translate-y-1/2 text-sm">
                           $
                         </span>
                         <Input
@@ -729,7 +736,9 @@ export default function NewPhysicalProductPage() {
                           value={(variant.price / 100).toFixed(2)}
                           onChange={(e) =>
                             updateVariant(variant.id, {
-                              price: Math.round(parseFloat(e.target.value) * 100) || 0,
+                              price:
+                                Math.round(parseFloat(e.target.value) * 100) ||
+                                0,
                             })
                           }
                           className="pl-7"
@@ -743,7 +752,7 @@ export default function NewPhysicalProductPage() {
                       </Label>
                       <div className="flex items-center gap-2">
                         <div className="relative flex-1">
-                          <span className="text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 text-sm">
+                          <span className="text-muted-foreground absolute top-1/2 left-3 -translate-y-1/2 text-sm">
                             $
                           </span>
                           <Input
@@ -850,7 +859,8 @@ export default function NewPhysicalProductPage() {
 
               {variants.length === 0 && (
                 <p className="text-muted-foreground text-sm">
-                  No variants configured yet. Add at least one variant to set pricing.
+                  No variants configured yet. Add at least one variant to set
+                  pricing.
                 </p>
               )}
 

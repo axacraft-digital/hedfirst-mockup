@@ -2,16 +2,16 @@
 
 import { use } from "react"
 import {
-  IconUser,
+  IconClipboardCheck,
   IconCreditCard,
-  IconShoppingCart,
   IconFileCheck,
-  IconStethoscope,
+  IconId,
+  IconLogin,
   IconRefresh,
   IconShield,
-  IconLogin,
-  IconClipboardCheck,
-  IconId,
+  IconShoppingCart,
+  IconStethoscope,
+  IconUser,
   IconUserEdit,
   IconX,
 } from "@tabler/icons-react"
@@ -262,8 +262,7 @@ const categoryColors: Record<EventCategory, string> = {
     "bg-purple-100 text-purple-600 dark:bg-purple-900 dark:text-purple-400",
   order: "bg-amber-100 text-amber-600 dark:bg-amber-900 dark:text-amber-400",
   subscription: "bg-sky-100 text-sky-600 dark:bg-sky-900 dark:text-sky-400",
-  compliance:
-    "bg-rose-100 text-rose-600 dark:bg-rose-900 dark:text-rose-400",
+  compliance: "bg-rose-100 text-rose-600 dark:bg-rose-900 dark:text-rose-400",
 }
 
 // Format timestamp
@@ -303,7 +302,7 @@ export default function PatientHistoryPage({ params }: Props) {
       <ScrollArea className="faded-bottom -mx-4 flex-1 scroll-smooth px-4 md:pb-16">
         <div className="relative mx-auto max-w-2xl">
           {/* Timeline line */}
-          <div className="absolute left-5 top-0 h-full w-px bg-border" />
+          <div className="bg-border absolute top-0 left-5 h-full w-px" />
 
           {/* Events */}
           <div className="space-y-6">
@@ -345,8 +344,8 @@ export default function PatientHistoryPage({ params }: Props) {
 
           {/* End marker */}
           <div className="relative mt-6 flex items-center gap-4 pl-1">
-            <div className="relative z-10 flex size-10 shrink-0 items-center justify-center rounded-full bg-muted">
-              <div className="size-2 rounded-full bg-muted-foreground" />
+            <div className="bg-muted relative z-10 flex size-10 shrink-0 items-center justify-center rounded-full">
+              <div className="bg-muted-foreground size-2 rounded-full" />
             </div>
             <span className="text-muted-foreground text-sm">
               Beginning of activity history

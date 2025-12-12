@@ -18,8 +18,8 @@ import {
   IconUsers,
 } from "@tabler/icons-react"
 import { AudioWaveform, GalleryVerticalEnd } from "lucide-react"
-import { cn } from "@/lib/utils"
 import { Logo } from "@/components/logo"
+import { cn } from "@/lib/utils"
 import { type SidebarData } from "../types"
 
 export const sidebarData: SidebarData = {
