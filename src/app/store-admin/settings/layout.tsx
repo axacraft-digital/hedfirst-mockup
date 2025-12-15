@@ -1,3 +1,4 @@
+import { type CSSProperties } from "react"
 import { Bell, Monitor, Paintbrush, Palette, UserCog, Wrench } from "lucide-react"
 import { Header } from "@/components/layout/header"
 import { Separator } from "@/components/ui/separator"
@@ -36,10 +37,29 @@ interface Props {
 }
 
 export default function SettingsLayout({ children }: Props) {
+  const tenantThemeVariables: CSSProperties = {
+    "--primary": "#1A56DB",
+    "--primary-foreground": "#FFFFFF",
+    "--accent": "#E5EDFF",
+    "--accent-foreground": "#0F172A",
+    "--ring": "#1A56DB",
+    "--secondary": "#E5EDFF",
+    "--secondary-foreground": "#0F172A",
+    "--sidebar-primary": "#1A56DB",
+    "--sidebar-primary-foreground": "#FFFFFF",
+    "--sidebar-accent": "#E5EDFF",
+    "--sidebar-accent-foreground": "#0F172A",
+    "--sidebar-ring": "#1A56DB",
+  }
+
   return (
     <>
       <Header />
-      <div className="space-y-6 p-4 md:p-6">
+      <div
+        className="space-y-6 p-4 md:p-6"
+        data-tenant="hedfirst"
+        style={tenantThemeVariables}
+      >
         <div className="space-y-0.5">
           <h1 className="text-2xl font-bold tracking-tight md:text-3xl">
             Settings

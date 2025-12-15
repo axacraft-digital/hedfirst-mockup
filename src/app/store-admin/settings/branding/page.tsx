@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, type CSSProperties } from "react"
 import chroma from "chroma-js"
 import { Upload } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -74,6 +74,14 @@ const mockBrandingConfig = {
     white: "/tenants/hedfirst/logo-white.svg",
     favicon: "/tenants/hedfirst/favicon.ico",
   },
+}
+
+const getReadableForeground = (hex: string) => {
+  try {
+    return chroma(hex).luminance() > 0.6 ? "#0F172A" : "#FFFFFF"
+  } catch {
+    return "#FFFFFF"
+  }
 }
 
 export default function SettingsBrandingPage() {
@@ -222,20 +230,34 @@ export default function SettingsBrandingPage() {
               See how your brand colors appear in the interface.
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6">
+          <CardContent>
+            <div
+              className="space-y-6 rounded-lg border bg-card p-6"
+              style={
+                {
+                  "--primary": palette["600"],
+                  "--primary-foreground": getReadableForeground(palette["600"]),
+                  "--accent": palette["100"],
+                  "--accent-foreground": getReadableForeground(palette["600"]),
+                  "--ring": palette["500"],
+                  "--secondary": palette["100"],
+                  "--secondary-foreground": getReadableForeground(palette["700"]),
+                } as CSSProperties
+              }
+            >
             {/* Buttons */}
             <div className="space-y-2">
               <Label>Buttons</Label>
               <div className="flex flex-wrap gap-2">
                 <button
                   className="rounded px-4 py-2 text-sm font-medium text-white"
-                  style={{ backgroundColor: palette["600"] }}
+                  style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}
                 >
                   Primary Button
                 </button>
                 <button
                   className="rounded border-2 px-4 py-2 text-sm font-medium"
-                  style={{ borderColor: palette["600"], color: palette["600"] }}
+                  style={{ borderColor: "var(--primary)", color: "var(--primary)" }}
                 >
                   Outlined Button
                 </button>
@@ -249,7 +271,7 @@ export default function SettingsBrandingPage() {
                 This is a paragraph with a{" "}
                 <span
                   className="cursor-pointer underline"
-                  style={{ color: palette["600"] }}
+                  style={{ color: "var(--primary)" }}
                 >
                   sample link
                 </span>{" "}
@@ -314,6 +336,7 @@ export default function SettingsBrandingPage() {
               <Label>Progress</Label>
               <Progress value={60} className="w-full" />
               <p className="text-muted-foreground text-sm">60% complete</p>
+            </div>
             </div>
           </CardContent>
         </Card>
