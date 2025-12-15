@@ -37,7 +37,7 @@ interface Props {
 }
 
 export default function SettingsLayout({ children }: Props) {
-  const tenantThemeVariables: CSSProperties = {
+  const tenantThemeVariables = {
     "--primary": "#1A56DB",
     "--primary-foreground": "#FFFFFF",
     "--accent": "#E5EDFF",
@@ -50,7 +50,7 @@ export default function SettingsLayout({ children }: Props) {
     "--sidebar-accent": "#E5EDFF",
     "--sidebar-accent-foreground": "#0F172A",
     "--sidebar-ring": "#1A56DB",
-  }
+  } as CSSProperties
 
   return (
     <>
