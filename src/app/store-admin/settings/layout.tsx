@@ -1,5 +1,5 @@
 import { type CSSProperties } from "react"
-import { Bell, Monitor, Paintbrush, Palette, UserCog, Wrench } from "lucide-react"
+import { Bell, Menu, Monitor, Paintbrush, Palette, Wrench } from "lucide-react"
 import { Header } from "@/components/layout/header"
 import { Separator } from "@/components/ui/separator"
 import { SidebarNav } from "./components/sidebar-nav"
@@ -29,6 +29,11 @@ const sidebarNavItems = [
     title: "Display",
     href: "/store-admin/settings/display",
     icon: <Monitor size={18} />,
+  },
+  {
+    title: "Navigation",
+    href: "/store-admin/settings/navigation",
+    icon: <Menu size={18} />,
   },
 ]
 
